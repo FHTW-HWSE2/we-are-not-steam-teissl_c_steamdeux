@@ -1,0 +1,12 @@
+Problem:
+Fehler: „undefined reference to load_games“ beim Kompilieren von dev branch
+
+Lösung:
+Die Datei data/load_games.c, die load_games enthält, war nicht im Kompilierbefehl enthalten.
+
+Korrigierter Befehl:
+
+gcc -Iinclude main.c business/process_games.c presentation/display_games.c presentation/display_error.c data/load_games.c -o TestProgramm -ljansson
+
+Ergebnis:
+Fehler behoben und das Programm erfolgreich ausgeführt.
