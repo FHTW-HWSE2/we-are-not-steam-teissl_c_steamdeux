@@ -45,3 +45,6 @@ Fehler behoben und das Programm erfolgreich ausgeführt.
 - CMock and Unity were chosen for their compatibility with C projects and ease of use
 
 //27.3 Hauptptoblem sina alle nötige funktionen ins makefile einzubinden test läuft nt weil nicht alle libarys drin sind
+
+Neue Implementierung (branch: feature-readUser): User aus dem JSON-File lesen und in die Konsole ausgeben: 1. dump JSON mittels "cat" system command und 2. eine formatierte Ausgabe.
+
