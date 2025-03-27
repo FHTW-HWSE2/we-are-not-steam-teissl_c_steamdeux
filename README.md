@@ -1,18 +1,6 @@
 Problem:
 Fehler: „undefined reference to load_games“ beim Kompilieren von dev branch
 
-Lösung:
-Die Datei data/load_games.c, die load_games enthält, war nicht im Kompilierbefehl enthalten.
-
-Korrigierter Befehl:
-
-gcc -Iinclude main.c business/process_games.c presentation/display_games.c presentation/display_error.c data/load_games.c -o TestProgramm -ljansson
-
-Ergebnis:
-Fehler behoben und das Programm erfolgreich ausgeführt.
-
-# C Project Testing Implementation
-
 ## Meeting Minutes - March 25, 2025
 
 ### Progress
@@ -46,5 +34,6 @@ Fehler behoben und das Programm erfolgreich ausgeführt.
 
 //27.3 Hauptptoblem sina alle nötige funktionen ins makefile einzubinden test läuft nt weil nicht alle libarys drin sind
 
-Neue Implementierung (branch: feature-readUser): User aus dem JSON-File lesen und in die Konsole ausgeben: 1. dump JSON mittels "cat" system command und 2. eine formatierte Ausgabe.
+26.3.25 Neue Implementierung (branch: feature-readUser): User aus dem JSON-File lesen und in die Konsole ausgeben: 1. dump JSON mittels "cat" system command und 2. eine formatierte Ausgabe.
+add_compile_options(-Werror -Wall -Wno-unused-parameter) wurde zu CMakeLists.txt hinzugefügt
 
