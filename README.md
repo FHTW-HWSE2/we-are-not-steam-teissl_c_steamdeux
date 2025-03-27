@@ -1,6 +1,3 @@
-Problem:
-Fehler: „undefined reference to load_games“ beim Kompilieren von dev branch
-
 ## Meeting Minutes - March 25, 2025
 
 ### Progress
