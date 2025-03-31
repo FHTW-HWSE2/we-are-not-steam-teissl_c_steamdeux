@@ -2,7 +2,7 @@
 
 ## Protocol 17.-26. März 2025 ##  
 - 3-Layer-Architektur umgesetzt (CLI/Logic/Data)  
-- Branches: `feature-readUser` (User-Daten lesen), `dev` (Spielespeicherung)  
+- Branches: `feature-addUser` (User anlegen), `dev` (Spielespeicherung)  
 - CMake statt Makefile (+ Compiler-Flags: `-Werror -Wall`)  
 - CLI-Input fertig implementiert   
 
