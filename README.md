@@ -50,7 +50,7 @@
 - CMock linker errors.
 - Broken function/header access.
 
-### Instructor Questions (March 31)
+### Questions for March 31
 1. Simplify CMock+Unity workflow?
 2. Fix include paths/linker errors?
 
