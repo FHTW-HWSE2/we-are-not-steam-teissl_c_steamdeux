@@ -1,8 +1,7 @@
 # Project Meeting Minutes & Protocol
 
 ## Protocol 31. März - 7. April ##
-#### Goals:
- - Testing all functions
+
 
 ### Meeting
  - 3rd March, 19:00-22:00 Meeting in Discord
@@ -10,19 +9,23 @@
   - discussed which functions need to get mocked
   - watched several tutorials for Unit tests in C
   - added returns to void functions
+#### Goals:
+ - Testing all functions
+#### Done:
+ - 2 out of 3 branches fully tested, all tests passed.
+#### Failed:
+ - 1 branch was not able to get tested since there were C23 warnings. 
 
-### Private
+### in privat-time
   - Berk: implement all testing for dev and featureAddUser branches
     David: solved failed tests for featureAddUser branch
     Donato: involved in testing for featureAddUser
     Zinedin: involved in testing for dev
     Sina: involved in testing for featureAddUser
 
-### Done:
- - 2 out of 3 branches fully tested, all tests passed.
 
-### Failed:
- - 1 branch was not able to get tested since there were C23 warnings. 
+
+
 
 
 
