@@ -4,7 +4,7 @@
 
 
 ### Meeting
- - 3rd March, 19:00-22:00 Meeting in Discord
+ - 3rd April, 19:00-22:00 Meeting in Discord
   - discussed distribution of tasks
   - discussed which functions need to get mocked
   - watched several tutorials for Unit tests in C
