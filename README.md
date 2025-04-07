@@ -1,5 +1,14 @@
 # Project Meeting Minutes & Protocol
 
+## Protocol from 7. April
+
+Goals:
+Berk: Deleting and editing games, Also Berk will push testing to feature-readUser branch
+David: Deleting and editing user
+Donato: Functional Requirements 5 and 7
+Sina: Functional Requirements 12 and 16
+Zinedin: Functional Requirements 14 Simulate Game Streams
+
 ## Protocol 31. März - 7. April ##
 
 
