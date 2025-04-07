@@ -1,7 +1,7 @@
 # Project Meeting Minutes & Protocol
 
 ## Protocol 31. März - 7. April ##
-### Goals:
+#### Goals:
  - Testing all functions
 
 ### Meeting
