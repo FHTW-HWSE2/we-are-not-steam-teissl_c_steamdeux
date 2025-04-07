@@ -16,7 +16,7 @@
 #### Failed:
  - 1 branch was not able to get tested since there were C23 warnings. 
 
-### in privat-time
+#### in privat-time
   - Berk: implement all testing for dev and featureAddUser branches
   - David: solved failed tests for featureAddUser branch
   - Donato: involved in testing for featureAddUser
