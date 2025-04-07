@@ -18,10 +18,10 @@
 
 ### in privat-time
   - Berk: implement all testing for dev and featureAddUser branches
-    David: solved failed tests for featureAddUser branch
-    Donato: involved in testing for featureAddUser
-    Zinedin: involved in testing for dev
-    Sina: involved in testing for featureAddUser
+  - David: solved failed tests for featureAddUser branch
+  - Donato: involved in testing for featureAddUser
+  - Zinedin: involved in testing for dev
+  - Sina: involved in testing for featureAddUser
 
 
 
