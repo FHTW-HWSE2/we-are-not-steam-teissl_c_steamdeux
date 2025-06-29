@@ -12,6 +12,9 @@ if(COVERAGE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lgcov")
 endif()
 
+# Test-Option separat aktivierbar
+option(ENABLE_TESTING "Enable unit tests" ON)
+
 find_package(PkgConfig REQUIRED)
 
 # Include-Verzeichnisse
@@ -39,6 +42,11 @@ set(SOURCES
 # Executable erstellen
 add_executable(game_manager ${SOURCES})
 
-# Ausführen von Tests (optional)
+# Main app als Test (z. B. für manuelle Launch-Tests)
 enable_testing()
 add_test(NAME GameManagerTestRun COMMAND game_manager)
+
+# Test-Unterordner hinzufügen
+if(ENABLE_TESTING)
+    add_subdirectory(test)
+endif()
