@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "compilerPath": "/home/sina/Documents/FH/SS25/HWSE/SteamDeux/we-are-not-steam-teissl_c_steamdeux/CMakeLists.txt"
+        }
+    ],
+    "version": 4
+}

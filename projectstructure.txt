@@ -1,0 +1,60 @@
+Project Structure – GameManager
+
+.
+├── build/                          # Kompilierte Binaries und Build-Artefakte (von CMake generiert)
+│
+├── cJSON/                          # Drittanbieter-Bibliothek zur JSON-Verarbeitung (cJSON.c / cJSON.h)
+│
+├── external/                       # Platz für weitere optionale externe Bibliotheken
+│
+├── inc/                            # Header-Dateien (Schnittstellen)
+│   ├── data/
+│   │   └── data.h                  # Schnittstellen für Nutzerverwaltung und Spiel-JSON
+│   │
+│   ├── logic/
+│   │   └── logic.h                 # Businesslogik: Validierung, Nutzerlogik, Spielbearbeitung
+│   │
+│   ├── presentation/
+│   │   ├── presentation.h          # Hauptmenü und UI-Funktionen
+│   │   └── run.h                   # Report-Erstellungsfunktion
+│   │
+│   └── error.h                     # Fehlercode-Definitionen
+│
+├── src/                            # Implementierungen (nach Layern gegliedert)
+│   ├── data/
+│   │   ├── data.c                  # Nutzerverwaltung (lesen/speichern/bearbeiten von User-JSON)
+│   │   ├── game.h                  # Definition der Game-Struktur
+│   │   ├── load_games.h            # Funktion zum Laden der Spieldaten aus JSON
+│   │   └── save_games.h            # Funktion zum Speichern von Spielen in JSON
+│
+│   ├── logic/
+│   │   ├── logic.c                 # Implementierung der Businesslogik
+│   │   └── process_games.h         # Bearbeitung von Spielen (editieren/löschen)
+│
+│   ├── presentation/
+│   │   ├── display_error.c         # Fehlerausgabe im Terminal
+│   │   ├── display_error.h
+│   │   ├── display_games.c         # Ausgabe formatierter Spielinformationen
+│   │   ├── display_games.h
+│   │   ├── menu.c                  # Game Management Menü (Spiele-CRUD im UI)
+│   │   ├── menu.h
+│   │   ├── presentation.c          # Admin-UI für Userverwaltung und Simulation
+│   │   └── run.c                   # Einstiegspunkt für Berichterstellung
+│
+├── simulation/                     # Simulationscode
+│   └── simulation.h                # Simulationscode Header
+│
+├── tests_addReport/                # Unit-Tests für das Hinzufügen von Reports
+├── tests_editRemoveUser/           # Tests zur Bearbeitung und Löschung von Benutzern
+├── tests_Dev/                      # Weitere Tests während der Entwicklung (optional)
+│
+├── games.json                      # JSON-Datei mit allen gespeicherten Spielen
+├── users.json                      # JSON-Datei mit allen gespeicherten Nutzern
+├── reports.json                    # JSON-Datei mit gespeicherten Berichten
+├── usersRanked.json                # JSON-Datei mit den Top 10 Spieler nach Spielzeitsumme
+├── test_save.json                  # Test-/Backup-Datei
+│
+├── main.c                          # Hauptprogramm (Startpunkt, Menüaufruf)
+├── CMakeLists.txt                  # CMake-Konfigurationsdatei für den Build-Prozess
+├── readme.md                       # Beschreibung, Hinweise und Nutzungsanleitung
+└── projectstructure.txt            # (Diese Datei)

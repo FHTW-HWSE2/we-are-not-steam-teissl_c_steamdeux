@@ -1,0 +1,23 @@
+Kommentar zum Merge von Branches 04.06.2025 ab 12:30 Uhr,
+Versucht Branches feature-editRemoveUser und feature-addReport zu mergen, über VSCode und Git, mit code --diff command und Merge Editor. 
+
+Schwierigkeit: Unterschiedliche Ordnerstruktur in den Branches,
+Source Dateien und Header Dateien waren auf den Branches in unterschielichen Verzeichnisebenen und musste manuell pro Datei kombiniert werden:
+(zB. code    --diff data/data.c src/data/data.c,
+             git rm data/data.c,
+             git add src/data/data.c
+             git commit -m "Merged data.c from both branches into src/data/")
+
+ca 14:30 Uhr Geschafft die Source und Header Dateien dieser zwei Branches zu kombinieren und zu pushen, ohne dass Konflikte auftreten.
+
+ca 15:30 Uhr: Geschafft die CMakelists.txt Dateien und Test Ordner mit unity dependencies anzupassen, damit das Programm kompiliert.
+Schwierigkeiten: unity dependencies waren in unterschiedlichen Ordnern in den Branches und in CMakelists mussten die Pfade angepasst werden,
+für cmock musste mit "git submodule update --init --recursive" .gitmodules aktualisiert werden, damit es in external/unity/src/unity.c existiert.
+
+================================================================================================================================================================================================
+
+Kommentar zum Merge von Branches 05.06.2025 ab 16:30 Uhr
+Funktion addReport im Startmenü (presentation layer) eingebunden und als neue Option eingefügt.
+Programm kompiliert und kann ausgeführt werden. --> Basis für Mergen weiterer Branches
+
+================================================================================================================================================================================================
