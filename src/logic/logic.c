@@ -55,12 +55,15 @@ int validate_player_profile(const char* full_name, const char* gamertag, const c
     if (!strptime(sub_start, "%d.%m.%Y", &start_tm) || !strptime(sub_end, "%d.%m.%Y", &end_tm)) {
         return ERR_INVALID_DATE;
     }
-
+    // Set tm_isdst to -1 to let mktime determine DST
+    start_tm.tm_isdst = -1;
+    end_tm.tm_isdst = -1;
 
     // Startdatum darf nicht in der Vergangenheit liegen
     time_t now = time(NULL);
     struct tm now_tm = *localtime(&now);
     now_tm.tm_hour = 0; now_tm.tm_min = 0; now_tm.tm_sec = 0;
+    now_tm.tm_isdst = -1;
     time_t today = mktime(&now_tm);
     time_t start_time = mktime(&start_tm);
     if (difftime(start_time, today) < 0) {
@@ -152,10 +155,14 @@ int edit_user_logic(const char* gamertag, const char* new_full_name, const char*
         if (!strptime(sub_start, "%d.%m.%Y", &start_tm) || !strptime(sub_end, "%d.%m.%Y", &end_tm)) {
             return ERR_INVALID_DATE;
         }
+        // Set tm_isdst to -1 to let mktime determine DST
+        start_tm.tm_isdst = -1;
+        end_tm.tm_isdst = -1;
 
         time_t now = time(NULL);
         struct tm now_tm = *localtime(&now);
         now_tm.tm_hour = 0; now_tm.tm_min = 0; now_tm.tm_sec = 0;
+        now_tm.tm_isdst = -1;
         time_t today = mktime(&now_tm);
         time_t start_time = mktime(&start_tm);
 
