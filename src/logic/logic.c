@@ -31,6 +31,7 @@ int validate_player_profile(const char* full_name, const char* gamertag, const c
     // check that admin does not input empty parameters
     if (strlen(full_name) == 0 || strlen(gamertag) == 0 || strlen(ssn) == 0 || strlen(email) == 0 || strlen(sub_start) == 0 || strlen(sub_end) == 0) {
         return ERR_EMPTY_FIELD; // Leeres Feld
+        // Zinedin
     }
 
     // added after testing
@@ -42,18 +43,21 @@ int validate_player_profile(const char* full_name, const char* gamertag, const c
         if(i != 4 && (ssn[i] < '0' || ssn[i] > '9')){
             return ERR_INVALID_SSN; // invalid SSN format (non-digit character)
         }
+        // sina
     }
 
     // Validate email: Must have '@' and at least one '.' after it - Added after testing 07.04.2025
     const char* at_pos = strchr(email, '@');
         if (!at_pos || strchr(at_pos, '.') == NULL) {
             return ERR_INVALID_EMAIL; // invalid email format
+            // sina
         }
 
     // Datumsformate prüfen
     struct tm start_tm = {0}, end_tm = {0};
     if (!strptime(sub_start, "%d.%m.%Y", &start_tm) || !strptime(sub_end, "%d.%m.%Y", &end_tm)) {
         return ERR_INVALID_DATE;
+        // sina
     }
     // Set tm_isdst to -1 to let mktime determine DST
     start_tm.tm_isdst = -1;
@@ -68,6 +72,7 @@ int validate_player_profile(const char* full_name, const char* gamertag, const c
     time_t start_time = mktime(&start_tm);
     if (difftime(start_time, today) < 0) {
         return ERR_PAST_DATE; // Startdatum in der Vergangenheit
+        // david
     }
 
     // is_subscribed prüfen
@@ -78,6 +83,7 @@ int validate_player_profile(const char* full_name, const char* gamertag, const c
         is_subscribed = 0;
     } else {
         return ERR_INVALID_SUB_STATUS;
+        // Donato
     }
 
 
@@ -95,6 +101,7 @@ int validate_player_profile(const char* full_name, const char* gamertag, const c
         return ERR_SUCCESS; // Erfolg
     } else {
         return ERR_STORAGE_FAILURE; // Speicherfehler
+        // Donato
     }
 }
 
