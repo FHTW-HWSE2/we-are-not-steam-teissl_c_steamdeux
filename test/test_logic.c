@@ -41,7 +41,7 @@ void test_valid_input_returns_ERR_SUCCESS(void) {
     const char* gamertag = "Player123";
     const char* ssn = "1234-567890";
     const char* email = "max@test.com";
-    const char* sub_start = "01.07.2025";
+    const char* sub_start = "05.07.2025";
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
@@ -64,6 +64,21 @@ void test_valid_input_returns_ERR_SUCCESS(void) {
 }
 
 
+void test_start_date_in_past_returns_ERR_PAST_DATE(void) {
+    // Alle Felder gültig – außer: Startdatum liegt in der Vergangenheit
+    const char* full_name = "Old Start";
+    const char* gamertag = "PastStartUser";
+    const char* ssn = "1234-567890";
+    const char* email = "past@example.com";
+    const char* sub_start = "01.01.2000";  // Vergangenheit!
+    const char* sub_end = "01.01.2100";    // Gültig
+    const char* is_subscribed_str = "true";
+
+    // Kein Mock nötig, da die Funktion vorher schon abbricht
+    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+
+    TEST_ASSERT_EQUAL_INT(ERR_PAST_DATE, result);
+}
 
 
 int main(void) {
@@ -71,5 +86,6 @@ int main(void) {
     RUN_TEST(test_logic_create_report_valid_inputs);
     RUN_TEST(test_logic_create_report_null_input);
     RUN_TEST(test_valid_input_returns_ERR_SUCCESS);
+    RUN_TEST(test_start_date_in_past_returns_ERR_PAST_DATE);
     return UNITY_END();
 }
