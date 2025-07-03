@@ -9,8 +9,13 @@
 
 void start_simulation() {
     int choice, duration;
+    time_t sim_now = time(NULL); // Startzeit für Simulation
+    char datebuf[64];
     while (1) {
+        // Aktuelles Simulationsdatum/Uhrzeit anzeigen
+        strftime(datebuf, sizeof(datebuf), "%Y-%m-%d %H:%M:%S", localtime(&sim_now));
         printf("\n--- Simulation Menu ---\n");
+        printf("Aktuelles Simulationsdatum: %s\n", datebuf);
         printf("1. Simulate days\n");
         printf("2. Simulate weeks\n");
         printf("3. Simulate months\n");
@@ -85,7 +90,8 @@ void start_simulation() {
 
         srand(time(NULL));
         int total_days = days;
-        time_t now = time(NULL);
+        // Simulationszeitpunkt für diese Runde
+        time_t now = sim_now;
 
         for (int i = 0; i < cJSON_GetArraySize(users); ++i) {
             cJSON *user = cJSON_GetArrayItem(users, i);
@@ -140,7 +146,9 @@ void start_simulation() {
         cJSON_Delete(gjson);
         cJSON_Delete(report_arr);
 
+        // Simulationszeit fortschreiben
+        sim_now = now + days * 86400;
         printf("Simulation abgeschlossen. Sessions gespeichert.\n");
-        // Nach einer Simulation zurück ins Menü
+        // Nach einer Simulation zurück ins Menü (Schleife bleibt erhalten)
     }
 }
