@@ -623,8 +623,9 @@ void add_user_presentation() {
 void display_users_presentation(){
     // Präsentationsschicht: Ausgabe
     printf("Displaying all users:\n");
-    if(!display_users_logic()) {
-        printf("Failed to display users.\n");
+    int result = display_users_logic();
+    if (result != ERR_SUCCESS) {
+        printf("Failed to display users. Error code: %d\n", result);
     }
 }
 
