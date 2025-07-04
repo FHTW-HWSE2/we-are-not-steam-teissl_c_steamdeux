@@ -4,7 +4,7 @@
 #include "presentation.h"
 #include "../inc/logic/logic.h"
 #include "../inc/presentation/run.h"
-#include "../data/data.h"
+#include "../inc/data/data.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdio.h>

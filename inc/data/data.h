@@ -15,6 +15,7 @@ void print_user_to_cli(void);
 int remove_player_profile(const char* gamertag);
 int edit_player_profile(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, int is_subscribed);
 void remove_expired_users(void);
+int data_update_all_subscription_flags(void);
 
 
 #endif // DATA_H
