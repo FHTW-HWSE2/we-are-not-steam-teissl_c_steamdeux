@@ -1,0 +1,8 @@
+/Users/donadoni/Uni/Semester2/HWSE2/we-are-not-steam-teissl_c_steamdeux/build/CMakeFiles/game_manager.dir
+/Users/donadoni/Uni/Semester2/HWSE2/we-are-not-steam-teissl_c_steamdeux/build/CMakeFiles/test.dir
+/Users/donadoni/Uni/Semester2/HWSE2/we-are-not-steam-teissl_c_steamdeux/build/CMakeFiles/edit_cache.dir
+/Users/donadoni/Uni/Semester2/HWSE2/we-are-not-steam-teissl_c_steamdeux/build/CMakeFiles/rebuild_cache.dir
+/Users/donadoni/Uni/Semester2/HWSE2/we-are-not-steam-teissl_c_steamdeux/build/test/CMakeFiles/test_logic.dir
+/Users/donadoni/Uni/Semester2/HWSE2/we-are-not-steam-teissl_c_steamdeux/build/test/CMakeFiles/test.dir
+/Users/donadoni/Uni/Semester2/HWSE2/we-are-not-steam-teissl_c_steamdeux/build/test/CMakeFiles/edit_cache.dir
+/Users/donadoni/Uni/Semester2/HWSE2/we-are-not-steam-teissl_c_steamdeux/build/test/CMakeFiles/rebuild_cache.dir

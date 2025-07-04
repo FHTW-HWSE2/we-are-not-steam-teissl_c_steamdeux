@@ -1,6 +1,6 @@
 #ifndef PRESENTATION_H
 #define PRESENTATION_H
-#define MAX_INPUT 100
+#define MAX_USER_INPUT 100
 
 void presentation_collect_and_save_report(void);
 void start_admin_menu();

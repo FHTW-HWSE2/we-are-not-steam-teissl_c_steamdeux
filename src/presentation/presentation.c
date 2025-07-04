@@ -18,6 +18,15 @@
 
 #define BUFFER_SIZE 256
 
+// Comparison function for sorting users by hours
+static int compare_users_by_hours(const void *a, const void *b) {
+    const cJSON *userA = *(const cJSON **)a;
+    const cJSON *userB = *(const cJSON **)b;
+    int hoursA = cJSON_GetObjectItem(userA, "player_hours")->valueint;
+    int hoursB = cJSON_GetObjectItem(userB, "player_hours")->valueint;
+    return hoursB - hoursA;
+}
+
 // ANSI color codes
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define ANSI_COLOR_CYAN    "\x1b[36;1m"
@@ -262,14 +271,7 @@ void show_top_users_terminal(void) {
         user_ptrs[i] = cJSON_GetArrayItem(user_array, i);
     }
 
-    int compare_users(const void *a, const void *b) {
-        const cJSON *userA = *(const cJSON **)a;
-        const cJSON *userB = *(const cJSON **)b;
-        int hoursA = cJSON_GetObjectItem(userA, "player_hours")->valueint;
-        int hoursB = cJSON_GetObjectItem(userB, "player_hours")->valueint;
-        return hoursB - hoursA;
-    }
-    qsort(user_ptrs, user_count, sizeof(cJSON*), compare_users);
+    qsort(user_ptrs, user_count, sizeof(cJSON*), compare_users_by_hours);
 
     int top = user_count < 10 ? user_count : 10;
     printf("Top %d users by playtime:\n", top);
@@ -332,14 +334,7 @@ void generate_top_users_file(void) {
         user_ptrs[i] = cJSON_GetArrayItem(user_array, i);
     }
 
-    int compare_users(const void *a, const void *b) {
-        const cJSON *userA = *(const cJSON **)a;
-        const cJSON *userB = *(const cJSON **)b;
-        int hoursA = cJSON_GetObjectItem(userA, "player_hours")->valueint;
-        int hoursB = cJSON_GetObjectItem(userB, "player_hours")->valueint;
-        return hoursB - hoursA;
-    }
-    qsort(user_ptrs, user_count, sizeof(cJSON*), compare_users);
+    qsort(user_ptrs, user_count, sizeof(cJSON*), compare_users_by_hours);
 
     int top = user_count < 10 ? user_count : 10;
     cJSON *ranked_array = cJSON_CreateArray();
@@ -378,7 +373,7 @@ for (int i = 0; i < top; ++i) {
 void start_admin_menu(){
     // Präsentationsschicht: Menüführung, Benutzereingaben, Aufruf anderer Präsentationsfunktionen
     printf("\n=== User Managment Menu ===\n");
-    char choice[MAX_INPUT];
+    char choice[MAX_USER_INPUT];
 
     while (1){
         printf("---------------\n");
@@ -392,7 +387,7 @@ void start_admin_menu(){
         printf("8. Generate player report (usersRanked.json)\n"); // <-- NEU
         printf("0. Return to Main Menu\n");
         printf("Choose an option: ");
-        fgets(choice, MAX_INPUT, stdin);
+        fgets(choice, MAX_USER_INPUT, stdin);
 
         int option = atoi(choice);
         switch (option) {
@@ -490,24 +485,24 @@ void read_ssn_input(const char *prompt, char *buffer, size_t size) {
 void add_user_presentation() {
     // Präsentationsschicht: Eingabe, Ausgabe, Menüführung
     // HINWEIS: Datums- und Feldvalidierung, SSN/Email-Prüfung etc. gehören in die Logikschicht!
-    char full_name[MAX_INPUT] = {};
-    char gamertag[MAX_INPUT] = {};
-    char ssn[MAX_INPUT] = {};
-    char email[MAX_INPUT] = {};
-    char subscription_start[MAX_INPUT] = {};
-    char subscription_end[MAX_INPUT] = {};
+    char full_name[MAX_USER_INPUT] = {};
+    char gamertag[MAX_USER_INPUT] = {};
+    char ssn[MAX_USER_INPUT] = {};
+    char email[MAX_USER_INPUT] = {};
+    char subscription_start[MAX_USER_INPUT] = {};
+    char subscription_end[MAX_USER_INPUT] = {};
 
     printf("Please add a new user.\n");
 
-    read_alpha_input("Enter full name: ", full_name, MAX_INPUT);
+    read_alpha_input("Enter full name: ", full_name, MAX_USER_INPUT);
 
     printf("Enter gamertag: ");
-    fgets(gamertag, MAX_INPUT, stdin);
+    fgets(gamertag, MAX_USER_INPUT, stdin);
     gamertag[strcspn(gamertag, "\n")] = '\0';
 
-    read_ssn_input("Enter SSN (format XXXX-XXXXXX): ", ssn, MAX_INPUT);
+    read_ssn_input("Enter SSN (format XXXX-XXXXXX): ", ssn, MAX_USER_INPUT);
 
-    read_email_input("Enter email address: ", email, MAX_INPUT);
+    read_email_input("Enter email address: ", email, MAX_USER_INPUT);
 
     // Subscription start date selection
     int start_choice = -1;
@@ -516,8 +511,8 @@ void add_user_presentation() {
         printf("1. Use today's date\n");
         printf("0. Enter a future date\n");
         printf("Enter your choice (1/0): ");
-        char start_choice_str[MAX_INPUT];
-        fgets(start_choice_str, MAX_INPUT, stdin);
+        char start_choice_str[MAX_USER_INPUT];
+        fgets(start_choice_str, MAX_USER_INPUT, stdin);
         start_choice_str[strcspn(start_choice_str, "\n")] = '\0';
         if (strlen(start_choice_str) == 0) {
             printf("Invalid choice. Please enter 1 or 0.\n");
@@ -537,7 +532,7 @@ void add_user_presentation() {
     } else {
         while (1) {
             printf("Enter subscription start date (DD.MM.YYYY) [must be today or later]: ");
-            fgets(subscription_start, MAX_INPUT, stdin);
+            fgets(subscription_start, MAX_USER_INPUT, stdin);
             subscription_start[strcspn(subscription_start, "\n")] = '\0';
             struct tm start_tm = {0};
             if (!strptime(subscription_start, "%d.%m.%Y", &start_tm)) {
@@ -564,8 +559,8 @@ void add_user_presentation() {
         printf("2. 6 months\n");
         printf("3. 12 months\n");
         printf("Enter your choice (1/2/3): ");
-        char duration_choice[MAX_INPUT];
-        fgets(duration_choice, MAX_INPUT, stdin);
+        char duration_choice[MAX_USER_INPUT];
+        fgets(duration_choice, MAX_USER_INPUT, stdin);
         duration_choice[strcspn(duration_choice, "\n")] = '\0';
         if (strlen(duration_choice) == 0) {
             printf("Invalid choice. Please enter 1, 2, or 3.\n");
@@ -633,9 +628,9 @@ void display_users_presentation(){
 
 void remove_user_presentation() {
     // Präsentationsschicht: Eingabe, Ausgabe
-    char gamertag[MAX_INPUT] = {};
+    char gamertag[MAX_USER_INPUT] = {};
     printf("Enter gamertag of user to remove: ");
-    fgets(gamertag, MAX_INPUT, stdin);
+    fgets(gamertag, MAX_USER_INPUT, stdin);
     gamertag[strcspn(gamertag, "\n")] = '\0';
 
     if (remove_user_logic(gamertag)) {
@@ -648,21 +643,21 @@ void remove_user_presentation() {
 void edit_user_presentation() {
     // Präsentationsschicht: Eingabe, Ausgabe
     // HINWEIS: Validierung und Formatprüfungen gehören in die Logikschicht!
-    char gamertag[MAX_INPUT] = {};
-    char full_name[MAX_INPUT] = {};
-    char ssn[MAX_INPUT] = {};
-    char email[MAX_INPUT] = {};
-    char subscription_start[MAX_INPUT] = {};
-    char subscription_end[MAX_INPUT] = {};
-    // char subscription_flag[MAX_INPUT] = {}; // not needed anymore
+    char gamertag[MAX_USER_INPUT] = {};
+    char full_name[MAX_USER_INPUT] = {};
+    char ssn[MAX_USER_INPUT] = {};
+    char email[MAX_USER_INPUT] = {};
+    char subscription_start[MAX_USER_INPUT] = {};
+    char subscription_end[MAX_USER_INPUT] = {};
+    // char subscription_flag[MAX_USER_INPUT] = {}; // not needed anymore
 
     printf("Enter gamertag of user to edit: ");
-    fgets(gamertag, MAX_INPUT, stdin);
+    fgets(gamertag, MAX_USER_INPUT, stdin);
     gamertag[strcspn(gamertag, "\n")] = '\0';
 
     // For each field, allow skipping with 0
     printf("Enter new full name (or 0 to keep current): ");
-    fgets(full_name, MAX_INPUT, stdin);
+    fgets(full_name, MAX_USER_INPUT, stdin);
     full_name[strcspn(full_name, "\n")] = '\0';
     if (strcmp(full_name, "0") != 0) {
         while (1) {
@@ -675,14 +670,14 @@ void edit_user_presentation() {
             }
             if (strlen(full_name) > 0 && valid) break;
             printf("Invalid input. Please enter only letters and spaces (or 0 to keep current): ");
-            fgets(full_name, MAX_INPUT, stdin);
+            fgets(full_name, MAX_USER_INPUT, stdin);
             full_name[strcspn(full_name, "\n")] = '\0';
             if (strcmp(full_name, "0") == 0) break;
         }
     }
 
     printf("Enter new SSN (format XXXX-XXXXXX or XXXX XXXXXX, or 0 to keep current): ");
-    fgets(ssn, MAX_INPUT, stdin);
+    fgets(ssn, MAX_USER_INPUT, stdin);
     ssn[strcspn(ssn, "\n")] = '\0';
     if (strcmp(ssn, "0") != 0) {
         while (1) {
@@ -709,21 +704,21 @@ void edit_user_presentation() {
             }
             if (valid) break;
             printf("Invalid SSN. Please use format XXXX-XXXXXX or XXXX XXXXXX (or 0 to keep current): ");
-            fgets(ssn, MAX_INPUT, stdin);
+            fgets(ssn, MAX_USER_INPUT, stdin);
             ssn[strcspn(ssn, "\n")] = '\0';
             if (strcmp(ssn, "0") == 0) break;
         }
     }
 
     printf("Enter new email address (or 0 to keep current): ");
-    fgets(email, MAX_INPUT, stdin);
+    fgets(email, MAX_USER_INPUT, stdin);
     email[strcspn(email, "\n")] = '\0';
     if (strcmp(email, "0") != 0) {
         while (1) {
             const char* at_pos = strchr(email, '@');
             if (strlen(email) > 0 && at_pos && strchr(at_pos, '.')) break;
             printf("Invalid email format. Please enter a valid email (or 0 to keep current): ");
-            fgets(email, MAX_INPUT, stdin);
+            fgets(email, MAX_USER_INPUT, stdin);
             email[strcspn(email, "\n")] = '\0';
             if (strcmp(email, "0") == 0) break;
         }
@@ -736,8 +731,8 @@ void edit_user_presentation() {
         printf("1. Use today's date\n");
         printf("0. Enter a future date\n");
         printf("Enter your choice (1/0, or 0 to keep current): ");
-        char start_choice_str[MAX_INPUT];
-        fgets(start_choice_str, MAX_INPUT, stdin);
+        char start_choice_str[MAX_USER_INPUT];
+        fgets(start_choice_str, MAX_USER_INPUT, stdin);
         start_choice_str[strcspn(start_choice_str, "\n")] = '\0';
         if (strlen(start_choice_str) == 0) {
             printf("Invalid choice. Please enter 1 or 0.\n");
@@ -759,7 +754,7 @@ void edit_user_presentation() {
     } else if (start_choice == 0) {
         while (1) {
             printf("Enter subscription start date (DD.MM.YYYY) [must be today or in the future, or 0 to keep current]: ");
-            fgets(subscription_start, MAX_INPUT, stdin);
+            fgets(subscription_start, MAX_USER_INPUT, stdin);
             subscription_start[strcspn(subscription_start, "\n")] = '\0';
             if (strcmp(subscription_start, "0") == 0) break;
             struct tm start_tm = {0};
@@ -788,8 +783,8 @@ void edit_user_presentation() {
         printf("2. 6 months\n");
         printf("3. 12 months\n");
         printf("Enter your choice (1/2/3, or 0 to keep current): ");
-        char duration_choice[MAX_INPUT];
-        fgets(duration_choice, MAX_INPUT, stdin);
+        char duration_choice[MAX_USER_INPUT];
+        fgets(duration_choice, MAX_USER_INPUT, stdin);
         duration_choice[strcspn(duration_choice, "\n")] = '\0';
         if (strcmp(duration_choice, "0") == 0) break;
         if (strlen(duration_choice) == 0) {

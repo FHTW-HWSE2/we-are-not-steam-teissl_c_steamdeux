@@ -98,6 +98,52 @@ void test_empty_field_returns_ERR_EMPTY_FIELD(void) { //siehe Kommentar validate
 }
 
 
+void test_invalid_subscription_status_returns_ERR_INVALID_SUB_STATUS(void) {
+    // Alle Felder gültig – außer: Abo-Status ist ungültig
+    const char* full_name = "Invalid Sub User";
+    const char* gamertag = "InvalidSubUser";
+    const char* ssn = "1234-567890";
+    const char* email = "invalid@example.com";
+    const char* sub_start = "05.07.2025";
+    const char* sub_end = "01.08.2025";
+    const char* is_subscribed_str = "invalid"; // ungültig!
+
+    // Kein Mock nötig, da die Funktion vorher schon abbricht
+    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+
+    TEST_ASSERT_EQUAL_INT(ERR_INVALID_SUB_STATUS, result);
+}
+
+
+void test_storage_failure_returns_ERR_STORAGE_FAILURE(void) {
+    // Alle Felder gültig – aber save_player_profile schlägt fehl
+    const char* full_name = "Storage Fail User";
+    const char* gamertag = "StorageFailUser";
+    const char* ssn = "1234-567890";
+    const char* email = "storage@example.com";
+    const char* sub_start = "05.07.2025";
+    const char* sub_end = "01.08.2025";
+    const char* is_subscribed_str = "true";
+
+    // Erwarteter Aufruf von save_player_profile – aber mit Fehler
+    save_player_profile_ExpectAndReturn(
+        full_name,
+        gamertag,
+        0,               // player_hours
+        ssn,
+        email,
+        sub_start,
+        sub_end,
+        1,               // is_subscribed = true
+        1                // return 1 → Fehler beim Speichern
+    );
+
+    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+
+    TEST_ASSERT_EQUAL_INT(ERR_STORAGE_FAILURE, result);
+}
+
+
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_logic_create_report_valid_inputs);
@@ -105,5 +151,7 @@ int main(void) {
     RUN_TEST(test_valid_input_returns_ERR_SUCCESS);
     RUN_TEST(test_start_date_in_past_returns_ERR_PAST_DATE);
     RUN_TEST(test_empty_field_returns_ERR_EMPTY_FIELD); // hinzugefügt
+    RUN_TEST(test_invalid_subscription_status_returns_ERR_INVALID_SUB_STATUS); // hinzugefügt
+    RUN_TEST(test_storage_failure_returns_ERR_STORAGE_FAILURE); // hinzugefügt
     return UNITY_END();
 }
