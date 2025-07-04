@@ -329,4 +329,15 @@ int logic_is_only_spaces(const char *str) {
     return 1;
 }
 
+// Prüft, ob ein Datum im Format DD.MM.YYYY vorliegt (ohne weitere Logik)
+int logic_is_valid_date_format(const char *date) {
+    if (!date || strlen(date) != 10) return 0;
+    if (date[2] != '.' || date[5] != '.') return 0;
+    for (int i = 0; i < 10; ++i) {
+        if (i == 2 || i == 5) continue;
+        if (date[i] < '0' || date[i] > '9') return 0;
+    }
+    return 1;
+}
+
 // Hinweis (04.07.2025): Die Funktion logic_update_all_subscription_flags() wurde entfernt, da der Logic-Layer für diese Operation nicht benötigt wird.

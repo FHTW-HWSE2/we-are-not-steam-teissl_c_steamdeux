@@ -186,23 +186,10 @@ void presentation_collect_and_save_report(void) {
     read_input("Enter report title: ", title, BUFFER_SIZE);
     read_input("Enter report description: ", description, BUFFER_SIZE);
 
-    // Added after merge to handle inputs
-     while (1) {
+    // Datumsformat-Validierung in die Logikschicht ausgelagert
+    while (1) {
         read_input("Enter report date (DD.MM.YYYY): ", date, BUFFER_SIZE);
-
-        // Datum prüfen: Format muss exakt 10 Zeichen sein und Punkte an Position 2 und 5
-        if (strlen(date) == 10 && date[2] == '.' && date[5] == '.') {
-            int valid = 1;
-            for (int i = 0; i < 10; ++i) {
-                if (i == 2 || i == 5) continue;
-                if (date[i] < '0' || date[i] > '9') {
-                    valid = 0;
-                    break;
-                }
-            }
-            if (valid) break; // korrektes Format
-        }
-
+        if (logic_is_valid_date_format(date)) break;
         printf("Invalid date format. Please use DD.MM.YYYY\n");
     }
 
