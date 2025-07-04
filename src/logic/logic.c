@@ -126,16 +126,26 @@ void print_users_logic(){
     print_user_to_cli();
 }
 
-int display_users_logic(){
-    // Logikschicht: Ruft Datenschicht auf, gibt aber auch direkt aus (printf)
-    // HINWEIS: printf ist Präsentationslogik und sollte ausgelagert werden!
+int display_users_logic() {
     char* users_data = NULL;
     int result = read_player_profiles(&users_data);
-    if(result == ERR_SUCCESS){
-        printf("%s\n", users_data); // Print the formatted user data
-        free(users_data);           // Free the allocated string
+
+    if (result == ERR_SUCCESS && users_data != NULL && strlen(users_data) > 0) {
+        printf("%s\n", users_data);
+        free(users_data);
+        return ERR_SUCCESS; // Alles ok
     }
-    return result;
+
+    // Falls read_player_profiles Erfolg meldet, aber leerer Text kommt → trotzdem als Erfolg behandeln
+    if (result == ERR_SUCCESS) {
+        printf("No users to display.\n");
+        if (users_data) free(users_data);
+        return ERR_SUCCESS;
+    }
+
+    // Bei Speicherfehler oder JSON-Problem
+    if (users_data) free(users_data);
+    return result; // z. B. ERR_STORAGE_FAILURE
 }
 
 int remove_user_logic(const char* gamertag) {
