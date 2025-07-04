@@ -16,3 +16,9 @@ Put in following commands:
 2) -> "cmake .."
 3) -> "make"
 5) -> "./game_manager" while you are in the build folder.
+
+###  How to compile and run tests:
+1) -> "cd build"
+2) -> "cmake .."
+3) -> "make"
+5) -> "./game_manager" while you are in the build folder.

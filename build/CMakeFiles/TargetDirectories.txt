@@ -1,0 +1,8 @@
+/home/zinedin/we-are-not-steam-teissl_c_steamdeux/build/CMakeFiles/game_manager.dir
+/home/zinedin/we-are-not-steam-teissl_c_steamdeux/build/CMakeFiles/test.dir
+/home/zinedin/we-are-not-steam-teissl_c_steamdeux/build/CMakeFiles/edit_cache.dir
+/home/zinedin/we-are-not-steam-teissl_c_steamdeux/build/CMakeFiles/rebuild_cache.dir
+/home/zinedin/we-are-not-steam-teissl_c_steamdeux/build/test/CMakeFiles/test_logic.dir
+/home/zinedin/we-are-not-steam-teissl_c_steamdeux/build/test/CMakeFiles/test.dir
+/home/zinedin/we-are-not-steam-teissl_c_steamdeux/build/test/CMakeFiles/edit_cache.dir
+/home/zinedin/we-are-not-steam-teissl_c_steamdeux/build/test/CMakeFiles/rebuild_cache.dir

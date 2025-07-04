@@ -80,10 +80,9 @@
 // Refactored am 04.07.2025: Nur Präsentationslogik (printf) bleibt hier.
 // Die eigentliche Logik und Datenzugriffe sind jetzt in logic.c/data.c ausgelagert.
 void update_all_subscription_flags() {
-    // Aufruf der neuen Logikfunktion, die alles übernimmt (siehe logic.c)
-    // Die Funktion gibt die Anzahl der geänderten Flags zurück
-    int changed = logic_update_all_subscription_flags(); // <-- NEU, ausgelagert am 04.07.2025
-    printf("Updated %d user subscription flag(s).\n", changed); // Nur Ausgabe bleibt Präsentation
+    // Hinweis: Da keine Logik nötig ist, wird direkt die Data-Layer-Funktion aufgerufen.
+    int changed = data_update_all_subscription_flags(); // <-- Logic-Layer übersprungen
+    printf("Updated %d user subscription flag(s).\n", changed);
 }
 
 // Übermenü für User Management und Game Management Menü

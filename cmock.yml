@@ -1,6 +1,0 @@
-:cmock:
-  :mock_path: mocks
-  :plugins:
-    - expect
-    - expect_any_args
-    - callback

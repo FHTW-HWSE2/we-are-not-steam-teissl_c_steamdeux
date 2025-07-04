@@ -318,10 +318,4 @@ void display_all_games(Game *games, int game_count) {
     printf("============================\n");
 }
 
-// Refactored am 04.07.2025: Ausgelagert aus presentation.c
-// Diese Funktion übernimmt die Logik und ruft die Datenfunktion auf.
-int logic_update_all_subscription_flags() {
-    // Aufruf der neuen Datenfunktion, die alles erledigt
-    // Gibt die Anzahl der geänderten Flags zurück
-    return data_update_all_subscription_flags(); // <-- NEU, ausgelagert am 04.07.2025
-}
+// Hinweis (04.07.2025): Die Funktion logic_update_all_subscription_flags() wurde entfernt, da der Logic-Layer für diese Operation nicht benötigt wird.
