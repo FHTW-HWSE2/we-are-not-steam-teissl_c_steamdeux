@@ -39,11 +39,14 @@ cJSON *logic_create_report(const char *title, const char *description, const cha
 
 int validate_player_profile(const char* full_name, const char* gamertag, const char* ssn, const char* email, const char* sub_start, const char* sub_end, const char* is_subscribed_str){
     // Logikschicht: Validierung der Eingaben
-    // HINWEIS: Datenzugriff (save_player_profile) am Ende ist Schichtverletzung! Speichern gehört in die Datenschicht.
-    // check that admin does not input empty parameters
-    if (strlen(full_name) == 0 || strlen(gamertag) == 0 || strlen(ssn) == 0 || strlen(email) == 0 || strlen(sub_start) == 0 || strlen(sub_end) == 0) {
-        return ERR_EMPTY_FIELD; // Leeres Feld
-        // Zinedin, die Funktion validate_player_profile() ist eine level unter Zeile 412 -461 in presentation.c, dadurch überflüssig?
+    // Pflichtfelder: leer oder nur Leerzeichen -> Fehler
+    if (strlen(full_name) == 0 || logic_is_only_spaces(full_name) ||
+        strlen(gamertag) == 0 || logic_is_only_spaces(gamertag) ||
+        strlen(ssn) == 0 || logic_is_only_spaces(ssn) ||
+        strlen(email) == 0 || logic_is_only_spaces(email) ||
+        strlen(sub_start) == 0 || logic_is_only_spaces(sub_start) ||
+        strlen(sub_end) == 0 || logic_is_only_spaces(sub_end)) {
+        return ERR_EMPTY_FIELD;
     }
 
     // added after testing
@@ -316,6 +319,14 @@ void display_all_games(Game *games, int game_count) {
             games[i].mode);
     }
     printf("============================\n");
+}
+
+// Refactored 04.07.2025: Hilfsfunktion für Präsentationsschicht
+int logic_is_only_spaces(const char *str) {
+    for (size_t i = 0; i < strlen(str); ++i) {
+        if (str[i] != ' ') return 0;
+    }
+    return 1;
 }
 
 // Hinweis (04.07.2025): Die Funktion logic_update_all_subscription_flags() wurde entfernt, da der Logic-Layer für diese Operation nicht benötigt wird.

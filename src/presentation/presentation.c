@@ -151,30 +151,28 @@ void start_main_menu() {
     }
 }
 
-// Added after merge, to handle invalid inputs.
+// Refactored 04.07.2025: Validierung (nur Leerzeichen) ausgelagert in logic layer
 static void read_input(const char *prompt, char *buffer, size_t size) {
-    // Präsentationsschicht: Einfache Eingabe
-    // HINWEIS: Validierung (nur Leerzeichen) ist Logik, sollte ausgelagert werden!
-    while (1) {
+    int valid = 0;
+    while (!valid) {
         printf("%s", prompt);
         if (fgets(buffer, size, stdin)) {
             size_t len = strlen(buffer);
             if (len > 0 && buffer[len - 1] == '\n') {
-                buffer[len - 1] = '\0'; // Newline entfernen
+                buffer[len - 1] = '\0';
             }
-            // Eingabe auf nur Leerzeichen prüfen
-            int only_spaces = 1;
-            for (size_t i = 0; i < strlen(buffer); ++i) {
-                if (buffer[i] != ' ') {
-                    only_spaces = 0;
-                    break;
-                }
+            if (strlen(buffer) == 0) {
+                printf("Invalid input. Please enter a valid value.\n");
+                continue;
             }
-            if (strlen(buffer) > 0 && !only_spaces) {
-                return; // gültige Eingabe
+            if (logic_is_only_spaces(buffer)) {
+                printf("Input must not be only spaces. Please enter a valid value.\n");
+                continue;
             }
+            valid = 1;
+        } else {
+            printf("Invalid input. Please enter a valid value.\n");
         }
-        printf("Invalid input. Please enter a valid number.\n");
     }
 }
 
@@ -230,7 +228,7 @@ void show_top_users_terminal(void) {
     // HINWEIS: Datei- und Sortierlogik gehören in die Data- und Logikschicht!
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if (!file) {
-        printf("Error: Could not open %s\n", USERS_JSON_PATH);
+        printf("Error: Could not open users.json\n");
         return;
     }
     fseek(file, 0, SEEK_END);
@@ -249,7 +247,7 @@ void show_top_users_terminal(void) {
     cJSON *user_array = cJSON_Parse(data);
     free(data);
     if (!user_array || !cJSON_IsArray(user_array)) {
-        printf("Error: %s is not a valid JSON array\n", USERS_JSON_PATH);
+        printf("Error: users.json is not a valid JSON array\n");
         if (user_array) cJSON_Delete(user_array);
         return;
     }
@@ -293,7 +291,7 @@ void generate_top_users_file(void) {
     // HINWEIS: Datei- und Sortierlogik gehören in die Data- und Logikschicht!
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if (!file) {
-        printf("Error: Could not open %s\n", USERS_JSON_PATH);
+        printf("Error: Could not open users.json\n");
         return;
     }
     fseek(file, 0, SEEK_END);
@@ -312,7 +310,7 @@ void generate_top_users_file(void) {
     cJSON *user_array = cJSON_Parse(data);
     free(data);
     if (!user_array || !cJSON_IsArray(user_array)) {
-        printf("Error: %s is not a valid JSON array\n", USERS_JSON_PATH);
+        printf("Error: users.json is not a valid JSON array\n");
         if (user_array) cJSON_Delete(user_array);
         return;
     }
@@ -356,7 +354,7 @@ for (int i = 0; i < top; ++i) {
 }
 
     char *json_str = cJSON_Print(ranked_array);
-    FILE *out = fopen("./usersRanked.json", "w");
+    FILE *out = fopen("../usersRanked.json", "w");
     if (out && json_str) {
         fputs(json_str, out);
         fclose(out);
@@ -426,12 +424,18 @@ void start_admin_menu(){
 
 
 void read_alpha_input(const char *prompt, char *buffer, size_t size) {
-    // Präsentationsschicht: Einfache Eingabe
-    // HINWEIS: Komplexe Validierung (nur Buchstaben, Leerzeichen, -) gehört in die Logikschicht!
     while (1) {
         printf("%s", prompt);
         if (fgets(buffer, size, stdin)) {
             buffer[strcspn(buffer, "\n")] = '\0';
+            if (strlen(buffer) == 0) {
+                printf("Invalid input. Please enter only letters and spaces.\n");
+                continue;
+            }
+            if (logic_is_only_spaces(buffer)) {
+                printf("Input must not be only spaces. Please enter only letters and spaces.\n");
+                continue;
+            }
             int valid = 1;
             for (size_t i = 0; i < strlen(buffer); ++i) {
                 if ((buffer[i] < 'A' || (buffer[i] > 'Z' && buffer[i] < 'a') || buffer[i] > 'z') && buffer[i] != ' ' && buffer[i] != '-') {
@@ -439,7 +443,7 @@ void read_alpha_input(const char *prompt, char *buffer, size_t size) {
                     break;
                 }
             }
-            if (strlen(buffer) > 0 && valid) return;
+            if (valid) return;
         }
         printf("Invalid input. Please enter only letters and spaces.\n");
     }
@@ -496,9 +500,21 @@ void add_user_presentation() {
 
     read_alpha_input("Enter full name: ", full_name, MAX_USER_INPUT);
 
-    printf("Enter gamertag: ");
-    fgets(gamertag, MAX_USER_INPUT, stdin);
-    gamertag[strcspn(gamertag, "\n")] = '\0';
+    // Gamertag-Eingabe mit sofortiger Validierung auf Leerzeichen/leere Eingabe
+    while (1) {
+        printf("Enter gamertag: ");
+        fgets(gamertag, MAX_USER_INPUT, stdin);
+        gamertag[strcspn(gamertag, "\n")] = '\0';
+        if (strlen(gamertag) == 0) {
+            printf("Invalid input. Please enter a non-empty gamertag.\n");
+            continue;
+        }
+        if (logic_is_only_spaces(gamertag)) {
+            printf("Gamertag must not be only spaces. Please enter a valid value.\n");
+            continue;
+        }
+        break;
+    }
 
     read_ssn_input("Enter SSN (format XXXX-XXXXXX): ", ssn, MAX_USER_INPUT);
 
