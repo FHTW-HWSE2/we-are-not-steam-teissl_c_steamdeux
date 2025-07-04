@@ -10,7 +10,17 @@
 #include <time.h> // Für validate_player_profile() Funktion um das Startdatum zu prüfen
 #include "../inc/error.h" // Für Fehlercodes
 
+// ===================== SCHICHTEN-KOMMENTARE BEGINN =====================
+//
+// Logikschicht: Validiert, verarbeitet, prüft Formate, berechnet, entscheidet.
+// Datenschicht: Liest/schreibt Dateien, persistiert Daten.
+// Präsentationsschicht: Präsentiert Menüs, liest Benutzereingaben, gibt Ausgaben aus.
+//
+// HINWEIS: Wo Code gemischte Verantwortlichkeiten hat, ist dies explizit markiert.
+// ===================== SCHICHTEN-KOMMENTARE ENDE =====================
+
 cJSON *logic_create_report(const char *title, const char *description, const char *date) {
+    // Logikschicht: Erstellt ein Report-Objekt, keine I/O, keine Validierung
     if (!title || !description || !date) {
         return NULL;
     }
@@ -28,10 +38,12 @@ cJSON *logic_create_report(const char *title, const char *description, const cha
 }
 
 int validate_player_profile(const char* full_name, const char* gamertag, const char* ssn, const char* email, const char* sub_start, const char* sub_end, const char* is_subscribed_str){
+    // Logikschicht: Validierung der Eingaben
+    // HINWEIS: Datenzugriff (save_player_profile) am Ende ist Schichtverletzung! Speichern gehört in die Datenschicht.
     // check that admin does not input empty parameters
     if (strlen(full_name) == 0 || strlen(gamertag) == 0 || strlen(ssn) == 0 || strlen(email) == 0 || strlen(sub_start) == 0 || strlen(sub_end) == 0) {
         return ERR_EMPTY_FIELD; // Leeres Feld
-        // Zinedin
+        // Zinedin, die Funktion validate_player_profile() ist eine level unter Zeile 412 -461 in presentation.c, dadurch überflüssig?
     }
 
     // added after testing
@@ -106,10 +118,14 @@ int validate_player_profile(const char* full_name, const char* gamertag, const c
 }
 
 void print_users_logic(){
+    // Logikschicht: Ruft Datenschicht auf
+    // HINWEIS: printf in dieser Funktion ist Präsentationslogik und sollte ausgelagert werden!
     print_user_to_cli();
 }
 
 int display_users_logic(){
+    // Logikschicht: Ruft Datenschicht auf, gibt aber auch direkt aus (printf)
+    // HINWEIS: printf ist Präsentationslogik und sollte ausgelagert werden!
     char* users_data = NULL;
     int result = read_player_profiles(&users_data);
     if(result == ERR_SUCCESS){
@@ -120,11 +136,12 @@ int display_users_logic(){
 }
 
 int remove_user_logic(const char* gamertag) {
+    // Logikschicht: Ruft Datenschicht auf
     return remove_player_profile(gamertag);
 }
 
 int edit_user_logic(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, const char* is_subscribed_str) {
-
+    // Logikschicht: Validierung und Aufruf Datenschicht
     // Wenn alle Eingabefelder leer sind → nichts zu bearbeiten
     // Eingefügt, weil beim Editieren von Usern Daten die Felder mit "0" als "Error Fields cannot be empty" markiert wurden
     if (strlen(new_full_name) == 0 &&
@@ -208,6 +225,8 @@ int edit_user_logic(const char* gamertag, const char* new_full_name, const char*
 // in logic.c
 // 20.06.2025: Funktion initialize_game_data_loading() wurde angepasst, den Fehler zu beheben, dass bei Programmstart Spiele falsch geladen werden.
 int initialize_game_data_loading(const char *filename, Game **games, int *game_count) {
+    // Logikschicht: Initialisiert Spieldaten, ruft Datenschicht auf
+    // HINWEIS: printf ist Präsentationslogik und sollte ausgelagert werden!
     printf("Loading games from: %s\n", filename);
 
     // Die Funktion wird nun mit der Adresse von game_count aufgerufen.
@@ -225,6 +244,7 @@ int initialize_game_data_loading(const char *filename, Game **games, int *game_c
 
 // Funktion zum Bearbeiten eines Spiels
 int edit_game(Game games[], int game_count, int game_id, const char *new_title) {
+    // Logikschicht: Bearbeitet Spieldaten im Speicher
     for (int i = 0; i < game_count; i++) {
         if (games[i].id == game_id) {
             strncpy(games[i].title, new_title, sizeof(games[i].title) - 1);
@@ -239,6 +259,7 @@ int edit_game(Game games[], int game_count, int game_id, const char *new_title) 
 
 // Funktion zum Löschen eines Spiels
 int delete_game(Game games[], int *game_count, int game_id) {
+    // Logikschicht: Löscht Spieldaten im Speicher
     for (int i = 0; i < *game_count; i++) {
         if (games[i].id == game_id) {
             for (int j = i; j < *game_count - 1; j++) {
@@ -255,6 +276,7 @@ int delete_game(Game games[], int *game_count, int game_id) {
 
 // Funktion zum Hinzufügen eines neuen Spiels
 int add_new_game(Game **games, int *game_count, const char *title, const char *description, const char *version, const char *mode) {
+    // Logikschicht: Fügt neues Spiel hinzu
     *games = realloc(*games, (*game_count + 1) * sizeof(Game));
     if (*games == NULL) {
         printf("Error: Memory allocation failed.\n");
@@ -283,6 +305,8 @@ int add_new_game(Game **games, int *game_count, const char *title, const char *d
 
 // Funktion, um alle Spiele anzuzeigen
 void display_all_games(Game *games, int game_count) {
+    // Logikschicht: Gibt Spieldaten aus
+    // HINWEIS: printf ist Präsentationslogik und sollte ausgelagert werden!
     printf("\n=== Displaying All Games ===\n");
     for (int i = 0; i < game_count; i++) {
         printf("ID: %d | Title: %s | Version: %s | Mode: %s\n", 
@@ -292,4 +316,12 @@ void display_all_games(Game *games, int game_count) {
             games[i].mode);
     }
     printf("============================\n");
+}
+
+// Refactored am 04.07.2025: Ausgelagert aus presentation.c
+// Diese Funktion übernimmt die Logik und ruft die Datenfunktion auf.
+int logic_update_all_subscription_flags() {
+    // Aufruf der neuen Datenfunktion, die alles erledigt
+    // Gibt die Anzahl der geänderten Flags zurück
+    return data_update_all_subscription_flags(); // <-- NEU, ausgelagert am 04.07.2025
 }

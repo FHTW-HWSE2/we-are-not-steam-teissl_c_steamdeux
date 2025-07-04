@@ -25,58 +25,70 @@
 #define ANSI_COLOR_YELLOW  "\x1b[33;1m"
 #define ANSI_COLOR_RED     "\x1b[31;1m"
 
+// ===================== SCHICHTENKOMMENTARE BEGINN =====================
+// HINWEIS: Diese Datei ist die Präsentationsschicht (presentation layer).
+// Sie darf NUR für Benutzereingabe/-ausgabe (I/O, printf, scanf, fgets, etc.) zuständig sein.
+// KEINE Validierung, KEINE Datenzugriffe, KEINE Geschäftslogik!
+// Validierung -> logic.c, Datenzugriff -> data.c
+// ================================================================
+//
+// update_all_subscription_flags():
+// SCHICHTVERLETZUNG! Diese Funktion macht Datenzugriff (FILE, cJSON) und Logik (Datum vergleichen).
+// -> Alles außer printf gehört in data/logic layer ausgelagert!
+//
+// print_typewriter():
+// OK, reine Präsentationslogik (Ausgabe).
+//
+// start_main_menu():
+// OK, Menüführung und Ausgabe. Aber remove_expired_users() und update_all_subscription_flags() sind Schichtverletzungen, da sie Daten/Logik direkt aufrufen.
+//
+// read_input():
+// OK für einfache Eingabe, aber Validierung (nur Leerzeichen prüfen) gehört in die Logikschicht.
+//
+// presentation_collect_and_save_report():
+// SCHICHTVERLETZUNG! Validierung von Datum und Feldern ist hier, gehört aber in die Logikschicht. Nur read_input und printf sind erlaubt.
+//
+// show_top_users_terminal():
+// SCHICHTVERLETZUNG! Liest und sortiert Daten direkt (FILE, cJSON, qsort). Nur printf gehört hierher. Datenzugriff und Sortierung -> data/logic layer.
+//
+// generate_top_users_file():
+// SCHICHTVERLETZUNG! Liest, sortiert und schreibt Daten (FILE, cJSON, qsort). Nur printf gehört hierher. Datenzugriff und Sortierung -> data/logic layer.
+//
+// start_admin_menu():
+// OK, reine Menüführung und Ausgabe.
+//
+// read_alpha_input(), read_email_input(), read_ssn_input():
+// SCHICHTVERLETZUNG! Komplexe Validierung (Format, Zeichenprüfung) gehört in die Logikschicht. Nur Eingabeaufforderung und Weitergabe an Logik erlaubt.
+//
+// add_user_presentation():
+// SCHICHTVERLETZUNG! Validierung von Datum, SSN, Email, etc. ist hier, gehört aber in die Logikschicht. Nur Eingabeaufforderung und Weitergabe an Logik erlaubt.
+//
+// display_users_presentation():
+// OK, ruft Logik auf und gibt aus.
+//
+// remove_user_presentation():
+// OK, ruft Logik auf und gibt aus.
+//
+// edit_user_presentation():
+// SCHICHTVERLETZUNG! Validierung von Feldern, Datum, SSN, Email, etc. ist hier, gehört aber in die Logikschicht. Nur Eingabeaufforderung und Weitergabe an Logik erlaubt.
+//
+// start_game_management_menu():
+// OK, reine Menüführung und Ausgabe.
+// ===================== SCHICHTENKOMMENTARE ENDE =====================
+
 // Helper: Update is_subscribed for all users based on current date, NEW NEW NEW
+// Refactored am 04.07.2025: Nur Präsentationslogik (printf) bleibt hier.
+// Die eigentliche Logik und Datenzugriffe sind jetzt in logic.c/data.c ausgelagert.
 void update_all_subscription_flags() {
-    FILE *file = fopen(USERS_JSON_PATH, "r");
-    if (!file) return;
-    fseek(file, 0, SEEK_END);
-    long length = ftell(file);
-    fseek(file, 0, SEEK_SET);
-    char *data = malloc(length + 1);
-    fread(data, 1, length, file);
-    data[length] = '\0';
-    fclose(file);
-    cJSON *user_array = cJSON_Parse(data);
-    free(data);
-    if (!user_array || !cJSON_IsArray(user_array)) {
-        cJSON_Delete(user_array);
-        return;
-    }
-    time_t now = time(NULL);
-    int changed = 0;
-    int size = cJSON_GetArraySize(user_array);
-    for (int i = 0; i < size; i++) {
-        cJSON *user = cJSON_GetArrayItem(user_array, i);
-        cJSON *sub_end = cJSON_GetObjectItem(user, "subscription_end_date");
-        cJSON *sub_flag = cJSON_GetObjectItem(user, "is_subscribed");
-        if (sub_end && cJSON_IsString(sub_end)) {
-            struct tm end_tm = {0};
-            if (strptime(sub_end->valuestring, "%d.%m.%Y", &end_tm)) {
-                time_t end_time = mktime(&end_tm);
-                int should_be = (difftime(end_time, now) >= 0) ? 1 : 0;
-                if (!sub_flag || sub_flag->valueint != should_be) {
-                    cJSON_ReplaceItemInObject(user, "is_subscribed", cJSON_CreateBool(should_be));
-                    changed++;
-                }
-            }
-        }
-    }
-    if (changed) {
-        char *json_text = cJSON_Print(user_array);
-        file = fopen(USERS_JSON_PATH, "w");
-        if (file) {
-            fputs(json_text, file);
-            fflush(file);
-            fclose(file);
-        }
-        free(json_text);
-    }
-    printf("Updated %d user subscription flag(s).\n", changed);
-    cJSON_Delete(user_array);
+    // Aufruf der neuen Logikfunktion, die alles übernimmt (siehe logic.c)
+    // Die Funktion gibt die Anzahl der geänderten Flags zurück
+    int changed = logic_update_all_subscription_flags(); // <-- NEU, ausgelagert am 04.07.2025
+    printf("Updated %d user subscription flag(s).\n", changed); // Nur Ausgabe bleibt Präsentation
 }
 
 // Übermenü für User Management und Game Management Menü
 void print_typewriter(const char *str, useconds_t delay, const char *color) {
+    // Präsentationsschicht: Nur Ausgabe
     if (color) printf("%s", color);
     for (size_t i = 0; i < strlen(str); ++i) {
         putchar(str[i]);
@@ -88,6 +100,7 @@ void print_typewriter(const char *str, useconds_t delay, const char *color) {
 }
 
 void start_main_menu() {
+    // Präsentationsschicht: Menüführung, Benutzereingaben, Aufruf anderer Präsentationsfunktionen
     print_typewriter("____ _____ _____    _    __  __   ____  _____ _   ___  __    ", 1000, ANSI_COLOR_CYAN);
     print_typewriter("/ ___|_   _| ____|  / \\  |  \\/  | |  _ \\| ____| | | \\ \\/ /    ", 1000, ANSI_COLOR_CYAN);
     print_typewriter("\\___ \\ | | |  _|   / _ \\ | |\\/| | | | | |  _| | | | |\\  /     ", 1000, ANSI_COLOR_CYAN);
@@ -132,6 +145,8 @@ void start_main_menu() {
 
 // Added after merge, to handle invalid inputs.
 static void read_input(const char *prompt, char *buffer, size_t size) {
+    // Präsentationsschicht: Einfache Eingabe
+    // HINWEIS: Validierung (nur Leerzeichen) ist Logik, sollte ausgelagert werden!
     while (1) {
         printf("%s", prompt);
         if (fgets(buffer, size, stdin)) {
@@ -139,7 +154,6 @@ static void read_input(const char *prompt, char *buffer, size_t size) {
             if (len > 0 && buffer[len - 1] == '\n') {
                 buffer[len - 1] = '\0'; // Newline entfernen
             }
-
             // Eingabe auf nur Leerzeichen prüfen
             int only_spaces = 1;
             for (size_t i = 0; i < strlen(buffer); ++i) {
@@ -148,7 +162,6 @@ static void read_input(const char *prompt, char *buffer, size_t size) {
                     break;
                 }
             }
-
             if (strlen(buffer) > 0 && !only_spaces) {
                 return; // gültige Eingabe
             }
@@ -158,6 +171,8 @@ static void read_input(const char *prompt, char *buffer, size_t size) {
 }
 
 void presentation_collect_and_save_report(void) {
+    // Präsentationsschicht: Eingabe und Ausgabe
+    // HINWEIS: Datumsformat- und Feldvalidierung gehören in die Logikschicht!
     char title[BUFFER_SIZE];
     char description[BUFFER_SIZE];
     char date[BUFFER_SIZE];
@@ -202,6 +217,9 @@ void presentation_collect_and_save_report(void) {
 
 // Show top 10 in terminal
 void show_top_users_terminal(void) {
+    // Datenschicht + Logikschicht: Dateioperationen, Sortierung
+    // Präsentationsschicht: Ausgabe der Top-User
+    // HINWEIS: Datei- und Sortierlogik gehören in die Data- und Logikschicht!
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if (!file) {
         printf("Error: Could not open users.json\n");
@@ -269,6 +287,9 @@ void show_top_users_terminal(void) {
 
 // Generate usersRanked.json file
 void generate_top_users_file(void) {
+    // Datenschicht + Logikschicht: Dateioperationen, Sortierung, Schreiben
+    // Präsentationsschicht: Ausgabe von Erfolg/Misserfolg
+    // HINWEIS: Datei- und Sortierlogik gehören in die Data- und Logikschicht!
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if (!file) {
         printf("Error: Could not open users.json\n");
@@ -356,6 +377,7 @@ for (int i = 0; i < top; ++i) {
     cJSON_Delete(user_array);
 }
 void start_admin_menu(){
+    // Präsentationsschicht: Menüführung, Benutzereingaben, Aufruf anderer Präsentationsfunktionen
     printf("\n=== User Managment Menu ===\n");
     char choice[MAX_INPUT];
 
@@ -410,6 +432,8 @@ void start_admin_menu(){
 
 
 void read_alpha_input(const char *prompt, char *buffer, size_t size) {
+    // Präsentationsschicht: Einfache Eingabe
+    // HINWEIS: Komplexe Validierung (nur Buchstaben, Leerzeichen, -) gehört in die Logikschicht!
     while (1) {
         printf("%s", prompt);
         if (fgets(buffer, size, stdin)) {
@@ -428,6 +452,8 @@ void read_alpha_input(const char *prompt, char *buffer, size_t size) {
 }
 
 void read_email_input(const char *prompt, char *buffer, size_t size) {
+    // Präsentationsschicht: Einfache Eingabe
+    // HINWEIS: Emailformat-Validierung gehört in die Logikschicht!
     while (1) {
         printf("%s", prompt);
         if (fgets(buffer, size, stdin)) {
@@ -440,6 +466,8 @@ void read_email_input(const char *prompt, char *buffer, size_t size) {
 }
 
 void read_ssn_input(const char *prompt, char *buffer, size_t size) {
+    // Präsentationsschicht: Einfache Eingabe
+    // HINWEIS: SSN-Formatvalidierung gehört in die Logikschicht!
     while (1) {
         printf("%s", prompt);
         if (fgets(buffer, size, stdin)) {
@@ -458,9 +486,11 @@ void read_ssn_input(const char *prompt, char *buffer, size_t size) {
         }
         printf("Invalid SSN. Please use format XXXX-XXXXXX or XXXX XXXXXX (e.g., 1234-567890 or 1234 567890).\n");
     }
-}
+} // Eingabefunktion endet  >validate profile
 
 void add_user_presentation() {
+    // Präsentationsschicht: Eingabe, Ausgabe, Menüführung
+    // HINWEIS: Datums- und Feldvalidierung, SSN/Email-Prüfung etc. gehören in die Logikschicht!
     char full_name[MAX_INPUT] = {};
     char gamertag[MAX_INPUT] = {};
     char ssn[MAX_INPUT] = {};
@@ -595,6 +625,7 @@ void add_user_presentation() {
 
 
 void display_users_presentation(){
+    // Präsentationsschicht: Ausgabe
     printf("Displaying all users:\n");
     if(!display_users_logic()) {
         printf("Failed to display users.\n");
@@ -602,6 +633,7 @@ void display_users_presentation(){
 }
 
 void remove_user_presentation() {
+    // Präsentationsschicht: Eingabe, Ausgabe
     char gamertag[MAX_INPUT] = {};
     printf("Enter gamertag of user to remove: ");
     fgets(gamertag, MAX_INPUT, stdin);
@@ -615,6 +647,8 @@ void remove_user_presentation() {
 }
 
 void edit_user_presentation() {
+    // Präsentationsschicht: Eingabe, Ausgabe
+    // HINWEIS: Validierung und Formatprüfungen gehören in die Logikschicht!
     char gamertag[MAX_INPUT] = {};
     char full_name[MAX_INPUT] = {};
     char ssn[MAX_INPUT] = {};
@@ -725,7 +759,7 @@ void edit_user_presentation() {
         subscription_flag = "true";
     } else if (start_choice == 0) {
         while (1) {
-            printf("Enter subscription start date (DD.MM.YYYY) [must be today or later, or 0 to keep current]: ");
+            printf("Enter subscription start date (DD.MM.YYYY) [must be today or in the future, or 0 to keep current]: ");
             fgets(subscription_start, MAX_INPUT, stdin);
             subscription_start[strcspn(subscription_start, "\n")] = '\0';
             if (strcmp(subscription_start, "0") == 0) break;
@@ -812,7 +846,8 @@ void edit_user_presentation() {
 //========================================================================
 // Neue Funktion zum Starten des Game Management Menüs
 void start_game_management_menu() {
+    // Präsentationsschicht: Menüaufruf
     printf("\nOpening Game Management Menu...\n");
     start_menu();  // ruft das Menü aus menu.c auf
 }
-// CODE VON DEV BRANCH wurde in src/presentation als eigene C files eingefügt
+// ===================== SCHICHTEN-KOMMENTARE ENDE =====================

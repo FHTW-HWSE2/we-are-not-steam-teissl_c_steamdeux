@@ -15,6 +15,7 @@
 
 
 cJSON *data_load_reports(void) {
+    // Datenschicht: Lädt Reports aus Datei
     FILE *file = fopen(REPORTS_FILE, "r");
     if (file == NULL) {
         // Datei existiert nicht -> neue leere JSON-Array zurückgeben
@@ -46,6 +47,7 @@ cJSON *data_load_reports(void) {
 }
 
 int data_save_report(cJSON *report) {
+    // Datenschicht: Speichert Report in Datei
     cJSON *reports = data_load_reports();
     if (!reports) {
         return ERR_STORAGE_FAILURE;
@@ -78,6 +80,7 @@ int data_save_report(cJSON *report) {
 // hardcoded path from project folder --> in data.h verschoben und definiert, damit es kompiliert
 
 int save_player_profile(const char* full_name, const char* gamertag, int player_hours, const char* ssn, const char* email, const char* sub_start, const char* sub_end, int is_subscribed){
+    // Datenschicht: Speichert User-Profil in Datei
     FILE *file = fopen(USERS_JSON_PATH, "r");
 
     // cJSON struct is defined in cJSON.h, represents a JSON element: either object {}, array [], number or string
@@ -155,6 +158,8 @@ int save_player_profile(const char* full_name, const char* gamertag, int player_
 
 
 void print_user_to_cli(void){
+    // Datenschicht: Gibt Userdaten direkt aus
+    // HINWEIS: printf/system ist Präsentationslogik und sollte ausgelagert werden!
     printf("Displaying all users...\n\n");
     system("cat ../users.json");
     printf("\n");
@@ -163,6 +168,7 @@ void print_user_to_cli(void){
 
 
 int read_player_profiles(char** output){
+    // Datenschicht: Liest Userdaten aus Datei und gibt sie formatiert zurück
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if(!file){
         *output = strdup("No users found (file missing).\n");
@@ -254,6 +260,7 @@ int read_player_profiles(char** output){
 }
 
 int remove_player_profile(const char* gamertag) {
+    // Datenschicht: Entfernt User aus Datei
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if (!file) return ERR_STORAGE_FAILURE;
 
@@ -297,6 +304,7 @@ int remove_player_profile(const char* gamertag) {
 }
 
 int edit_player_profile(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, int is_subscribed) {
+    // Datenschicht: Bearbeitet Userdaten in Datei
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if (!file) return ERR_STORAGE_FAILURE;
 
@@ -381,6 +389,7 @@ int edit_player_profile(const char* gamertag, const char* new_full_name, const c
 // Die Signatur wird geändert, um einen Output-Parameter für die Anzahl aufzunehmen.
 // 20.06.2025: Funktion load_games() wurde angepasst, den Fehler zu beheben, dass bei Programmstart Spiele falsch geladen werden.
 Game *load_games(const char *filename, int *count_out) {
+    // Datenschicht: Lädt Spieldaten aus Datei
     FILE *file = fopen(filename, "r");
     if (!file) {
         *count_out = 0;
@@ -457,6 +466,7 @@ Game *load_games(const char *filename, int *count_out) {
 
 
 int save_games(const char *filename, Game games[], int game_count) {
+    // Datenschicht: Speichert Spieldaten in Datei
     cJSON *root = cJSON_CreateObject();
     cJSON *games_array = cJSON_CreateArray();
 
@@ -489,6 +499,8 @@ int save_games(const char *filename, Game games[], int game_count) {
 // Funktion von Zinedin aus Branch feature-subscriptionEndDate eingefügt
 // JSON Macro angepasst auf 
 void remove_expired_users() {
+    // Datenschicht: Entfernt abgelaufene User aus Datei
+    // HINWEIS: printf ist Präsentationslogik und sollte ausgelagert werden!
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if (!file) {
         printf("Error: Could not open %s\n", USERS_JSON_PATH);
@@ -561,4 +573,57 @@ void remove_expired_users() {
     cJSON_Delete(new_array);
 
     printf("\nRemoved %d expired user(s).\n", removed_count);
+}
+
+// Refactored am 04.07.2025: Ausgelagert aus presentation.c
+// Diese Funktion übernimmt die Dateioperationen und JSON-Logik für das Aktualisieren der Subscription-Flags.
+int data_update_all_subscription_flags() {
+    // --- BEGIN: Ausgelagert aus update_all_subscription_flags (presentation.c, 04.07.2025) ---
+    FILE *file = fopen(USERS_JSON_PATH, "r");
+    if (!file) return 0;
+    fseek(file, 0, SEEK_END);
+    long length = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    char *data = malloc(length + 1);
+    fread(data, 1, length, file);
+    data[length] = '\0';
+    fclose(file);
+    cJSON *user_array = cJSON_Parse(data);
+    free(data);
+    if (!user_array || !cJSON_IsArray(user_array)) {
+        cJSON_Delete(user_array);
+        return 0;
+    }
+    time_t now = time(NULL);
+    int changed = 0;
+    int size = cJSON_GetArraySize(user_array);
+    for (int i = 0; i < size; i++) {
+        cJSON *user = cJSON_GetArrayItem(user_array, i);
+        cJSON *sub_end = cJSON_GetObjectItem(user, "subscription_end_date");
+        cJSON *sub_flag = cJSON_GetObjectItem(user, "is_subscribed");
+        if (sub_end && cJSON_IsString(sub_end)) {
+            struct tm end_tm = {0};
+            if (strptime(sub_end->valuestring, "%d.%m.%Y", &end_tm)) {
+                time_t end_time = mktime(&end_tm);
+                int should_be = (difftime(end_time, now) >= 0) ? 1 : 0;
+                if (!sub_flag || sub_flag->valueint != should_be) {
+                    cJSON_ReplaceItemInObject(user, "is_subscribed", cJSON_CreateBool(should_be));
+                    changed++;
+                }
+            }
+        }
+    }
+    if (changed) {
+        char *json_text = cJSON_Print(user_array);
+        file = fopen(USERS_JSON_PATH, "w");
+        if (file) {
+            fputs(json_text, file);
+            fflush(file);
+            fclose(file);
+        }
+        free(json_text);
+    }
+    cJSON_Delete(user_array);
+    return changed;
+    // --- END: Ausgelagert aus update_all_subscription_flags (presentation.c, 04.07.2025) ---
 }
