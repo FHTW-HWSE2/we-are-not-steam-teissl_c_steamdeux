@@ -1,2 +1,24 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/vkqWP-pV)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=18375103&assignment_repo_type=AssignmentRepo)
+This branch gives you following options:
+Add, Read, Edit, Remove Games
+Add, Read, Edit, Remove Users
+Create a report of users in a file.
+List users in formated way into the CLI.
+
+### Make Sure
+Firstly make sure that you installed the jansson library.
+Put in following commands:
+ - sudo apt update
+ - sudo apt install libjansson-dev
+ - sudo apt install pkg-config
+
+### How to compile and run:
+1) -> "cd build"
+2) -> "cmake .."
+3) -> "make"
+5) -> "./game_manager" while you are in the build folder.
+
+###  How to compile and run tests:
+1) -> "cd build"
+2) -> "cmake .."
+3) -> "make"
+5) -> "./game_manager" while you are in the build folder.

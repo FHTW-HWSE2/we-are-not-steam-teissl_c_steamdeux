@@ -230,7 +230,7 @@ void show_top_users_terminal(void) {
     // HINWEIS: Datei- und Sortierlogik gehören in die Data- und Logikschicht!
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if (!file) {
-        printf("Error: Could not open users.json\n");
+        printf("Error: Could not open %s\n", USERS_JSON_PATH);
         return;
     }
     fseek(file, 0, SEEK_END);
@@ -249,7 +249,7 @@ void show_top_users_terminal(void) {
     cJSON *user_array = cJSON_Parse(data);
     free(data);
     if (!user_array || !cJSON_IsArray(user_array)) {
-        printf("Error: users.json is not a valid JSON array\n");
+        printf("Error: %s is not a valid JSON array\n", USERS_JSON_PATH);
         if (user_array) cJSON_Delete(user_array);
         return;
     }
@@ -293,7 +293,7 @@ void generate_top_users_file(void) {
     // HINWEIS: Datei- und Sortierlogik gehören in die Data- und Logikschicht!
     FILE *file = fopen(USERS_JSON_PATH, "r");
     if (!file) {
-        printf("Error: Could not open users.json\n");
+        printf("Error: Could not open %s\n", USERS_JSON_PATH);
         return;
     }
     fseek(file, 0, SEEK_END);
@@ -312,7 +312,7 @@ void generate_top_users_file(void) {
     cJSON *user_array = cJSON_Parse(data);
     free(data);
     if (!user_array || !cJSON_IsArray(user_array)) {
-        printf("Error: users.json is not a valid JSON array\n");
+        printf("Error: %s is not a valid JSON array\n", USERS_JSON_PATH);
         if (user_array) cJSON_Delete(user_array);
         return;
     }
@@ -356,7 +356,7 @@ for (int i = 0; i < top; ++i) {
 }
 
     char *json_str = cJSON_Print(ranked_array);
-    FILE *out = fopen("../usersRanked.json", "w");
+    FILE *out = fopen("./usersRanked.json", "w");
     if (out && json_str) {
         fputs(json_str, out);
         fclose(out);

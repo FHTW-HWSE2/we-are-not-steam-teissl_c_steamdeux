@@ -215,7 +215,7 @@ void print_user_to_cli(void){
     // Datenschicht: Gibt Userdaten direkt aus
     // HINWEIS: printf/system ist Präsentationslogik und sollte ausgelagert werden!
     printf("Displaying all users...\n\n");
-    system("cat ../users.json");
+    system("cat " USERS_JSON_PATH);
     printf("\n");
 }
 

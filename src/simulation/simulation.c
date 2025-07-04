@@ -47,7 +47,7 @@ void start_simulation() {
                 continue;
         }
 
-        FILE *uf = fopen("../users.json", "r");
+        FILE *uf = fopen(USERS_JSON_PATH, "r");
         if (!uf) { printf("Fehler beim Öffnen von users.json\n"); return; }
         fseek(uf, 0, SEEK_END);
         long usize = ftell(uf);
@@ -60,7 +60,7 @@ void start_simulation() {
         free(udata);
         if (!users) { printf("User-JSON Fehler\n"); return; }
 
-        FILE *gf = fopen("../games.json", "r");
+        FILE *gf = fopen(GAMES_JSON_PATH, "r");
         if (!gf) { printf("Fehler beim Öffnen von games.json\n"); return; }
         fseek(gf, 0, SEEK_END);
         long gsize = ftell(gf);
@@ -73,7 +73,7 @@ void start_simulation() {
         free(gdata);
         cJSON *games = cJSON_GetObjectItem(gjson, "games");
 
-        FILE *rf = fopen("../reports.json", "r");
+        FILE *rf = fopen(REPORTS_JSON_PATH, "r");
         cJSON *report_arr = NULL;
         if (rf) {
             fseek(rf, 0, SEEK_END);
@@ -135,7 +135,7 @@ void start_simulation() {
             }
         }
 
-        FILE *outf = fopen("../reports.json", "w");
+        FILE *outf = fopen(REPORTS_JSON_PATH, "w");
         if (!outf) { printf("Fehler beim Speichern der Reports\n"); return; }
         char *outdata = cJSON_Print(report_arr);
         fputs(outdata, outf);
