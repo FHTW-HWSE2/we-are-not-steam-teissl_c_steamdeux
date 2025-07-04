@@ -14,6 +14,60 @@
 #define REPORTS_FILE "../reports.json"
 
 
+// Refactored am 04.07.2025: Ausgelagert aus presentation.c
+// Diese Funktion übernimmt die Dateioperationen und JSON-Logik für das Aktualisieren der Subscription-Flags.
+int data_update_all_subscription_flags() {
+    // --- BEGIN: Ausgelagert aus update_all_subscription_flags (presentation.c, 04.07.2025) ---
+    FILE *file = fopen(USERS_JSON_PATH, "r");
+    if (!file) return 0;
+    fseek(file, 0, SEEK_END);
+    long length = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    char *data = malloc(length + 1);
+    fread(data, 1, length, file);
+    data[length] = '\0';
+    fclose(file);
+    cJSON *user_array = cJSON_Parse(data);
+    free(data);
+    if (!user_array || !cJSON_IsArray(user_array)) {
+        cJSON_Delete(user_array);
+        return 0;
+    }
+    time_t now = time(NULL);
+    int changed = 0;
+    int size = cJSON_GetArraySize(user_array);
+    for (int i = 0; i < size; i++) {
+        cJSON *user = cJSON_GetArrayItem(user_array, i);
+        cJSON *sub_end = cJSON_GetObjectItem(user, "subscription_end_date");
+        cJSON *sub_flag = cJSON_GetObjectItem(user, "is_subscribed");
+        if (sub_end && cJSON_IsString(sub_end)) {
+            struct tm end_tm = {0};
+            if (strptime(sub_end->valuestring, "%d.%m.%Y", &end_tm)) {
+                time_t end_time = mktime(&end_tm);
+                int should_be = (difftime(end_time, now) >= 0) ? 1 : 0;
+                if (!sub_flag || sub_flag->valueint != should_be) {
+                    cJSON_ReplaceItemInObject(user, "is_subscribed", cJSON_CreateBool(should_be));
+                    changed++;
+                }
+            }
+        }
+    }
+    if (changed) {
+        char *json_text = cJSON_Print(user_array);
+        file = fopen(USERS_JSON_PATH, "w");
+        if (file) {
+            fputs(json_text, file);
+            fflush(file);
+            fclose(file);
+        }
+        free(json_text);
+    }
+    cJSON_Delete(user_array);
+    return changed;
+    // --- END: Ausgelagert aus update_all_subscription_flags (presentation.c, 04.07.2025) ---
+}
+
+
 cJSON *data_load_reports(void) {
     // Datenschicht: Lädt Reports aus Datei
     FILE *file = fopen(REPORTS_FILE, "r");
@@ -573,57 +627,4 @@ void remove_expired_users() {
     cJSON_Delete(new_array);
 
     printf("\nRemoved %d expired user(s).\n", removed_count);
-}
-
-// Refactored am 04.07.2025: Ausgelagert aus presentation.c
-// Diese Funktion übernimmt die Dateioperationen und JSON-Logik für das Aktualisieren der Subscription-Flags.
-int data_update_all_subscription_flags() {
-    // --- BEGIN: Ausgelagert aus update_all_subscription_flags (presentation.c, 04.07.2025) ---
-    FILE *file = fopen(USERS_JSON_PATH, "r");
-    if (!file) return 0;
-    fseek(file, 0, SEEK_END);
-    long length = ftell(file);
-    fseek(file, 0, SEEK_SET);
-    char *data = malloc(length + 1);
-    fread(data, 1, length, file);
-    data[length] = '\0';
-    fclose(file);
-    cJSON *user_array = cJSON_Parse(data);
-    free(data);
-    if (!user_array || !cJSON_IsArray(user_array)) {
-        cJSON_Delete(user_array);
-        return 0;
-    }
-    time_t now = time(NULL);
-    int changed = 0;
-    int size = cJSON_GetArraySize(user_array);
-    for (int i = 0; i < size; i++) {
-        cJSON *user = cJSON_GetArrayItem(user_array, i);
-        cJSON *sub_end = cJSON_GetObjectItem(user, "subscription_end_date");
-        cJSON *sub_flag = cJSON_GetObjectItem(user, "is_subscribed");
-        if (sub_end && cJSON_IsString(sub_end)) {
-            struct tm end_tm = {0};
-            if (strptime(sub_end->valuestring, "%d.%m.%Y", &end_tm)) {
-                time_t end_time = mktime(&end_tm);
-                int should_be = (difftime(end_time, now) >= 0) ? 1 : 0;
-                if (!sub_flag || sub_flag->valueint != should_be) {
-                    cJSON_ReplaceItemInObject(user, "is_subscribed", cJSON_CreateBool(should_be));
-                    changed++;
-                }
-            }
-        }
-    }
-    if (changed) {
-        char *json_text = cJSON_Print(user_array);
-        file = fopen(USERS_JSON_PATH, "w");
-        if (file) {
-            fputs(json_text, file);
-            fflush(file);
-            fclose(file);
-        }
-        free(json_text);
-    }
-    cJSON_Delete(user_array);
-    return changed;
-    // --- END: Ausgelagert aus update_all_subscription_flags (presentation.c, 04.07.2025) ---
 }
