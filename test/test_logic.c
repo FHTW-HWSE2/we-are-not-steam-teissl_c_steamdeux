@@ -81,11 +81,29 @@ void test_start_date_in_past_returns_ERR_PAST_DATE(void) {
 }
 
 
+void test_empty_field_returns_ERR_EMPTY_FIELD(void) { //siehe Kommentar validate_player_profile in logic.c
+    // Mindestens ein Pflichtfeld ist leer
+    const char* full_name = ""; // leer
+    const char* gamertag = "Player123";
+    const char* ssn = "1234-567890";
+    const char* email = "max@test.com";
+    const char* sub_start = "05.07.2025";
+    const char* sub_end = "01.08.2025";
+    const char* is_subscribed_str = "true";
+
+    // Kein Mock nötig, da die Funktion vorher schon abbricht
+    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+
+    TEST_ASSERT_EQUAL_INT(ERR_EMPTY_FIELD, result);
+}
+
+
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_logic_create_report_valid_inputs);
     RUN_TEST(test_logic_create_report_null_input);
     RUN_TEST(test_valid_input_returns_ERR_SUCCESS);
     RUN_TEST(test_start_date_in_past_returns_ERR_PAST_DATE);
+    RUN_TEST(test_empty_field_returns_ERR_EMPTY_FIELD); // hinzugefügt
     return UNITY_END();
 }
