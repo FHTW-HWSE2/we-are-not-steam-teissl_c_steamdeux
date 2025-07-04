@@ -10,6 +10,7 @@ void print_users_logic();
 int remove_user_logic(const char* gamertag);
 int edit_user_logic(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, const char* is_subscribed_str);
 int logic_is_only_spaces(const char *str);
+int logic_is_valid_date_format(const char *date);
 
 
 #endif // LOGIC_H
