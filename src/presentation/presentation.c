@@ -178,7 +178,6 @@ static void read_input(const char *prompt, char *buffer, size_t size) {
 
 void presentation_collect_and_save_report(void) {
     // Präsentationsschicht: Eingabe und Ausgabe
-    // HINWEIS: Datumsformat- und Feldvalidierung gehören in die Logikschicht!
     char title[BUFFER_SIZE];
     char description[BUFFER_SIZE];
     char date[BUFFER_SIZE];
@@ -503,7 +502,7 @@ void add_user_presentation() {
         break;
     }
 
-    read_ssn_input("Enter SSN (format XXXX-XXXXXX): ", ssn, MAX_USER_INPUT);
+    read_ssn_input("Enter SSN (format XXXX-XXXXXX or XXXX XXXXXX): ", ssn, MAX_USER_INPUT);
 
     read_email_input("Enter email address: ", email, MAX_USER_INPUT);
 

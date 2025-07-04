@@ -186,7 +186,7 @@ void test_ssn_invalid_hyphen_position_returns_ERR_INVALID_SSN(void) {
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_SSN, result);
 }
 //Sina -- ssn mit buchstaben und zahlen
-void test_ssn_invalid_non_digit_char_returns_ERR_INVALID_SSN(void) {
+void test_ssn_invalid_digit_on_wrong_positionchar_returns_ERR_INVALID_SSN(void) {
     const char* full_name = "Test User";
     const char* gamertag = "TestPlayer";
     const char* ssn = "123A-567890"; // Invalid SSN: non-digit character
@@ -346,7 +346,7 @@ int main(void) {
     RUN_TEST(test_ssn_invalid_length_too_short_returns_ERR_INVALID_SSN); 
     RUN_TEST(test_ssn_invalid_length_too_long_returns_ERR_INVALID_SSN); 
     RUN_TEST(test_ssn_invalid_hyphen_position_returns_ERR_INVALID_SSN); 
-    RUN_TEST(test_ssn_invalid_non_digit_char_returns_ERR_INVALID_SSN); 
+    RUN_TEST(test_ssn_invalid_digit_on_wrong_positionchar_returns_ERR_INVALID_SSN); 
     // --- eMail Tests
     RUN_TEST(test_email_missing_at_symbol_returns_ERR_INVALID_EMAIL);
     RUN_TEST(test_email_missing_dot_after_at_returns_ERR_INVALID_EMAIL);
