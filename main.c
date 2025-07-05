@@ -4,6 +4,6 @@
 
 
 int main(void) {
-    start_main_menu();
+    presentation_start_main_menu();
     return ERR_SUCCESS;
 }

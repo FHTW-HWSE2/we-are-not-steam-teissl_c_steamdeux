@@ -2329,4 +2329,594 @@
 		"kills":	5,
 		"deaths":	1,
 		"assists":	0
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Adventure Quest",
+		"duration_minutes":	108,
+		"timestamp":	"2025-06-29T11:17:15",
+		"score":	127,
+		"progress":	87
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"BTD Battles",
+		"duration_minutes":	111,
+		"timestamp":	"2025-07-03T04:02:34",
+		"kills":	0,
+		"deaths":	8,
+		"assists":	4
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Zombie X Survivor",
+		"duration_minutes":	132,
+		"timestamp":	"2025-07-03T01:29:31",
+		"score":	372,
+		"progress":	2
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Space Odyssey",
+		"duration_minutes":	98,
+		"timestamp":	"2025-06-29T10:51:07",
+		"kills":	5,
+		"deaths":	10,
+		"assists":	6
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Puzzle Mania",
+		"duration_minutes":	75,
+		"timestamp":	"2025-07-04T20:49:28",
+		"score":	913,
+		"progress":	96
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Racing Thunder",
+		"duration_minutes":	90,
+		"timestamp":	"2025-07-05T20:19:35",
+		"kills":	11,
+		"deaths":	2,
+		"assists":	6
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Mystery Island",
+		"duration_minutes":	113,
+		"timestamp":	"2025-07-03T09:27:37",
+		"score":	648,
+		"progress":	76
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Fantasy League",
+		"duration_minutes":	47,
+		"timestamp":	"2025-07-04T06:39:46",
+		"kills":	7,
+		"deaths":	13,
+		"assists":	7
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Dungeon Crawler",
+		"duration_minutes":	35,
+		"timestamp":	"2025-06-29T07:05:05",
+		"score":	991,
+		"progress":	49
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Cyber Battle",
+		"duration_minutes":	115,
+		"timestamp":	"2025-07-05T06:10:28",
+		"kills":	17,
+		"deaths":	10,
+		"assists":	8
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"",
+		"duration_minutes":	146,
+		"timestamp":	"2025-07-05T01:48:49",
+		"score":	710,
+		"progress":	17
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Test",
+		"duration_minutes":	107,
+		"timestamp":	"2025-06-28T14:54:18",
+		"score":	267,
+		"progress":	67
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Name",
+		"duration_minutes":	56,
+		"timestamp":	"2025-06-26T21:09:16",
+		"score":	646,
+		"progress":	98
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"Name",
+		"duration_minutes":	129,
+		"timestamp":	"2025-07-01T18:08:39",
+		"score":	258,
+		"progress":	28
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"mr.politician",
+		"duration_minutes":	96,
+		"timestamp":	"2025-07-01T18:10:25",
+		"kills":	6,
+		"deaths":	10,
+		"assists":	0
+	}, {
+		"gamertag":	"CyberSam",
+		"game":	"abc",
+		"duration_minutes":	84,
+		"timestamp":	"2025-06-30T13:52:28",
+		"score":	883,
+		"progress":	54
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Adventure Quest",
+		"duration_minutes":	102,
+		"timestamp":	"2025-07-05T00:19:15",
+		"score":	884,
+		"progress":	83
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"BTD Battles",
+		"duration_minutes":	32,
+		"timestamp":	"2025-06-30T08:29:01",
+		"kills":	19,
+		"deaths":	1,
+		"assists":	4
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Zombie X Survivor",
+		"duration_minutes":	81,
+		"timestamp":	"2025-06-29T04:49:12",
+		"score":	54,
+		"progress":	41
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Space Odyssey",
+		"duration_minutes":	113,
+		"timestamp":	"2025-07-04T02:48:49",
+		"kills":	3,
+		"deaths":	11,
+		"assists":	6
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Puzzle Mania",
+		"duration_minutes":	127,
+		"timestamp":	"2025-07-05T02:45:51",
+		"score":	44,
+		"progress":	19
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Racing Thunder",
+		"duration_minutes":	66,
+		"timestamp":	"2025-06-30T04:50:29",
+		"kills":	4,
+		"deaths":	14,
+		"assists":	7
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Mystery Island",
+		"duration_minutes":	114,
+		"timestamp":	"2025-06-30T19:02:28",
+		"score":	90,
+		"progress":	37
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Fantasy League",
+		"duration_minutes":	103,
+		"timestamp":	"2025-06-27T04:41:53",
+		"kills":	12,
+		"deaths":	3,
+		"assists":	2
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Dungeon Crawler",
+		"duration_minutes":	49,
+		"timestamp":	"2025-07-04T16:18:02",
+		"score":	21,
+		"progress":	74
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Cyber Battle",
+		"duration_minutes":	72,
+		"timestamp":	"2025-06-28T23:42:59",
+		"kills":	17,
+		"deaths":	8,
+		"assists":	5
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"",
+		"duration_minutes":	113,
+		"timestamp":	"2025-07-05T19:10:57",
+		"score":	951,
+		"progress":	61
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Test",
+		"duration_minutes":	93,
+		"timestamp":	"2025-06-29T20:50:47",
+		"score":	185,
+		"progress":	0
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Name",
+		"duration_minutes":	90,
+		"timestamp":	"2025-07-01T21:14:51",
+		"score":	221,
+		"progress":	25
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Name",
+		"duration_minutes":	102,
+		"timestamp":	"2025-06-27T13:42:43",
+		"score":	859,
+		"progress":	18
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"mr.politician",
+		"duration_minutes":	124,
+		"timestamp":	"2025-06-28T11:34:05",
+		"kills":	7,
+		"deaths":	6,
+		"assists":	4
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"abc",
+		"duration_minutes":	36,
+		"timestamp":	"2025-07-04T01:41:45",
+		"score":	569,
+		"progress":	49
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Adventure Quest",
+		"duration_minutes":	119,
+		"timestamp":	"2025-07-03T07:29:56",
+		"score":	519,
+		"progress":	48
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"BTD Battles",
+		"duration_minutes":	65,
+		"timestamp":	"2025-06-26T20:04:01",
+		"kills":	13,
+		"deaths":	3,
+		"assists":	7
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Zombie X Survivor",
+		"duration_minutes":	60,
+		"timestamp":	"2025-06-26T20:15:11",
+		"score":	405,
+		"progress":	36
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Space Odyssey",
+		"duration_minutes":	99,
+		"timestamp":	"2025-07-01T21:16:17",
+		"kills":	4,
+		"deaths":	14,
+		"assists":	0
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Puzzle Mania",
+		"duration_minutes":	32,
+		"timestamp":	"2025-07-03T02:24:29",
+		"score":	289,
+		"progress":	100
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Racing Thunder",
+		"duration_minutes":	138,
+		"timestamp":	"2025-07-02T10:45:56",
+		"kills":	19,
+		"deaths":	9,
+		"assists":	5
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Mystery Island",
+		"duration_minutes":	95,
+		"timestamp":	"2025-07-05T09:10:44",
+		"score":	216,
+		"progress":	12
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Fantasy League",
+		"duration_minutes":	114,
+		"timestamp":	"2025-06-29T16:07:07",
+		"kills":	2,
+		"deaths":	4,
+		"assists":	2
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Dungeon Crawler",
+		"duration_minutes":	127,
+		"timestamp":	"2025-07-02T22:11:35",
+		"score":	135,
+		"progress":	57
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Cyber Battle",
+		"duration_minutes":	85,
+		"timestamp":	"2025-07-02T02:36:16",
+		"kills":	3,
+		"deaths":	7,
+		"assists":	2
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"",
+		"duration_minutes":	124,
+		"timestamp":	"2025-07-04T10:45:51",
+		"score":	887,
+		"progress":	26
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Test",
+		"duration_minutes":	114,
+		"timestamp":	"2025-07-05T00:27:10",
+		"score":	712,
+		"progress":	24
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Name",
+		"duration_minutes":	36,
+		"timestamp":	"2025-06-26T20:51:31",
+		"score":	967,
+		"progress":	38
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Name",
+		"duration_minutes":	107,
+		"timestamp":	"2025-06-26T09:24:07",
+		"score":	168,
+		"progress":	84
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"mr.politician",
+		"duration_minutes":	129,
+		"timestamp":	"2025-07-02T10:01:42",
+		"kills":	16,
+		"deaths":	3,
+		"assists":	9
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"abc",
+		"duration_minutes":	52,
+		"timestamp":	"2025-06-29T17:44:08",
+		"score":	779,
+		"progress":	18
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Adventure Quest",
+		"duration_minutes":	143,
+		"timestamp":	"2025-07-01T15:00:09",
+		"score":	777,
+		"progress":	10
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"BTD Battles",
+		"duration_minutes":	147,
+		"timestamp":	"2025-06-26T11:16:13",
+		"kills":	2,
+		"deaths":	3,
+		"assists":	9
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Zombie X Survivor",
+		"duration_minutes":	96,
+		"timestamp":	"2025-07-04T11:30:14",
+		"score":	26,
+		"progress":	28
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Space Odyssey",
+		"duration_minutes":	133,
+		"timestamp":	"2025-07-03T14:36:53",
+		"kills":	14,
+		"deaths":	14,
+		"assists":	9
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Puzzle Mania",
+		"duration_minutes":	64,
+		"timestamp":	"2025-06-28T23:33:46",
+		"score":	567,
+		"progress":	71
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Racing Thunder",
+		"duration_minutes":	116,
+		"timestamp":	"2025-06-29T13:43:03",
+		"kills":	13,
+		"deaths":	7,
+		"assists":	4
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Mystery Island",
+		"duration_minutes":	83,
+		"timestamp":	"2025-07-01T17:28:24",
+		"score":	623,
+		"progress":	80
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Fantasy League",
+		"duration_minutes":	46,
+		"timestamp":	"2025-07-05T16:53:05",
+		"kills":	11,
+		"deaths":	9,
+		"assists":	6
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Dungeon Crawler",
+		"duration_minutes":	139,
+		"timestamp":	"2025-07-01T04:16:57",
+		"score":	874,
+		"progress":	62
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Cyber Battle",
+		"duration_minutes":	35,
+		"timestamp":	"2025-07-01T03:43:08",
+		"kills":	1,
+		"deaths":	11,
+		"assists":	9
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"",
+		"duration_minutes":	50,
+		"timestamp":	"2025-07-03T15:26:55",
+		"score":	30,
+		"progress":	27
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Test",
+		"duration_minutes":	117,
+		"timestamp":	"2025-07-03T09:23:16",
+		"score":	553,
+		"progress":	69
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Name",
+		"duration_minutes":	125,
+		"timestamp":	"2025-07-05T07:31:17",
+		"score":	236,
+		"progress":	71
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Name",
+		"duration_minutes":	91,
+		"timestamp":	"2025-07-01T22:43:23",
+		"score":	940,
+		"progress":	74
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"mr.politician",
+		"duration_minutes":	121,
+		"timestamp":	"2025-07-02T14:56:39",
+		"kills":	19,
+		"deaths":	11,
+		"assists":	2
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"abc",
+		"duration_minutes":	118,
+		"timestamp":	"2025-06-26T20:55:36",
+		"score":	523,
+		"progress":	59
+	}, {
+		"gamertag":	" ",
+		"game":	"Adventure Quest",
+		"duration_minutes":	124,
+		"timestamp":	"2025-07-03T19:20:36",
+		"score":	581,
+		"progress":	86
+	}, {
+		"gamertag":	" ",
+		"game":	"BTD Battles",
+		"duration_minutes":	110,
+		"timestamp":	"2025-06-30T02:01:45",
+		"kills":	14,
+		"deaths":	12,
+		"assists":	0
+	}, {
+		"gamertag":	" ",
+		"game":	"Zombie X Survivor",
+		"duration_minutes":	144,
+		"timestamp":	"2025-07-05T03:41:29",
+		"score":	471,
+		"progress":	39
+	}, {
+		"gamertag":	" ",
+		"game":	"Space Odyssey",
+		"duration_minutes":	82,
+		"timestamp":	"2025-07-04T04:30:19",
+		"kills":	3,
+		"deaths":	8,
+		"assists":	5
+	}, {
+		"gamertag":	" ",
+		"game":	"Puzzle Mania",
+		"duration_minutes":	60,
+		"timestamp":	"2025-07-03T10:31:45",
+		"score":	365,
+		"progress":	86
+	}, {
+		"gamertag":	" ",
+		"game":	"Racing Thunder",
+		"duration_minutes":	104,
+		"timestamp":	"2025-06-29T23:41:22",
+		"kills":	14,
+		"deaths":	8,
+		"assists":	6
+	}, {
+		"gamertag":	" ",
+		"game":	"Mystery Island",
+		"duration_minutes":	64,
+		"timestamp":	"2025-07-01T17:37:21",
+		"score":	629,
+		"progress":	40
+	}, {
+		"gamertag":	" ",
+		"game":	"Fantasy League",
+		"duration_minutes":	58,
+		"timestamp":	"2025-06-30T17:33:27",
+		"kills":	12,
+		"deaths":	2,
+		"assists":	5
+	}, {
+		"gamertag":	" ",
+		"game":	"Dungeon Crawler",
+		"duration_minutes":	120,
+		"timestamp":	"2025-06-26T18:36:34",
+		"score":	802,
+		"progress":	77
+	}, {
+		"gamertag":	" ",
+		"game":	"Cyber Battle",
+		"duration_minutes":	96,
+		"timestamp":	"2025-07-01T14:22:15",
+		"kills":	18,
+		"deaths":	12,
+		"assists":	0
+	}, {
+		"gamertag":	" ",
+		"game":	"",
+		"duration_minutes":	114,
+		"timestamp":	"2025-06-26T00:43:53",
+		"score":	520,
+		"progress":	43
+	}, {
+		"gamertag":	" ",
+		"game":	"Test",
+		"duration_minutes":	126,
+		"timestamp":	"2025-06-30T08:40:33",
+		"score":	337,
+		"progress":	18
+	}, {
+		"gamertag":	" ",
+		"game":	"Name",
+		"duration_minutes":	78,
+		"timestamp":	"2025-06-29T11:05:44",
+		"score":	181,
+		"progress":	81
+	}, {
+		"gamertag":	" ",
+		"game":	"Name",
+		"duration_minutes":	86,
+		"timestamp":	"2025-07-04T15:52:12",
+		"score":	809,
+		"progress":	49
+	}, {
+		"gamertag":	" ",
+		"game":	"mr.politician",
+		"duration_minutes":	65,
+		"timestamp":	"2025-06-27T10:15:46",
+		"kills":	18,
+		"deaths":	11,
+		"assists":	9
+	}, {
+		"gamertag":	" ",
+		"game":	"abc",
+		"duration_minutes":	97,
+		"timestamp":	"2025-07-04T20:31:57",
+		"score":	30,
+		"progress":	89
 	}]

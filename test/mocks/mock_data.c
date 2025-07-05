@@ -158,3 +158,8 @@ int data_load_games(const char *filename, Game **games_out, int *count_out) {
     *count_out = 0;
     return 0; // Mock returns success
 }
+
+// Missing data_update_all_subscription_flags function - added for test compatibility
+int data_update_all_subscription_flags(void) {
+    return 0; // Mock returns 0 users updated
+}

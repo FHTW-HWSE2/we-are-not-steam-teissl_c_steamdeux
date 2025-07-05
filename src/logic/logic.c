@@ -131,6 +131,49 @@ int logic_create_user(const char* full_name, const char* gamertag, const char* s
     else return ERR_STORAGE_FAILURE;
 }
 
+// Enhanced logic_create_user that handles date calculation and duration
+int logic_create_user_with_duration(const char* full_name, const char* gamertag, const char* ssn, const char* email, const char* sub_start, const char* is_subscribed_str, int duration_months, int use_today_as_start) {
+    char actual_start[64] = {0};
+    char calculated_end[64] = {0};
+    
+    // Handle start date logic
+    if (use_today_as_start) {
+        time_t now = time(NULL);
+        struct tm *now_tm = localtime(&now);
+        strftime(actual_start, sizeof(actual_start), "%d.%m.%Y", now_tm);
+    } else {
+        strncpy(actual_start, sub_start, sizeof(actual_start) - 1);
+    }
+    
+    // Calculate end date based on duration
+    struct tm start_tm = {0};
+    if (!strptime(actual_start, "%d.%m.%Y", &start_tm)) {
+        return ERR_INVALID_DATE;
+    }
+    
+    // Add duration months
+    start_tm.tm_mon += duration_months;
+    // Handle year overflow
+    while (start_tm.tm_mon >= 12) {
+        start_tm.tm_mon -= 12;
+        start_tm.tm_year++;
+    }
+    
+    // Format end date
+    strftime(calculated_end, sizeof(calculated_end), "%d.%m.%Y", &start_tm);
+    
+    // Now validate and create user with calculated dates
+    int valid = logic_validate_player_profile(full_name, gamertag, ssn, email, actual_start, calculated_end, is_subscribed_str);
+    if (valid != ERR_SUCCESS) return valid;
+    
+    int is_subscribed;
+    logic_validate_subscription_status(is_subscribed_str, &is_subscribed);
+    int player_hours = 0;
+    int result = data_save_player_profile(full_name, gamertag, player_hours, ssn, email, actual_start, calculated_end, is_subscribed);
+    if (result == 0) return ERR_SUCCESS;
+    else return ERR_STORAGE_FAILURE;
+}
+
 // --- Refactor edit_user_logic to use helpers ---
 int logic_edit_user(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, const char* is_subscribed_str) {
     // Validate non-empty fields individually with proper validation
@@ -247,6 +290,11 @@ int logic_is_valid_ssn(const char *str) {
 
 // Hinweis (04.07.2025): Die Funktion logic_update_all_subscription_flags() wurde entfernt, da der Logic-Layer für diese Operation nicht benötigt wird.
 
+// Refactored 05.07.2025: Funktion wieder hinzugefügt für saubere Schichtentrennung
+int logic_update_all_subscription_flags() {
+    return data_update_all_subscription_flags();
+}
+
 // Prototyp für die Sortierfunktion (wird in logic_get_top_users verwendet)
 static int compare_users_by_hours(const void *a, const void *b);
 
@@ -297,4 +345,28 @@ int logic_remove_user(const char* gamertag) {
 
 int logic_get_all_users(cJSON **users_out) {
     return data_get_all_users(users_out);
+}
+
+// Generate top users file - moved from presentation layer
+int logic_generate_top_users_file(void) {
+    int top_n = 10;
+    cJSON *top_users = logic_get_top_users(top_n);
+    if (!top_users || !cJSON_IsArray(top_users)) {
+        if (top_users) cJSON_Delete(top_users);
+        return ERR_STORAGE_FAILURE;
+    }
+    char *json_str = cJSON_Print(top_users);
+    FILE *out = fopen("../usersRanked.json", "w");
+    if (out && json_str) {
+        fputs(json_str, out);
+        fclose(out);
+        free(json_str);
+        cJSON_Delete(top_users);
+        return ERR_SUCCESS;
+    } else {
+        if (out) fclose(out);
+        free(json_str);
+        cJSON_Delete(top_users);
+        return ERR_STORAGE_FAILURE;
+    }
 }
