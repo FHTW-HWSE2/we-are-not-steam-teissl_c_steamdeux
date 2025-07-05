@@ -463,25 +463,8 @@ void add_user_presentation() {
     printf("Please add a new user.\n");
 
     read_alpha_input("Enter full name: ", full_name, MAX_USER_INPUT);
-
-    // Gamertag-Eingabe mit sofortiger Validierung auf Leerzeichen/leere Eingabe
-    while (1) {
-        printf("Enter gamertag: ");
-        fgets(gamertag, MAX_USER_INPUT, stdin);
-        gamertag[strcspn(gamertag, "\n")] = '\0';
-        if (strlen(gamertag) == 0) {
-            printf("Invalid input. Please enter a non-empty gamertag.\n");
-            continue;
-        }
-        if (logic_is_only_spaces(gamertag)) {
-            printf("Gamertag must not be only spaces. Please enter a valid value.\n");
-            continue;
-        }
-        break;
-    }
-
+    read_input("Enter gamertag: ", gamertag, MAX_USER_INPUT);
     read_ssn_input("Enter SSN (format XXXX-XXXXXX or XXXX XXXXXX): ", ssn, MAX_USER_INPUT);
-
     read_email_input("Enter email address: ", email, MAX_USER_INPUT);
 
     // Subscription start date selection
