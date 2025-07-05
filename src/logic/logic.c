@@ -1,15 +1,12 @@
 #define _XOPEN_SOURCE // Define für die strptime Funktion, um Datumsformate zu prüfen
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <time.h> // Für validate_player_profile() Funktion um das Startdatum zu prüfen
 #include "../inc/logic/logic.h"
 #include "../inc/data/data.h"
-#include "cJSON.h"
-#include "process_games.h"
-#include "../src/data/load_games.h"
-#include <time.h> // Für validate_player_profile() Funktion um das Startdatum zu prüfen
 #include "../inc/error.h" // Für Fehlercodes
+#include "cJSON.h"
 
 // ===================== SCHICHTEN-KOMMENTARE BEGINN =====================
 //
@@ -38,21 +35,58 @@ cJSON *logic_create_report(const char *title, const char *description, const cha
     return report;
 }
 
-// --- Static validation helpers ---
+// --- Static validation helpers (internal use only) ---
 static int logic_validate_required_field(const char* str) {
     return str && strlen(str) > 0 && !logic_is_only_spaces(str);
 }
 
+static int validate_ssn_format(const char* ssn) {
+    if (!ssn || strlen(ssn) != 11) return 0;
+    if (ssn[4] != '-' && ssn[4] != ' ') return 0;
+    for (int i = 0; i < 11; i++) {
+        if (i == 4) continue;
+        if (ssn[i] < '0' || ssn[i] > '9') return 0;
+    }
+    return 1;
+}
+
+static int validate_email_format(const char* email) {
+    if (!email || strlen(email) == 0) return 0;
+    const char* at_pos = strchr(email, '@');
+    if (!at_pos || strchr(at_pos, '.') == NULL) return 0;
+    return 1;
+}
+
+static int validate_date_format(const char* date) {
+    if (!date || strlen(date) != 10) return 0;
+    if (date[2] != '.' || date[5] != '.') return 0;
+    for (int i = 0; i < 10; ++i) {
+        if (i == 2 || i == 5) continue;
+        if (date[i] < '0' || date[i] > '9') return 0;
+    }
+    return 1;
+}
+
+static int validate_alpha_format(const char *str) {
+    if (!str || strlen(str) == 0) return 0;
+    for (size_t i = 0; i < strlen(str); ++i) {
+        if ((str[i] < 'A' || (str[i] > 'Z' && str[i] < 'a') || str[i] > 'z') && str[i] != ' ' && str[i] != '-') {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 static int logic_validate_ssn(const char* ssn) {
-    return logic_is_valid_ssn(ssn);
+    return validate_ssn_format(ssn);
 }
 
 static int logic_validate_email(const char* email) {
-    return logic_is_valid_email(email);
+    return validate_email_format(email);
 }
 
 static int logic_validate_date(const char* date) {
-    return logic_is_valid_date_format(date);
+    return validate_date_format(date);
 }
 
 static int logic_validate_subscription_status(const char* status, int* out) {
@@ -105,16 +139,24 @@ int logic_create_user(const char* full_name, const char* gamertag, const char* s
 
 // --- Refactor edit_user_logic to use helpers ---
 int logic_edit_user(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, const char* is_subscribed_str) {
-    if (!logic_validate_required_field(new_full_name) &&
-        !logic_validate_required_field(new_ssn) &&
-        !logic_validate_required_field(new_email) &&
-        !logic_validate_required_field(sub_start) &&
-        !logic_validate_required_field(sub_end)) {
-        return ERR_EMPTY_FIELD;
+    // Validate non-empty fields individually with proper validation
+    if (logic_validate_required_field(new_full_name) && !validate_alpha_format(new_full_name)) {
+        return ERR_EMPTY_FIELD;  // Using existing error code for invalid format
     }
-    if (logic_validate_required_field(new_ssn) && !logic_validate_ssn(new_ssn)) return ERR_INVALID_SSN;
-    if (logic_validate_required_field(new_email) && !logic_validate_email(new_email)) return ERR_INVALID_EMAIL;
-    if (logic_validate_required_field(sub_start) && logic_validate_required_field(sub_end) && (!logic_validate_date(sub_start) || !logic_validate_date(sub_end))) return ERR_INVALID_DATE;
+    if (logic_validate_required_field(new_ssn) && !logic_validate_ssn(new_ssn)) {
+        return ERR_INVALID_SSN;
+    }
+    if (logic_validate_required_field(new_email) && !logic_validate_email(new_email)) {
+        return ERR_INVALID_EMAIL;
+    }
+    if (logic_validate_required_field(sub_start) && !logic_validate_date(sub_start)) {
+        return ERR_INVALID_DATE;
+    }
+    if (logic_validate_required_field(sub_end) && !logic_validate_date(sub_end)) {
+        return ERR_INVALID_DATE;
+    }
+    
+    // Date logic: if both dates are provided, validate start is not in past
     if (logic_validate_required_field(sub_start) && logic_validate_required_field(sub_end)) {
         struct tm start_tm = {0}, end_tm = {0};
         strptime(sub_start, "%d.%m.%Y", &start_tm);
@@ -128,10 +170,16 @@ int logic_edit_user(const char* gamertag, const char* new_full_name, const char*
         time_t start_time = mktime(&start_tm);
         if (difftime(start_time, today) < 0) return ERR_PAST_DATE;
     }
+    
+    // Validate subscription status if provided
     int is_subscribed = -1;
     if (is_subscribed_str && strlen(is_subscribed_str) > 0) {
-        if (!logic_validate_subscription_status(is_subscribed_str, &is_subscribed)) return ERR_INVALID_SUB_STATUS;
+        if (!logic_validate_subscription_status(is_subscribed_str, &is_subscribed)) {
+            return ERR_INVALID_SUB_STATUS;
+        }
     }
+    
+    // Call data layer with validated inputs
     int result = data_edit_player_profile(gamertag, new_full_name, new_ssn, new_email, sub_start, sub_end, is_subscribed);
     if (result == ERR_SUCCESS) return ERR_SUCCESS;
     else if (result == ERR_USER_NOT_FOUND) return ERR_USER_NOT_FOUND;
@@ -196,42 +244,21 @@ int logic_is_only_spaces(const char *str) {
     return 1;
 }
 
-// Öffentliche Validierungsfunktionen mit logic_ Prefix
+// Öffentliche Validierungsfunktionen für Präsentationsschicht - delegieren an interne Helfer
 int logic_is_valid_date_format(const char *date) {
-    if (!date || strlen(date) != 10) return 0;
-    if (date[2] != '.' || date[5] != '.') return 0;
-    for (int i = 0; i < 10; ++i) {
-        if (i == 2 || i == 5) continue;
-        if (date[i] < '0' || date[i] > '9') return 0;
-    }
-    return 1;
+    return validate_date_format(date);
 }
 
 int logic_is_valid_alpha(const char *str) {
-    if (!str || strlen(str) == 0) return 0;
-    for (size_t i = 0; i < strlen(str); ++i) {
-        if ((str[i] < 'A' || (str[i] > 'Z' && str[i] < 'a') || str[i] > 'z') && str[i] != ' ' && str[i] != '-') {
-            return 0;
-        }
-    }
-    return 1;
+    return validate_alpha_format(str);
 }
 
 int logic_is_valid_email(const char *str) {
-    if (!str || strlen(str) == 0) return 0;
-    const char* at_pos = strchr(str, '@');
-    if (!at_pos || strchr(at_pos, '.') == NULL) return 0;
-    return 1;
+    return validate_email_format(str);
 }
 
 int logic_is_valid_ssn(const char *str) {
-    if (!str || strlen(str) != 11) return 0;
-    if (str[4] != '-' && str[4] != ' ') return 0;
-    for (int i = 0; i < 11; i++) {
-        if (i == 4) continue;
-        if (str[i] < '0' || str[i] > '9') return 0;
-    }
-    return 1;
+    return validate_ssn_format(str);
 }
 
 // Hinweis (04.07.2025): Die Funktion logic_update_all_subscription_flags() wurde entfernt, da der Logic-Layer für diese Operation nicht benötigt wird.
