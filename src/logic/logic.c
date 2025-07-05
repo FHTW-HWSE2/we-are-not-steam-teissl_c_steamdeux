@@ -40,7 +40,7 @@ static int logic_validate_required_field(const char* str) {
     return str && strlen(str) > 0 && !logic_is_only_spaces(str);
 }
 
-static int validate_ssn_format(const char* ssn) {
+static int is_valid_ssn_format(const char* ssn) {
     if (!ssn || strlen(ssn) != 11) return 0;
     if (ssn[4] != '-' && ssn[4] != ' ') return 0;
     for (int i = 0; i < 11; i++) {
@@ -50,14 +50,14 @@ static int validate_ssn_format(const char* ssn) {
     return 1;
 }
 
-static int validate_email_format(const char* email) {
+static int is_valid_email_format(const char* email) {
     if (!email || strlen(email) == 0) return 0;
     const char* at_pos = strchr(email, '@');
     if (!at_pos || strchr(at_pos, '.') == NULL) return 0;
     return 1;
 }
 
-static int validate_date_format(const char* date) {
+static int is_valid_date_format(const char* date) {
     if (!date || strlen(date) != 10) return 0;
     if (date[2] != '.' || date[5] != '.') return 0;
     for (int i = 0; i < 10; ++i) {
@@ -67,7 +67,7 @@ static int validate_date_format(const char* date) {
     return 1;
 }
 
-static int validate_alpha_format(const char *str) {
+static int is_valid_alpha_format(const char *str) {
     if (!str || strlen(str) == 0) return 0;
     for (size_t i = 0; i < strlen(str); ++i) {
         if ((str[i] < 'A' || (str[i] > 'Z' && str[i] < 'a') || str[i] > 'z') && str[i] != ' ' && str[i] != '-') {
@@ -77,22 +77,27 @@ static int validate_alpha_format(const char *str) {
     return 1;
 }
 
-static int logic_validate_ssn(const char* ssn) {
-    return validate_ssn_format(ssn);
-}
-
-static int logic_validate_email(const char* email) {
-    return validate_email_format(email);
-}
-
-static int logic_validate_date(const char* date) {
-    return validate_date_format(date);
-}
-
 static int logic_validate_subscription_status(const char* status, int* out) {
     if (strcmp(status, "true") == 0) { *out = 1; return 1; }
     if (strcmp(status, "false") == 0) { *out = 0; return 1; }
     return 0;
+}
+
+static int is_date_in_future(const char* date_str) {
+    if (!date_str) return 0;
+    struct tm date_tm = {0};
+    if (!strptime(date_str, "%d.%m.%Y", &date_tm)) return 0;
+    date_tm.tm_isdst = -1;
+    
+    time_t now = time(NULL);
+    struct tm now_tm = *localtime(&now);
+    now_tm.tm_hour = 0; now_tm.tm_min = 0; now_tm.tm_sec = 0;
+    now_tm.tm_isdst = -1;
+    
+    time_t today = mktime(&now_tm);
+    time_t date_time = mktime(&date_tm);
+    
+    return difftime(date_time, today) >= 0;
 }
 
 // --- Split: validation only ---
@@ -105,21 +110,10 @@ int logic_validate_player_profile(const char* full_name, const char* gamertag, c
         !logic_validate_required_field(sub_end)) {
         return ERR_EMPTY_FIELD;
     }
-    if (!logic_validate_ssn(ssn)) return ERR_INVALID_SSN;
-    if (!logic_validate_email(email)) return ERR_INVALID_EMAIL;
-    if (!logic_validate_date(sub_start) || !logic_validate_date(sub_end)) return ERR_INVALID_DATE;
-    // Date logic: parse and check not in past
-    struct tm start_tm = {0}, end_tm = {0};
-    strptime(sub_start, "%d.%m.%Y", &start_tm);
-    strptime(sub_end, "%d.%m.%Y", &end_tm);
-    start_tm.tm_isdst = -1; end_tm.tm_isdst = -1;
-    time_t now = time(NULL);
-    struct tm now_tm = *localtime(&now);
-    now_tm.tm_hour = 0; now_tm.tm_min = 0; now_tm.tm_sec = 0;
-    now_tm.tm_isdst = -1;
-    time_t today = mktime(&now_tm);
-    time_t start_time = mktime(&start_tm);
-    if (difftime(start_time, today) < 0) return ERR_PAST_DATE;
+    if (!is_valid_ssn_format(ssn)) return ERR_INVALID_SSN;
+    if (!is_valid_email_format(email)) return ERR_INVALID_EMAIL;
+    if (!is_valid_date_format(sub_start) || !is_valid_date_format(sub_end)) return ERR_INVALID_DATE;
+    if (!is_date_in_future(sub_start)) return ERR_PAST_DATE;
     int is_subscribed;
     if (!logic_validate_subscription_status(is_subscribed_str, &is_subscribed)) return ERR_INVALID_SUB_STATUS;
     return ERR_SUCCESS;
@@ -140,35 +134,25 @@ int logic_create_user(const char* full_name, const char* gamertag, const char* s
 // --- Refactor edit_user_logic to use helpers ---
 int logic_edit_user(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, const char* is_subscribed_str) {
     // Validate non-empty fields individually with proper validation
-    if (logic_validate_required_field(new_full_name) && !validate_alpha_format(new_full_name)) {
+    if (logic_validate_required_field(new_full_name) && !is_valid_alpha_format(new_full_name)) {
         return ERR_EMPTY_FIELD;  // Using existing error code for invalid format
     }
-    if (logic_validate_required_field(new_ssn) && !logic_validate_ssn(new_ssn)) {
+    if (logic_validate_required_field(new_ssn) && !is_valid_ssn_format(new_ssn)) {
         return ERR_INVALID_SSN;
     }
-    if (logic_validate_required_field(new_email) && !logic_validate_email(new_email)) {
+    if (logic_validate_required_field(new_email) && !is_valid_email_format(new_email)) {
         return ERR_INVALID_EMAIL;
     }
-    if (logic_validate_required_field(sub_start) && !logic_validate_date(sub_start)) {
+    if (logic_validate_required_field(sub_start) && !is_valid_date_format(sub_start)) {
         return ERR_INVALID_DATE;
     }
-    if (logic_validate_required_field(sub_end) && !logic_validate_date(sub_end)) {
+    if (logic_validate_required_field(sub_end) && !is_valid_date_format(sub_end)) {
         return ERR_INVALID_DATE;
     }
     
-    // Date logic: if both dates are provided, validate start is not in past
-    if (logic_validate_required_field(sub_start) && logic_validate_required_field(sub_end)) {
-        struct tm start_tm = {0}, end_tm = {0};
-        strptime(sub_start, "%d.%m.%Y", &start_tm);
-        strptime(sub_end, "%d.%m.%Y", &end_tm);
-        start_tm.tm_isdst = -1; end_tm.tm_isdst = -1;
-        time_t now = time(NULL);
-        struct tm now_tm = *localtime(&now);
-        now_tm.tm_hour = 0; now_tm.tm_min = 0; now_tm.tm_sec = 0;
-        now_tm.tm_isdst = -1;
-        time_t today = mktime(&now_tm);
-        time_t start_time = mktime(&start_tm);
-        if (difftime(start_time, today) < 0) return ERR_PAST_DATE;
+    // Date logic: if start date is provided, validate it's not in past
+    if (logic_validate_required_field(sub_start) && !is_date_in_future(sub_start)) {
+        return ERR_PAST_DATE;
     }
     
     // Validate subscription status if provided
@@ -246,19 +230,19 @@ int logic_is_only_spaces(const char *str) {
 
 // Öffentliche Validierungsfunktionen für Präsentationsschicht - delegieren an interne Helfer
 int logic_is_valid_date_format(const char *date) {
-    return validate_date_format(date);
+    return is_valid_date_format(date);
 }
 
 int logic_is_valid_alpha(const char *str) {
-    return validate_alpha_format(str);
+    return is_valid_alpha_format(str);
 }
 
 int logic_is_valid_email(const char *str) {
-    return validate_email_format(str);
+    return is_valid_email_format(str);
 }
 
 int logic_is_valid_ssn(const char *str) {
-    return validate_ssn_format(str);
+    return is_valid_ssn_format(str);
 }
 
 // Hinweis (04.07.2025): Die Funktion logic_update_all_subscription_flags() wurde entfernt, da der Logic-Layer für diese Operation nicht benötigt wird.
