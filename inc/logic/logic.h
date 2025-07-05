@@ -14,6 +14,11 @@ int logic_is_valid_date_format(const char *date);
 int logic_is_valid_alpha(const char *str);
 int logic_is_valid_email(const char *str);
 int logic_is_valid_ssn(const char *str);
+/**
+ * Liefert ein Array der Top-N User sortiert nach Spielzeit (player_hours).
+ * Gibt ein cJSON-Array (muss vom Aufrufer gelöscht werden) zurück, oder NULL bei Fehler.
+ */
+cJSON *logic_get_top_users(int n);
 
 
 #endif // LOGIC_H

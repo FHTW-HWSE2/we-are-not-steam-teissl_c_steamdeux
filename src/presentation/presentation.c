@@ -209,65 +209,30 @@ void presentation_collect_and_save_report(void) {
 
 // Show top 10 in terminal
 void show_top_users_terminal(void) {
-    // Datenschicht + Logikschicht: Dateioperationen, Sortierung
-    // Präsentationsschicht: Ausgabe der Top-User
-    // HINWEIS: Datei- und Sortierlogik gehören in die Data- und Logikschicht!
-    FILE *file = fopen(USERS_JSON_PATH, "r");
-    if (!file) {
-        printf("Error: Could not open users.json\n");
+    // Präsentationsschicht: Ausgabe der Top-User, keine Daten-/Sortierlogik mehr
+    int top_n = 10;
+    cJSON *top_users = logic_get_top_users(top_n);
+    if (!top_users || !cJSON_IsArray(top_users)) {
+        printf("No users found or error loading users.\n");
+        if (top_users) cJSON_Delete(top_users);
         return;
     }
-    fseek(file, 0, SEEK_END);
-    long length = ftell(file);
-    fseek(file, 0, SEEK_SET);
-    char *data = malloc(length + 1);
-    if (!data) {
-        printf("Error: Memory allocation failed\n");
-        fclose(file);
-        return;
-    }
-    fread(data, 1, length, file);
-    data[length] = '\0';
-    fclose(file);
-
-    cJSON *user_array = cJSON_Parse(data);
-    free(data);
-    if (!user_array || !cJSON_IsArray(user_array)) {
-        printf("Error: users.json is not a valid JSON array\n");
-        if (user_array) cJSON_Delete(user_array);
-        return;
-    }
-
-    int user_count = cJSON_GetArraySize(user_array);
-    if (user_count == 0) {
+    int count = cJSON_GetArraySize(top_users);
+    if (count == 0) {
         printf("No users found.\n");
-        cJSON_Delete(user_array);
+        cJSON_Delete(top_users);
         return;
     }
-
-    cJSON **user_ptrs = malloc(user_count * sizeof(cJSON*));
-    if (!user_ptrs) {
-        printf("Error: Memory allocation failed\n");
-        cJSON_Delete(user_array);
-        return;
-    }
-    for (int i = 0; i < user_count; ++i) {
-        user_ptrs[i] = cJSON_GetArrayItem(user_array, i);
-    }
-
-    qsort(user_ptrs, user_count, sizeof(cJSON*), compare_users_by_hours);
-
-    int top = user_count < 10 ? user_count : 10;
-    printf("Top %d users by playtime:\n", top);
-    for (int i = 0; i < top; ++i) {
-        cJSON *user = user_ptrs[i];
+    printf("Top %d users by playtime:\n", count);
+    for (int i = 0; i < count; ++i) {
+        cJSON *user = cJSON_GetArrayItem(top_users, i);
+        cJSON *gamertag = cJSON_GetObjectItem(user, "gamertag");
+        cJSON *player_hours = cJSON_GetObjectItem(user, "player_hours");
         printf("%d. %s - %d hours\n", i + 1,
-            cJSON_GetObjectItem(user, "gamertag")->valuestring,
-            cJSON_GetObjectItem(user, "player_hours")->valueint);
+            gamertag && cJSON_IsString(gamertag) ? gamertag->valuestring : "(unknown)",
+            player_hours && cJSON_IsNumber(player_hours) ? player_hours->valueint : 0);
     }
-
-    free(user_ptrs);
-    cJSON_Delete(user_array);
+    cJSON_Delete(top_users);
 }
 
 // Generate usersRanked.json file

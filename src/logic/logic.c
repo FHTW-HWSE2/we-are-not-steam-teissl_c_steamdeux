@@ -5,6 +5,7 @@
 #include <string.h>
 #include "../inc/logic/logic.h"
 #include "../inc/data/data.h"
+#include "cJSON.h"
 #include "process_games.h"
 #include "../src/data/load_games.h"
 #include <time.h> // Für validate_player_profile() Funktion um das Startdatum zu prüfen
@@ -382,3 +383,53 @@ int logic_is_valid_ssn(const char *str) {
 }
 
 // Hinweis (04.07.2025): Die Funktion logic_update_all_subscription_flags() wurde entfernt, da der Logic-Layer für diese Operation nicht benötigt wird.
+
+// Liefert ein cJSON-Array der Top-N User nach Spielzeit (player_hours absteigend sortiert)
+cJSON *logic_get_top_users(int n) {
+    FILE *file = fopen(USERS_JSON_PATH, "r");
+    if (!file) return NULL;
+    fseek(file, 0, SEEK_END);
+    long length = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    char *data = malloc(length + 1);
+    if (!data) { fclose(file); return NULL; }
+    fread(data, 1, length, file);
+    data[length] = '\0';
+    fclose(file);
+    cJSON *user_array = cJSON_Parse(data);
+    free(data);
+    if (!user_array || !cJSON_IsArray(user_array)) {
+        if (user_array) cJSON_Delete(user_array);
+        return NULL;
+    }
+    int user_count = cJSON_GetArraySize(user_array);
+    if (user_count == 0) {
+        cJSON_Delete(user_array);
+        return cJSON_CreateArray();
+    }
+    cJSON **user_ptrs = malloc(user_count * sizeof(cJSON*));
+    if (!user_ptrs) {
+        cJSON_Delete(user_array);
+        return NULL;
+    }
+    for (int i = 0; i < user_count; ++i) {
+        user_ptrs[i] = cJSON_GetArrayItem(user_array, i);
+    }
+    // Sortieren nach player_hours absteigend
+    int compare_users_by_hours(const void *a, const void *b) {
+        const cJSON *userA = *(const cJSON **)a;
+        const cJSON *userB = *(const cJSON **)b;
+        int hoursA = cJSON_GetObjectItem(userA, "player_hours")->valueint;
+        int hoursB = cJSON_GetObjectItem(userB, "player_hours")->valueint;
+        return hoursB - hoursA;
+    }
+    qsort(user_ptrs, user_count, sizeof(cJSON*), compare_users_by_hours);
+    int top = user_count < n ? user_count : n;
+    cJSON *result = cJSON_CreateArray();
+    for (int i = 0; i < top; ++i) {
+        cJSON_AddItemToArray(result, cJSON_Duplicate(user_ptrs[i], 1));
+    }
+    free(user_ptrs);
+    cJSON_Delete(user_array);
+    return result;
+}
