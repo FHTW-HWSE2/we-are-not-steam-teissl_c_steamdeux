@@ -31,10 +31,6 @@ set(SOURCES
     src/data/data.c
     src/logic/logic.c
     src/presentation/presentation.c
-    src/presentation/menu.c
-    src/presentation/display_games.c
-    src/presentation/display_error.c
-    src/presentation/run.c
     cJSON/cJSON.c
     src/simulation/simulation.c
 )

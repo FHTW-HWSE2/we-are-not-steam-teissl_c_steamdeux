@@ -1,6 +1,8 @@
 #include "mock_data.h"
 #include "unity.h"
 #include <string.h>
+#include "../src/data/game.h"
+#include "cJSON.h"
 
 static int expected_return_value;
 static int function_called;
@@ -50,6 +52,23 @@ int save_player_profile(
     return expected_return_value;
 }
 
+// Updated function with data_ prefix
+int data_save_player_profile(
+    const char* full_name,
+    const char* gamertag,
+    int player_hours,
+    const char* ssn,
+    const char* email,
+    const char* sub_start,
+    const char* sub_end,
+    int is_subscribed
+) {
+    (void)full_name; (void)gamertag; (void)player_hours; (void)ssn;
+    (void)email; (void)sub_start; (void)sub_end; (void)is_subscribed;
+    function_called = 1;
+    return expected_return_value;
+}
+
 // ==== remove_player_profile ====
 void remove_player_profile_ExpectAndReturn(const char* gamertag, int return_value) {
     (void)gamertag;
@@ -57,6 +76,11 @@ void remove_player_profile_ExpectAndReturn(const char* gamertag, int return_valu
 }
 
 int remove_player_profile(const char* gamertag) {
+    (void)gamertag;
+    return expected_return_value;
+}
+
+int data_remove_player_profile(const char* gamertag) {
     (void)gamertag;
     return expected_return_value;
 }
@@ -78,6 +102,18 @@ void edit_player_profile_ExpectAndReturn(
 }
 
 int edit_player_profile(const char* gamertag,
+                        const char* new_full_name,
+                        const char* new_ssn,
+                        const char* new_email,
+                        const char* sub_start,
+                        const char* sub_end,
+                        int is_subscribed) {
+    (void)gamertag; (void)new_full_name; (void)new_ssn;
+    (void)new_email; (void)sub_start; (void)sub_end; (void)is_subscribed;
+    return expected_return_value;
+}
+
+int data_edit_player_profile(const char* gamertag,
                         const char* new_full_name,
                         const char* new_ssn,
                         const char* new_email,
@@ -113,4 +149,11 @@ void print_user_to_cli(void) {
 int data_get_all_users(cJSON **users_out) {
     *users_out = cJSON_CreateArray();
     return 0;
+}
+
+// Missing data_load_games function
+Game *data_load_games(const char *filename, int *count_out) {
+    (void)filename;
+    *count_out = 0;
+    return NULL;
 }

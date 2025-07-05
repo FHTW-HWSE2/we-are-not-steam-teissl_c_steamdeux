@@ -89,5 +89,11 @@
 			"version":	"3",
 			"mode":	"Multiplayer",
 			"current_streams":	0
+		}, {
+			"title":	"abc",
+			"description":	"test",
+			"version":	"1",
+			"mode":	"sup",
+			"current_streams":	0
 		}]
 }
