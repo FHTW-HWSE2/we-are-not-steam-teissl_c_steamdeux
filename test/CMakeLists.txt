@@ -4,9 +4,9 @@
 add_executable(test_logic
     test_logic.c
     unity/unity.c
-    mocks/mock_data.c 
     mock_load_games.c
     ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
 )
 

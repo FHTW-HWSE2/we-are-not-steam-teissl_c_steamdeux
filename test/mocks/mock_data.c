@@ -108,3 +108,9 @@ void print_user_to_cli_Expect(void) {
 void print_user_to_cli(void) {
     function_called = 1;
 }
+
+// Dummy-Implementierung für Test-Builds, damit Linker zufrieden ist
+int data_get_all_users(cJSON **users_out) {
+    *users_out = cJSON_CreateArray();
+    return 0;
+}

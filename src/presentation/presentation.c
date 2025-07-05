@@ -118,7 +118,8 @@ void start_main_menu() {
     printf(ANSI_COLOR_GREEN "Welcome!" ANSI_COLOR_RESET "\n");
 
     // Direkt beim Start ausführen
-    remove_expired_users();
+    int removed_count = 0;
+    data_remove_expired_users(&removed_count);
     update_all_subscription_flags(); // keep all flags up to date
 
     int choice;
@@ -209,7 +210,6 @@ void presentation_collect_and_save_report(void) {
 
 // Show top 10 in terminal
 void show_top_users_terminal(void) {
-    // Präsentationsschicht: Ausgabe der Top-User, keine Daten-/Sortierlogik mehr
     int top_n = 10;
     cJSON *top_users = logic_get_top_users(top_n);
     if (!top_users || !cJSON_IsArray(top_users)) {
@@ -237,74 +237,14 @@ void show_top_users_terminal(void) {
 
 // Generate usersRanked.json file
 void generate_top_users_file(void) {
-    // Datenschicht + Logikschicht: Dateioperationen, Sortierung, Schreiben
-    // Präsentationsschicht: Ausgabe von Erfolg/Misserfolg
-    // HINWEIS: Datei- und Sortierlogik gehören in die Data- und Logikschicht!
-    FILE *file = fopen(USERS_JSON_PATH, "r");
-    if (!file) {
-        printf("Error: Could not open users.json\n");
+    int top_n = 10;
+    cJSON *top_users = logic_get_top_users(top_n);
+    if (!top_users || !cJSON_IsArray(top_users)) {
+        printf("Error: Could not get top users.\n");
+        if (top_users) cJSON_Delete(top_users);
         return;
     }
-    fseek(file, 0, SEEK_END);
-    long length = ftell(file);
-    fseek(file, 0, SEEK_SET);
-    char *data = malloc(length + 1);
-    if (!data) {
-        printf("Error: Memory allocation failed\n");
-        fclose(file);
-        return;
-    }
-    fread(data, 1, length, file);
-    data[length] = '\0';
-    fclose(file);
-
-    cJSON *user_array = cJSON_Parse(data);
-    free(data);
-    if (!user_array || !cJSON_IsArray(user_array)) {
-        printf("Error: users.json is not a valid JSON array\n");
-        if (user_array) cJSON_Delete(user_array);
-        return;
-    }
-
-    int user_count = cJSON_GetArraySize(user_array);
-    if (user_count == 0) {
-        printf("No users found.\n");
-        cJSON_Delete(user_array);
-        return;
-    }
-
-    cJSON **user_ptrs = malloc(user_count * sizeof(cJSON*));
-    if (!user_ptrs) {
-        printf("Error: Memory allocation failed\n");
-        cJSON_Delete(user_array);
-        return;
-    }
-    for (int i = 0; i < user_count; ++i) {
-        user_ptrs[i] = cJSON_GetArrayItem(user_array, i);
-    }
-
-    qsort(user_ptrs, user_count, sizeof(cJSON*), compare_users_by_hours);
-
-    int top = user_count < 10 ? user_count : 10;
-    cJSON *ranked_array = cJSON_CreateArray();
-for (int i = 0; i < top; ++i) {
-    cJSON *user = user_ptrs[i];
-    cJSON *new_user = cJSON_CreateObject();
-
-    // Add only the required fields
-    cJSON *gamertag = cJSON_GetObjectItem(user, "gamertag");
-    cJSON *player_hours = cJSON_GetObjectItem(user, "player_hours");
-    cJSON *sub = cJSON_GetObjectItem(user, "is_subscribed");
-    const char *subscribed = (sub && cJSON_IsBool(sub) && sub->valueint) ? "yes" : "no";
-
-    cJSON_AddStringToObject(new_user, "gamertag", gamertag ? gamertag->valuestring : "");
-    cJSON_AddNumberToObject(new_user, "player_hours", player_hours ? player_hours->valueint : 0);
-    cJSON_AddStringToObject(new_user, "subscribed", subscribed);
-
-    cJSON_AddItemToArray(ranked_array, new_user);
-}
-
-    char *json_str = cJSON_Print(ranked_array);
+    char *json_str = cJSON_Print(top_users);
     FILE *out = fopen("../usersRanked.json", "w");
     if (out && json_str) {
         fputs(json_str, out);
@@ -315,9 +255,7 @@ for (int i = 0; i < top; ++i) {
         if (out) fclose(out);
     }
     free(json_str);
-    cJSON_Delete(ranked_array);
-    free(user_ptrs);
-    cJSON_Delete(user_array);
+    cJSON_Delete(top_users);
 }
 void start_admin_menu(){
     // Präsentationsschicht: Menüführung, Benutzereingaben, Aufruf anderer Präsentationsfunktionen
@@ -341,7 +279,19 @@ void start_admin_menu(){
         int option = atoi(choice);
         switch (option) {
             case 1:
-                print_users_logic();
+                // Option 1: Rohdaten anzeigen (alte Funktion, ggf. logic_get_all_users + printf als JSON)
+                {
+                    cJSON *users = NULL;
+                    int result = logic_get_all_users(&users);
+                    if (result != ERR_SUCCESS || !users) {
+                        printf("Failed to load users.\n");
+                    } else {
+                        char *json = cJSON_Print(users);
+                        printf("%s\n", json ? json : "(null)");
+                        if (json) free(json);
+                        cJSON_Delete(users);
+                    }
+                }
                 break;
             case 2:
                 display_users_presentation();
@@ -416,8 +366,6 @@ void read_ssn_input(const char *prompt, char *buffer, size_t size) {
 } // Eingabefunktion endet  >validate profile
 
 void add_user_presentation() {
-    // Präsentationsschicht: Eingabe, Ausgabe, Menüführung
-    // HINWEIS: Datums- und Feldvalidierung, SSN/Email-Prüfung etc. gehören in die Logikschicht!
     char full_name[MAX_USER_INPUT] = {};
     char gamertag[MAX_USER_INPUT] = {};
     char ssn[MAX_USER_INPUT] = {};
@@ -426,13 +374,11 @@ void add_user_presentation() {
     char subscription_end[MAX_USER_INPUT] = {};
 
     printf("Please add a new user.\n");
-
-    read_alpha_input("Enter full name: ", full_name, MAX_USER_INPUT);
+    read_input("Enter full name: ", full_name, MAX_USER_INPUT);
     read_input("Enter gamertag: ", gamertag, MAX_USER_INPUT);
-    read_ssn_input("Enter SSN (format XXXX-XXXXXX or XXXX XXXXXX): ", ssn, MAX_USER_INPUT);
-    read_email_input("Enter email address: ", email, MAX_USER_INPUT);
+    read_input("Enter SSN (format XXXX-XXXXXX or XXXX XXXXXX): ", ssn, MAX_USER_INPUT);
+    read_input("Enter email address: ", email, MAX_USER_INPUT);
 
-    // Subscription start date selection
     int start_choice = -1;
     while (start_choice != 0 && start_choice != 1) {
         printf("Choose subscription start date:\n");
@@ -458,26 +404,7 @@ void add_user_presentation() {
         strftime(subscription_start, sizeof(subscription_start), "%d.%m.%Y", now_tm);
         printf("Subscription start date set to today: %s\n", subscription_start);
     } else {
-        while (1) {
-            printf("Enter subscription start date (DD.MM.YYYY) [must be today or later]: ");
-            fgets(subscription_start, MAX_USER_INPUT, stdin);
-            subscription_start[strcspn(subscription_start, "\n")] = '\0';
-            struct tm start_tm = {0};
-            if (!strptime(subscription_start, "%d.%m.%Y", &start_tm)) {
-                printf("Error: Invalid start date format. Please use DD.MM.YYYY.\n");
-                continue;
-            }
-            time_t now = time(NULL);
-            struct tm now_tm = *localtime(&now);
-            now_tm.tm_hour = 0; now_tm.tm_min = 0; now_tm.tm_sec = 0;
-            time_t today = mktime(&now_tm);
-            time_t start_time = mktime(&start_tm);
-            if (difftime(start_time, today) < 0) {
-                printf("Error: Start date must be today or in the future.\n");
-                continue;
-            }
-            break;
-        }
+        read_input("Enter subscription start date (DD.MM.YYYY): ", subscription_start, MAX_USER_INPUT);
     }
 
     int duration = 0;
@@ -501,16 +428,10 @@ void add_user_presentation() {
         else printf("Invalid choice. Please enter 1, 2, or 3.\n");
     }
 
-    struct tm start_tm = {0};
-    strptime(subscription_start, "%d.%m.%Y", &start_tm);
-    start_tm.tm_mday = start_tm.tm_mday;
-    start_tm.tm_mon += duration;
-    mktime(&start_tm);
-    strftime(subscription_end, sizeof(subscription_end), "%d.%m.%Y", &start_tm);
-
+    // Let logic layer handle date calculation and validation
+    // Pass empty string for subscription_end, logic will compute it
     const char* subscription_flag = "true";
-
-    int result = validate_player_profile(full_name, gamertag, ssn, email, subscription_start, subscription_end, subscription_flag);
+    int result = logic_create_user(full_name, gamertag, ssn, email, subscription_start, "", subscription_flag);
     if (result == ERR_SUCCESS) {
         printf("\nUser added successfully!\n");
     } else {
@@ -544,116 +465,29 @@ void add_user_presentation() {
     }
 }
 
-
-
-void display_users_presentation(){
-    // Präsentationsschicht: Ausgabe
-    printf("Displaying all users:\n");
-    int result = display_users_logic();
-    if (result != ERR_SUCCESS) {
-        printf("Failed to display users. Error code: %d\n", result);
-    }
-}
-
-void remove_user_presentation() {
-    // Präsentationsschicht: Eingabe, Ausgabe
-    char gamertag[MAX_USER_INPUT] = {};
-    printf("Enter gamertag of user to remove: ");
-    fgets(gamertag, MAX_USER_INPUT, stdin);
-    gamertag[strcspn(gamertag, "\n")] = '\0';
-
-    if (remove_user_logic(gamertag)) {
-        printf("\nUser removed successfully.\n");
-    } else {
-        printf("\nError: User not found.\n");
-    }
-}
-
 void edit_user_presentation() {
-    // Präsentationsschicht: Eingabe, Ausgabe
-    // HINWEIS: Validierung und Formatprüfungen gehören in die Logikschicht!
     char gamertag[MAX_USER_INPUT] = {};
     char full_name[MAX_USER_INPUT] = {};
     char ssn[MAX_USER_INPUT] = {};
     char email[MAX_USER_INPUT] = {};
     char subscription_start[MAX_USER_INPUT] = {};
     char subscription_end[MAX_USER_INPUT] = {};
-    // char subscription_flag[MAX_USER_INPUT] = {}; // not needed anymore
+    const char* subscription_flag = NULL;
 
     printf("Enter gamertag of user to edit: ");
     fgets(gamertag, MAX_USER_INPUT, stdin);
     gamertag[strcspn(gamertag, "\n")] = '\0';
 
-    // For each field, allow skipping with 0
     printf("Enter new full name (or 0 to keep current): ");
     fgets(full_name, MAX_USER_INPUT, stdin);
     full_name[strcspn(full_name, "\n")] = '\0';
-    if (strcmp(full_name, "0") != 0) {
-        while (1) {
-            int valid = 1;
-            for (size_t i = 0; i < strlen(full_name); ++i) {
-                if ((full_name[i] < 'A' || (full_name[i] > 'Z' && full_name[i] < 'a') || full_name[i] > 'z') && full_name[i] != ' ' && full_name[i] != '-') {
-                    valid = 0;
-                    break;
-                }
-            }
-            if (strlen(full_name) > 0 && valid) break;
-            printf("Invalid input. Please enter only letters and spaces (or 0 to keep current): ");
-            fgets(full_name, MAX_USER_INPUT, stdin);
-            full_name[strcspn(full_name, "\n")] = '\0';
-            if (strcmp(full_name, "0") == 0) break;
-        }
-    }
-
     printf("Enter new SSN (format XXXX-XXXXXX or XXXX XXXXXX, or 0 to keep current): ");
     fgets(ssn, MAX_USER_INPUT, stdin);
     ssn[strcspn(ssn, "\n")] = '\0';
-    if (strcmp(ssn, "0") != 0) {
-        while (1) {
-            int valid = 0;
-            // Check for XXXX-XXXXXX
-            if (strlen(ssn) == 11 && ssn[4] == '-') {
-                valid = 1;
-                for (int i = 0; i < 11; i++) {
-                    if (i != 4 && (ssn[i] < '0' || ssn[i] > '9')) {
-                        valid = 0;
-                        break;
-                    }
-                }
-            }
-            // Check for XXXX XXXXXX
-            else if (strlen(ssn) == 11 && ssn[4] == ' ') {
-                valid = 1;
-                for (int i = 0; i < 11; i++) {
-                    if (i != 4 && (ssn[i] < '0' || ssn[i] > '9')) {
-                        valid = 0;
-                        break;
-                    }
-                }
-            }
-            if (valid) break;
-            printf("Invalid SSN. Please use format XXXX-XXXXXX or XXXX XXXXXX (or 0 to keep current): ");
-            fgets(ssn, MAX_USER_INPUT, stdin);
-            ssn[strcspn(ssn, "\n")] = '\0';
-            if (strcmp(ssn, "0") == 0) break;
-        }
-    }
-
     printf("Enter new email address (or 0 to keep current): ");
     fgets(email, MAX_USER_INPUT, stdin);
     email[strcspn(email, "\n")] = '\0';
-    if (strcmp(email, "0") != 0) {
-        while (1) {
-            const char* at_pos = strchr(email, '@');
-            if (strlen(email) > 0 && at_pos && strchr(at_pos, '.')) break;
-            printf("Invalid email format. Please enter a valid email (or 0 to keep current): ");
-            fgets(email, MAX_USER_INPUT, stdin);
-            email[strcspn(email, "\n")] = '\0';
-            if (strcmp(email, "0") == 0) break;
-        }
-    }
 
-    // Subscription start date selection
     int start_choice = -1;
     while (start_choice != 0 && start_choice != 1) {
         printf("Choose subscription start date:\n");
@@ -672,8 +506,6 @@ void edit_user_presentation() {
             printf("Invalid choice. Please enter 1 or 0.\n");
         }
     }
-
-    const char* subscription_flag = NULL;
     if (start_choice == 1) {
         time_t now = time(NULL);
         struct tm *now_tm = localtime(&now);
@@ -681,70 +513,23 @@ void edit_user_presentation() {
         printf("Subscription start date set to today: %s\n", subscription_start);
         subscription_flag = "true";
     } else if (start_choice == 0) {
-        while (1) {
-            printf("Enter subscription start date (DD.MM.YYYY) [must be today or in the future, or 0 to keep current]: ");
-            fgets(subscription_start, MAX_USER_INPUT, stdin);
-            subscription_start[strcspn(subscription_start, "\n")] = '\0';
-            if (strcmp(subscription_start, "0") == 0) break;
-            struct tm start_tm = {0};
-            if (!strptime(subscription_start, "%d.%m.%Y", &start_tm)) {
-                printf("Error: Invalid start date format. Please use DD.MM.YYYY.\n");
-                continue;
-            }
-            time_t now = time(NULL);
-            struct tm now_tm = *localtime(&now);
-            now_tm.tm_hour = 0; now_tm.tm_min = 0; now_tm.tm_sec = 0;
-            time_t today = mktime(&now_tm);
-            time_t start_time = mktime(&start_tm);
-            if (difftime(start_time, today) < 0) {
-                printf("Error: Start date must be today or in the future.\n");
-                continue;
-            }
-            subscription_flag = "false";
-            break;
-        }
+        printf("Enter subscription start date (DD.MM.YYYY) [or 0 to keep current]: ");
+        fgets(subscription_start, MAX_USER_INPUT, stdin);
+        subscription_start[strcspn(subscription_start, "\n")] = '\0';
+        if (strcmp(subscription_start, "0") == 0) subscription_start[0] = '\0';
+        else subscription_flag = "false";
     }
 
-    int duration = 0;
-    while (duration != 1 && duration != 6 && duration != 12) {
-        printf("Choose new subscription model:\n");
-        printf("1. 1 month\n");
-        printf("2. 6 months\n");
-        printf("3. 12 months\n");
-        printf("Enter your choice (1/2/3, or 0 to keep current): ");
-        char duration_choice[MAX_USER_INPUT];
-        fgets(duration_choice, MAX_USER_INPUT, stdin);
-        duration_choice[strcspn(duration_choice, "\n")] = '\0';
-        if (strcmp(duration_choice, "0") == 0) break;
-        if (strlen(duration_choice) == 0) {
-            printf("Invalid choice. Please enter 1, 2, 3, or 0.\n");
-            continue;
-        }
-        int option = atoi(duration_choice);
-        if (option == 1) duration = 1;
-        else if (option == 2) duration = 6;
-        else if (option == 3) duration = 12;
-        else printf("Invalid choice. Please enter 1, 2, 3, or 0.\n");
-    }
-
-    struct tm start_tm = {0};
-    if (strcmp(subscription_start, "0") != 0 && strlen(subscription_start) > 0) {
-        strptime(subscription_start, "%d.%m.%Y", &start_tm);
-        start_tm.tm_mday = start_tm.tm_mday;
-        start_tm.tm_mon += duration;
-        mktime(&start_tm);
-        strftime(subscription_end, sizeof(subscription_end), "%d.%m.%Y", &start_tm);
-    }
-
-    // Eingaben mit "0" als "beibehalten" behandeln → in leeren String umwandeln
-    // Eingefügt weil beim Editieren von Usern Daten die Felder mit "0" als Invalid markiert wurden
+    printf("Enter new subscription end date (or 0 to keep current): ");
+    fgets(subscription_end, MAX_USER_INPUT, stdin);
+    subscription_end[strcspn(subscription_end, "\n")] = '\0';
     if (strcmp(full_name, "0") == 0) full_name[0] = '\0';
     if (strcmp(ssn, "0") == 0) ssn[0] = '\0';
     if (strcmp(email, "0") == 0) email[0] = '\0';
     if (strcmp(subscription_start, "0") == 0) subscription_start[0] = '\0';
     if (strcmp(subscription_end, "0") == 0) subscription_end[0] = '\0';
 
-    int result = edit_user_logic(gamertag, full_name, ssn, email, subscription_start, subscription_end, subscription_flag);
+    int result = logic_edit_user(gamertag, full_name, ssn, email, subscription_start, subscription_end, subscription_flag);
     if (result == ERR_SUCCESS) {
         printf("User updated successfully.\n");
     } else if (result == ERR_USER_NOT_FOUND) {
@@ -774,3 +559,54 @@ void start_game_management_menu() {
     start_menu();  // ruft das Menü aus menu.c auf
 }
 // ===================== SCHICHTEN-KOMMENTARE ENDE =====================
+
+void display_users_presentation() {
+    cJSON *users = NULL;
+    int result = logic_get_all_users(&users);
+    if (result != 0 || !users || !cJSON_IsArray(users)) {
+        printf("Failed to load users.\n");
+        if (users) cJSON_Delete(users);
+        return;
+    }
+    int count = cJSON_GetArraySize(users);
+    if (count == 0) {
+        printf("No users found.\n");
+        cJSON_Delete(users);
+        return;
+    }
+    printf("=== User List ===\n");
+    for (int i = 0; i < count; ++i) {
+        cJSON *user = cJSON_GetArrayItem(users, i);
+        cJSON *full_name = cJSON_GetObjectItem(user, "full_name");
+        cJSON *gamertag = cJSON_GetObjectItem(user, "gamertag");
+        cJSON *player_hours = cJSON_GetObjectItem(user, "player_hours");
+        cJSON *ssn = cJSON_GetObjectItem(user, "ssn");
+        cJSON *email = cJSON_GetObjectItem(user, "email");
+        cJSON *sub_start = cJSON_GetObjectItem(user, "subscription_start_date");
+        cJSON *sub_end = cJSON_GetObjectItem(user, "subscription_end_date");
+        cJSON *is_sub = cJSON_GetObjectItem(user, "is_subscribed");
+        printf("User %d:\n  Name: %s\n  Gamertag: %s\n  Hours: %d\n  SSN: %s\n  Email: %s\n  Sub Start: %s\n  Sub End: %s\n  Subscribed: %s\n\n",
+            i+1,
+            full_name && cJSON_IsString(full_name) ? full_name->valuestring : "",
+            gamertag && cJSON_IsString(gamertag) ? gamertag->valuestring : "",
+            player_hours && cJSON_IsNumber(player_hours) ? player_hours->valueint : 0,
+            ssn && cJSON_IsString(ssn) ? ssn->valuestring : "",
+            email && cJSON_IsString(email) ? email->valuestring : "",
+            sub_start && cJSON_IsString(sub_start) ? sub_start->valuestring : "",
+            sub_end && cJSON_IsString(sub_end) ? sub_end->valuestring : "",
+            is_sub && cJSON_IsBool(is_sub) ? (is_sub->valueint ? "Yes" : "No") : "No");
+    }
+    cJSON_Delete(users);
+}
+
+void remove_user_presentation() {
+    char gamertag[MAX_USER_INPUT] = {};
+    printf("Enter gamertag of user to remove: ");
+    fgets(gamertag, MAX_USER_INPUT, stdin);
+    gamertag[strcspn(gamertag, "\n")] = '\0';
+    if (logic_remove_user(gamertag)) {
+        printf("\nUser removed successfully.\n");
+    } else {
+        printf("\nError: User not found.\n");
+    }
+}

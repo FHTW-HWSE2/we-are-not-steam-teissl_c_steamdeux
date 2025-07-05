@@ -33,7 +33,7 @@ void test_logic_create_report_null_input(void) {
     TEST_ASSERT_NULL(report);
 }
 
-// Tests für validate_player_profile
+// Tests für logic_validate_player_profile
 // Success
 void test_valid_input_returns_ERR_SUCCESS(void) {
     // Eingabedaten – alle gültig
@@ -58,7 +58,7 @@ void test_valid_input_returns_ERR_SUCCESS(void) {
         0                // return 0 → erfolgreich
     );
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_SUCCESS, result);
 }
@@ -75,7 +75,7 @@ void test_start_date_in_past_returns_ERR_PAST_DATE(void) {
     const char* is_subscribed_str = "true";
 
     // Kein Mock nötig, da die Funktion vorher schon abbricht
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_PAST_DATE, result);
 }
@@ -92,7 +92,7 @@ void test_empty_field_returns_ERR_EMPTY_FIELD(void) { //siehe Kommentar validate
     const char* is_subscribed_str = "true";
 
     // Kein Mock nötig, da die Funktion vorher schon abbricht
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_EMPTY_FIELD, result);
 }
@@ -109,7 +109,7 @@ void test_invalid_subscription_status_returns_ERR_INVALID_SUB_STATUS(void) {
     const char* is_subscribed_str = "invalid"; // ungültig!
 
     // Kein Mock nötig, da die Funktion vorher schon abbricht
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_SUB_STATUS, result);
 }
@@ -138,7 +138,7 @@ void test_storage_failure_returns_ERR_STORAGE_FAILURE(void) {
         1                // return 1 → Fehler beim Speichern
     );
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_STORAGE_FAILURE, result);
 }
@@ -153,11 +153,11 @@ void test_ssn_invalid_length_too_short_returns_ERR_INVALID_SSN(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_SSN, result);
 }
-//SIna --ssn too long
+//Sina --ssn too long
 void test_ssn_invalid_length_too_long_returns_ERR_INVALID_SSN(void) {
     const char* full_name = "Test User";
     const char* gamertag = "TestPlayer";
@@ -167,7 +167,7 @@ void test_ssn_invalid_length_too_long_returns_ERR_INVALID_SSN(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_SSN, result);
 }
@@ -181,7 +181,7 @@ void test_ssn_invalid_hyphen_position_returns_ERR_INVALID_SSN(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_SSN, result);
 }
@@ -195,7 +195,7 @@ void test_ssn_invalid_digit_on_wrong_positionchar_returns_ERR_INVALID_SSN(void) 
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_SSN, result);
 }
@@ -209,7 +209,7 @@ void test_email_missing_at_symbol_returns_ERR_INVALID_EMAIL(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_EMAIL, result);
 }
@@ -223,7 +223,7 @@ void test_email_missing_dot_after_at_returns_ERR_INVALID_EMAIL(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_EMAIL, result);
 }
@@ -237,7 +237,7 @@ void test_email_dot_before_at_returns_ERR_INVALID_EMAIL(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_EMAIL, result);
 }
@@ -251,7 +251,7 @@ void test_date_invalid_format_separator_returns_ERR_INVALID_DATE(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_DATE, result);
 }
@@ -297,7 +297,7 @@ void test_date_invalid_format_year_returns_ERR_PAST_DATE(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_PAST_DATE, result);
 }
@@ -311,7 +311,7 @@ void test_date_non_existent_day_returns_ERR_INVALID_DATE(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_DATE, result);
 }
@@ -325,7 +325,7 @@ void test_date_non_existent_month_returns_ERR_INVALID_DATE(void) {
     const char* sub_end = "01.08.2025";
     const char* is_subscribed_str = "true";
 
-    int result = validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
+    int result = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
 
     TEST_ASSERT_EQUAL_INT(ERR_INVALID_DATE, result);
 }
