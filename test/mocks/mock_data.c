@@ -151,9 +151,10 @@ int data_get_all_users(cJSON **users_out) {
     return 0;
 }
 
-// Missing data_load_games function
-Game *data_load_games(const char *filename, int *count_out) {
+// Missing data_load_games function - updated signature
+int data_load_games(const char *filename, Game **games_out, int *count_out) {
     (void)filename;
+    *games_out = NULL;
     *count_out = 0;
-    return NULL;
+    return 0; // Mock returns success
 }

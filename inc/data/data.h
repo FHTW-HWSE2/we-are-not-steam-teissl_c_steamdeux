@@ -16,7 +16,7 @@ int data_edit_player_profile(const char* gamertag, const char* new_full_name, co
 int data_get_all_users(cJSON **users_out);
 int data_remove_expired_users(int *removed_count_out);
 int data_update_all_subscription_flags();
-Game *data_load_games(const char *filename, int *count_out);
+int data_load_games(const char *filename, Game **games_out, int *count_out);
 int data_save_games(const char *filename, Game games[], int game_count);
 
 #endif

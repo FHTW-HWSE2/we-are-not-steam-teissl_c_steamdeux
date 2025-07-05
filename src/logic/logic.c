@@ -141,11 +141,7 @@ int logic_edit_user(const char* gamertag, const char* new_full_name, const char*
 // --- LOGIC GAME FUNKTIONEN (stumm, keine printf, nur ERR_... Rückgabe) ---
 
 int logic_initialize_game_data_loading(const char *filename, Game **games, int *game_count) {
-    *games = data_load_games(filename, game_count);
-    if (*games == NULL) {
-        return ERR_STORAGE_FAILURE;
-    }
-    return ERR_SUCCESS;
+    return data_load_games(filename, games, game_count);
 }
 
 int logic_edit_game(Game games[], int game_count, int game_id, const char *new_title) {

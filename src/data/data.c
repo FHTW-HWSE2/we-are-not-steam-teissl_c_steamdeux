@@ -229,27 +229,39 @@ int data_edit_player_profile(const char* gamertag, const char* new_full_name, co
 // CODE VON DEV BRANCH EINGEFÜGT:
 // Die Signatur wird geändert, um einen Output-Parameter für die Anzahl aufzunehmen.
 // 20.06.2025: Funktion load_games() wurde angepasst, den Fehler zu beheben, dass bei Programmstart Spiele falsch geladen werden.
-Game *data_load_games(const char *filename, int *count_out) {
+// Refactored 05.07.2025: Signatur auf robustes Fehlerbehandlungs-Muster umgestellt.
+int data_load_games(const char *filename, Game **games_out, int *count_out) {
+    if (!filename || !games_out || !count_out) {
+        return ERR_STORAGE_FAILURE;
+    }
+    
+    *games_out = NULL;
+    *count_out = 0;
+    
     cJSON *root = load_json_from_file(filename);
     if (!root || !cJSON_IsObject(root)) {
         if (root) cJSON_Delete(root);
-        *count_out = 0;
-        return NULL;
+        return ERR_STORAGE_FAILURE;
     }
+    
     cJSON *games_array = cJSON_GetObjectItem(root, KEY_GAMES);
     if (!games_array || !cJSON_IsArray(games_array)) {
         cJSON_Delete(root);
-        *count_out = 0;
-        return NULL;
+        return ERR_STORAGE_FAILURE;
     }
+    
     int game_count = cJSON_GetArraySize(games_array);
-    *count_out = game_count;
+    if (game_count == 0) {
+        cJSON_Delete(root);
+        return ERR_SUCCESS; // Empty array is valid
+    }
+    
     Game *games = malloc(game_count * sizeof(Game));
     if (!games) {
         cJSON_Delete(root);
-        *count_out = 0;
-        return NULL;
+        return ERR_STORAGE_FAILURE;
     }
+    
     for (int i = 0; i < game_count; i++) {
         cJSON *game_obj = cJSON_GetArrayItem(games_array, i);
         games[i].id = i + 1;
@@ -268,8 +280,11 @@ Game *data_load_games(const char *filename, int *count_out) {
         games[i].mode[sizeof(games[i].mode) - 1] = '\0';
         games[i].current_streams = streams_obj && cJSON_IsNumber(streams_obj) ? streams_obj->valueint : 0;
     }
+    
     cJSON_Delete(root);
-    return games;
+    *games_out = games;
+    *count_out = game_count;
+    return ERR_SUCCESS;
 }
 
 int data_save_games(const char *filename, Game games[], int game_count) {
@@ -333,12 +348,3 @@ int data_remove_expired_users(int *removed_count_out) {
     if (removed_count_out) *removed_count_out = removed_count;
     return result == ERR_SUCCESS ? ERR_SUCCESS : ERR_STORAGE_FAILURE;
 }
-
-// Alte Funktionsnamen entfernen/ersetzen
-#define save_player_profile data_save_player_profile
-#define remove_player_profile data_remove_player_profile
-#define edit_player_profile data_edit_player_profile
-#define load_games data_load_games
-#define save_games data_save_games
-#define remove_expired_users(...) data_remove_expired_users(__VA_ARGS__)
-#define data_update_all_subscription_flags data_update_all_subscription_flags
