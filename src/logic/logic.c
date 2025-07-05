@@ -350,4 +350,35 @@ int logic_is_valid_date_format(const char *date) {
     return 1;
 }
 
+// Prüft, ob ein String nur Buchstaben, Leerzeichen oder Bindestrich enthält
+enum { LOGIC_ALPHA_OK = 1, LOGIC_ALPHA_INVALID = 0 };
+int logic_is_valid_alpha(const char *str) {
+    if (!str || strlen(str) == 0) return LOGIC_ALPHA_INVALID;
+    for (size_t i = 0; i < strlen(str); ++i) {
+        if ((str[i] < 'A' || (str[i] > 'Z' && str[i] < 'a') || str[i] > 'z') && str[i] != ' ' && str[i] != '-') {
+            return LOGIC_ALPHA_INVALID;
+        }
+    }
+    return LOGIC_ALPHA_OK;
+}
+
+// Prüft, ob eine E-Mail ein einfaches valides Format hat
+int logic_is_valid_email(const char *str) {
+    if (!str || strlen(str) == 0) return 0;
+    const char* at_pos = strchr(str, '@');
+    if (!at_pos || strchr(at_pos, '.') == NULL) return 0;
+    return 1;
+}
+
+// Prüft, ob eine SSN im Format XXXX-XXXXXX oder XXXX XXXXXX ist
+int logic_is_valid_ssn(const char *str) {
+    if (!str || strlen(str) != 11) return 0;
+    if (str[4] != '-' && str[4] != ' ') return 0;
+    for (int i = 0; i < 11; i++) {
+        if (i == 4) continue;
+        if (str[i] < '0' || str[i] > '9') return 0;
+    }
+    return 1;
+}
+
 // Hinweis (04.07.2025): Die Funktion logic_update_all_subscription_flags() wurde entfernt, da der Logic-Layer für diese Operation nicht benötigt wird.

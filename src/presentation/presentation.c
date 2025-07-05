@@ -422,51 +422,29 @@ void read_alpha_input(const char *prompt, char *buffer, size_t size) {
                 printf("Input must not be only spaces. Please enter only letters and spaces.\n");
                 continue;
             }
-            int valid = 1;
-            for (size_t i = 0; i < strlen(buffer); ++i) {
-                if ((buffer[i] < 'A' || (buffer[i] > 'Z' && buffer[i] < 'a') || buffer[i] > 'z') && buffer[i] != ' ' && buffer[i] != '-') {
-                    valid = 0;
-                    break;
-                }
-            }
-            if (valid) return;
+            if (logic_is_valid_alpha(buffer)) return;
         }
         printf("Invalid input. Please enter only letters and spaces.\n");
     }
 }
 
 void read_email_input(const char *prompt, char *buffer, size_t size) {
-    // Präsentationsschicht: Einfache Eingabe
-    // HINWEIS: Emailformat-Validierung gehört in die Logikschicht!
     while (1) {
         printf("%s", prompt);
         if (fgets(buffer, size, stdin)) {
             buffer[strcspn(buffer, "\n")] = '\0';
-            const char* at_pos = strchr(buffer, '@');
-            if (strlen(buffer) > 0 && at_pos && strchr(at_pos, '.')) return;
+            if (logic_is_valid_email(buffer)) return;
         }
         printf("Invalid email format. Please enter a valid email (e.g., user@domain.com).\n");
     }
 }
 
 void read_ssn_input(const char *prompt, char *buffer, size_t size) {
-    // Präsentationsschicht: Einfache Eingabe
-    // HINWEIS: SSN-Formatvalidierung gehört in die Logikschicht!
     while (1) {
         printf("%s", prompt);
         if (fgets(buffer, size, stdin)) {
             buffer[strcspn(buffer, "\n")] = '\0';
-            if (strlen(buffer) == 11 && (buffer[4] == '-' || buffer[4] == ' ')) {
-                int valid = 1;
-                for (int i = 0; i < 11; i++) {
-                    if (i == 4) continue;
-                    if (buffer[i] < '0' || buffer[i] > '9') {
-                        valid = 0;
-                        break;
-                    }
-                }
-                if (valid) return;
-            }
+            if (logic_is_valid_ssn(buffer)) return;
         }
         printf("Invalid SSN. Please use format XXXX-XXXXXX or XXXX XXXXXX (e.g., 1234-567890 or 1234 567890).\n");
     }
