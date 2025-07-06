@@ -13,9 +13,9 @@
 		"player_hours":	1609,
 		"ssn":	"3456 04071992",
 		"email":	"samantha.lee@example.com",
-		"subscription_start_date":	"10.01.2025",
-		"subscription_end_date":	"10.07.2025",
-		"is_subscribed":	true
+		"subscription_start_date":	"10.01.2021",
+		"subscription_end_date":	"10.07.2021",
+		"is_subscribed":	false
 	}, {
 		"full_name":	"David Newname",
 		"gamertag":	"PixelKing",

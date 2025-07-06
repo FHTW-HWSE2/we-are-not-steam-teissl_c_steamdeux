@@ -79,7 +79,7 @@
 // Die eigentliche Logik und Datenzugriffe sind jetzt in logic.c/data.c ausgelagert.
 // Refactored am 05.07.2025: Schichtverletzung behoben - ruft jetzt logic_update_all_subscription_flags() auf
 void presentation_update_all_subscription_flags() {
-    int changed = logic_update_all_subscription_flags();
+    int changed = data_update_all_subscription_flags();
     printf("Updated %d user subscription flag(s).\n", changed);
 }
 
