@@ -48,6 +48,7 @@ static cJSON* load_json_from_file(const char* path) {
     cJSON *json = cJSON_Parse(data);
     free(data);
     return json;
+}
 // David testet
 
 static int save_json_to_file(const char* path, cJSON* json) {
