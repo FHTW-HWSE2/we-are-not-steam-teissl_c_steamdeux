@@ -48,7 +48,7 @@ static cJSON* load_json_from_file(const char* path) {
     cJSON *json = cJSON_Parse(data);
     free(data);
     return json;
-}
+// David testet
 
 static int save_json_to_file(const char* path, cJSON* json) {
     char *json_text = cJSON_Print(json);
@@ -63,7 +63,7 @@ static int save_json_to_file(const char* path, cJSON* json) {
     fclose(file);
     free(json_text);
     return ERR_SUCCESS;
-}
+} // Donato testet
 
 
 // Refactored am 04.07.2025: Ausgelagert aus presentation.c
@@ -98,7 +98,7 @@ int data_update_all_subscription_flags() {
     }
     cJSON_Delete(user_array);
     return changed;
-}
+} // Donato testet
 
 
 cJSON *data_load_reports(void) {
@@ -107,7 +107,7 @@ cJSON *data_load_reports(void) {
         return cJSON_CreateArray();
     }
     return reports;
-}
+} // Berk testet
 
 int data_save_report(cJSON *report) {
     cJSON *reports = load_json_from_file(REPORTS_FILE);
@@ -118,7 +118,7 @@ int data_save_report(cJSON *report) {
     int result = save_json_to_file(REPORTS_FILE, reports);
     cJSON_Delete(reports);
     return result;
-}
+} // David testet
 
 // hardcoded path from project folder --> in data.h verschoben und definiert, damit es kompiliert
 
@@ -145,7 +145,7 @@ int data_save_player_profile(const char* full_name, const char* gamertag, int pl
     int result = save_json_to_file(USERS_JSON_PATH, user_array);
     cJSON_Delete(user_array);
     return result;
-}
+} // Donato testet
 
 
 // Neue Funktion: Gibt alle User als cJSON-Array zurück
@@ -158,7 +158,7 @@ int data_get_all_users(cJSON **users_out) {
     }
     *users_out = user_array;
     return ERR_SUCCESS;
-}
+} // David testet
 
 int data_remove_player_profile(const char* gamertag) {
     cJSON *user_array = load_json_from_file(USERS_JSON_PATH);
@@ -179,7 +179,7 @@ int data_remove_player_profile(const char* gamertag) {
     }
     cJSON_Delete(user_array);
     return ERR_USER_NOT_FOUND;
-}
+} // Berk testet
 
 int data_edit_player_profile(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, int is_subscribed) {
     cJSON *user_array = load_json_from_file(USERS_JSON_PATH);
@@ -222,7 +222,7 @@ int data_edit_player_profile(const char* gamertag, const char* new_full_name, co
     int result = save_json_to_file(USERS_JSON_PATH, user_array);
     cJSON_Delete(user_array);
     return result;
-}
+} // David testet
 
 
 //=======================================================================
@@ -285,7 +285,7 @@ int data_load_games(const char *filename, Game **games_out, int *count_out) {
     *games_out = games;
     *count_out = game_count;
     return ERR_SUCCESS;
-}
+} // Donato testet
 
 int data_save_games(const char *filename, Game games[], int game_count) {
     cJSON *root = cJSON_CreateObject();
@@ -303,7 +303,7 @@ int data_save_games(const char *filename, Game games[], int game_count) {
     int result = save_json_to_file(filename, root);
     cJSON_Delete(root);
     return result;
-}
+} // Berk testet
 
 // Funktion von Zinedin aus Branch feature-subscriptionEndDate eingefügt
 // JSON Macro angepasst auf 
@@ -347,4 +347,4 @@ int data_remove_expired_users(int *removed_count_out) {
     cJSON_Delete(new_array);
     if (removed_count_out) *removed_count_out = removed_count;
     return result == ERR_SUCCESS ? ERR_SUCCESS : ERR_STORAGE_FAILURE;
-}
+} // David
