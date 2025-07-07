@@ -109,6 +109,7 @@ void presentation_start_main_menu() {
     // Direkt beim Start ausführen
     int removed_count = 0;
     data_remove_expired_users(&removed_count);
+    printf("Removed %d expired user(s).\n", removed_count);
     presentation_update_all_subscription_flags(); // keep all flags up to date
 
     int choice;

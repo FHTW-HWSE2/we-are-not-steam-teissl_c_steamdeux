@@ -8,23 +8,14 @@
 		"subscription_end_date":	"15.03.2025",
 		"is_subscribed":	false
 	}, {
-		"full_name":	"Samantha Lee",
-		"gamertag":	"CyberSam",
-		"player_hours":	1609,
-		"ssn":	"3456 04071992",
-		"email":	"samantha.lee@example.com",
-		"subscription_start_date":	"10.01.2021",
-		"subscription_end_date":	"10.07.2021",
-		"is_subscribed":	false
-	}, {
 		"full_name":	"David Newname",
 		"gamertag":	"PixelKing",
 		"player_hours":	584,
 		"ssn":	"1234-567890",
 		"email":	"david.new@example.com",
-		"subscription_start_date":	"20.08.2023",
-		"subscription_end_date":	"20.09.2023",
-		"is_subscribed":	false
+		"subscription_start_date":	"01.07.2025",
+		"subscription_end_date":	"20.09.2025",
+		"is_subscribed":	true
 	}, {
 		"full_name":	"Jessica Roberts",
 		"gamertag":	"LunaGamerX",
@@ -40,9 +31,9 @@
 		"player_hours":	990,
 		"ssn":	"7890 11041985",
 		"email":	"kevin.thompson@example.com",
-		"subscription_start_date":	"12.06.2024",
-		"subscription_end_date":	"12.12.2024",
-		"is_subscribed":	false
+		"subscription_start_date":	"12.06.2025",
+		"subscription_end_date":	"12.12.2025",
+		"is_subscribed":	true
 	}, {
 		"full_name":	"Olivia Brown",
 		"gamertag":	"NeonKnight",
@@ -85,16 +76,7 @@
 		"player_hours":	552,
 		"ssn":	"6780 05061996",
 		"email":	"james.wilson@example.com",
-		"subscription_start_date":	"22.10.2023",
-		"subscription_end_date":	"22.11.2023",
-		"is_subscribed":	false
-	}, {
-		"full_name":	" ",
-		"gamertag":	" ",
-		"player_hours":	0,
-		"ssn":	"4862-030906",
-		"email":	"a@a.a",
-		"subscription_start_date":	"04.07.2025",
-		"subscription_end_date":	"04.08.2025",
+		"subscription_start_date":	"22.06.2025",
+		"subscription_end_date":	"22.11.2025",
 		"is_subscribed":	true
 	}]
