@@ -29,5 +29,19 @@ void presentation_start_menu(void);
 void presentation_display_main_menu(void);
 int presentation_get_main_menu_choice(void);
 void presentation_show_startup_info(int removed_count, int changed_flags);
+// Zeigt das User Management Menü an
+void presentation_display_user_menu(void);
+// Holt die Auswahl für das User Management Menü
+int presentation_get_user_menu_choice(void);
+
+// Passive Eingabefunktionen für das Pull-Modell
+void presentation_get_full_name(char *buffer, size_t size);
+void presentation_get_gamertag(char *buffer, size_t size);
+void presentation_get_ssn(char *buffer, size_t size);
+void presentation_get_email(char *buffer, size_t size);
+void presentation_get_subscription_start(char *buffer, size_t size);
+void presentation_get_subscription_end(char *buffer, size_t size);
+void presentation_get_is_subscribed(char *buffer, size_t size);
+void presentation_get_subscription_duration(char *buffer, size_t size);
 
 #endif // PRESENTATION_H

@@ -158,7 +158,7 @@ void presentation_show_top_users_terminal(void) {
     cJSON_Delete(top_users);
 }
 
-// Generate usersRanked.json file
+// NOCH FALSCH
 void presentation_generate_top_users_file(void) {
     // Pure UI: call logic layer to handle file generation, only print result
     int result = logic_generate_top_users_file();
@@ -607,4 +607,48 @@ void presentation_start_menu() {
 // ===================== END CONSOLIDATED FUNCTIONS =====================
 void presentation_show_error(const char *msg) {
     printf(ANSI_COLOR_RED "Error: %s\n" ANSI_COLOR_RESET, msg);
+}
+
+// Zeigt nur das User Management Menü an
+void presentation_display_user_menu(void) {
+    printf("\n=== User Management Menu ===\n");
+    printf("1. Print user.json data in the CLI.\n");
+    printf("2. Display formatted user data to CLI.\n");
+    printf("3. Add a user\n");
+    printf("4. Edit a user\n");
+    printf("5. Delete a user\n");
+    printf("6. Add a report\n");
+    printf("7. Rank Top 10 Users by Playtime\n");
+    printf("8. Generate player report (usersRanked.json)\n");
+    printf("0. Return to Main Menu\n");
+}
+
+// Holt die Auswahl für das User Management Menü
+int presentation_get_user_menu_choice(void) {
+    return read_int_input(ANSI_COLOR_CYAN "Choose an option: " ANSI_COLOR_RESET);
+}
+
+void presentation_get_full_name(char *buffer, size_t size) {
+    read_input("Enter full name: ", buffer, size);
+}
+void presentation_get_gamertag(char *buffer, size_t size) {
+    read_input("Enter gamertag: ", buffer, size);
+}
+void presentation_get_ssn(char *buffer, size_t size) {
+    read_input("Enter SSN (format XXXX-XXXXXX or XXXX XXXXXX): ", buffer, size);
+}
+void presentation_get_email(char *buffer, size_t size) {
+    read_input("Enter email address: ", buffer, size);
+}
+void presentation_get_subscription_start(char *buffer, size_t size) {
+    read_input("Enter subscription start date (DD.MM.YYYY): ", buffer, size);
+}
+void presentation_get_subscription_end(char *buffer, size_t size) {
+    read_input("Enter subscription end date (DD.MM.YYYY): ", buffer, size);
+}
+void presentation_get_is_subscribed(char *buffer, size_t size) {
+    read_input("Is subscribed? (true/false): ", buffer, size);
+}
+void presentation_get_subscription_duration(char *buffer, size_t size) {
+    read_input("Enter subscription duration in months (1/6/12): ", buffer, size);
 }

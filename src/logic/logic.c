@@ -9,6 +9,8 @@
 #include "cJSON.h"
 #include "../inc/presentation/presentation.h"
 
+#define BUFFER_SIZE 256
+
 // ===================== SCHICHTEN-KOMMENTARE BEGINN =====================
 //
 // Logikschicht: Validiert, verarbeitet, prüft Formate, berechnet, entscheidet.
@@ -264,6 +266,12 @@ int logic_add_new_game(Game **games, int *game_count, const char *title, const c
     return ERR_SUCCESS;
 }
 
+// Prototypen für interne Funktionen
+static void logic_user_menu_workflow(void);
+static void logic_handle_add_user_workflow(void);
+static void logic_handle_edit_user_workflow(void);
+static void read_input(const char *prompt, char *buffer, size_t size);
+
 // Refactored 04.07.2025: Hilfsfunktion für Präsentationsschicht
 int logic_is_only_spaces(const char *str) {
     for (size_t i = 0; i < strlen(str); ++i) {
@@ -372,6 +380,13 @@ int logic_generate_top_users_file(void) {
     }
 }
 
+
+
+
+
+
+
+
 void logic_create_and_save_report(void) {
     const char* title = presentation_get_report_title();
     const char* description = presentation_get_report_description();
@@ -435,19 +450,178 @@ void logic_start_application(void) {
 
         switch (choice) {
             case 1:
-                // logic_handle_user_menu_workflow(); // Platzhalter
-                presentation_show_message("User Management selected.");
+                logic_user_menu_workflow();
                 break;
             case 2:
-                // logic_handle_game_menu_workflow(); // Platzhalter
-                presentation_show_message("Game Management selected.");
+                presentation_show_message("Display formatted user data selected (Workflow to be implemented).");
                 break;
-            case 3:
-                // logic_handle_simulation_workflow(); // Platzhalter
-                presentation_show_message("Simulation selected.");
+            case 3: // Add a user
+                logic_handle_add_user_workflow();
+                break;
+            case 4: // Edit a user
+                logic_handle_edit_user_workflow();
+                break;
+            case 5:
+                presentation_show_message("Delete user selected (Workflow to be implemented).");
+                break;
+            case 6:
+                presentation_show_message("Add report selected (Workflow to be implemented).");
+                break;
+            case 7:
+                presentation_show_message("Rank Top 10 Users selected (Workflow to be implemented).");
+                break;
+            case 8:
+                presentation_show_message("Generate player report selected (Workflow to be implemented).");
                 break;
             default:
                 presentation_show_error("Invalid option. Please try again.");
         }
+    }
+}
+
+// Diese Funktion steuert das User Management Menü
+static void logic_user_menu_workflow(void) {
+    while (1) {
+        presentation_display_user_menu();
+        int choice = presentation_get_user_menu_choice();
+        if (choice == 0) {
+            presentation_show_message("Returning to main menu...");
+            break;
+        }
+        switch (choice) {
+            case 3: // Add a user
+                logic_handle_add_user_workflow();
+                break;
+            case 4: // Edit a user
+                logic_handle_edit_user_workflow();
+                break;
+            // ... weitere cases für die anderen Menüpunkte ...
+            default:
+                presentation_show_error("Invalid option. Please try again.");
+        }
+    }
+}
+
+// Diese Funktion steuert das Hinzufügen eines Users im Pull-Modell
+static void logic_handle_add_user_workflow(void) {
+    char full_name[BUFFER_SIZE], gamertag[BUFFER_SIZE], ssn[BUFFER_SIZE], email[BUFFER_SIZE], sub_start[BUFFER_SIZE], duration_str[BUFFER_SIZE];
+    int use_today = 0, duration = 1;
+
+    presentation_show_message("Please add a new user.");
+    presentation_get_full_name(full_name, sizeof(full_name));
+    presentation_get_gamertag(gamertag, sizeof(gamertag));
+    presentation_get_ssn(ssn, sizeof(ssn));
+    presentation_get_email(email, sizeof(email));
+
+    // Startdatum-Auswahl
+    presentation_show_message("Choose subscription start date:\n1. Use today's date\n0. Enter a future date");
+    read_input("Enter your choice (1/0): ", sub_start, sizeof(sub_start));
+    use_today = atoi(sub_start);
+    if (use_today != 1) {
+        presentation_get_subscription_start(sub_start, sizeof(sub_start));
+    } else {
+        strcpy(sub_start, ""); // Logik entscheidet über heutiges Datum
+    }
+
+    // Dauer-Auswahl
+    presentation_show_message("Choose subscription model:\n1. 1 month\n2. 6 months\n3. 12 months");
+    presentation_get_subscription_duration(duration_str, sizeof(duration_str));
+    int duration_option = atoi(duration_str);
+    if (duration_option == 2) duration = 6;
+    else if (duration_option == 3) duration = 12;
+    else duration = 1;
+
+    const char *is_subscribed_str = "true";
+    int result = logic_create_user_with_duration(full_name, gamertag, ssn, email, sub_start, is_subscribed_str, duration, use_today);
+
+    switch (result) {
+        case ERR_SUCCESS:
+            presentation_show_message("User added successfully!");
+            break;
+        case ERR_INVALID_EMAIL:
+            presentation_show_error("The email format is invalid.");
+            break;
+        case ERR_PAST_DATE:
+            presentation_show_error("The start date cannot be in the past.");
+            break;
+        case ERR_INVALID_SSN:
+            presentation_show_error("SSN must be in format XXXX-XXXXXX (e.g., 1234-567890).");
+            break;
+        case ERR_INVALID_SUB_STATUS:
+            presentation_show_error("Subscription status must be 'true' or 'false'.");
+            break;
+        case ERR_INVALID_DATE:
+            presentation_show_error("Invalid date format. Please use DD.MM.YYYY.");
+            break;
+        case ERR_EMPTY_FIELD:
+            presentation_show_error("All fields must be non-empty.");
+            break;
+        case ERR_STORAGE_FAILURE:
+            presentation_show_error("Could not save user data.");
+            break;
+        default:
+            presentation_show_error("An unknown error occurred.");
+            break;
+    }
+}
+
+// Diese Funktion steuert das Bearbeiten eines Users im Pull-Modell
+static void logic_handle_edit_user_workflow(void) {
+    char gamertag[MAX_USER_INPUT], new_full_name[MAX_USER_INPUT], new_ssn[MAX_USER_INPUT], new_email[MAX_USER_INPUT];
+    char sub_start[MAX_USER_INPUT], sub_end[MAX_USER_INPUT], is_subscribed_str[MAX_USER_INPUT];
+
+    presentation_get_gamertag(gamertag, sizeof(gamertag));
+    presentation_show_message("Enter new full name (or leave empty to keep current):");
+    read_input("", new_full_name, sizeof(new_full_name));
+    presentation_show_message("Enter new SSN (or leave empty to keep current):");
+    read_input("", new_ssn, sizeof(new_ssn));
+    presentation_show_message("Enter new email (or leave empty to keep current):");
+    read_input("", new_email, sizeof(new_email));
+    presentation_show_message("Enter new subscription start date (DD.MM.YYYY) (or leave empty to keep current):");
+    read_input("", sub_start, sizeof(sub_start));
+    presentation_show_message("Enter new subscription end date (DD.MM.YYYY) (or leave empty to keep current):");
+    read_input("", sub_end, sizeof(sub_end));
+    presentation_show_message("Is subscribed? (1 = yes, 0 = no, or leave empty to keep current):");
+    read_input("", is_subscribed_str, sizeof(is_subscribed_str));
+
+    int result = logic_edit_user(gamertag, new_full_name, new_ssn, new_email, sub_start, sub_end, is_subscribed_str);
+    switch (result) {
+        case ERR_SUCCESS:
+            presentation_show_message("User edited successfully.");
+            break;
+        case ERR_USER_NOT_FOUND:
+            presentation_show_error("User not found.");
+            break;
+        case ERR_INVALID_SSN:
+            presentation_show_error("Invalid SSN format.");
+            break;
+        case ERR_INVALID_EMAIL:
+            presentation_show_error("Invalid email format.");
+            break;
+        case ERR_INVALID_DATE:
+            presentation_show_error("Invalid date format.");
+            break;
+        case ERR_PAST_DATE:
+            presentation_show_error("Date cannot be in the past.");
+            break;
+        case ERR_EMPTY_FIELD:
+            presentation_show_error("Fields cannot be empty.");
+            break;
+        case ERR_STORAGE_FAILURE:
+            presentation_show_error("Could not save data.");
+            break;
+        default:
+            presentation_show_error("Unknown error occurred.");
+    }
+}
+
+// Funktion zum Einlesen von Benutzereingaben mit Prompt
+static void read_input(const char *prompt, char *buffer, size_t size) {
+    printf("%s", prompt);
+    fflush(stdout);
+    if (fgets(buffer, size, stdin) == NULL) {
+        buffer[0] = '\0';
+    } else {
+        buffer[strcspn(buffer, "\n")] = '\0';
     }
 }
