@@ -400,3 +400,54 @@ void logic_create_and_save_report(void) {
         presentation_show_message("Report saved successfully.");
     }
 }
+
+// Diese Funktion bündelt die Startup-Tasks
+static int logic_perform_startup_tasks(int* removed_count, int* changed_flags) {
+    *removed_count = 0;
+    *changed_flags = 0;
+    if (data_remove_expired_users(removed_count) != ERR_SUCCESS) {
+        return ERR_STORAGE_FAILURE;
+    }
+    *changed_flags = data_update_all_subscription_flags();
+    return ERR_SUCCESS;
+}
+
+// Die neue Hauptschleife der Anwendung, gesteuert von der Logik
+void logic_start_application(void) {
+    presentation_print_welcome_banner();
+
+    // Startup-Tasks ausführen und Ergebnis anzeigen
+    int removed, changed;
+    if (logic_perform_startup_tasks(&removed, &changed) == ERR_SUCCESS) {
+        presentation_show_startup_info(removed, changed);
+    } else {
+        presentation_show_error("Critical error during startup tasks.");
+    }
+
+    while (1) {
+        presentation_display_main_menu();
+        int choice = presentation_get_main_menu_choice();
+
+        if (choice == 0) {
+            presentation_show_message("Exiting...");
+            break;
+        }
+
+        switch (choice) {
+            case 1:
+                // logic_handle_user_menu_workflow(); // Platzhalter
+                presentation_show_message("User Management selected.");
+                break;
+            case 2:
+                // logic_handle_game_menu_workflow(); // Platzhalter
+                presentation_show_message("Game Management selected.");
+                break;
+            case 3:
+                // logic_handle_simulation_workflow(); // Platzhalter
+                presentation_show_message("Simulation selected.");
+                break;
+            default:
+                presentation_show_error("Invalid option. Please try again.");
+        }
+    }
+}

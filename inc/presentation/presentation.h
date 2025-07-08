@@ -12,7 +12,6 @@ void presentation_display_users();
 void presentation_remove_user();
 void presentation_edit_user();
 void presentation_start_game_management_menu();
-void presentation_start_main_menu();
 void presentation_show_top_users_terminal();
 void presentation_generate_top_users_file();
 void presentation_show_message(const char *msg);
@@ -25,5 +24,10 @@ void presentation_display_games(const Game games[], int game_count);
 void presentation_display_error(const char *message);
 int presentation_run(void);
 void presentation_start_menu(void);
+
+// Deklarationen für passive UI-Funktionen
+void presentation_display_main_menu(void);
+int presentation_get_main_menu_choice(void);
+void presentation_show_startup_info(int removed_count, int changed_flags);
 
 #endif // PRESENTATION_H

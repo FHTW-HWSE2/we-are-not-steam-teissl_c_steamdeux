@@ -4,6 +4,6 @@
 
 
 int main(void) {
-    presentation_start_main_menu();
+    logic_start_application(); // NEU: Pull-Modell
     return ERR_SUCCESS;
 }

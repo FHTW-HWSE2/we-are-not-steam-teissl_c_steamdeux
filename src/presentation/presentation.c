@@ -49,41 +49,33 @@ void presentation_print_welcome_banner(void) {
     printf(ANSI_COLOR_GREEN "Welcome!" ANSI_COLOR_RESET "\n"); //so bleibt
 }
 
-void presentation_start_main_menu() {
-    // Präsentationsschicht: Menüführung, Benutzereingaben, Aufruf anderer Präsentationsfunktionen
-    presentation_print_welcome_banner();
+void presentation_display_main_menu(void) {
+    printf("\n" ANSI_COLOR_YELLOW "1. User Management Menu\n"
+           "2. Game Management Menu\n"
+           "3. Start simulation\n"
+           "0. Exit\n" ANSI_COLOR_RESET);
+}
 
-    // Direkt beim Start ausführen
-    int removed_count = 0;
-    data_remove_expired_users(&removed_count);
-    printf("Removed %d expired user(s).\n", removed_count);
-    presentation_update_all_subscription_flags(); // keep all flags up to date
-
-    int choice;
+static int read_int_input(const char *prompt) {
+    char input[16];
+    int value;
     while (1) {
-        printf("\n" ANSI_COLOR_YELLOW "1. User Management Menu\n" "2. Game Management Menu\n" "3. Start simulation\n" "0. Exit\n" ANSI_COLOR_RESET);
-        printf(ANSI_COLOR_CYAN "Choose an option: " ANSI_COLOR_RESET);
-        char input[16];
-        fgets(input, sizeof(input), stdin);
-        choice = atoi(input);
-        switch (choice) {
-            case 1:
-                presentation_update_all_subscription_flags(); // always up to date before user menu
-                presentation_start_admin_menu();
-                break;
-            case 2:
-                presentation_start_game_management_menu();
-                break;
-            case 3:
-                start_simulation();
-                break;
-            case 0:
-                printf(ANSI_COLOR_GREEN "Exiting...\n" ANSI_COLOR_RESET);
-                return;
-            default:
-                printf(ANSI_COLOR_RED "Invalid input. Please enter a valid number.\n" ANSI_COLOR_RESET);
+        printf("%s", prompt);
+        if (fgets(input, sizeof(input), stdin)) {
+            value = atoi(input);
+            if (value >= 0 && value <= 3) return value;
         }
+        printf(ANSI_COLOR_RED "Invalid input. Please enter a valid number.\n" ANSI_COLOR_RESET);
     }
+}
+
+int presentation_get_main_menu_choice(void) {
+    return read_int_input(ANSI_COLOR_CYAN "Choose an option: " ANSI_COLOR_RESET);
+}
+
+void presentation_show_startup_info(int removed_count, int changed_flags) {
+    printf("Info: %d expired user(s) removed.\n", removed_count);
+    printf("Info: %d user subscription(s) checked and updated.\n", changed_flags);
 }
 
 // Refactored 04.07.2025: Validierung (nur Leerzeichen) ausgelagert in logic layer,
@@ -613,3 +605,6 @@ void presentation_start_menu() {
 }
 
 // ===================== END CONSOLIDATED FUNCTIONS =====================
+void presentation_show_error(const char *msg) {
+    printf(ANSI_COLOR_RED "Error: %s\n" ANSI_COLOR_RESET, msg);
+}

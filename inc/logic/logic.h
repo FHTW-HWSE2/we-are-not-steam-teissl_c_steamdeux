@@ -33,5 +33,7 @@ int logic_add_new_game(Game **games, int *game_count, const char *title, const c
 int logic_edit_game(Game games[], int game_count, int game_id, const char *new_title);
 int logic_delete_game(Game games[], int *game_count, int game_id);
 void logic_create_and_save_report(void);
+// Deklaration für den neuen Haupteinstiegspunkt der Logik
+void logic_start_application(void);
 
 #endif // LOGIC_H
