@@ -510,8 +510,26 @@ static void logic_handle_add_user_workflow(void) {
     presentation_show_message("Please add a new user.");
     presentation_get_full_name(full_name, sizeof(full_name));
     presentation_get_gamertag(gamertag, sizeof(gamertag));
-    presentation_get_ssn(ssn, sizeof(ssn));
-    presentation_get_email(email, sizeof(email));
+
+    // SSN validation loop
+    while (1) {
+        presentation_get_ssn(ssn, sizeof(ssn));
+        if (!logic_is_only_spaces(ssn) && logic_is_valid_ssn(ssn)) {
+            break;
+        } else {
+            presentation_show_error("SSN must be in format XXXX-XXXXXX (e.g., 1234-567890). Please try again.");
+        }
+    }
+
+    // Email validation loop
+    while (1) {
+        presentation_get_email(email, sizeof(email));
+        if (!logic_is_only_spaces(email) && logic_is_valid_email(email)) {
+            break;
+        } else {
+            presentation_show_error("The email format is invalid. Please try again.");
+        }
+    }
 
     // Startdatum-Auswahl
     presentation_show_message("Choose subscription start date:\n1. Use today's date\n0. Enter a future date");
