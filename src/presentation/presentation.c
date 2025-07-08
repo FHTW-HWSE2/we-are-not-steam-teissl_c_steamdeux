@@ -14,8 +14,6 @@
 
 #define BUFFER_SIZE 256
 
-
-
 // ANSI color codes
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define ANSI_COLOR_CYAN    "\x1b[36;1m"
@@ -104,7 +102,7 @@ void presentation_start_main_menu() {
     presentation_print_typewriter(" ___) || | | |___ / ___ \\| |  | | | |_| | |___| |_| |/  \\   _ ", 1000, ANSI_COLOR_CYAN);
     presentation_print_typewriter("|____/ |_| |_____/_/   \\_\\_|  |_| |____/|_____|\\___//_/\\_\\ (_)", 1000, ANSI_COLOR_CYAN);
     presentation_print_typewriter("", 1000, NULL);
-    printf(ANSI_COLOR_GREEN "Welcome!" ANSI_COLOR_RESET "\n");
+    printf(ANSI_COLOR_GREEN "Welcome!" ANSI_COLOR_RESET "\n"); //so bleibt
 
     // Direkt beim Start ausführen
     int removed_count = 0;
@@ -139,7 +137,7 @@ void presentation_start_main_menu() {
     }
 }
 
-// Refactored 04.07.2025: Validierung (nur Leerzeichen) ausgelagert in logic layer
+// Refactored 04.07.2025: Validierung (nur Leerzeichen) ausgelagert in logic layer,
 static void read_input(const char *prompt, char *buffer, size_t size) {
     int valid = 0;
     while (!valid) {
@@ -164,35 +162,32 @@ static void read_input(const char *prompt, char *buffer, size_t size) {
     }
 }
 
-void presentation_collect_and_save_report(void) {
-    // Präsentationsschicht: Eingabe und Ausgabe
-    char title[BUFFER_SIZE];
-    char description[BUFFER_SIZE];
-    char date[BUFFER_SIZE];
+void presentation_show_message(const char *msg) {
+    printf("%s\n", msg);
+}
 
-    read_input("Enter report title: ", title, BUFFER_SIZE);
-    read_input("Enter report description: ", description, BUFFER_SIZE);
+const char* presentation_get_report_title(void) {
+    static char title[BUFFER_SIZE];
+    printf("Enter report title: ");
+    fgets(title, BUFFER_SIZE, stdin);
+    title[strcspn(title, "\n")] = 0;
+    return title;
+}
 
-    // Datumsformat-Validierung in die Logikschicht ausgelagert
-    while (1) {
-        read_input("Enter report date (DD.MM.YYYY): ", date, BUFFER_SIZE);
-        if (logic_is_valid_date_format(date)) break;
-        printf("Invalid date format. Please use DD.MM.YYYY\n");
-    }
+const char* presentation_get_report_description(void) {
+    static char description[BUFFER_SIZE];
+    printf("Enter report description: ");
+    fgets(description, BUFFER_SIZE, stdin);
+    description[strcspn(description, "\n")] = 0;
+    return description;
+}
 
-    cJSON *report = logic_create_report(title, description, date);
-    if (!report) {
-        printf("Error creating report.\n");
-        return;
-    }
-
-    if (data_save_report(report) != ERR_SUCCESS) {
-        printf("Error saving report.\n");
-        cJSON_Delete(report); // Da wir es nicht gespeichert haben, müssen wir selbst löschen
-        return;
-    }
-
-    printf("Report saved successfully.\n");
+const char* presentation_get_report_date(void) {
+    static char date[BUFFER_SIZE];
+    printf("Enter report date (DD.MM.YYYY): ");
+    fgets(date, BUFFER_SIZE, stdin);
+    date[strcspn(date, "\n")] = 0;
+    return date;
 }
 
 // Show top 10 in terminal
@@ -570,7 +565,7 @@ void presentation_display_error(const char *message) {
 
 // From run.c
 int presentation_run() {
-    presentation_collect_and_save_report();
+    logic_create_and_save_report();
     return ERR_SUCCESS;
 }
 

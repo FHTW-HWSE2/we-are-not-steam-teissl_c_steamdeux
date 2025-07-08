@@ -7,6 +7,7 @@
 #include "../inc/data/data.h"
 #include "../inc/error.h" // Für Fehlercodes
 #include "cJSON.h"
+#include "../inc/presentation/presentation.h"
 
 // ===================== SCHICHTEN-KOMMENTARE BEGINN =====================
 //
@@ -368,5 +369,34 @@ int logic_generate_top_users_file(void) {
         free(json_str);
         cJSON_Delete(top_users);
         return ERR_STORAGE_FAILURE;
+    }
+}
+
+void logic_create_and_save_report(void) {
+    const char* title = presentation_get_report_title();
+    const char* description = presentation_get_report_description();
+    const char* date = presentation_get_report_date();
+
+    if (!title || !description || !date || logic_is_only_spaces(title) || logic_is_only_spaces(description) || logic_is_only_spaces(date)) {
+        presentation_show_message("All fields must be non-empty.");
+        return;
+    }
+    if (!logic_is_valid_date_format(date)) {
+        presentation_show_message("Invalid date format. Please use DD.MM.YYYY");
+        return;
+    }
+
+    cJSON *report = logic_create_report(title, description, date);
+    if (!report) {
+        presentation_show_message("Error creating report.");
+        return;
+    }
+    int save_result = data_save_report(report);
+    cJSON_Delete(report);
+
+    if (save_result != ERR_SUCCESS) {
+        presentation_show_message("Error saving report.");
+    } else {
+        presentation_show_message("Report saved successfully.");
     }
 }

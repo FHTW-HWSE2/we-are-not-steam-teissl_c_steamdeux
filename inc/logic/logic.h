@@ -32,6 +32,6 @@ int logic_initialize_game_data_loading(const char *filename, Game **games, int *
 int logic_add_new_game(Game **games, int *game_count, const char *title, const char *description, const char *version, const char *mode);
 int logic_edit_game(Game games[], int game_count, int game_id, const char *new_title);
 int logic_delete_game(Game games[], int *game_count, int game_id);
-
+void logic_create_and_save_report(void);
 
 #endif // LOGIC_H

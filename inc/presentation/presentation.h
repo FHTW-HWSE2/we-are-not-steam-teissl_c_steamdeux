@@ -15,6 +15,10 @@ void presentation_start_game_management_menu();
 void presentation_start_main_menu();
 void presentation_show_top_users_terminal();
 void presentation_generate_top_users_file();
+void presentation_show_message(const char *msg);
+const char* presentation_get_report_title(void);
+const char* presentation_get_report_description(void);
+const char* presentation_get_report_date(void);
 
 // Consolidated functions from other presentation files
 void presentation_display_games(const Game games[], int game_count);
