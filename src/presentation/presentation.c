@@ -14,68 +14,13 @@
 
 #define BUFFER_SIZE 256
 
-// ANSI color codes
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define ANSI_COLOR_CYAN    "\x1b[36;1m"
 #define ANSI_COLOR_GREEN   "\x1b[32;1m"
 #define ANSI_COLOR_YELLOW  "\x1b[33;1m"
 #define ANSI_COLOR_RED     "\x1b[31;1m"
 
-// ===================== SCHICHTENKOMMENTARE BEGINN =====================
-// HINWEIS: Diese Datei ist die Präsentationsschicht (presentation layer).
-// Sie darf NUR für Benutzereingabe/-ausgabe (I/O, printf, scanf, fgets, etc.) zuständig sein.
-// KEINE Validierung, KEINE Datenzugriffe, KEINE Geschäftslogik!
-// Validierung -> logic.c, Datenzugriff -> data.c
-// ================================================================
-//
-// update_all_subscription_flags():
-// SCHICHTVERLETZUNG! Diese Funktion macht Datenzugriff (FILE, cJSON) und Logik (Datum vergleichen).
-// -> Alles außer printf gehört in data/logic layer ausgelagert!
-//
-// print_typewriter():
-// OK, reine Präsentationslogik (Ausgabe).
-//
-// start_main_menu():
-// OK, Menüführung und Ausgabe. Aber remove_expired_users() und update_all_subscription_flags() sind Schichtverletzungen, da sie Daten/Logik direkt aufrufen.
-//
-// read_input():
-// OK für einfache Eingabe, aber Validierung (nur Leerzeichen prüfen) gehört in die Logikschicht.
-//
-// presentation_collect_and_save_report():
-// SCHICHTVERLETZUNG! Validierung von Datum und Feldern ist hier, gehört aber in die Logikschicht. Nur read_input und printf sind erlaubt.
-//
-// show_top_users_terminal():
-// SCHICHTVERLETZUNG! Liest und sortiert Daten direkt (FILE, cJSON, qsort). Nur printf gehört hierher. Datenzugriff und Sortierung -> data/logic layer.
-//
-// generate_top_users_file():
-// SCHICHTVERLETZUNG! Liest, sortiert und schreibt Daten (FILE, cJSON, qsort). Nur printf gehört hierher. Datenzugriff und Sortierung -> data/logic layer.
-//
-// start_admin_menu():
-// OK, reine Menüführung und Ausgabe.
-//
-// read_alpha_input(), read_email_input(), read_ssn_input():
-// SCHICHTVERLETZUNG! Komplexe Validierung (Format, Zeichenprüfung) gehört in die Logikschicht. Nur Eingabeaufforderung und Weitergabe an Logik erlaubt.
-//
-// add_user_presentation():
-// SCHICHTVERLETZUNG! Validierung von Datum, SSN, Email, etc. ist hier, gehört aber in die Logikschicht. Nur Eingabeaufforderung und Weitergabe an Logik erlaubt.
-//
-// display_users_presentation():
-// OK, ruft Logik auf und gibt aus.
-//
-// remove_user_presentation():
-// OK, ruft Logik auf und gibt aus.
-//
-// edit_user_presentation():
-// SCHICHTVERLETZUNG! Validierung von Feldern, Datum, SSN, Email, etc. ist hier, gehört aber in die Logikschicht. Nur Eingabeaufforderung und Weitergabe an Logik erlaubt.
-//
-// start_game_management_menu():
-// OK, reine Menüführung und Ausgabe.
-// ===================== SCHICHTENKOMMENTARE ENDE =====================
-
-// Helper: Update is_subscribed for all users based on current date, NEW NEW NEW
-// Refactored am 04.07.2025: Nur Präsentationslogik (printf) bleibt hier.
-// Die eigentliche Logik und Datenzugriffe sind jetzt in logic.c/data.c ausgelagert.
-// Refactored am 05.07.2025: Schichtverletzung behoben - ruft jetzt logic_update_all_subscription_flags() auf
+//nicht okay
 void presentation_update_all_subscription_flags() {
     int changed = data_update_all_subscription_flags();
     printf("Updated %d user subscription flag(s).\n", changed);
@@ -94,8 +39,7 @@ void presentation_print_typewriter(const char *str, useconds_t delay, const char
     if (color) printf(ANSI_COLOR_RESET);
 }
 
-void presentation_start_main_menu() {
-    // Präsentationsschicht: Menüführung, Benutzereingaben, Aufruf anderer Präsentationsfunktionen
+void presentation_print_welcome_banner(void) {
     presentation_print_typewriter("____ _____ _____    _    __  __   ____  _____ _   ___  __    ", 1000, ANSI_COLOR_CYAN);
     presentation_print_typewriter("/ ___|_   _| ____|  / \\  |  \\/  | |  _ \\| ____| | | \\ \\/ /    ", 1000, ANSI_COLOR_CYAN);
     presentation_print_typewriter("\\___ \\ | | |  _|   / _ \\ | |\\/| | | | | |  _| | | | |\\  /     ", 1000, ANSI_COLOR_CYAN);
@@ -103,6 +47,11 @@ void presentation_start_main_menu() {
     presentation_print_typewriter("|____/ |_| |_____/_/   \\_\\_|  |_| |____/|_____|\\___//_/\\_\\ (_)", 1000, ANSI_COLOR_CYAN);
     presentation_print_typewriter("", 1000, NULL);
     printf(ANSI_COLOR_GREEN "Welcome!" ANSI_COLOR_RESET "\n"); //so bleibt
+}
+
+void presentation_start_main_menu() {
+    // Präsentationsschicht: Menüführung, Benutzereingaben, Aufruf anderer Präsentationsfunktionen
+    presentation_print_welcome_banner();
 
     // Direkt beim Start ausführen
     int removed_count = 0;
@@ -223,7 +172,8 @@ void presentation_generate_top_users_file(void) {
     int result = logic_generate_top_users_file();
     if (result == ERR_SUCCESS) {
         printf("usersRanked.json generated.\n");
-    } else {
+    } else {// ===================== SCHICHTENKOMMENTARE BEGINN =====================
+
         printf("Error: Could not generate usersRanked.json\n");
     }
 }
