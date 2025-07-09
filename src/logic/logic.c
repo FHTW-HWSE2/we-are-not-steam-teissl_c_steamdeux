@@ -178,45 +178,6 @@ int logic_create_user_with_duration(const char* full_name, const char* gamertag,
     else return ERR_STORAGE_FAILURE;
 }
 
-// --- Refactor edit_user_logic to use helpers ---
-int logic_edit_user(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, const char* is_subscribed_str) {
-    // Validate non-empty fields individually with proper validation
-    if (logic_validate_required_field(new_full_name) && !is_valid_alpha_format(new_full_name)) {
-        return ERR_EMPTY_FIELD;  // Using existing error code for invalid format
-    }
-    if (logic_validate_required_field(new_ssn) && !is_valid_ssn_format(new_ssn)) {
-        return ERR_INVALID_SSN;
-    }
-    if (logic_validate_required_field(new_email) && !is_valid_email_format(new_email)) {
-        return ERR_INVALID_EMAIL;
-    }
-    if (logic_validate_required_field(sub_start) && !is_valid_date_format(sub_start)) {
-        return ERR_INVALID_DATE;
-    }
-    if (logic_validate_required_field(sub_end) && !is_valid_date_format(sub_end)) {
-        return ERR_INVALID_DATE;
-    }
-    
-    // Date logic: if start date is provided, validate it's not in past
-    if (logic_validate_required_field(sub_start) && !is_date_in_future(sub_start)) {
-        return ERR_PAST_DATE;
-    }
-    
-    // Validate subscription status if provided
-    int is_subscribed = -1;
-    if (is_subscribed_str && strlen(is_subscribed_str) > 0) {
-        if (!logic_validate_subscription_status(is_subscribed_str, &is_subscribed)) {
-            return ERR_INVALID_SUB_STATUS;
-        }
-    }
-    
-    // Call data layer with validated inputs
-    int result = data_edit_player_profile(gamertag, new_full_name, new_ssn, new_email, sub_start, sub_end, is_subscribed);
-    if (result == ERR_SUCCESS) return ERR_SUCCESS;
-    else if (result == ERR_USER_NOT_FOUND) return ERR_USER_NOT_FOUND;
-    else return ERR_STORAGE_FAILURE;
-}
-
 // --- LOGIC GAME FUNKTIONEN (stumm, keine printf, nur ERR_... Rückgabe) ---
 
 int logic_initialize_game_data_loading(const char *filename, Game **games, int *game_count) {
