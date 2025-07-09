@@ -88,4 +88,13 @@
 		"subscription_start_date":	"09.07.2025",
 		"subscription_end_date":	"09.08.2025",
 		"is_subscribed":	true
+	}, {
+		"full_name":	"a",
+		"gamertag":	"a",
+		"player_hours":	0,
+		"ssn":	"4689 030906",
+		"email":	"z@gmail.com",
+		"subscription_start_date":	"10.08.2026",
+		"subscription_end_date":	"10.08.2027",
+		"is_subscribed":	true
 	}]

@@ -44,8 +44,9 @@ static int logic_validate_required_field(const char* str) {
 }
 
 static int is_valid_ssn_format(const char* ssn) {
+    // Nur Format XXXX-XXXXXX (Bindestrich) ist erlaubt
     if (!ssn || strlen(ssn) != 11) return 0;
-    if (ssn[4] != '-' && ssn[4] != ' ') return 0;
+    if (ssn[4] != '-') return 0;
     for (int i = 0; i < 11; i++) {
         if (i == 4) continue;
         if (ssn[i] < '0' || ssn[i] > '9') return 0;
@@ -393,26 +394,26 @@ void logic_create_and_save_report(void) {
     const char* date = presentation_get_report_date();
 
     if (!title || !description || !date || logic_is_only_spaces(title) || logic_is_only_spaces(description) || logic_is_only_spaces(date)) {
-        presentation_show_message("All fields must be non-empty.");
+        presentation_error_empty_fields();
         return;
     }
     if (!logic_is_valid_date_format(date)) {
-        presentation_show_message("Invalid date format. Please use DD.MM.YYYY");
+        presentation_error_date();
         return;
     }
 
     cJSON *report = logic_create_report(title, description, date);
     if (!report) {
-        presentation_show_message("Error creating report.");
+        presentation_error_unknown();
         return;
     }
     int save_result = data_save_report(report);
     cJSON_Delete(report);
 
     if (save_result != ERR_SUCCESS) {
-        presentation_show_message("Error saving report.");
+        presentation_error_storage();
     } else {
-        presentation_show_message("Report saved successfully.");
+        presentation_success_report_saved();
     }
 }
 
@@ -436,7 +437,7 @@ void logic_start_application(void) {
     if (logic_perform_startup_tasks(&removed, &changed) == ERR_SUCCESS) {
         presentation_show_startup_info(removed, changed);
     } else {
-        presentation_show_error("Critical error during startup tasks.");
+        presentation_error_critical_startup();
     }
 
     while (1) {
@@ -444,7 +445,7 @@ void logic_start_application(void) {
         int choice = presentation_get_main_menu_choice();
 
         if (choice == 0) {
-            presentation_show_message("Exiting...");
+            presentation_info_exiting();
             break;
         }
 
@@ -453,7 +454,7 @@ void logic_start_application(void) {
                 logic_user_menu_workflow();
                 break;
             case 2:
-                presentation_show_message("Display formatted user data selected (Workflow to be implemented).");
+                presentation_info_display_formatted_user_data();
                 break;
             case 3: // Add a user
                 logic_handle_add_user_workflow();
@@ -462,19 +463,19 @@ void logic_start_application(void) {
                 logic_handle_edit_user_workflow();
                 break;
             case 5:
-                presentation_show_message("Delete user selected (Workflow to be implemented).");
+                presentation_info_delete_user_selected();
                 break;
             case 6:
-                presentation_show_message("Add report selected (Workflow to be implemented).");
+                presentation_info_add_report_selected();
                 break;
             case 7:
-                presentation_show_message("Rank Top 10 Users selected (Workflow to be implemented).");
+                presentation_info_rank_top_users_selected();
                 break;
             case 8:
-                presentation_show_message("Generate player report selected (Workflow to be implemented).");
+                presentation_info_generate_player_report_selected();
                 break;
             default:
-                presentation_show_error("Invalid option. Please try again.");
+                presentation_error_invalid_option();
         }
     }
 }
@@ -485,7 +486,7 @@ static void logic_user_menu_workflow(void) {
         presentation_display_user_menu();
         int choice = presentation_get_user_menu_choice();
         if (choice == 0) {
-            presentation_show_message("Returning to main menu...");
+            presentation_info_returning_to_main_menu();
             break;
         }
         switch (choice) {
@@ -497,7 +498,7 @@ static void logic_user_menu_workflow(void) {
                 break;
             // ... weitere cases für die anderen Menüpunkte ...
             default:
-                presentation_show_error("Invalid option. Please try again.");
+                presentation_error_invalid_option();
         }
     }
 }
@@ -507,32 +508,47 @@ static void logic_handle_add_user_workflow(void) {
     char full_name[BUFFER_SIZE], gamertag[BUFFER_SIZE], ssn[BUFFER_SIZE], email[BUFFER_SIZE], sub_start[BUFFER_SIZE], duration_str[BUFFER_SIZE];
     int use_today = 0, duration = 1;
 
-    presentation_show_message("Please add a new user.");
-    presentation_get_full_name(full_name, sizeof(full_name));
-    presentation_get_gamertag(gamertag, sizeof(gamertag));
-
+    presentation_welcome_add_user();
+    // Full name validation loop
+    while (1) {
+        presentation_get_full_name(full_name, sizeof(full_name));
+        if (logic_is_only_spaces(full_name) || strlen(full_name) == 0) {
+            presentation_error_full_name_empty();
+        } else if (!logic_is_valid_alpha(full_name)) {
+            presentation_error_full_name_format();
+        } else {
+            break;
+        }
+    }
+    // Gamertag validation loop
+    while (1) {
+        presentation_get_gamertag(gamertag, sizeof(gamertag));
+        if (logic_is_only_spaces(gamertag) || strlen(gamertag) == 0) {
+            presentation_error_gamertag_empty();
+        } else {
+            break;
+        }
+    }
     // SSN validation loop
     while (1) {
         presentation_get_ssn(ssn, sizeof(ssn));
         if (!logic_is_only_spaces(ssn) && logic_is_valid_ssn(ssn)) {
             break;
         } else {
-            presentation_show_error("SSN must be in format XXXX-XXXXXX (e.g., 1234-567890). Please try again.");
+            presentation_error_ssn();
         }
     }
-
     // Email validation loop
     while (1) {
         presentation_get_email(email, sizeof(email));
         if (!logic_is_only_spaces(email) && logic_is_valid_email(email)) {
             break;
         } else {
-            presentation_show_error("The email format is invalid. Please try again.");
+            presentation_error_email();
         }
     }
-
     // Startdatum-Auswahl
-    presentation_show_message("Choose subscription start date:\n1. Use today's date\n0. Enter a future date");
+    presentation_choose_subscription_start();
     read_input("Enter your choice (1/0): ", sub_start, sizeof(sub_start));
     use_today = atoi(sub_start);
     if (use_today != 1) {
@@ -540,45 +556,42 @@ static void logic_handle_add_user_workflow(void) {
     } else {
         strcpy(sub_start, ""); // Logik entscheidet über heutiges Datum
     }
-
     // Dauer-Auswahl
-    presentation_show_message("Choose subscription model:\n1. 1 month\n2. 6 months\n3. 12 months");
+    presentation_choose_subscription_model();
     presentation_get_subscription_duration(duration_str, sizeof(duration_str));
     int duration_option = atoi(duration_str);
     if (duration_option == 2) duration = 6;
     else if (duration_option == 3) duration = 12;
     else duration = 1;
-
     const char *is_subscribed_str = "true";
     int result = logic_create_user_with_duration(full_name, gamertag, ssn, email, sub_start, is_subscribed_str, duration, use_today);
-
     switch (result) {
         case ERR_SUCCESS:
-            presentation_show_message("User added successfully!");
+            presentation_success_user_added();
             break;
         case ERR_INVALID_EMAIL:
-            presentation_show_error("The email format is invalid.");
+            presentation_error_email();
             break;
         case ERR_PAST_DATE:
-            presentation_show_error("The start date cannot be in the past.");
+            presentation_error_past_date();
             break;
         case ERR_INVALID_SSN:
-            presentation_show_error("SSN must be in format XXXX-XXXXXX (e.g., 1234-567890).");
+            presentation_error_ssn();
             break;
         case ERR_INVALID_SUB_STATUS:
-            presentation_show_error("Subscription status must be 'true' or 'false'.");
+            presentation_error_sub_status();
             break;
         case ERR_INVALID_DATE:
-            presentation_show_error("Invalid date format. Please use DD.MM.YYYY.");
+            presentation_error_date();
             break;
         case ERR_EMPTY_FIELD:
-            presentation_show_error("All fields must be non-empty.");
+            presentation_error_empty_fields();
             break;
         case ERR_STORAGE_FAILURE:
-            presentation_show_error("Could not save user data.");
+            presentation_error_storage();
             break;
         default:
-            presentation_show_error("An unknown error occurred.");
+            presentation_error_unknown();
             break;
     }
 }
@@ -588,48 +601,111 @@ static void logic_handle_edit_user_workflow(void) {
     char gamertag[MAX_USER_INPUT], new_full_name[MAX_USER_INPUT], new_ssn[MAX_USER_INPUT], new_email[MAX_USER_INPUT];
     char sub_start[MAX_USER_INPUT], sub_end[MAX_USER_INPUT], is_subscribed_str[MAX_USER_INPUT];
 
-    presentation_get_gamertag(gamertag, sizeof(gamertag));
-    presentation_show_message("Enter new full name (or leave empty to keep current):");
-    read_input("", new_full_name, sizeof(new_full_name));
-    presentation_show_message("Enter new SSN (or leave empty to keep current):");
-    read_input("", new_ssn, sizeof(new_ssn));
-    presentation_show_message("Enter new email (or leave empty to keep current):");
-    read_input("", new_email, sizeof(new_email));
-    presentation_show_message("Enter new subscription start date (DD.MM.YYYY) (or leave empty to keep current):");
-    read_input("", sub_start, sizeof(sub_start));
-    presentation_show_message("Enter new subscription end date (DD.MM.YYYY) (or leave empty to keep current):");
-    read_input("", sub_end, sizeof(sub_end));
-    presentation_show_message("Is subscribed? (1 = yes, 0 = no, or leave empty to keep current):");
-    read_input("", is_subscribed_str, sizeof(is_subscribed_str));
+    // Gamertag (Pflichtfeld) validieren
+    while (1) {
+        presentation_get_gamertag(gamertag, sizeof(gamertag));
+        if (!logic_is_only_spaces(gamertag)) {
+            break;
+        } else {
+            presentation_error_gamertag_empty_edit();
+        }
+    }
+
+    // Full name (optional, aber falls eingegeben, validieren)
+    presentation_info_enter_full_name_edit();
+    while (1) {
+        read_input("", new_full_name, sizeof(new_full_name));
+        if (strlen(new_full_name) == 0 || (!logic_is_only_spaces(new_full_name) && logic_is_valid_alpha(new_full_name))) {
+            break;
+        } else {
+            presentation_error_full_name_format_edit();
+        }
+    }
+
+    // SSN (optional, aber falls eingegeben, validieren)
+    presentation_info_enter_ssn_edit();
+    while (1) {
+        read_input("", new_ssn, sizeof(new_ssn));
+        if (strlen(new_ssn) == 0 || (!logic_is_only_spaces(new_ssn) && logic_is_valid_ssn(new_ssn))) {
+            break;
+        } else {
+            presentation_error_ssn_format_edit();
+        }
+    }
+
+    // Email (optional, aber falls eingegeben, validieren)
+    presentation_info_enter_email_edit();
+    while (1) {
+        read_input("", new_email, sizeof(new_email));
+        if (strlen(new_email) == 0 || (!logic_is_only_spaces(new_email) && logic_is_valid_email(new_email))) {
+            break;
+        } else {
+            presentation_error_email_format_edit();
+        }
+    }
+
+    // Startdatum (optional, aber falls eingegeben, validieren)
+    presentation_info_enter_start_date_edit();
+    while (1) {
+        read_input("", sub_start, sizeof(sub_start));
+        if (strlen(sub_start) == 0 || logic_is_valid_date_format(sub_start)) {
+            break;
+        } else {
+            presentation_error_date_format_edit();
+        }
+    }
+
+    // Enddatum (optional, aber falls eingegeben, validieren)
+    presentation_info_enter_end_date_edit();
+    while (1) {
+        read_input("", sub_end, sizeof(sub_end));
+        if (strlen(sub_end) == 0 || logic_is_valid_date_format(sub_end)) {
+            break;
+        } else {
+            presentation_error_date_format_edit();
+        }
+    }
+
+    // Subscription status (optional, aber falls eingegeben, validieren)
+    presentation_info_enter_sub_status_edit();
+    while (1) {
+        read_input("", is_subscribed_str, sizeof(is_subscribed_str));
+        if (strlen(is_subscribed_str) == 0 || strcmp(is_subscribed_str, "1") == 0 || strcmp(is_subscribed_str, "0") == 0) {
+            break;
+        } else {
+            presentation_error_sub_status_edit();
+        }
+    }
 
     int result = logic_edit_user(gamertag, new_full_name, new_ssn, new_email, sub_start, sub_end, is_subscribed_str);
     switch (result) {
         case ERR_SUCCESS:
-            presentation_show_message("User edited successfully.");
+            presentation_success_user_edited();
             break;
         case ERR_USER_NOT_FOUND:
-            presentation_show_error("User not found.");
+            presentation_error_user_not_found();
             break;
         case ERR_INVALID_SSN:
-            presentation_show_error("Invalid SSN format.");
+            presentation_error_ssn();
             break;
         case ERR_INVALID_EMAIL:
-            presentation_show_error("Invalid email format.");
+            presentation_error_email();
             break;
         case ERR_INVALID_DATE:
-            presentation_show_error("Invalid date format.");
+            presentation_error_date();
             break;
         case ERR_PAST_DATE:
-            presentation_show_error("Date cannot be in the past.");
+            presentation_error_past_date();
             break;
         case ERR_EMPTY_FIELD:
-            presentation_show_error("Fields cannot be empty.");
+            presentation_error_empty_fields();
             break;
         case ERR_STORAGE_FAILURE:
-            presentation_show_error("Could not save data.");
+            presentation_error_storage();
             break;
         default:
-            presentation_show_error("Unknown error occurred.");
+            presentation_error_unknown();
+            break;
     }
 }
 

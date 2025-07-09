@@ -11,6 +11,8 @@
 #include <time.h>
 #include "../inc/error.h" // For error codes
 #include "../simulation/simulation.h"
+#include "messages.h"
+#include "menu.h"
 
 #define BUFFER_SIZE 256
 
@@ -37,40 +39,6 @@ void presentation_print_typewriter(const char *str, useconds_t delay, const char
     }
     putchar('\n');
     if (color) printf(ANSI_COLOR_RESET);
-}
-
-void presentation_print_welcome_banner(void) {
-    presentation_print_typewriter("____ _____ _____    _    __  __   ____  _____ _   ___  __    ", 1000, ANSI_COLOR_CYAN);
-    presentation_print_typewriter("/ ___|_   _| ____|  / \\  |  \\/  | |  _ \\| ____| | | \\ \\/ /    ", 1000, ANSI_COLOR_CYAN);
-    presentation_print_typewriter("\\___ \\ | | |  _|   / _ \\ | |\\/| | | | | |  _| | | | |\\  /     ", 1000, ANSI_COLOR_CYAN);
-    presentation_print_typewriter(" ___) || | | |___ / ___ \\| |  | | | |_| | |___| |_| |/  \\   _ ", 1000, ANSI_COLOR_CYAN);
-    presentation_print_typewriter("|____/ |_| |_____/_/   \\_\\_|  |_| |____/|_____|\\___//_/\\_\\ (_)", 1000, ANSI_COLOR_CYAN);
-    presentation_print_typewriter("", 1000, NULL);
-    printf(ANSI_COLOR_GREEN "Welcome!" ANSI_COLOR_RESET "\n"); //so bleibt
-}
-
-void presentation_display_main_menu(void) {
-    printf("\n" ANSI_COLOR_YELLOW "1. User Management Menu\n"
-           "2. Game Management Menu\n"
-           "3. Start simulation\n"
-           "0. Exit\n" ANSI_COLOR_RESET);
-}
-
-static int read_int_input(const char *prompt) {
-    char input[16];
-    int value;
-    while (1) {
-        printf("%s", prompt);
-        if (fgets(input, sizeof(input), stdin)) {
-            value = atoi(input);
-            if (value >= 0 && value <= 3) return value;
-        }
-        printf(ANSI_COLOR_RED "Invalid input. Please enter a valid number.\n" ANSI_COLOR_RESET);
-    }
-}
-
-int presentation_get_main_menu_choice(void) {
-    return read_int_input(ANSI_COLOR_CYAN "Choose an option: " ANSI_COLOR_RESET);
 }
 
 void presentation_show_startup_info(int removed_count, int changed_flags) {
@@ -277,6 +245,7 @@ void presentation_read_ssn_input(const char *prompt, char *buffer, size_t size) 
     }
 } // Eingabefunktion endet  >validate profile
 
+/*
 void presentation_add_user() {
     // 1. DUMM DATEN SAMMELN (ohne jede Prüfung)
     char full_name[BUFFER_SIZE], gamertag[BUFFER_SIZE], ssn[BUFFER_SIZE], email[BUFFER_SIZE], sub_start[BUFFER_SIZE];
@@ -413,6 +382,7 @@ void presentation_edit_user() {
             printf("Unknown error occurred.\n");
     }
 }
+*/
 
 //========================================================================
 // Neue Funktion zum Starten des Game Management Menüs
@@ -498,17 +468,6 @@ void presentation_display_games(const Game games[], int game_count) {
         printf("Current Streams: %d\n", games[i].current_streams);
         printf("--------------------------\n");
     }
-}
-
-// From display_error.c
-void presentation_display_error(const char *message) {
-    printf("Error: %s\n", message);
-}
-
-// From run.c
-int presentation_run() {
-    logic_create_and_save_report();
-    return ERR_SUCCESS;
 }
 
 // From menu.c
@@ -605,11 +564,7 @@ void presentation_start_menu() {
 }
 
 // ===================== END CONSOLIDATED FUNCTIONS =====================
-void presentation_show_error(const char *msg) {
-    printf(ANSI_COLOR_RED "Error: %s\n" ANSI_COLOR_RESET, msg);
-}
-
-// Zeigt nur das User Management Menü an
+// UI/menu functions required for linking (stubs or real):
 void presentation_display_user_menu(void) {
     printf("\n=== User Management Menu ===\n");
     printf("1. Print user.json data in the CLI.\n");
@@ -622,33 +577,48 @@ void presentation_display_user_menu(void) {
     printf("8. Generate player report (usersRanked.json)\n");
     printf("0. Return to Main Menu\n");
 }
-
-// Holt die Auswahl für das User Management Menü
 int presentation_get_user_menu_choice(void) {
-    return read_int_input(ANSI_COLOR_CYAN "Choose an option: " ANSI_COLOR_RESET);
+    char input[16];
+    printf("Choose an option: ");
+    fgets(input, sizeof(input), stdin);
+    return atoi(input);
 }
-
 void presentation_get_full_name(char *buffer, size_t size) {
-    read_input("Enter full name: ", buffer, size);
+    printf("Enter full name: ");
+    fgets(buffer, size, stdin);
+    buffer[strcspn(buffer, "\n")] = 0;
 }
 void presentation_get_gamertag(char *buffer, size_t size) {
-    read_input("Enter gamertag: ", buffer, size);
+    printf("Enter gamertag: ");
+    fgets(buffer, size, stdin);
+    buffer[strcspn(buffer, "\n")] = 0;
 }
 void presentation_get_ssn(char *buffer, size_t size) {
-    read_input("Enter SSN (format XXXX-XXXXXX or XXXX XXXXXX): ", buffer, size);
+    printf("Enter SSN (format XXXX-XXXXXX or XXXX XXXXXX): ");
+    fgets(buffer, size, stdin);
+    buffer[strcspn(buffer, "\n")] = 0;
 }
 void presentation_get_email(char *buffer, size_t size) {
-    read_input("Enter email address: ", buffer, size);
+    printf("Enter email address: ");
+    fgets(buffer, size, stdin);
+    buffer[strcspn(buffer, "\n")] = 0;
 }
 void presentation_get_subscription_start(char *buffer, size_t size) {
-    read_input("Enter subscription start date (DD.MM.YYYY): ", buffer, size);
-}
-void presentation_get_subscription_end(char *buffer, size_t size) {
-    read_input("Enter subscription end date (DD.MM.YYYY): ", buffer, size);
-}
-void presentation_get_is_subscribed(char *buffer, size_t size) {
-    read_input("Is subscribed? (true/false): ", buffer, size);
+    printf("Enter subscription start date (DD.MM.YYYY): ");
+    fgets(buffer, size, stdin);
+    buffer[strcspn(buffer, "\n")] = 0;
 }
 void presentation_get_subscription_duration(char *buffer, size_t size) {
-    read_input("Enter subscription duration in months (1/6/12): ", buffer, size);
+    printf("Enter subscription duration in months (1/6/12): ");
+    fgets(buffer, size, stdin);
+    buffer[strcspn(buffer, "\n")] = 0;
 }
+void presentation_display_error(const char *message) {
+    printf("Error: %s\n", message);
+}
+int presentation_run() {
+    // Dummy implementation
+    return 0;
+}
+void presentation_add_user() {}
+void presentation_edit_user() {}

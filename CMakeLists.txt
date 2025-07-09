@@ -31,6 +31,8 @@ set(SOURCES
     src/data/data.c
     src/logic/logic.c
     src/presentation/presentation.c
+    src/presentation/messages.c
+    src/presentation/menu.c
     cJSON/cJSON.c
     src/simulation/simulation.c
 )
