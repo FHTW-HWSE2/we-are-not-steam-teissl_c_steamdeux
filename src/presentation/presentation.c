@@ -13,14 +13,15 @@
 #include "../simulation/simulation.h"
 #include "messages.h"
 #include "menu.h"
-
-#define BUFFER_SIZE 256
+#include "cJSON.h"
 
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define ANSI_COLOR_CYAN    "\x1b[36;1m"
 #define ANSI_COLOR_GREEN   "\x1b[32;1m"
 #define ANSI_COLOR_YELLOW  "\x1b[33;1m"
 #define ANSI_COLOR_RED     "\x1b[31;1m"
+
+#define BUFFER_SIZE 256
 
 //nicht okay
 void presentation_update_all_subscription_flags() {
@@ -159,19 +160,8 @@ void presentation_start_admin_menu(){
         int option = atoi(choice);
         switch (option) {
             case 1:
-                // Option 1: Rohdaten anzeigen (alte Funktion, ggf. logic_get_all_users + printf als JSON)
-                {
-                    cJSON *users = NULL;
-                    int result = logic_get_all_users(&users);
-                    if (result != ERR_SUCCESS || !users) {
-                        printf("Failed to load users.\n");
-                    } else {
-                        char *json = cJSON_Print(users);
-                        printf("%s\n", json ? json : "(null)");
-                        if (json) free(json);
-                        cJSON_Delete(users);
-                    }
-                }
+                // Option 1: Print raw user JSON via logic layer
+                logic_handle_list_users_json_workflow();
                 break;
             case 2:
                 presentation_display_users();
@@ -622,3 +612,42 @@ int presentation_run() {
 }
 void presentation_add_user() {}
 void presentation_edit_user() {}
+void presentation_show_error(const char *message) {
+    printf(ANSI_COLOR_RED "Error: %s\n" ANSI_COLOR_RESET, message);
+}
+
+const char* presentation_get_user_gamertag(void) {
+    static char gamertag[BUFFER_SIZE];
+    printf("Enter gamertag: ");
+    fgets(gamertag, sizeof(gamertag), stdin);
+    gamertag[strcspn(gamertag, "\n")] = 0;
+    return gamertag;
+}
+
+void presentation_display_user_list(const char* json_data) {
+    if (!json_data) {
+        printf("(No data to display)\n");
+        return;
+    }
+    cJSON *users = cJSON_Parse(json_data);
+    if (!users || !cJSON_IsArray(users)) {
+        printf("(Invalid user data)\n");
+        if (users) cJSON_Delete(users);
+        return;
+    }
+    printf("\n%-4s %-20s %-15s %-12s %-25s %-12s %-12s %-5s\n", "Nr.", "Full Name", "Gamertag", "SSN", "Email", "Sub Start", "Sub End", "Sub");
+    printf("%s\n", "---------------------------------------------------------------------------------------------------------------");
+    int idx = 1;
+    cJSON *user = NULL;
+    cJSON_ArrayForEach(user, users) {
+        const char *full_name = cJSON_GetObjectItem(user, "full_name") ? cJSON_GetObjectItem(user, "full_name")->valuestring : "";
+        const char *gamertag = cJSON_GetObjectItem(user, "gamertag") ? cJSON_GetObjectItem(user, "gamertag")->valuestring : "";
+        const char *ssn = cJSON_GetObjectItem(user, "ssn") ? cJSON_GetObjectItem(user, "ssn")->valuestring : "";
+        const char *email = cJSON_GetObjectItem(user, "email") ? cJSON_GetObjectItem(user, "email")->valuestring : "";
+        const char *sub_start = cJSON_GetObjectItem(user, "sub_start") ? cJSON_GetObjectItem(user, "sub_start")->valuestring : "";
+        const char *sub_end = cJSON_GetObjectItem(user, "sub_end") ? cJSON_GetObjectItem(user, "sub_end")->valuestring : "";
+        int is_sub = cJSON_GetObjectItem(user, "is_subscribed") ? cJSON_GetObjectItem(user, "is_subscribed")->valueint : 0;
+        printf("%-4d %-20s %-15s %-12s %-25s %-12s %-12s %-5s\n", idx++, full_name, gamertag, ssn, email, sub_start, sub_end, is_sub ? "yes" : "no");
+    }
+    cJSON_Delete(users);
+}

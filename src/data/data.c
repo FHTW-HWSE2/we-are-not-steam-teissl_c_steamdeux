@@ -348,4 +348,26 @@ int data_remove_expired_users(int *removed_count_out) {
     cJSON_Delete(new_array);
     if (removed_count_out) *removed_count_out = removed_count;
     return result == ERR_SUCCESS ? ERR_SUCCESS : ERR_STORAGE_FAILURE;
-} // David
+} // David testet
+
+int data_get_user_by_gamertag(const char* gamertag, cJSON** user_out) {
+    cJSON* user_array = load_json_from_file(USERS_JSON_PATH);
+    if (!user_array || !cJSON_IsArray(user_array)) {
+        if (user_array) cJSON_Delete(user_array);
+        *user_out = NULL;
+        return ERR_STORAGE_FAILURE;
+    }
+    int user_count = cJSON_GetArraySize(user_array);
+    for (int i = 0; i < user_count; i++) {
+        cJSON* user = cJSON_GetArrayItem(user_array, i);
+        cJSON* gtag_item = cJSON_GetObjectItem(user, "gamertag");
+        if (gtag_item && cJSON_IsString(gtag_item) && strcmp(gtag_item->valuestring, gamertag) == 0) {
+            *user_out = cJSON_Duplicate(user, 1);
+            cJSON_Delete(user_array);
+            return ERR_SUCCESS;
+        }
+    }
+    cJSON_Delete(user_array);
+    *user_out = NULL;
+    return ERR_USER_NOT_FOUND;
+}

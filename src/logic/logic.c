@@ -451,13 +451,18 @@ static void logic_user_menu_workflow(void) {
             break;
         }
         switch (choice) {
+            case 1: // Option 1: Einzelnen User anzeigen
+                logic_handle_view_user_workflow();
+                break;
+            case 2: // Option 2: Alle User auflisten
+                logic_handle_list_users_workflow();
+                break;
             case 3: // Add a user
                 logic_handle_add_user_workflow();
                 break;
             case 4: // Edit a user
                 logic_handle_edit_user_workflow();
                 break;
-            // ... weitere cases für die anderen Menüpunkte ...
             default:
                 presentation_error_invalid_option();
         }
@@ -670,6 +675,38 @@ static void logic_handle_edit_user_workflow(void) {
     }
 }
 
+// Korrigierte Version: logic_edit_user ruft nur die Datenschicht-Funktion auf
+int logic_edit_user(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, const char* is_subscribed_str) {
+    // Schritt 1: Validierung der Eingaben
+    if (logic_validate_required_field(new_full_name) && !is_valid_alpha_format(new_full_name)) {
+        return ERR_EMPTY_FIELD;
+    }
+    if (logic_validate_required_field(new_ssn) && !is_valid_ssn_format(new_ssn)) {
+        return ERR_INVALID_SSN;
+    }
+    if (logic_validate_required_field(new_email) && !is_valid_email_format(new_email)) {
+        return ERR_INVALID_EMAIL;
+    }
+    if (logic_validate_required_field(sub_start) && !is_valid_date_format(sub_start)) {
+        return ERR_INVALID_DATE;
+    }
+    if (logic_validate_required_field(sub_end) && !is_valid_date_format(sub_end)) {
+        return ERR_INVALID_DATE;
+    }
+    int is_subscribed = -1; // -1 = nicht ändern
+    if (is_subscribed_str && strlen(is_subscribed_str) > 0) {
+        if (strcmp(is_subscribed_str, "1") == 0) {
+            is_subscribed = 1;
+        } else if (strcmp(is_subscribed_str, "0") == 0) {
+            is_subscribed = 0;
+        } else {
+            return ERR_INVALID_SUB_STATUS;
+        }
+    }
+    // EIN Aufruf an die Datenschicht, die alles erledigt
+    return data_edit_player_profile(gamertag, new_full_name, new_ssn, new_email, sub_start, sub_end, is_subscribed);
+}
+
 // Funktion zum Einlesen von Benutzereingaben mit Prompt
 static void read_input(const char *prompt, char *buffer, size_t size) {
     printf("%s", prompt);
@@ -679,4 +716,54 @@ static void read_input(const char *prompt, char *buffer, size_t size) {
     } else {
         buffer[strcspn(buffer, "\n")] = '\0';
     }
+}
+
+// Zeigt alle User an (Workflow für Menü Option 2)
+void logic_handle_list_users_workflow(void) {
+    cJSON *users = NULL;
+    int result = data_get_all_users(&users);
+    if (result != ERR_SUCCESS || !users) {
+        presentation_show_error("Could not load users.");
+        if (users) cJSON_Delete(users);
+        return;
+    }
+    char *json_string = cJSON_Print(users);
+    presentation_display_user_list(json_string);
+    free(json_string);
+    cJSON_Delete(users);
+}
+
+// Prints the raw user JSON to the CLI (Workflow for User Menu Option 1)
+void logic_handle_list_users_json_workflow(void) {
+    cJSON *users = NULL;
+    int result = data_get_all_users(&users);
+    if (result != ERR_SUCCESS || !users) {
+        presentation_show_error("Could not load users.");
+        if (users) cJSON_Delete(users);
+        return;
+    }
+    char *json_string = cJSON_Print(users);
+    if (json_string) {
+        // Output raw JSON (presentation layer should only print, not parse)
+        printf("%s\n", json_string);
+        free(json_string);
+    } else {
+        presentation_show_error("Failed to serialize user data.");
+    }
+    cJSON_Delete(users);
+}
+
+// Zeigt einen einzelnen User an (Workflow für Menü Option 1)
+void logic_handle_view_user_workflow(void) {
+    cJSON *users = NULL;
+    int result = data_get_all_users(&users);
+    if (result != ERR_SUCCESS || !users) {
+        presentation_show_error("Could not load users.");
+        if (users) cJSON_Delete(users);
+        return;
+    }
+    char *json_string = cJSON_Print(users);
+    presentation_display_user_list(json_string);
+    free(json_string);
+    cJSON_Delete(users);
 }

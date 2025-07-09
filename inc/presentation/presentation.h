@@ -65,6 +65,9 @@ void presentation_error_date(void);
 void presentation_error_empty_fields(void);
 void presentation_error_storage(void);
 void presentation_error_unknown(void);
+void presentation_show_error(const char *message);
+const char* presentation_get_user_gamertag(void);
+void presentation_display_user_list(const char* json_data);
 
 // --- moved to messages.h ---
 // void presentation_error_gamertag_empty_edit(void);

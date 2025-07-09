@@ -35,5 +35,8 @@ int logic_delete_game(Game games[], int *game_count, int game_id);
 void logic_create_and_save_report(void);
 // Deklaration für den neuen Haupteinstiegspunkt der Logik
 void logic_start_application(void);
+void logic_handle_view_user_workflow(void);
+void logic_handle_list_users_workflow(void);
+void logic_handle_list_users_json_workflow(void);
 
 #endif // LOGIC_H
