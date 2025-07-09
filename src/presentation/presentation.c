@@ -22,7 +22,7 @@
 
 #define BUFFER_SIZE 256
 
-//nicht okay
+//nicht okay data wird aufgerufen
 void presentation_update_all_subscription_flags() {
     int changed = data_update_all_subscription_flags();
     printf("Updated %d user subscription flag(s).\n", changed);
@@ -41,12 +41,12 @@ void presentation_print_typewriter(const char *str, useconds_t delay, const char
     if (color) printf(ANSI_COLOR_RESET);
 }
 
-void presentation_show_startup_info(int removed_count, int changed_flags) {
+void presentation_show_startup_info(int removed_count, int changed_flags) { //statt remove count, funktion aus logic die diesen wert zurück gibt
     printf("Info: %d expired user(s) removed.\n", removed_count);
     printf("Info: %d user subscription(s) checked and updated.\n", changed_flags);
 }
 
-// Refactored 04.07.2025: Validierung (nur Leerzeichen) ausgelagert in logic layer,
+// gehört logic layer, alle valiedierungen logic
 static void read_input(const char *prompt, char *buffer, size_t size) {
     int valid = 0;
     while (!valid) {
@@ -71,11 +71,11 @@ static void read_input(const char *prompt, char *buffer, size_t size) {
     }
 }
 
-void presentation_show_message(const char *msg) {
+void presentation_show_message(const char *msg) { //eig überflüssig
     printf("%s\n", msg);
 }
 
-const char* presentation_get_report_title(void) {
+const char* presentation_get_report_title(void) { //schaut gut aus 
     static char title[BUFFER_SIZE];
     printf("Enter report title: ");
     fgets(title, BUFFER_SIZE, stdin);
@@ -99,7 +99,7 @@ const char* presentation_get_report_date(void) {
     return date;
 }
 
-// Show top 10 in terminal
+// finden valiederungen statt, logic, is schon in logic top user
 void presentation_show_top_users_terminal(void) {
     int top_n = 10;
     cJSON *top_users = logic_get_top_users(top_n);
@@ -126,17 +126,18 @@ void presentation_show_top_users_terminal(void) {
     cJSON_Delete(top_users);
 }
 
-// NOCH FALSCH
+// valiederiugngen logic
 void presentation_generate_top_users_file(void) {
     // Pure UI: call logic layer to handle file generation, only print result
     int result = logic_generate_top_users_file();
     if (result == ERR_SUCCESS) {
         printf("usersRanked.json generated.\n");
-    } else {// ===================== SCHICHTENKOMMENTARE BEGINN =====================
+    } else {
 
         printf("Error: Could not generate usersRanked.json\n");
     }
 }
+
 void presentation_start_admin_menu(){
     // Präsentationsschicht: Menüführung, Benutzereingaben, Aufruf anderer Präsentationsfunktionen
     printf("\n=== User Managment Menu ===\n");
@@ -149,8 +150,8 @@ void presentation_start_admin_menu(){
         printf("3. Edit a user\n");
         printf("4. Delete a user\n");
         printf("5. Add a report\n");
-        printf("6. Rank Top 10 Users by Playtime\n"); // <-- NEW
-        printf("7. Generate player report (usersRanked.json)\n"); // <-- NEU
+        printf("6. Rank Top 10 Users by Playtime\n");
+        printf("7. Generate player report (usersRanked.json)\n");
         printf("0. Return to Main Menu\n");
         printf("Choose an option: ");
         fgets(choice, MAX_USER_INPUT, stdin);
@@ -187,8 +188,7 @@ void presentation_start_admin_menu(){
     }
 }
 
-
-void presentation_read_alpha_input(const char *prompt, char *buffer, size_t size) {
+void presentation_read_alpha_input(const char *prompt, char *buffer, size_t size) { //valiederiungen, schau wo und ob aufgerufen , sonst redudant, oder logic
     while (1) {
         printf("%s", prompt);
         if (fgets(buffer, size, stdin)) {
@@ -377,7 +377,7 @@ void presentation_start_game_management_menu() {
 }
 // ===================== SCHICHTEN-KOMMENTARE ENDE =====================
 
-void presentation_display_users() {
+void presentation_display_users() { //valiedierung
     cJSON *users = NULL;
     int result = logic_get_all_users(&users);
     if (result != 0 || !users) {
@@ -391,7 +391,7 @@ void presentation_display_users() {
     cJSON_Delete(users);
 }
 
-void presentation_remove_user() {
+void presentation_remove_user() { //ruft logic auf
     char gamertag[MAX_USER_INPUT] = {};
     printf("Enter gamertag of user to remove: ");
     fgets(gamertag, MAX_USER_INPUT, stdin);
@@ -414,13 +414,12 @@ void presentation_remove_user() {
     }
 }
 
-// ===================== CONSOLIDATED PRESENTATION FUNCTIONS =====================
 
-// From display_games.c
+//greift auf data 
 void presentation_display_games(const Game games[], int game_count) {
     printf("=== Game List ===\n");
     for (int i = 0; i < game_count; i++) {
-        printf("Title: %s\n", games[i].title);
+        printf("Title: %s\n", games[i].title); //anstatt games i .title funktionsaufruf aus logic
         printf("Description: %s\n", games[i].description);
         printf("Version: %s\n", games[i].version);
         printf("Mode: %s\n", games[i].mode);
@@ -429,7 +428,7 @@ void presentation_display_games(const Game games[], int game_count) {
     }
 }
 
-// From menu.c
+// valiederungen logic
 void presentation_start_menu() {
     Game *games = NULL;
     int game_count = 0;
@@ -526,7 +525,7 @@ void presentation_start_menu() {
 // UI/menu functions required for linking (stubs or real):
 void presentation_display_user_menu(void) {
     printf("\n=== User Management Menu ===\n");
-    printf("1. Display formatted user data to CLI.\n");
+    printf("1. Display formatted user data to CLI.\n"); //display formatted user wieder reinholen, 1 ist raw json
     printf("2. Add a user\n");
     printf("3. Edit a user\n");
     printf("4. Delete a user\n");
@@ -578,7 +577,7 @@ int presentation_run() {
     // Dummy implementation
     return 0;
 }
-void presentation_add_user() {}
+void presentation_add_user() {} //unnötig
 void presentation_edit_user() {}
 void presentation_show_error(const char *message) {
     printf(ANSI_COLOR_RED "Error: %s\n" ANSI_COLOR_RESET, message);
