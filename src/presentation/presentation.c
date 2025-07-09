@@ -13,7 +13,6 @@
 #include "../simulation/simulation.h"
 #include "messages.h"
 #include "menu.h"
-#include "cJSON.h"
 
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define ANSI_COLOR_CYAN    "\x1b[36;1m"
@@ -145,14 +144,13 @@ void presentation_start_admin_menu(){
 
     while (1){
         printf("---------------\n");
-        printf("1. Print user.json data in the CLI.\n");
-        printf("2. Display formatted user data to CLI.\n");
-        printf("3. Add a user\n");
-        printf("4. Edit a user\n");
-        printf("5. Delete a user\n");
-        printf("6. Add a report\n");
-        printf("7. Rank Top 10 Users by Playtime\n"); // <-- NEW
-        printf("8. Generate player report (usersRanked.json)\n"); // <-- NEU
+        printf("1. Display formatted user data to CLI.\n");
+        printf("2. Add a user\n");
+        printf("3. Edit a user\n");
+        printf("4. Delete a user\n");
+        printf("5. Add a report\n");
+        printf("6. Rank Top 10 Users by Playtime\n"); // <-- NEW
+        printf("7. Generate player report (usersRanked.json)\n"); // <-- NEU
         printf("0. Return to Main Menu\n");
         printf("Choose an option: ");
         fgets(choice, MAX_USER_INPUT, stdin);
@@ -160,28 +158,24 @@ void presentation_start_admin_menu(){
         int option = atoi(choice);
         switch (option) {
             case 1:
-                // Option 1: Print raw user JSON via logic layer
-                logic_handle_list_users_json_workflow();
-                break;
-            case 2:
                 presentation_display_users();
                 break;
-            case 3:
+            case 2:
                 presentation_add_user();
                 break;
-            case 4:
+            case 3:
                 presentation_edit_user();
                 break;
-            case 5:
+            case 4:
                 presentation_remove_user();
                 break;
-            case 6:
+            case 5:
                 presentation_run();
                 break;
-            case 7:
+            case 6:
                 presentation_show_top_users_terminal();
                 break;
-            case 8:
+            case 7:
                 presentation_generate_top_users_file();
                 break;
             case 0:
@@ -386,39 +380,14 @@ void presentation_start_game_management_menu() {
 void presentation_display_users() {
     cJSON *users = NULL;
     int result = logic_get_all_users(&users);
-    if (result != 0 || !users || !cJSON_IsArray(users)) {
+    if (result != 0 || !users) {
         printf("Failed to load users.\n");
         if (users) cJSON_Delete(users);
         return;
     }
-    int count = cJSON_GetArraySize(users);
-    if (count == 0) {
-        printf("No users found.\n");
-        cJSON_Delete(users);
-        return;
-    }
-    printf("=== User List ===\n");
-    for (int i = 0; i < count; ++i) {
-        cJSON *user = cJSON_GetArrayItem(users, i);
-        cJSON *full_name = cJSON_GetObjectItem(user, "full_name");
-        cJSON *gamertag = cJSON_GetObjectItem(user, "gamertag");
-        cJSON *player_hours = cJSON_GetObjectItem(user, "player_hours");
-        cJSON *ssn = cJSON_GetObjectItem(user, "ssn");
-        cJSON *email = cJSON_GetObjectItem(user, "email");
-        cJSON *sub_start = cJSON_GetObjectItem(user, "subscription_start_date");
-        cJSON *sub_end = cJSON_GetObjectItem(user, "subscription_end_date");
-        cJSON *is_sub = cJSON_GetObjectItem(user, "is_subscribed");
-        printf("User %d:\n  Name: %s\n  Gamertag: %s\n  Hours: %d\n  SSN: %s\n  Email: %s\n  Sub Start: %s\n  Sub End: %s\n  Subscribed: %s\n\n",
-            i+1,
-            full_name && cJSON_IsString(full_name) ? full_name->valuestring : "",
-            gamertag && cJSON_IsString(gamertag) ? gamertag->valuestring : "",
-            player_hours && cJSON_IsNumber(player_hours) ? player_hours->valueint : 0,
-            ssn && cJSON_IsString(ssn) ? ssn->valuestring : "",
-            email && cJSON_IsString(email) ? email->valuestring : "",
-            sub_start && cJSON_IsString(sub_start) ? sub_start->valuestring : "",
-            sub_end && cJSON_IsString(sub_end) ? sub_end->valuestring : "",
-            is_sub && cJSON_IsBool(is_sub) ? (is_sub->valueint ? "Yes" : "No") : "No");
-    }
+    char *json_string = cJSON_Print(users);
+    printf("%s\n", json_string ? json_string : "(No data to display)");
+    if (json_string) free(json_string);
     cJSON_Delete(users);
 }
 
@@ -557,14 +526,13 @@ void presentation_start_menu() {
 // UI/menu functions required for linking (stubs or real):
 void presentation_display_user_menu(void) {
     printf("\n=== User Management Menu ===\n");
-    printf("1. Print user.json data in the CLI.\n");
-    printf("2. Display formatted user data to CLI.\n");
-    printf("3. Add a user\n");
-    printf("4. Edit a user\n");
-    printf("5. Delete a user\n");
-    printf("6. Add a report\n");
-    printf("7. Rank Top 10 Users by Playtime\n");
-    printf("8. Generate player report (usersRanked.json)\n");
+    printf("1. Display formatted user data to CLI.\n");
+    printf("2. Add a user\n");
+    printf("3. Edit a user\n");
+    printf("4. Delete a user\n");
+    printf("5. Add a report\n");
+    printf("6. Rank Top 10 Users by Playtime\n");
+    printf("7. Generate player report (usersRanked.json)\n");
     printf("0. Return to Main Menu\n");
 }
 int presentation_get_user_menu_choice(void) {
@@ -625,29 +593,6 @@ const char* presentation_get_user_gamertag(void) {
 }
 
 void presentation_display_user_list(const char* json_data) {
-    if (!json_data) {
-        printf("(No data to display)\n");
-        return;
-    }
-    cJSON *users = cJSON_Parse(json_data);
-    if (!users || !cJSON_IsArray(users)) {
-        printf("(Invalid user data)\n");
-        if (users) cJSON_Delete(users);
-        return;
-    }
-    printf("\n%-4s %-20s %-15s %-12s %-25s %-12s %-12s %-5s\n", "Nr.", "Full Name", "Gamertag", "SSN", "Email", "Sub Start", "Sub End", "Sub");
-    printf("%s\n", "---------------------------------------------------------------------------------------------------------------");
-    int idx = 1;
-    cJSON *user = NULL;
-    cJSON_ArrayForEach(user, users) {
-        const char *full_name = cJSON_GetObjectItem(user, "full_name") ? cJSON_GetObjectItem(user, "full_name")->valuestring : "";
-        const char *gamertag = cJSON_GetObjectItem(user, "gamertag") ? cJSON_GetObjectItem(user, "gamertag")->valuestring : "";
-        const char *ssn = cJSON_GetObjectItem(user, "ssn") ? cJSON_GetObjectItem(user, "ssn")->valuestring : "";
-        const char *email = cJSON_GetObjectItem(user, "email") ? cJSON_GetObjectItem(user, "email")->valuestring : "";
-        const char *sub_start = cJSON_GetObjectItem(user, "sub_start") ? cJSON_GetObjectItem(user, "sub_start")->valuestring : "";
-        const char *sub_end = cJSON_GetObjectItem(user, "sub_end") ? cJSON_GetObjectItem(user, "sub_end")->valuestring : "";
-        int is_sub = cJSON_GetObjectItem(user, "is_subscribed") ? cJSON_GetObjectItem(user, "is_subscribed")->valueint : 0;
-        printf("%-4d %-20s %-15s %-12s %-25s %-12s %-12s %-5s\n", idx++, full_name, gamertag, ssn, email, sub_start, sub_end, is_sub ? "yes" : "no");
-    }
-    cJSON_Delete(users);
+    printf("=== User Data ===\n");
+    printf("%s\n", json_data ? json_data : "(No data to display)");
 }

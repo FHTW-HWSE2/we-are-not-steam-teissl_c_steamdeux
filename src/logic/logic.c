@@ -451,16 +451,13 @@ static void logic_user_menu_workflow(void) {
             break;
         }
         switch (choice) {
-            case 1: // Option 1: Einzelnen User anzeigen
-                logic_handle_view_user_workflow();
-                break;
-            case 2: // Option 2: Alle User auflisten
+            case 1: // Option 1: Alle User als formatierte Liste anzeigen
                 logic_handle_list_users_workflow();
                 break;
-            case 3: // Add a user
+            case 2: // Add a user (war vorher 3)
                 logic_handle_add_user_workflow();
                 break;
-            case 4: // Edit a user
+            case 3: // Edit a user (war vorher 4)
                 logic_handle_edit_user_workflow();
                 break;
             default:
@@ -718,7 +715,7 @@ static void read_input(const char *prompt, char *buffer, size_t size) {
     }
 }
 
-// Zeigt alle User an (Workflow für Menü Option 2)
+// Zeigt alle User als formatierte Liste an (Workflow für Menü Option 1)
 void logic_handle_list_users_workflow(void) {
     cJSON *users = NULL;
     int result = data_get_all_users(&users);
@@ -733,32 +730,12 @@ void logic_handle_list_users_workflow(void) {
     cJSON_Delete(users);
 }
 
-// Prints the raw user JSON to the CLI (Workflow for User Menu Option 1)
-void logic_handle_list_users_json_workflow(void) {
-    cJSON *users = NULL;
-    int result = data_get_all_users(&users);
-    if (result != ERR_SUCCESS || !users) {
-        presentation_show_error("Could not load users.");
-        if (users) cJSON_Delete(users);
-        return;
-    }
-    char *json_string = cJSON_Print(users);
-    if (json_string) {
-        // Output raw JSON (presentation layer should only print, not parse)
-        printf("%s\n", json_string);
-        free(json_string);
-    } else {
-        presentation_show_error("Failed to serialize user data.");
-    }
-    cJSON_Delete(users);
-}
-
 // Zeigt einen einzelnen User an (Workflow für Menü Option 1)
 void logic_handle_view_user_workflow(void) {
     cJSON *users = NULL;
     int result = data_get_all_users(&users);
     if (result != ERR_SUCCESS || !users) {
-        presentation_show_error("Could not load users.");
+        presentation_show_error("Could not load users.");//NO
         if (users) cJSON_Delete(users);
         return;
     }
