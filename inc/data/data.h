@@ -1,9 +1,9 @@
 #ifndef DATA_H
 #define DATA_H
 
-#define USERS_JSON_PATH "../users.json"
-#define REPORTS_JSON_PATH "../reports.json"
-#define GAMES_JSON_PATH "../games.json"
+#define USERS_JSON_PATH "users.json" // 10.07. Angepasst und in CMakelists den Pfad geändert
+#define REPORTS_JSON_PATH "reports.json"  // 10.07. Angepasst und in CMakelists den Pfad geändert
+#define GAMES_JSON_PATH "games.json" // 10.07. Angepasst und in CMakelists den Pfad geändert
 
 #include "cJSON.h"
 #include "../src/data/game.h"

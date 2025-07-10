@@ -1,3 +1,4 @@
+#define _GNU_SOURCE // Für warning implicit declaration of function ‘strdup’
 #define _XOPEN_SOURCE // Define für die strptime Funktion, um Datumsformate zu prüfen
 #include <stdlib.h>
 #include <stdio.h>
@@ -21,7 +22,7 @@
 // ===================== SCHICHTEN-KOMMENTARE ENDE =====================
 
 cJSON *logic_create_report(const char *title, const char *description, const char *date) {
-    // Logikschicht: Erstellt ein Report-Objekt, keine I/O, keine Validierung
+    // Defensive Null-Prüfung
     if (!title || !description || !date) {
         return NULL;
     }
@@ -31,9 +32,12 @@ cJSON *logic_create_report(const char *title, const char *description, const cha
         return NULL;
     }
 
-    cJSON_AddStringToObject(report, "title", title);
-    cJSON_AddStringToObject(report, "description", description);
-    cJSON_AddStringToObject(report, "date", date);
+    if (!cJSON_AddStringToObject(report, "title", title) ||
+        !cJSON_AddStringToObject(report, "description", description) ||
+        !cJSON_AddStringToObject(report, "date", date)) {
+        cJSON_Delete(report);
+        return NULL;
+    }
 
     return report;
 }
@@ -228,12 +232,6 @@ int logic_add_new_game(Game **games, int *game_count, const char *title, const c
     return ERR_SUCCESS;
 }
 
-// Prototypen für interne Funktionen
-static void logic_user_menu_workflow(void);
-static void logic_handle_add_user_workflow(void);
-static void logic_handle_edit_user_workflow(void);
-static void read_input(const char *prompt, char *buffer, size_t size);
-
 // Refactored 04.07.2025: Hilfsfunktion für Präsentationsschicht
 int logic_is_only_spaces(const char *str) {
     for (size_t i = 0; i < strlen(str); ++i) {
@@ -259,15 +257,7 @@ int logic_is_valid_ssn(const char *str) {
     return is_valid_ssn_format(str);
 }
 
-// Hinweis (04.07.2025): Die Funktion logic_update_all_subscription_flags() wurde entfernt, da der Logic-Layer für diese Operation nicht benötigt wird.
 
-// Refactored 05.07.2025: Funktion wieder hinzugefügt für saubere Schichtentrennung
-int logic_update_all_subscription_flags() {
-    return data_update_all_subscription_flags();
-}
-
-// Prototyp für die Sortierfunktion (wird in logic_get_top_users verwendet)
-static int compare_users_by_hours(const void *a, const void *b);
 
 // Sortierfunktion für logic_get_top_users
 static int compare_users_by_hours(const void *a, const void *b) {
@@ -342,13 +332,6 @@ int logic_generate_top_users_file(void) {
     }
 }
 
-
-
-
-
-
-
-
 void logic_create_and_save_report(void) {
     const char* title = presentation_get_report_title();
     const char* description = presentation_get_report_description();
@@ -369,7 +352,6 @@ void logic_create_and_save_report(void) {
         return;
     }
     int save_result = data_save_report(report);
-    cJSON_Delete(report);
 
     if (save_result != ERR_SUCCESS) {
         presentation_error_storage();
@@ -409,32 +391,19 @@ void logic_start_application(void) {
             presentation_info_exiting();
             break;
         }
-
         switch (choice) {
             case 1:
-                logic_user_menu_workflow();
+                logic_user_menu_workflow(); // User Management Menü
                 break;
             case 2:
-                presentation_info_display_formatted_user_data();
+                presentation_start_game_management_menu(); // Game Management Menü starten
                 break;
-            case 3: // Add a user
-                logic_handle_add_user_workflow();
+            case 3:
+                start_simulation(); // Simulation starten
                 break;
-            case 4: // Edit a user
-                logic_handle_edit_user_workflow();
-                break;
-            case 5:
-                presentation_info_delete_user_selected();
-                break;
-            case 6:
-                presentation_info_add_report_selected();
-                break;
-            case 7:
-                presentation_info_rank_top_users_selected();
-                break;
-            case 8:
-                presentation_info_generate_player_report_selected();
-                break;
+            case 0:
+                presentation_info_exiting();
+                return;
             default:
                 presentation_error_invalid_option();
         }
@@ -452,13 +421,28 @@ static void logic_user_menu_workflow(void) {
         }
         switch (choice) {
             case 1: // Option 1: Alle User als formatierte Liste anzeigen
-                logic_handle_list_users_workflow();
+                logic_display_users_formatted();
                 break;
             case 2: // Add a user (war vorher 3)
                 logic_handle_add_user_workflow();
                 break;
             case 3: // Edit a user (war vorher 4)
                 logic_handle_edit_user_workflow();
+                break;
+            case 4: // Remove a user (war vorher 5)
+                presentation_remove_user();
+             break;
+            case 5:
+                presentation_info_add_report_selected();
+                logic_create_and_save_report();
+                break;
+            case 6:
+                presentation_info_rank_top_users_selected();
+                presentation_show_top_users_terminal();
+                break;
+            case 7:
+                presentation_info_generate_player_report_selected();
+                presentation_generate_top_users_file();
                 break;
             default:
                 presentation_error_invalid_option();
@@ -559,6 +543,7 @@ static void logic_handle_add_user_workflow(void) {
     }
 }
 
+
 // Diese Funktion steuert das Bearbeiten eines Users im Pull-Modell
 static void logic_handle_edit_user_workflow(void) {
     char gamertag[MAX_USER_INPUT], new_full_name[MAX_USER_INPUT], new_ssn[MAX_USER_INPUT], new_email[MAX_USER_INPUT];
@@ -574,6 +559,7 @@ static void logic_handle_edit_user_workflow(void) {
         }
     }
 
+    // Umstrukturierung 10.07.2025: Warum im unteren Kommentar optional?
     // Full name (optional, aber falls eingegeben, validieren)
     presentation_info_enter_full_name_edit();
     while (1) {
@@ -585,6 +571,7 @@ static void logic_handle_edit_user_workflow(void) {
         }
     }
 
+    // Umstrukturierung 10.07.2025: Warum im unteren Kommentar optional?
     // SSN (optional, aber falls eingegeben, validieren)
     presentation_info_enter_ssn_edit();
     while (1) {
@@ -596,6 +583,7 @@ static void logic_handle_edit_user_workflow(void) {
         }
     }
 
+    // Umstrukturierung 10.07.2025: Warum im unteren Kommentar optional?
     // Email (optional, aber falls eingegeben, validieren)
     presentation_info_enter_email_edit();
     while (1) {
@@ -607,6 +595,7 @@ static void logic_handle_edit_user_workflow(void) {
         }
     }
 
+    // Umstrukturierung 10.07.2025: Warum im unteren Kommentar optional?
     // Startdatum (optional, aber falls eingegeben, validieren)
     presentation_info_enter_start_date_edit();
     while (1) {
@@ -618,6 +607,7 @@ static void logic_handle_edit_user_workflow(void) {
         }
     }
 
+    // Umstrukturierung 10.07.2025: Enddatum muss ja berechnet werden. Wenn user nicht subscribed ist, darf er nicht angelegt werden.
     // Enddatum (optional, aber falls eingegeben, validieren)
     presentation_info_enter_end_date_edit();
     while (1) {
@@ -716,31 +706,245 @@ static void read_input(const char *prompt, char *buffer, size_t size) {
 }
 
 // Zeigt alle User als formatierte Liste an (Workflow für Menü Option 1)
-void logic_handle_list_users_workflow(void) {
-    cJSON *users = NULL;
-    int result = data_get_all_users(&users);
-    if (result != ERR_SUCCESS || !users) {
+// 10.07. geändert
+void logic_display_users_formatted(void) {
+    char **lines = NULL;
+    int count = 0;
+
+    if (logic_get_user_lines_for_display(&lines, &count) != ERR_SUCCESS) {
         presentation_show_error("Could not load users.");
-        if (users) cJSON_Delete(users);
         return;
     }
-    char *json_string = cJSON_Print(users);
-    presentation_display_user_list(json_string);
-    free(json_string);
-    cJSON_Delete(users);
+
+    // Übergabe an Präsentation
+    presentation_display_users_formatted(lines, count);
+
+    // Speicher aufräumen
+    for (int i = 0; i < count; ++i) {
+        free(lines[i]);
+    }
+    free(lines);
 }
 
-// Zeigt einen einzelnen User an (Workflow für Menü Option 1)
-void logic_handle_view_user_workflow(void) {
-    cJSON *users = NULL;
-    int result = data_get_all_users(&users);
-    if (result != ERR_SUCCESS || !users) {
-        presentation_show_error("Could not load users.");//NO
+// Added 10.07.2025: Diese Funktion gibt eine formatierte Liste aller User zurück
+// presentation macht nur printf
+// logic erstellt aufbereitete/formatierte Strings.
+// data bleibt Dateischnittstelle (JSON laden/speichern)
+int logic_get_user_lines_for_display(char*** lines_out, int* count_out) {
+    cJSON* users = NULL;
+    if (data_get_all_users(&users) != ERR_SUCCESS || !users) {
         if (users) cJSON_Delete(users);
+        return ERR_STORAGE_FAILURE;
+    }
+
+    int count = cJSON_GetArraySize(users);
+    char** result = malloc(sizeof(char*) * count * 10); // max 10 Zeilen pro User (worst-case)
+
+    int line_index = 0;
+    for (int i = 0; i < count; i++) {
+        cJSON* user = cJSON_GetArrayItem(users, i);
+        if (!user) continue;
+
+        char line[256];
+
+        snprintf(line, sizeof(line), "User %d:", i + 1);
+        result[line_index++] = strdup(line);
+
+        snprintf(line, sizeof(line), "Name: %s", cJSON_GetObjectItem(user, "full_name")->valuestring);
+        result[line_index++] = strdup(line);
+
+        snprintf(line, sizeof(line), "Gamertag: %s", cJSON_GetObjectItem(user, "gamertag")->valuestring);
+        result[line_index++] = strdup(line);
+
+        snprintf(line, sizeof(line), "Email: %s", cJSON_GetObjectItem(user, "email")->valuestring);
+        result[line_index++] = strdup(line);
+
+        snprintf(line, sizeof(line), "SSN: %s", cJSON_GetObjectItem(user, "ssn")->valuestring);
+        result[line_index++] = strdup(line);
+
+        snprintf(line, sizeof(line), "Subscribed: %s", cJSON_GetObjectItem(user, "is_subscribed")->valueint ? "true" : "false");
+        result[line_index++] = strdup(line);
+
+        snprintf(line, sizeof(line), "Subscription: %s – %s",
+            cJSON_GetObjectItem(user, "subscription_start_date")->valuestring,
+            cJSON_GetObjectItem(user, "subscription_end_date")->valuestring);
+        result[line_index++] = strdup(line);
+
+        snprintf(line, sizeof(line), "Playtime: %d hours",
+            cJSON_GetObjectItem(user, "player_hours")->valueint);
+        result[line_index++] = strdup(line);
+
+        result[line_index++] = strdup("--------------------------------------");
+    }
+
+    cJSON_Delete(users);
+    *lines_out = result;
+    *count_out = line_index;
+    return ERR_SUCCESS;
+}
+
+// Added 10.07.2025
+// ersetzt void presentation_start_menu() aus presentation.c
+void logic_handle_game_management_menu(void) {
+    Game *games = NULL;
+    int game_count = 0;
+
+    if (logic_initialize_game_data_loading(GAMES_JSON_PATH, &games, &game_count) != ERR_SUCCESS) {
+        presentation_display_error("Failed to load games.");
         return;
     }
-    char *json_string = cJSON_Print(users);
-    presentation_display_user_list(json_string);
-    free(json_string);
-    cJSON_Delete(users);
+
+    int choice;
+    do {
+        presentation_display_game_management_menu(); // zeigt nur das Menü
+        choice = presentation_get_game_menu_choice(); // liest Eingabe
+        switch (choice) {
+            case 1:
+                logic_display_games_formatted(games, game_count); // Präsentationsfunktion // 10.07. ersetzt die alte Funktion presentation_display_games
+                break;
+            case 2:
+                logic_handle_add_game(&games, &game_count);
+                break;
+            case 3:
+                logic_handle_edit_game(games, game_count);
+                break;
+            case 4:
+                logic_handle_delete_game(&games, &game_count);
+                break;
+            case 0:
+                break;
+            default:
+                presentation_display_error("Invalid option.");
+        }
+    } while (choice != 0);
+
+    free(games);
+}
+
+// Added 10.07.2025
+// ersetzt void presentation_start_menu() aus presentation.c
+void logic_handle_add_game(Game **games, int *game_count) {
+    char title[100], description[256], version[20], mode[50];
+
+    presentation_get_game_title(title, sizeof(title));
+    presentation_get_game_description(description, sizeof(description));
+    presentation_get_game_version(version, sizeof(version));
+    presentation_get_game_mode(mode, sizeof(mode));
+
+    if (!logic_is_only_spaces(title) && !logic_is_only_spaces(mode)) {
+        int result = logic_add_new_game(games, game_count, title, description, version, mode);
+        if (result == ERR_SUCCESS) {
+            if (data_save_games(GAMES_JSON_PATH, *games, *game_count) == ERR_SUCCESS) {
+                presentation_show_message("New game added.");
+            } else {
+                presentation_display_error("Failed to save game.");
+            }
+        } else {
+            presentation_display_error("Failed to add game.");
+        }
+    } else {
+        presentation_display_error("Title and Mode must not be empty.");
+    }
+}
+
+void logic_handle_edit_game(Game *games, int game_count) {
+    char input_id[16], new_title[100];
+    int game_id;
+
+    presentation_get_game_id_to_edit(input_id, sizeof(input_id));
+    game_id = atoi(input_id);
+
+    presentation_get_new_game_title(new_title, sizeof(new_title));
+
+    if (logic_is_only_spaces(new_title)) {
+        presentation_display_error("New title must not be empty.");
+        return;
+    }
+
+    if (logic_edit_game(games, game_count, game_id, new_title) == ERR_SUCCESS) {
+        if (data_save_games(GAMES_JSON_PATH, games, game_count) == ERR_SUCCESS) {
+            presentation_show_message("Game edited.");
+        } else {
+            presentation_display_error("Failed to save changes.");
+        }
+    } else {
+        presentation_display_error("Game not found.");
+    }
+}
+
+void logic_handle_delete_game(Game **games, int *game_count) {
+    char input_id[16];
+    int game_id;
+
+    presentation_get_game_id_to_delete(input_id, sizeof(input_id));
+    game_id = atoi(input_id);
+
+    if (logic_delete_game(*games, game_count, game_id) == ERR_SUCCESS) {
+        if (data_save_games(GAMES_JSON_PATH, *games, *game_count) == ERR_SUCCESS) {
+            presentation_show_message("Game deleted.");
+        } else {
+            presentation_display_error("Failed to save changes.");
+        }
+    } else {
+        presentation_display_error("Game not found.");
+    }
+}
+
+// ersetzt presentation_display_games aus presentation.c
+void logic_display_games_formatted(const Game *games, int game_count) {
+    char **lines = NULL;
+    int count = 0;
+
+    if (logic_get_game_lines_for_display(games, game_count, &lines, &count) != ERR_SUCCESS) {
+        presentation_show_error("Could not format game list.");
+        return;
+    }
+
+    // Ausgabe delegieren
+    presentation_display_users_formatted(lines, count);  // Wiederverwendet: zeigt einfach Zeilen an
+
+    // Aufräumen
+    for (int i = 0; i < count; ++i) {
+        free(lines[i]);
+    }
+    free(lines);
+}
+
+// ersetzt presentation_display_games aus presentation.c
+int logic_get_game_lines_for_display(const Game *games, int game_count, char ***lines_out, int *line_count_out) {
+    if (!games || game_count <= 0 || !lines_out || !line_count_out) {
+        return ERR_STORAGE_FAILURE;
+    }
+
+    char **lines = malloc(sizeof(char*) * game_count * 10); // max 10 Zeilen pro Spiel
+    if (!lines) return ERR_STORAGE_FAILURE;
+
+    int idx = 0;
+    char buffer[256];
+
+    for (int i = 0; i < game_count; i++) {
+        snprintf(buffer, sizeof(buffer), "Game %d:", i + 1);
+        lines[idx++] = strdup(buffer);
+
+        snprintf(buffer, sizeof(buffer), "Title: %s", games[i].title);
+        lines[idx++] = strdup(buffer);
+
+        snprintf(buffer, sizeof(buffer), "Description: %.240s", games[i].description);
+        lines[idx++] = strdup(buffer);
+
+        snprintf(buffer, sizeof(buffer), "Version: %s", games[i].version);
+        lines[idx++] = strdup(buffer);
+
+        snprintf(buffer, sizeof(buffer), "Mode: %s", games[i].mode);
+        lines[idx++] = strdup(buffer);
+
+        snprintf(buffer, sizeof(buffer), "Current Streams: %d", games[i].current_streams);
+        lines[idx++] = strdup(buffer);
+
+        lines[idx++] = strdup("--------------------------");
+    }
+
+    *lines_out = lines;
+    *line_count_out = idx;
+    return ERR_SUCCESS;
 }

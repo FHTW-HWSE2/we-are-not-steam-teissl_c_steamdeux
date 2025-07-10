@@ -3,6 +3,7 @@
 
 #include "cJSON.h"
 #include "../src/data/game.h"
+#include "../src/simulation/simulation.h"
 
 cJSON *logic_create_report(const char *title, const char *description, const char *date);
 int validate_player_profile(const char* full_name, const char* gamertag, const char* ssn, const char* email, const char* sub_start, const char* sub_end, const char* is_subscribed_str);
@@ -35,8 +36,27 @@ int logic_delete_game(Game games[], int *game_count, int game_id);
 void logic_create_and_save_report(void);
 // Deklaration für den neuen Haupteinstiegspunkt der Logik
 void logic_start_application(void);
-void logic_handle_view_user_workflow(void);
-void logic_handle_list_users_workflow(void);
-void logic_handle_list_users_json_workflow(void);
+void logic_display_users_formatted(void); // changed function 10.07.2025, renamed from logic_handle_list_users_workflow
+// removed function 10.07.2025:void logic_handle_view_user_workflow(void); replaced with logic_display_users_formatted
+// removed function 10.07.2025: void logic_handle_list_users_json_workflow(void); replaced with logic_display_users_formatted
+
+// Below functions were added 10.07.2025, 
+int logic_get_user_lines_for_display(char*** lines_out, int* count_out); // print formatting user data for display
+void logic_handle_game_management_menu(void);
+void logic_handle_game_management_menu(void);
+void logic_handle_add_game(Game **games, int *game_count);
+void logic_handle_edit_game(Game *games, int game_count);
+void logic_handle_delete_game(Game **games, int *game_count);
+void logic_display_games_formatted(const Game *games, int game_count);
+int logic_get_game_lines_for_display(const Game *games, int game_count, char ***lines_out, int *line_count_out);
+
+// Prototyp für die Sortierfunktion (wird in logic_get_top_users verwendet)
+static int compare_users_by_hours(const void *a, const void *b);
+
+// Prototypen für interne Funktionen
+static void logic_user_menu_workflow(void);
+static void logic_handle_add_user_workflow(void);
+static void logic_handle_edit_user_workflow(void);
+static void read_input(const char *prompt, char *buffer, size_t size);
 
 #endif // LOGIC_H

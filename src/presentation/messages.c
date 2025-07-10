@@ -56,19 +56,19 @@ void presentation_info_returning_to_main_menu(void) {
     printf("Returning to main menu...\n");
 }
 void presentation_info_display_formatted_user_data(void) {
-    printf("Display formatted user data selected (Workflow to be implemented).\n");
+    printf("Display formatted user data selected.\n"); // is now implemented
 }
 void presentation_info_delete_user_selected(void) {
-    printf("Delete user selected (Workflow to be implemented).\n");
+    printf("Delete user selected.\n");
 }
 void presentation_info_add_report_selected(void) {
-    printf("Add report selected (Workflow to be implemented).\n");
+    printf("Add report selected.\n");
 }
 void presentation_info_rank_top_users_selected(void) {
-    printf("Rank Top 10 Users selected (Workflow to be implemented).\n");
+    printf("Rank Top 10 Users selected.\n");
 }
 void presentation_info_generate_player_report_selected(void) {
-    printf("Generate player report selected (Workflow to be implemented).\n");
+    printf("Generate player report selected.\n");
 }
 void presentation_error_critical_startup(void) {
     printf(ANSI_COLOR_RED "Critical error during startup tasks.\n" ANSI_COLOR_RESET);
