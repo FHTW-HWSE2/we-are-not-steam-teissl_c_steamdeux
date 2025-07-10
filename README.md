@@ -1,24 +1,34 @@
+### Overview
 This branch gives you following options:
 Add, Read, Edit, Remove Games
 Add, Read, Edit, Remove Users
 Create a report of users in a file.
 List users in formated way into the CLI.
+(Noch erweitern)
 
-### Make Sure
-Firstly make sure that you installed the jansson library.
-Put in following commands:
- - sudo apt update
- - sudo apt install libjansson-dev
- - sudo apt install pkg-config
-
-### How to compile and run:
+### How to compile and run the main program:
 1) -> "cd build"
 2) -> "cmake .."
 3) -> "make"
 5) -> "./game_manager" while you are in the build folder.
 
-###  How to compile and run tests:
-1) -> "cd build"
-2) -> "cmake .."
-3) -> "make"
-5) -> "./game_manager" while you are in the build folder.
+### How to compile and run tests
+From Project Root execute these commands:
+1) -> "cmake -S . -B build"
+2) -> "cmake --build build"
+3) -> "./build/test/run_all_tests"
+
+
+### How to generate a coverage report
+From Project Root execute these commands:
+1) -> "cmake -S . -B build"
+2) -> "cmake --build build"
+3) -> "./build/test/run_all_tests"
+Immediately after that, change the directory to build:
+4)	-> "cd build"
+From Build execute:
+5)	-> "gcovr -r .. --html-details -o coverage.html"
+
+Additional Note: The command "gcovr -r .. --html-details -o coverage.html" generates a detailed HTML code coverage report. 
+It uses .. as the root directory to locate source files and coverage data, and produces an output file named coverage.html.
+The --html-details option ensures that the report includes line-by-line annotations showing which lines of code were executed during testing and which were not.
