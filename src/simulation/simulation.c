@@ -1,10 +1,4 @@
 #define _XOPEN_SOURCE
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "cJSON.h"
-#include "../inc/data/data.h"
 #include "simulation.h"
 
 void start_simulation() {

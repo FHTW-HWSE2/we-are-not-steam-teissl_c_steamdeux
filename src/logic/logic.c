@@ -5,10 +5,6 @@
 #include <string.h>
 #include <time.h> // Für validate_player_profile() Funktion um das Startdatum zu prüfen
 #include "../inc/logic/logic.h"
-#include "../inc/data/data.h"
-#include "../inc/error.h" // Für Fehlercodes
-#include "cJSON.h"
-#include "../inc/presentation/presentation.h"
 
 #define BUFFER_SIZE 256
 

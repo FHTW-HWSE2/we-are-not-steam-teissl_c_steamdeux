@@ -1,18 +1,6 @@
 #define _XOPEN_SOURCE 700
 #define _DEFAULT_SOURCE
-#include <unistd.h>
 #include "presentation.h"
-#include "../inc/logic/logic.h"
-#include "../inc/presentation/run.h"
-#include "../inc/data/data.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-#include "../inc/error.h" // For error codes
-#include "../simulation/simulation.h"
-#include "messages.h"
-#include "menu.h"
 
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define ANSI_COLOR_CYAN    "\x1b[36;1m"

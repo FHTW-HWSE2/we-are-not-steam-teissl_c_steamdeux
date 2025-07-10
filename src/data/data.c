@@ -1,15 +1,6 @@
-#define _XOPEN_SOURCE // Aktiviert POSIX-kompatible Funktionen, Für remove_expired_users Funktion benötigt. Für Funktionen wie strptime()
-#define _GNU_SOURCE // Aktiviert GNU-spezifische Funktionen, Für remove_expired_users Funktion. Für Funktionen wie strdup()
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#define _XOPEN_SOURCE 700
+#define _GNU_SOURCE
 #include "../inc/data/data.h"
-#include "cJSON.h"
-#include "save_games.h"
-#include "load_games.h"
-#include "data.h" // Hardcoded path from project folder, defined in data.h
-#include <time.h> // Für remove_expired_users Funktion
-#include "../inc/error.h" // Für Fehlercodes
 
 #define REPORTS_FILE "../reports.json"
 

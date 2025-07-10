@@ -1,7 +1,12 @@
 #ifndef MESSAGES_H
 #define MESSAGES_H
 
-// Dedicated message/prompt functions for presentation layer
+#include <stdio.h>
+
+#define ANSI_COLOR_RESET   "\x1b[0m"
+#define ANSI_COLOR_GREEN   "\x1b[32;1m"
+#define ANSI_COLOR_RED     "\x1b[31;1m"
+
 void presentation_error_gamertag_empty_edit(void);
 void presentation_error_full_name_format_edit(void);
 void presentation_error_ssn_format_edit(void);

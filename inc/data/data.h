@@ -1,12 +1,19 @@
 #ifndef DATA_H
 #define DATA_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include "../../cJSON/cJSON.h"
+#include "../error.h"
+#include "../../src/data/game.h"
+#include "../../src/data/save_games.h"
+#include "../../src/data/load_games.h"
+
 #define USERS_JSON_PATH "users.json" // 10.07. Angepasst und in CMakelists den Pfad geändert
 #define REPORTS_JSON_PATH "reports.json"  // 10.07. Angepasst und in CMakelists den Pfad geändert
 #define GAMES_JSON_PATH "games.json" // 10.07. Angepasst und in CMakelists den Pfad geändert
-
-#include "cJSON.h"
-#include "../src/data/game.h"
 
 int data_save_report(cJSON *report);
 cJSON *data_load_reports(void);

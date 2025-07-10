@@ -1,5 +1,5 @@
 #include "../../inc/presentation/messages.h"
-#include <stdio.h>
+
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define ANSI_COLOR_GREEN   "\x1b[32;1m"
 #define ANSI_COLOR_RED     "\x1b[31;1m"

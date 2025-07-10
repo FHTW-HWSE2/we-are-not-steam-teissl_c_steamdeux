@@ -1,9 +1,16 @@
 #ifndef LOGIC_H
 #define LOGIC_H
 
-#include "cJSON.h"
-#include "../src/data/game.h"
-#include "../src/simulation/simulation.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include "../../cJSON/cJSON.h"
+#include "../data/data.h"
+#include "../error.h"
+#include "../../src/data/game.h"
+#include "../../src/simulation/simulation.h"
+#include "../presentation/presentation.h"
 
 cJSON *logic_create_report(const char *title, const char *description, const char *date);
 int validate_player_profile(const char* full_name, const char* gamertag, const char* ssn, const char* email, const char* sub_start, const char* sub_end, const char* is_subscribed_str);
@@ -37,9 +44,6 @@ void logic_create_and_save_report(void);
 // Deklaration für den neuen Haupteinstiegspunkt der Logik
 void logic_start_application(void);
 void logic_display_users_formatted(void); // changed function 10.07.2025, renamed from logic_handle_list_users_workflow
-// removed function 10.07.2025:void logic_handle_view_user_workflow(void); replaced with logic_display_users_formatted
-// removed function 10.07.2025: void logic_handle_list_users_json_workflow(void); replaced with logic_display_users_formatted
-
 // Below functions were added 10.07.2025, 
 int logic_get_user_lines_for_display(char*** lines_out, int* count_out); // print formatting user data for display
 void logic_handle_game_management_menu(void);
