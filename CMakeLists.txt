@@ -40,27 +40,12 @@ set(SOURCES
 # Executable erstellen
 add_executable(game_manager ${SOURCES})
 
-# 10.07 hinzugefügt: JSON-Dateien
-# Nach dem Build: JSON-Dateien ins Build-Verzeichnis kopieren
-add_custom_command(TARGET game_manager POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_SOURCE_DIR}/users.json
-        ${CMAKE_CURRENT_BINARY_DIR}/users.json
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_SOURCE_DIR}/games.json
-        ${CMAKE_CURRENT_BINARY_DIR}/games.json
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_SOURCE_DIR}/reports.json
-        ${CMAKE_CURRENT_BINARY_DIR}/reports.json
-)
-
-
 # Main app als Test (z. B. für manuelle Launch-Tests)
 enable_testing()
 add_test(NAME GameManagerTestRun COMMAND game_manager)
 
-# Test-Unterordner hinzufügen
-if(ENABLE_TESTING)
+# # Test-Unterordner hinzufügen
+ if(ENABLE_TESTING)
     add_subdirectory(test)  # Test-Ordner wurde entfernt
 endif()
 
