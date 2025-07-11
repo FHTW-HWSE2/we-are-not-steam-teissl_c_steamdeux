@@ -1,3 +1,0 @@
-/home/zinedin/we-are-not-steam-teissl_c_steamdeux-1/test/CMakeFiles/test_read_input.dir
-/home/zinedin/we-are-not-steam-teissl_c_steamdeux-1/test/CMakeFiles/edit_cache.dir
-/home/zinedin/we-are-not-steam-teissl_c_steamdeux-1/test/CMakeFiles/rebuild_cache.dir
