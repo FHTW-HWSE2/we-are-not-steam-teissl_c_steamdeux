@@ -103,13 +103,28 @@ int data_update_all_subscription_flags() {
 
 // data_load_reports removed - not used anywhere WAR VON BERK NICHT MEHR NÖTIG
 
-//DAVID?
+//DAVID // Geändert im Zuge des Testing. Coverage nun vollständig
 int data_save_report(cJSON *report) {
+    if (!report) {
+        return ERR_STORAGE_FAILURE; // Fehler: NULL-Report übergeben
+    }
+
     cJSON *reports = load_json_from_file(REPORTS_FILE);
     if (!reports) {
+        // Datei konnte nicht geladen werden – erzeuge neues leeres Array
         reports = cJSON_CreateArray();
     }
+
+    // Sicherheitsprüfung: ist das geladene JSON wirklich ein Array?
+    if (!reports || !cJSON_IsArray(reports)) {
+        if (reports) {
+            cJSON_Delete(reports);
+        }
+        return ERR_STORAGE_FAILURE;
+    }
+
     cJSON_AddItemToArray(reports, report);
+
     int result = save_json_to_file(REPORTS_FILE, reports);
     cJSON_Delete(reports);
     return result;
