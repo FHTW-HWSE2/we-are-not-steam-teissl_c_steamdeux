@@ -304,7 +304,7 @@ int logic_generate_top_users_file(void) {
         return ERR_STORAGE_FAILURE;
     }
     char *json_str = cJSON_Print(top_users);
-    FILE *out = fopen("../usersRanked.json", "w");
+    FILE *out = fopen("usersRanked.txt", "w");
     if (out && json_str) {
         fputs(json_str, out);
         fclose(out);
