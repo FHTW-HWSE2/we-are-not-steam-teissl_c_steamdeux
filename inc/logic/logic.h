@@ -41,5 +41,9 @@ void logic_handle_delete_game(Game **games, int *game_count);
 void logic_display_games_formatted(const Game *games, int game_count);
 int logic_get_game_lines_for_display(const Game *games, int game_count, char ***lines_out, int *line_count_out);
 int logic_validate_required_field(const char* str);
+int is_valid_ssn_format(const char* ssn);
+int is_valid_email_format(const char* email);
+int is_valid_date_format(const char* date);
+int is_valid_alpha_format(const char *str);
 
 #endif // LOGIC_H

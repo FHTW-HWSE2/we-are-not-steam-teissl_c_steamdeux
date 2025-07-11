@@ -318,7 +318,6 @@ int data_remove_expired_users(int *removed_count_out) {
     time_t now = time(NULL);
     struct tm *current_time = localtime(&now);
     current_time->tm_year -= 2;
-    time_t two_years_ago = mktime(current_time);
     cJSON *new_array = cJSON_CreateArray();
     int removed_count = 0;
     int size = cJSON_GetArraySize(user_array);

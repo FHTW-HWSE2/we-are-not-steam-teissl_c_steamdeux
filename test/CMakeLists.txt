@@ -214,6 +214,9 @@ add_compile_options(-Wall -Wextra -Wno-unused-parameter)
 add_executable(test_is_valid_formats
     test_is_valid_formats.c
     unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
 )
 
 target_include_directories(test_is_valid_formats PRIVATE

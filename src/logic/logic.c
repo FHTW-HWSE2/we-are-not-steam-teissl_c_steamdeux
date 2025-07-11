@@ -41,8 +41,8 @@ cJSON *logic_create_report(const char *title, const char *description, const cha
     return report;
 }
 
-// --- Static validation helpers (internal use only) ---
-static int is_valid_ssn_format(const char* ssn) {
+// --- Validation helpers (now global for testing/coverage) ---
+int is_valid_ssn_format(const char* ssn) {
     // Nur Format XXXX-XXXXXX (Bindestrich) ist erlaubt
     if (!ssn || strlen(ssn) != 11) return 0;
     if (ssn[4] != '-') return 0;
@@ -53,14 +53,14 @@ static int is_valid_ssn_format(const char* ssn) {
     return 1;
 }
 
-static int is_valid_email_format(const char* email) {
+int is_valid_email_format(const char* email) {
     if (!email || strlen(email) == 0) return 0;
     const char* at_pos = strchr(email, '@');
     if (!at_pos || strchr(at_pos, '.') == NULL) return 0;
     return 1;
 }
 
-static int is_valid_date_format(const char* date) {
+int is_valid_date_format(const char* date) {
     if (!date || strlen(date) != 10) return 0;
     if (date[2] != '.' || date[5] != '.') return 0;
     for (int i = 0; i < 10; ++i) {
@@ -70,7 +70,7 @@ static int is_valid_date_format(const char* date) {
     return 1;
 }
 
-static int is_valid_alpha_format(const char *str) {
+int is_valid_alpha_format(const char *str) {
     if (!str || strlen(str) == 0) return 0;
     for (size_t i = 0; i < strlen(str); ++i) {
         if ((str[i] < 'A' || (str[i] > 'Z' && str[i] < 'a') || str[i] > 'z') && str[i] != ' ' && str[i] != '-') {
@@ -932,7 +932,7 @@ int logic_get_game_lines_for_display(const Game *games, int game_count, char ***
     return ERR_SUCCESS;
 }
 
-// Globale Implementierung von logic_validate_required_field
+//ZINEDIN
 int logic_validate_required_field(const char* str) {
     return str && strlen(str) > 0 && !logic_is_only_spaces(str);
 }
