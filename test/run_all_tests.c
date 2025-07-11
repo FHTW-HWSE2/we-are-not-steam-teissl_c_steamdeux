@@ -39,6 +39,7 @@ int main(void) {
     failed |= run("./build/test/test_is_date_in_future");
     // failed |= run("./build/test/test_logic_is_only_spaces"); // Deaktiviert, da Binary nicht existiert
     failed |= run("./build/test/test_read_input");
+    failed |= run("./build/test/test_logic_perform_startup_tasks");
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
         return 1;

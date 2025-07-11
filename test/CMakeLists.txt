@@ -93,7 +93,7 @@ target_include_directories(test_data_get_all_users PRIVATE
     ${PROJECT_SOURCE_DIR}/test/mocks
 )
 
-# Executable für den Test der Funktion data_save_report
+# Executable für den Test der Funktion data_save_report_missing_file
 add_executable(test_data_save_report_missing_file
     test_data_save_report_missing_file.c
     ${PROJECT_SOURCE_DIR}/src/data/data.c
@@ -335,6 +335,25 @@ target_include_directories(test_read_input PRIVATE
     ${PROJECT_SOURCE_DIR}/src/data
     ${PROJECT_SOURCE_DIR}/cJSON
     ${PROJECT_SOURCE_DIR}/src/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+)
+
+# Executable für den Test logic_perform_startup_tasks
+add_executable(test_logic_perform_startup_tasks
+    test_logic_perform_startup_tasks.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_cjson.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_external.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+target_include_directories(test_logic_perform_startup_tasks PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
     ${PROJECT_SOURCE_DIR}/test/unity
     ${PROJECT_SOURCE_DIR}/test/mocks
 )

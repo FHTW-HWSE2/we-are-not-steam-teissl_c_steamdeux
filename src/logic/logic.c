@@ -348,7 +348,7 @@ void logic_create_and_save_report(void) {
 }
 
 // Diese Funktion bündelt die Startup-Tasks
-static int logic_perform_startup_tasks(int* removed_count, int* changed_flags) {
+int logic_perform_startup_tasks(int* removed_count, int* changed_flags) {
     *removed_count = 0;
     *changed_flags = 0;
     if (data_remove_expired_users(removed_count) != ERR_SUCCESS) {
