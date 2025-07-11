@@ -2,12 +2,6 @@
 #define _DEFAULT_SOURCE
 #include "presentation.h"
 
-#define ANSI_COLOR_RESET   "\x1b[0m"
-#define ANSI_COLOR_CYAN    "\x1b[36;1m"
-#define ANSI_COLOR_GREEN   "\x1b[32;1m"
-#define ANSI_COLOR_YELLOW  "\x1b[33;1m"
-#define ANSI_COLOR_RED     "\x1b[31;1m"
-
 #define BUFFER_SIZE 256
 
 // Umstrukturierung 10.07.: Ich glaube das passt doch, weil presentation_show_startup_info aus logic.c aufgerufen wird
@@ -53,17 +47,17 @@ void presentation_generate_top_users_file(void) {
 }
 
 // Übermenü für User Management und Game Management Menü
-void presentation_print_typewriter(const char *str, useconds_t delay, const char *color) {
-    // Präsentationsschicht: Nur Ausgabe
-    if (color) printf("%s", color);
-    for (size_t i = 0; i < strlen(str); ++i) {
-        putchar(str[i]);
-        fflush(stdout);
-        usleep(delay);
-    }
-    putchar('\n');
-    if (color) printf(ANSI_COLOR_RESET);
-}
+// void presentation_print_typewriter(const char *str, useconds_t delay, const char *color) {
+//     // Präsentationsschicht: Nur Ausgabe
+//     if (color) printf("%s", color);
+//     for (size_t i = 0; i < strlen(str); ++i) {
+//         putchar(str[i]);
+//         fflush(stdout);
+//         usleep(delay);
+//     }
+//     putchar('\n');
+//     if (color) printf(ANSI_COLOR_RESET);
+// }
 
 //========================================================================
 // Neue Funktion zum Starten des Game Management Menüs
@@ -149,18 +143,6 @@ void presentation_get_subscription_duration(char *buffer, size_t size) {
 }
 void presentation_display_error(const char *message) {
     printf("Error: %s\n", message);
-}
-
-void presentation_show_error(const char *message) {
-    printf(ANSI_COLOR_RED "Error: %s\n" ANSI_COLOR_RESET, message);
-}
-
-const char* presentation_get_user_gamertag(void) {
-    static char gamertag[BUFFER_SIZE];
-    printf("Enter gamertag: ");
-    fgets(gamertag, sizeof(gamertag), stdin);
-    gamertag[strcspn(gamertag, "\n")] = 0;
-    return gamertag;
 }
 
 // finden valiederungen statt, logic, is schon in logic top user
@@ -258,6 +240,11 @@ int presentation_get_game_menu_choice(void) {
     return atoi(input);
 }
 
+// Restore UI helper functions used by logic
 void presentation_show_message(const char *msg) {
     printf("\033[32;1m%s\033[0m\n", msg);
+}
+
+void presentation_show_error(const char *message) {
+    printf("\033[31;1mError: %s\033[0m\n", message);
 }

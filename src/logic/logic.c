@@ -9,13 +9,16 @@
 #define BUFFER_SIZE 256
 
 // ===================== SCHICHTEN-KOMMENTARE BEGINN =====================
-//
 // Logikschicht: Validiert, verarbeitet, prüft Formate, berechnet, entscheidet.
 // Datenschicht: Liest/schreibt Dateien, persistiert Daten.
 // Präsentationsschicht: Präsentiert Menüs, liest Benutzereingaben, gibt Ausgaben aus.
-//
-// HINWEIS: Wo Code gemischte Verantwortlichkeiten hat, ist dies explizit markiert.
 // ===================== SCHICHTEN-KOMMENTARE ENDE =====================
+
+// Forward declarations for static functions
+static void logic_user_menu_workflow(void);
+static void logic_handle_add_user_workflow(void);
+static void logic_handle_edit_user_workflow(void);
+static void read_input(const char *prompt, char *buffer, size_t size);
 
 cJSON *logic_create_report(const char *title, const char *description, const char *date) {
     // Defensive Null-Prüfung
@@ -121,18 +124,6 @@ int logic_validate_player_profile(const char* full_name, const char* gamertag, c
     int is_subscribed;
     if (!logic_validate_subscription_status(is_subscribed_str, &is_subscribed)) return ERR_INVALID_SUB_STATUS;
     return ERR_SUCCESS;
-}
-
-// --- Split: creation (calls validation, then data layer) ---
-int logic_create_user(const char* full_name, const char* gamertag, const char* ssn, const char* email, const char* sub_start, const char* sub_end, const char* is_subscribed_str) {
-    int valid = logic_validate_player_profile(full_name, gamertag, ssn, email, sub_start, sub_end, is_subscribed_str);
-    if (valid != ERR_SUCCESS) return valid;
-    int is_subscribed;
-    logic_validate_subscription_status(is_subscribed_str, &is_subscribed);
-    int player_hours = 0;
-    int result = data_save_player_profile(full_name, gamertag, player_hours, ssn, email, sub_start, sub_end, is_subscribed);
-    if (result == 0) return ERR_SUCCESS;
-    else return ERR_STORAGE_FAILURE;
 }
 
 // Enhanced logic_create_user that handles date calculation and duration

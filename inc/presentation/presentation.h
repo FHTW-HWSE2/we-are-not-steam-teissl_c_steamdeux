@@ -9,7 +9,6 @@
 
 #include "menu.h"
 #include "messages.h"
-#include "run.h"
 #include "../logic/logic.h"
 #include "../data/data.h"
 #include "../error.h"
@@ -22,7 +21,9 @@ void presentation_remove_user();
 void presentation_start_game_management_menu();
 void presentation_show_top_users_terminal();
 void presentation_generate_top_users_file();
+// Restore prototypes for UI functions used by logic
 void presentation_show_message(const char *msg);
+void presentation_show_error(const char *message);
 const char* presentation_get_report_title(void);
 const char* presentation_get_report_description(void);
 const char* presentation_get_report_date(void);
@@ -61,8 +62,6 @@ void presentation_error_date(void);
 void presentation_error_empty_fields(void);
 void presentation_error_storage(void);
 void presentation_error_unknown(void);
-void presentation_show_error(const char *message);
-const char* presentation_get_user_gamertag(void);
 
 // Vorwärtsdeklarationen für Funktionen, die in menu.c implementiert sind
 void presentation_print_welcome_banner(void);
@@ -80,6 +79,5 @@ void presentation_get_new_game_title(char *buffer, size_t size);
 void presentation_get_game_id_to_delete(char *buffer, size_t size);
 void presentation_display_game_management_menu(void);
 int presentation_get_game_menu_choice(void);
-void presentation_show_message(const char *msg);
 
 #endif // PRESENTATION_H

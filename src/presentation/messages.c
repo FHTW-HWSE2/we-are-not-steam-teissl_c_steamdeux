@@ -55,12 +55,6 @@ void presentation_info_exiting(void) {
 void presentation_info_returning_to_main_menu(void) {
     printf("Returning to main menu...\n");
 }
-void presentation_info_display_formatted_user_data(void) {
-    printf("Display formatted user data selected.\n"); // is now implemented
-}
-void presentation_info_delete_user_selected(void) {
-    printf("Delete user selected.\n");
-}
 void presentation_info_add_report_selected(void) {
     printf("Add report selected.\n");
 }
