@@ -208,6 +208,32 @@ target_include_directories(test_data_remove_expired_users_all_users_valid PRIVAT
     ${PROJECT_SOURCE_DIR}/test/mocks
     ${PROJECT_SOURCE_DIR}/cJSON
 )
+#Sina edit---
+# Executable für den Test der Funktion logic_create_report
+add_executable(test_logic_create_report
+    test_logic_create_report.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+
+    # presentation implementations
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+)
+
+target_include_directories(test_logic_create_report PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data 
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
 
 
 # Executable um alle Tests gebündelt auszuführen

@@ -30,6 +30,8 @@ int main(void) {
     // Neue Tests für die drei zusätzlichen Funktionen
     failed |= run("./build/test/test_data_save_games");
     failed |= run("./build/test/test_data_remove_player_profile");
+    //Sina
+    failed |= run("./build/test/test_logic_create_report");
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
         return 1;
