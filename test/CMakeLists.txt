@@ -315,25 +315,7 @@ target_include_directories(test_logic_validate_subscription_status PRIVATE
     ${PROJECT_SOURCE_DIR}/test/unity
 )
 
-# Executable für den Test logic_is_only_spaces
-# (Deaktiviert, da test_logic_is_only_spaces.c nicht existiert)
-# add_executable(test_logic_is_only_spaces
-#     test_logic_is_only_spaces.c
-#     unity/unity.c
-#     ${PROJECT_SOURCE_DIR}/src/logic/logic.c
-#     ${PROJECT_SOURCE_DIR}/src/data/data.c
-#     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
-#     ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
-#     ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
-#     ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
-#     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
-#     ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
-# )
-# target_include_directories(test_logic_is_only_spaces PRIVATE
-#     ${PROJECT_SOURCE_DIR}/inc
-#     ${PROJECT_SOURCE_DIR}/src/logic
-#     ${PROJECT_SOURCE_DIR}/src/data
-#     ${PROJECT_SOURCE_DIR}/cJSON
-#     ${PROJECT_SOURCE_DIR}/src/presentation
-#     ${PROJECT_SOURCE_DIR}/test/unity
-# )
+# Executable für den Test der Funktion read_input
+add_executable(test_read_input
+    test_read_input.c
+)

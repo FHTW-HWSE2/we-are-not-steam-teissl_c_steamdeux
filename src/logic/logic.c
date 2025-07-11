@@ -25,7 +25,6 @@
 static void logic_user_menu_workflow(void);
 static void logic_handle_add_user_workflow(void);
 static void logic_handle_edit_user_workflow(void);
-static void read_input(const char *prompt, char *buffer, size_t size);
 
 cJSON *logic_create_report(const char *title, const char *description, const char *date) {
     // Defensive Null-Prüfung
@@ -683,7 +682,7 @@ int logic_edit_user(const char* gamertag, const char* new_full_name, const char*
 }
 
 // Funktion zum Einlesen von Benutzereingaben mit Prompt
-static void read_input(const char *prompt, char *buffer, size_t size) {
+void read_input(const char *prompt, char *buffer, size_t size) {
     printf("%s", prompt);
     fflush(stdout);
     if (fgets(buffer, size, stdin) == NULL) {

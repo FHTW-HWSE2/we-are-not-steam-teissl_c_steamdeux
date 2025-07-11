@@ -38,6 +38,7 @@ int main(void) {
     failed |= run("./build/test/test_logic_validate_subscription_status");
     failed |= run("./build/test/test_is_date_in_future");
     // failed |= run("./build/test/test_logic_is_only_spaces"); // Deaktiviert, da Binary nicht existiert
+    failed |= run("./build/test/test_read_input");
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
         return 1;
