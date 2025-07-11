@@ -34,6 +34,10 @@ int main(void) {
     failed |= run("./build/test/test_is_valid_formats"); // 🍺 Gemeinsame Format-Tests
     //Sina
     failed |= run("./build/test/test_logic_create_report");
+    // Ergänzte Kern-Validierungsfunktionen
+    failed |= run("./build/test/test_logic_validate_subscription_status");
+    failed |= run("./build/test/test_is_date_in_future");
+    failed |= run("./build/test/test_logic_is_only_spaces");
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
         return 1;
