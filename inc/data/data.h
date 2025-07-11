@@ -10,9 +10,15 @@
 #include "../../src/data/game.h"
 // Removed unused includes: save_games.h, load_games.h
 
+#ifndef USERS_JSON_PATH
 #define USERS_JSON_PATH "users.json" // 10.07. Angepasst und in CMakelists den Pfad geändert
+#endif
+#ifndef REPORTS_JSON_PATH
 #define REPORTS_JSON_PATH "reports.json"  // 10.07. Angepasst und in CMakelists den Pfad geändert
+#endif
+#ifndef GAMES_JSON_PATH
 #define GAMES_JSON_PATH "games.json" // 10.07. Angepasst und in CMakelists den Pfad geändert
+#endif
 
 int data_save_report(cJSON *report);
 // data_load_reports removed - not used anywhere

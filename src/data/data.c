@@ -2,7 +2,9 @@
 #define _GNU_SOURCE
 #include "../inc/data/data.h"
 
+#ifndef REPORTS_FILE
 #define REPORTS_FILE "../reports.json"
+#endif
 
 
 // Magic Strings: JSON keys
@@ -21,7 +23,8 @@ static const char* KEY_VERSION = "version";
 static const char* KEY_MODE = "mode";
 static const char* KEY_CURRENT_STREAMS = "current_streams";
 
-// DRY: JSON load/save helpers
+// DRY: JSON load/save helpers 
+//DAVID
 cJSON* load_json_from_file(const char* path) {
     FILE *file = fopen(path, "r");
     if (!file) return NULL;
@@ -41,6 +44,7 @@ cJSON* load_json_from_file(const char* path) {
     return json;
 }
 
+//DONATO
 static int save_json_to_file(const char* path, cJSON* json) {
     char *json_text = cJSON_Print(json);
     if (!json_text) return ERR_STORAGE_FAILURE;
@@ -59,6 +63,7 @@ static int save_json_to_file(const char* path, cJSON* json) {
 
 // Refactored am 04.07.2025: Ausgelagert aus presentation.c
 // Diese Funktion übernimmt die Dateioperationen und JSON-Logik für das Aktualisieren der Subscription-Flags.
+//DONATO
 int data_update_all_subscription_flags() {
     cJSON *user_array = load_json_from_file(USERS_JSON_PATH);
     if (!user_array || !cJSON_IsArray(user_array)) {
@@ -92,8 +97,9 @@ int data_update_all_subscription_flags() {
 }
 
 
-// data_load_reports removed - not used anywhere
+// data_load_reports removed - not used anywhere WAR VON BERK NICHT MEHR NÖTIG
 
+//DAVID?
 int data_save_report(cJSON *report) {
     cJSON *reports = load_json_from_file(REPORTS_FILE);
     if (!reports) {
@@ -105,6 +111,7 @@ int data_save_report(cJSON *report) {
     return result;
 }
 
+//DONATO
 int data_save_player_profile(const char* full_name, const char* gamertag, int player_hours, const char* ssn, const char* email, const char* sub_start, const char* sub_end, int is_subscribed){
     // Datenschicht: Speichert User-Profil in Datei
     cJSON *user_array = load_json_from_file(USERS_JSON_PATH);
@@ -132,6 +139,7 @@ int data_save_player_profile(const char* full_name, const char* gamertag, int pl
 
 
 // Neue Funktion: Gibt alle User als cJSON-Array zurück
+//DAVID
 int data_get_all_users(cJSON **users_out) {
     cJSON *user_array = load_json_from_file(USERS_JSON_PATH);
     if (!user_array || !cJSON_IsArray(user_array)) {
@@ -143,6 +151,7 @@ int data_get_all_users(cJSON **users_out) {
     return ERR_SUCCESS;
 }
 
+//BERK
 int data_remove_player_profile(const char* gamertag) {
     cJSON *user_array = load_json_from_file(USERS_JSON_PATH);
     if (!user_array || !cJSON_IsArray(user_array)) {
@@ -164,6 +173,7 @@ int data_remove_player_profile(const char* gamertag) {
     return ERR_USER_NOT_FOUND;
 }
 
+//DAVID
 int data_edit_player_profile(const char* gamertag, const char* new_full_name, const char* new_ssn, const char* new_email, const char* sub_start, const char* sub_end, int is_subscribed) {
     cJSON *user_array = load_json_from_file(USERS_JSON_PATH);
     if (!user_array || !cJSON_IsArray(user_array)) {
@@ -213,6 +223,9 @@ int data_edit_player_profile(const char* gamertag, const char* new_full_name, co
 // Die Signatur wird geändert, um einen Output-Parameter für die Anzahl aufzunehmen.
 // 20.06.2025: Funktion load_games() wurde angepasst, den Fehler zu beheben, dass bei Programmstart Spiele falsch geladen werden.
 // Refactored 05.07.2025: Signatur auf robustes Fehlerbehandlungs-Muster umgestellt.
+
+
+//DONATO
 int data_load_games(const char *filename, Game **games_out, int *count_out) {
     if (!filename || !games_out || !count_out) {
         return ERR_STORAGE_FAILURE;
@@ -270,6 +283,7 @@ int data_load_games(const char *filename, Game **games_out, int *count_out) {
     return ERR_SUCCESS;
 }
 
+//BERK
 int data_save_games(const char *filename, Game games[], int game_count) {
     cJSON *root = cJSON_CreateObject();
     cJSON *games_array = cJSON_CreateArray();
@@ -289,6 +303,7 @@ int data_save_games(const char *filename, Game games[], int game_count) {
 }
 
 // Funktion von Zinedin aus Branch feature-subscriptionEndDate eingefügt
+//DAVID
 int data_remove_expired_users(int *removed_count_out) {
     cJSON *user_array = load_json_from_file(USERS_JSON_PATH);
     if (!user_array || !cJSON_IsArray(user_array)) {

@@ -193,21 +193,6 @@ target_include_directories(test_data_remove_player_profile PRIVATE
     ${PROJECT_SOURCE_DIR}/test/mocks
 )
 
-# Executable für den Test der Funktion data_load_reports
-add_executable(test_data_load_reports
-    test_data_load_reports.c
-    ${PROJECT_SOURCE_DIR}/src/data/data.c
-    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
-    unity/unity.c
-)
-
-target_include_directories(test_data_load_reports PRIVATE
-    ${PROJECT_SOURCE_DIR}/inc
-    ${PROJECT_SOURCE_DIR}/src/data
-    ${PROJECT_SOURCE_DIR}/cJSON
-    ${PROJECT_SOURCE_DIR}/test/unity
-    ${PROJECT_SOURCE_DIR}/test/mocks
-)
 
 # Executable um alle Tests gebündelt auszuführen
 add_executable(run_all_tests run_all_tests.c)
