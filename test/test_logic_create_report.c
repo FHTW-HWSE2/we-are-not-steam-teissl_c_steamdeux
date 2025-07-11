@@ -1,6 +1,6 @@
 #include "unity.h"
 #include "cJSON.h"
-#include "../../inc/logic/logic.h" // Assuming logic.h contains the function declaration
+#include "../../inc/logic/logic.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
