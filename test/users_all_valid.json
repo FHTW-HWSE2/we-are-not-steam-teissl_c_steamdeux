@@ -1,0 +1,10 @@
+[{
+		"full_name":	"Active User",
+		"gamertag":	"active123",
+		"player_hours":	0,
+		"ssn":	"1234-567890",
+		"email":	"active@example.com",
+		"subscription_start_date":	"01.01.2023",
+		"subscription_end_date":	"01.01.2030",
+		"is_subscribed":	true
+	}]

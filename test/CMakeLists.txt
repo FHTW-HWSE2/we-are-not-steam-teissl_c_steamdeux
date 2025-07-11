@@ -22,16 +22,16 @@ target_include_directories(test_data PRIVATE
 )
 
 # Executable für den Test "test_data_remove_expired_users_missing_file_returns_ERR_STORAGE_FAILURE"
-add_executable(test_data_remove_missing
+add_executable(test_data_remove_expired_users_missing_file_returns_ERR_STORAGE_FAILURE
     test_data_remove_expired_users_missing_file_returns_ERR_STORAGE_FAILURE.c
     unity/unity.c
     ${PROJECT_SOURCE_DIR}/src/data/data.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
 )
 
-target_compile_definitions(test_data_remove_missing PRIVATE USERS_JSON_PATH=\"test/missing_users.json\")
+target_compile_definitions(test_data_remove_expired_users_missing_file_returns_ERR_STORAGE_FAILURE PRIVATE USERS_JSON_PATH=\"test/missing_users.json\")
 
-target_include_directories(test_data_remove_missing PRIVATE
+target_include_directories(test_data_remove_expired_users_missing_file_returns_ERR_STORAGE_FAILURE PRIVATE
     ${PROJECT_SOURCE_DIR}/inc
     ${PROJECT_SOURCE_DIR}/src/data
     ${PROJECT_SOURCE_DIR}/test/unity
@@ -191,6 +191,22 @@ target_include_directories(test_data_remove_player_profile PRIVATE
     ${PROJECT_SOURCE_DIR}/cJSON
     ${PROJECT_SOURCE_DIR}/test/unity
     ${PROJECT_SOURCE_DIR}/test/mocks
+)
+
+# Executable für den Test der Funktion data_remove_expired_users
+add_executable(test_data_remove_expired_users_all_users_valid
+    test_data_remove_expired_users_all_users_valid.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_include_directories(test_data_remove_expired_users_all_users_valid PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/cJSON
 )
 
 
