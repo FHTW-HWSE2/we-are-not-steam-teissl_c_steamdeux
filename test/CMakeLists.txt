@@ -193,9 +193,30 @@ target_include_directories(test_data_remove_player_profile PRIVATE
     ${PROJECT_SOURCE_DIR}/test/mocks
 )
 
+# Executable für den Test logic_validate_required_field
+add_executable(test_logic_validate_required_field
+    test_logic_validate_required_field.c
+    unity/unity.c
+)
+
+target_include_directories(test_logic_validate_required_field PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/test/unity
+)
 
 # Executable um alle Tests gebündelt auszuführen
 add_executable(run_all_tests run_all_tests.c)
 
 # Warnings
 add_compile_options(-Wall -Wextra -Wno-unused-parameter)
+
+# Executable für die gemeinsamen Format-Tests
+add_executable(test_is_valid_formats
+    test_is_valid_formats.c
+    unity/unity.c
+)
+
+target_include_directories(test_is_valid_formats PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/test/unity
+)

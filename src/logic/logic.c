@@ -42,10 +42,6 @@ cJSON *logic_create_report(const char *title, const char *description, const cha
 }
 
 // --- Static validation helpers (internal use only) ---
-static int logic_validate_required_field(const char* str) {
-    return str && strlen(str) > 0 && !logic_is_only_spaces(str);
-}
-
 static int is_valid_ssn_format(const char* ssn) {
     // Nur Format XXXX-XXXXXX (Bindestrich) ist erlaubt
     if (!ssn || strlen(ssn) != 11) return 0;
@@ -304,7 +300,7 @@ int logic_generate_top_users_file(void) {
         return ERR_STORAGE_FAILURE;
     }
     char *json_str = cJSON_Print(top_users);
-    FILE *out = fopen("../usersRanked.json", "w");
+    FILE *out = fopen("usersRanked.json", "w");
     if (out && json_str) {
         fputs(json_str, out);
         fclose(out);
@@ -934,4 +930,9 @@ int logic_get_game_lines_for_display(const Game *games, int game_count, char ***
     *lines_out = lines;
     *line_count_out = idx;
     return ERR_SUCCESS;
+}
+
+// Globale Implementierung von logic_validate_required_field
+int logic_validate_required_field(const char* str) {
+    return str && strlen(str) > 0 && !logic_is_only_spaces(str);
 }

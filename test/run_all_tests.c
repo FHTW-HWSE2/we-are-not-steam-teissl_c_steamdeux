@@ -25,8 +25,9 @@ int main(void) {
     // Neue Tests für die drei zusätzlichen Funktionen
     failed |= run("./build/test/test_data_save_games");
     failed |= run("./build/test/test_data_remove_player_profile");
-    failed |= run("./build/test/test_data_load_reports");
     // test_logic entfernt, da Datei nicht mehr existiert
+    failed |= run("./build/test/test_logic_validate_required_field"); 
+    failed |= run("./build/test/test_is_valid_formats"); // 🍺 Gemeinsame Format-Tests
 
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");

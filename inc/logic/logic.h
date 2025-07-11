@@ -40,5 +40,6 @@ void logic_handle_edit_game(Game *games, int game_count);
 void logic_handle_delete_game(Game **games, int *game_count);
 void logic_display_games_formatted(const Game *games, int game_count);
 int logic_get_game_lines_for_display(const Game *games, int game_count, char ***lines_out, int *line_count_out);
+int logic_validate_required_field(const char* str);
 
 #endif // LOGIC_H
