@@ -1,7 +1,10 @@
 #include "unity/unity.h"
-#include "../inc/logic/logic.h"
 #include "mocks/mock_time.h"
 #include <string.h>
+#include <time.h>
+
+// Declaration from is_date_in_future_testable.c
+int is_date_in_future(const char* date_str);
 
 // --- Mock helpers ---
 static time_t fixed_time_value;
@@ -43,9 +46,7 @@ void setUp(void) {
     fixed_time_value = 1752192000;
 }
 
-void tearDown(void) {
-    // Reset to real functions if needed
-}
+void tearDown(void) {}
 
 void test_is_date_in_future(void) {
     // Test: future date

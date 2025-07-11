@@ -4,6 +4,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h> // Für validate_player_profile() Funktion um das Startdatum zu prüfen
+#ifdef UNITTEST_MOCK_TIME
+#include "../test/mocks/mock_time.h"
+#define time mock_time
+#define localtime mock_localtime
+#define mktime mock_mktime
+#define difftime mock_difftime
+#endif
 #include "../inc/logic/logic.h"
 
 #define BUFFER_SIZE 256
@@ -214,6 +221,7 @@ int logic_add_new_game(Game **games, int *game_count, const char *title, const c
 
 // Refactored 04.07.2025: Hilfsfunktion für Präsentationsschicht
 int logic_is_only_spaces(const char *str) {
+    if (!str || str[0] == '\0') return 0;
     for (size_t i = 0; i < strlen(str); ++i) {
         if (str[i] != ' ') return 0;
     }

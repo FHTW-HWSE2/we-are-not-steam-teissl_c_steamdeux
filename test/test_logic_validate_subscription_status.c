@@ -8,7 +8,6 @@ void tearDown(void) {}
 void test_logic_validate_subscription_status(void) {
     // TODO: Implement real tests if function is made public
     // Example dummy usage:
-    int out = -1;
     // TEST_ASSERT_TRUE(logic_validate_subscription_status("true", &out));
     // TEST_ASSERT_EQUAL(1, out);
     // TEST_ASSERT_TRUE(logic_validate_subscription_status("false", &out));

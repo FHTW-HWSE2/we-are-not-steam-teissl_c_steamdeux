@@ -1,5 +1,6 @@
 #include "unity.h"
 #include "logic/logic.h"
+#include "mocks/mock_time.h"
 
 void setUp(void) {}
 void tearDown(void) {}

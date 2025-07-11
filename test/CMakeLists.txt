@@ -204,6 +204,7 @@ add_executable(test_logic_validate_required_field
     ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
     ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
 
 target_include_directories(test_logic_validate_required_field PRIVATE
@@ -215,6 +216,12 @@ target_include_directories(test_logic_validate_required_field PRIVATE
     ${PROJECT_SOURCE_DIR}/test/unity
 )
 
+# In test/CMakeLists.txt sicherstellen, dass das Mocking-Flag gesetzt wird
+set_source_files_properties(
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    PROPERTIES COMPILE_DEFINITIONS UNITTEST_MOCK_TIME
+)
+
 # Executable um alle Tests gebündelt auszuführen
 add_executable(run_all_tests run_all_tests.c)
 
@@ -222,15 +229,111 @@ add_executable(run_all_tests run_all_tests.c)
 add_compile_options(-Wall -Wextra -Wno-unused-parameter)
 
 # Executable für die gemeinsamen Format-Tests
-add_executable(test_is_valid_formats
+set(TEST_IS_VALID_FORMATS_SRCS
     test_is_valid_formats.c
     unity/unity.c
     ${PROJECT_SOURCE_DIR}/src/logic/logic.c
     ${PROJECT_SOURCE_DIR}/src/data/data.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
+
+add_executable(test_is_valid_formats ${TEST_IS_VALID_FORMATS_SRCS})
 
 target_include_directories(test_is_valid_formats PRIVATE
     ${PROJECT_SOURCE_DIR}/inc
     ${PROJECT_SOURCE_DIR}/test/unity
 )
+
+# Executable für den Test der Funktion is_date_in_future mit Mocking
+add_executable(test_is_date_in_future
+    test_is_date_in_future.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+target_include_directories(test_is_date_in_future PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+)
+
+set_source_files_properties(
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    PROPERTIES COMPILE_DEFINITIONS UNITTEST_MOCK_TIME
+)
+
+# Executable für den Test logic_create_report
+add_executable(test_logic_create_report
+    test_logic_create_report.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+target_include_directories(test_logic_create_report PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+)
+
+# Executable für den Test logic_validate_subscription_status
+add_executable(test_logic_validate_subscription_status
+    test_logic_validate_subscription_status.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+target_include_directories(test_logic_validate_subscription_status PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+)
+
+# Executable für den Test logic_is_only_spaces
+# (Deaktiviert, da test_logic_is_only_spaces.c nicht existiert)
+# add_executable(test_logic_is_only_spaces
+#     test_logic_is_only_spaces.c
+#     unity/unity.c
+#     ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+#     ${PROJECT_SOURCE_DIR}/src/data/data.c
+#     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+#     ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+#     ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+#     ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+#     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+#     ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+# )
+# target_include_directories(test_logic_is_only_spaces PRIVATE
+#     ${PROJECT_SOURCE_DIR}/inc
+#     ${PROJECT_SOURCE_DIR}/src/logic
+#     ${PROJECT_SOURCE_DIR}/src/data
+#     ${PROJECT_SOURCE_DIR}/cJSON
+#     ${PROJECT_SOURCE_DIR}/src/presentation
+#     ${PROJECT_SOURCE_DIR}/test/unity
+# )
