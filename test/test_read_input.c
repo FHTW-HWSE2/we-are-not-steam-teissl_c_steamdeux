@@ -16,17 +16,6 @@ static void redirect_stdin(const char *input) {
     close(pipefd[0]);
 }
 
-// Implementation of read_input for testing
-void read_input(const char *prompt, char *buffer, size_t size) {
-    printf("%s", prompt);
-    fflush(stdout);
-    if (fgets(buffer, size, stdin) == NULL) {
-        buffer[0] = '\0';
-    } else {
-        buffer[strcspn(buffer, "\n")] = '\0';
-    }
-}
-
 void test_read_input_basic() {
     char buffer[100];
     redirect_stdin("Hello, World!\n");
@@ -49,10 +38,29 @@ void test_read_input_truncation() {
     assert(strcmp(buffer, "12345") == 0);
 }
 
+void test_read_input_fgets_null() {
+    char buffer[100] = "notempty";
+    // Simuliere fgets==NULL durch Umleiten von stdin auf /dev/null
+    FILE *old_stdin = fdopen(dup(STDIN_FILENO), "r");
+    freopen("/dev/null", "r", stdin);
+    read_input("Prompt: ", buffer, sizeof(buffer));
+    assert(strcmp(buffer, "") == 0);
+    // Stelle stdin wieder her
+    if (old_stdin) {
+        dup2(fileno(old_stdin), STDIN_FILENO);
+        fclose(old_stdin);
+    }
+    freopen("/dev/tty", "r", stdin);
+}
+
+void setUp(void) {}
+void tearDown(void) {}
+
 int main() {
     test_read_input_basic();
     test_read_input_empty();
     test_read_input_truncation();
+    test_read_input_fgets_null();
     printf("All read_input tests passed.\n");
     return 0;
 }
