@@ -215,6 +215,220 @@ target_include_directories(test_logic_validate_required_field PRIVATE
     ${PROJECT_SOURCE_DIR}/test/unity
 )
 
+# Executable für save_json_to_file Test
+add_executable(test_data_save_json_to_file
+    test_data_save_json_to_file.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_include_directories(test_data_save_json_to_file PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+)
+
+# Executable für data_update_all_subscription_flags Test
+add_executable(test_data_update_all_subscription_flags
+    test_data_update_all_subscription_flags.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_compile_definitions(test_data_update_all_subscription_flags PRIVATE USERS_JSON_PATH=\"test/users_update_flags.json\")
+
+target_include_directories(test_data_update_all_subscription_flags PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/data
+)
+
+# Executable für data_save_player_profile Test
+add_executable(test_data_save_player_profile
+    test_data_save_player_profile.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_compile_definitions(test_data_save_player_profile PRIVATE USERS_JSON_PATH=\"test/users_save_profile.json\")
+
+target_include_directories(test_data_save_player_profile PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/data
+)
+
+# Executable für data_load_games Test
+add_executable(test_data_load_games
+    test_data_load_games.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_include_directories(test_data_load_games PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/data
+)
+
+# Executable für logic_validate_player_profile Test
+add_executable(test_logic_validate_player_profile
+    test_logic_validate_player_profile.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_include_directories(test_logic_validate_player_profile PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
+# Executable für logic_create_user_with_duration Test
+add_executable(test_logic_create_user_with_duration
+    test_logic_create_user_with_duration.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_compile_definitions(test_logic_create_user_with_duration PRIVATE USERS_JSON_PATH=\"test/users_create_duration.json\")
+
+target_include_directories(test_logic_create_user_with_duration PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
+# Executable für logic_remove_user Test
+add_executable(test_logic_remove_user
+    test_logic_remove_user.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_compile_definitions(test_logic_remove_user PRIVATE USERS_JSON_PATH=\"test/users_remove_test.json\")
+
+target_include_directories(test_logic_remove_user PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
+# Executable für logic_get_all_users Test
+add_executable(test_logic_get_all_users
+    test_logic_get_all_users.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_compile_definitions(test_logic_get_all_users PRIVATE USERS_JSON_PATH=\"test/users_get_all_test.json\")
+
+target_include_directories(test_logic_get_all_users PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
+# Executable für logic_edit_user Test
+add_executable(test_logic_edit_user
+    test_logic_edit_user.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_compile_definitions(test_logic_edit_user PRIVATE USERS_JSON_PATH=\"test/users_edit_logic.json\")
+
+target_include_directories(test_logic_edit_user PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
+# Executable für logic_get_top_users Test
+add_executable(test_logic_get_top_users
+    test_logic_get_top_users.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+)
+
+target_compile_definitions(test_logic_get_top_users PRIVATE USERS_JSON_PATH=\"test/users_top_test.json\")
+
+target_include_directories(test_logic_get_top_users PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
 # Executable um alle Tests gebündelt auszuführen
 add_executable(run_all_tests run_all_tests.c)
 

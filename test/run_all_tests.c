@@ -34,6 +34,16 @@ int main(void) {
     failed |= run("./build/test/test_is_valid_formats"); // 🍺 Gemeinsame Format-Tests
     //Sina
     failed |= run("./build/test/test_logic_create_report");
+    failed |= run("./build/test/test_data_save_json_to_file");
+    failed |= run("./build/test/test_data_update_all_subscription_flags");
+    failed |= run("./build/test/test_data_save_player_profile");
+    failed |= run("./build/test/test_data_load_games");
+    failed |= run("./build/test/test_logic_validate_player_profile");
+    failed |= run("./build/test/test_logic_create_user_with_duration");
+    failed |= run("./build/test/test_logic_remove_user");
+    failed |= run("./build/test/test_logic_get_all_users");
+    failed |= run("./build/test/test_logic_edit_user");
+    failed |= run("./build/test/test_logic_get_top_users");
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
         return 1;
