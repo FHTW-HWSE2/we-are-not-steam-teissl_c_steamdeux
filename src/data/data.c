@@ -1,5 +1,9 @@
+#ifndef _XOPEN_SOURCE
 #define _XOPEN_SOURCE 700
+#endif
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include "../inc/data/data.h"
 
 #ifndef REPORTS_FILE
