@@ -22,7 +22,7 @@ static const char* KEY_MODE = "mode";
 static const char* KEY_CURRENT_STREAMS = "current_streams";
 
 // DRY: JSON load/save helpers
-static cJSON* load_json_from_file(const char* path) {
+cJSON* load_json_from_file(const char* path) {
     FILE *file = fopen(path, "r");
     if (!file) return NULL;
     fseek(file, 0, SEEK_END);

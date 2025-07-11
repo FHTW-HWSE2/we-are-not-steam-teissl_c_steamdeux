@@ -61,7 +61,7 @@ add_test(NAME GameManagerTestRun COMMAND game_manager)
 
 # Test-Unterordner hinzufügen
 if(ENABLE_TESTING)
-    # add_subdirectory(test)  # Test-Ordner wurde entfernt
+    add_subdirectory(test)  # Test-Ordner wurde entfernt
 endif()
 
 # Warnings

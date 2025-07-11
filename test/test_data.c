@@ -4,7 +4,6 @@
 #define USERS_JSON_PATH "test/users_testing.json"
 #include "unity.h"
 #include "cJSON.h"
-#include "../../src/data/data.c"
 #include "mock_data.h"
 
 void append_expired_test_user_to_json_file(void); // Funktionsprototyp für Hilfsfunktion zum Befüllen der JSON Testdatei

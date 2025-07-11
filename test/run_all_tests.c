@@ -16,18 +16,17 @@ int main(void) {
     int failed = 0;
 
     // Ausführbare Testdateien im Build-Ordner
-    failed |= run("./build/test/test_logic");
     failed |= run("./build/test/test_data");
     failed |= run("./build/test/test_data_remove_missing");
     failed |= run("./build/test/test_data_edit_profile");
     failed |= run("./build/test/test_data_edit_profile_invalid_json");
     failed |= run("./build/test/test_data_get_all_users");
     failed |= run("./build/test/test_data_save_report_missing_file");
-    
     // Neue Tests für die drei zusätzlichen Funktionen
     failed |= run("./build/test/test_data_save_games");
     failed |= run("./build/test/test_data_remove_player_profile");
     failed |= run("./build/test/test_data_load_reports");
+    // test_logic entfernt, da Datei nicht mehr existiert
 
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
