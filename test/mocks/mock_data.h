@@ -71,4 +71,7 @@ int read_player_profiles(char** output);
 void print_user_to_cli_Expect(void);
 void print_user_to_cli(void);
 
+// Mock für data_remove_expired_users
+int data_remove_expired_users(int *removed_count);
+
 #endif

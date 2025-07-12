@@ -62,7 +62,6 @@ int presentation_get_game_id_to_edit(void) { return 0; }
 void presentation_get_new_game_title(char *a, int b) {}
 int presentation_get_game_id_to_delete(void) { return 0; }
 void presentation_success_report_saved(void) {}
-int data_remove_expired_users(void) { return 0; }
 const char* presentation_get_report_title(void) { return "stub_title"; }
 const char* presentation_get_report_description(void) { return "stub_desc"; }
 const char* presentation_get_report_date(void) { return "2025-07-12"; }
