@@ -37,6 +37,14 @@ int mock_user_menu_choice_count = 0;
 int mock_user_menu_choice_index = 0;
 int mock_user_menu_choices[100] = {0};
 
+// Additional tracking for user menu sub-options
+int mock_presentation_remove_user_called = 0;
+int mock_presentation_info_add_report_selected_called = 0;
+int mock_presentation_info_rank_top_users_selected_called = 0;
+int mock_presentation_show_top_users_terminal_called = 0;
+int mock_presentation_info_generate_player_report_selected_called = 0;
+int mock_presentation_generate_top_users_file_called = 0;
+
 // === Mock: Fehleranzeige ===
 void presentation_show_error(const char *message) {
     mock_presentation_show_error_called++;
@@ -126,12 +134,24 @@ void start_simulation(void) {
 // === Stub-Funktionen (do nothing oder Rückgabe 0/default) ===
 // (Keep the rest as is, or add tracking if needed for other tests)
 
-void presentation_remove_user(void) {}
-void presentation_info_add_report_selected(void) {}
-void presentation_info_rank_top_users_selected(void) {}
-void presentation_show_top_users_terminal(void) {}
-void presentation_info_generate_player_report_selected(void) {}
-void presentation_generate_top_users_file(void) {}
+void presentation_remove_user(void) {
+    mock_presentation_remove_user_called++;
+}
+void presentation_info_add_report_selected(void) {
+    mock_presentation_info_add_report_selected_called++;
+}
+void presentation_info_rank_top_users_selected(void) {
+    mock_presentation_info_rank_top_users_selected_called++;
+}
+void presentation_show_top_users_terminal(void) {
+    mock_presentation_show_top_users_terminal_called++;
+}
+void presentation_info_generate_player_report_selected(void) {
+    mock_presentation_info_generate_player_report_selected_called++;
+}
+void presentation_generate_top_users_file(void) {
+    mock_presentation_generate_top_users_file_called++;
+}
 void presentation_error_full_name_empty(void) {}
 void presentation_error_full_name_format(void) {}
 void presentation_get_full_name(char *a, size_t b) { if (a) memset(a, 0, b); }

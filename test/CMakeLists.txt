@@ -731,3 +731,31 @@ ${PROJECT_SOURCE_DIR}/src/logic
 ${PROJECT_SOURCE_DIR}/src/data
 ${PROJECT_SOURCE_DIR}/src/simulation  # For simulation.h if included indirectly
 )
+
+# Executable für den Test der Funktion logic_user_menu_workflow
+add_executable(test_logic_user_menu_workflow
+${PROJECT_SOURCE_DIR}/test/test_logic_user_menu_workflow.c
+${PROJECT_SOURCE_DIR}/test/unity/unity.c
+${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+${PROJECT_SOURCE_DIR}/src/logic/logic.c
+${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+target_compile_definitions(test_logic_user_menu_workflow PRIVATE
+    TESTING_STATIC_FUNCTIONS  # Define to expose static functions
+)
+
+target_include_directories(test_logic_user_menu_workflow PRIVATE
+${PROJECT_SOURCE_DIR}/inc
+${PROJECT_SOURCE_DIR}/inc/logic
+${PROJECT_SOURCE_DIR}/inc/data
+${PROJECT_SOURCE_DIR}/inc/presentation
+${PROJECT_SOURCE_DIR}/test/unity
+${PROJECT_SOURCE_DIR}/test/mocks
+${PROJECT_SOURCE_DIR}/cJSON
+${PROJECT_SOURCE_DIR}/src/logic
+${PROJECT_SOURCE_DIR}/src/data
+${PROJECT_SOURCE_DIR}/src/simulation
+)

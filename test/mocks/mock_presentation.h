@@ -35,6 +35,14 @@ extern int mock_user_menu_choice_count;
 extern int mock_user_menu_choice_index;
 extern int mock_user_menu_choices[100];
 
+// Additional tracking for user menu sub-options
+extern int mock_presentation_remove_user_called;
+extern int mock_presentation_info_add_report_selected_called;
+extern int mock_presentation_info_rank_top_users_selected_called;
+extern int mock_presentation_show_top_users_terminal_called;
+extern int mock_presentation_info_generate_player_report_selected_called;
+extern int mock_presentation_generate_top_users_file_called;
+
 // Function prototypes (subset matching those used in the test; add more if needed for other tests)
 void presentation_show_error(const char *message);
 void presentation_display_users_formatted(char **lines, int count);
