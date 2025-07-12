@@ -635,3 +635,48 @@ target_include_directories(test_logic_delete_game PRIVATE
     ${PROJECT_SOURCE_DIR}/test/mocks
     ${PROJECT_SOURCE_DIR}/cJSON
 )
+
+# Executable für den Test der Funktion logic_display_games_formatted
+add_executable(test_logic_display_games_formatted
+    ${PROJECT_SOURCE_DIR}/test/test_logic_display_games_formatted.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+target_include_directories(test_logic_display_games_formatted PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
+# Executable für den Test der Funktion logic_add_new_game
+add_executable(test_logic_add_new_game
+    ${PROJECT_SOURCE_DIR}/test/test_logic_add_new_game.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+)
+
+target_include_directories(test_logic_add_new_game PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/cJSON
+)
