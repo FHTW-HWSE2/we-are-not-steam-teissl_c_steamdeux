@@ -707,3 +707,27 @@ target_include_directories(test_run_simulation PRIVATE
     ${PROJECT_SOURCE_DIR}/cJSON
     ${PROJECT_SOURCE_DIR}/src/simulation
 )
+
+# Executable für den Test der Funktion logic_start_application
+add_executable(test_logic_start_application
+${PROJECT_SOURCE_DIR}/test/test_logic_start_application.c
+${PROJECT_SOURCE_DIR}/test/unity/unity.c
+${PROJECT_SOURCE_DIR}/cJSON/cJSON.c  # Direkt eingebunden für cJSON
+${PROJECT_SOURCE_DIR}/src/logic/logic.c  # The source under test
+${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+target_include_directories(test_logic_start_application PRIVATE
+${PROJECT_SOURCE_DIR}/inc
+${PROJECT_SOURCE_DIR}/inc/logic
+${PROJECT_SOURCE_DIR}/inc/data
+${PROJECT_SOURCE_DIR}/inc/presentation
+${PROJECT_SOURCE_DIR}/test/unity
+${PROJECT_SOURCE_DIR}/test/mocks
+${PROJECT_SOURCE_DIR}/cJSON
+${PROJECT_SOURCE_DIR}/src/logic
+${PROJECT_SOURCE_DIR}/src/data
+${PROJECT_SOURCE_DIR}/src/simulation  # For simulation.h if included indirectly
+)
