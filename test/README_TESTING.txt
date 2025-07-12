@@ -30,8 +30,16 @@ From Project Root execute these commands:
 
 Immediately after that, change the directory to build:
 	cd build
+	
 From Build execute:
-	gcovr -r .. --html-details -o coverage.html
+gcovr -r .. \
+  --filter '../src/logic' \
+  --filter '../src/data' \
+  --filter '../src/simulation' \
+  --exclude '../test' \
+  --exclude '../cJSON' \
+  --exclude '../src/presentation' \
+  --html --html-details -o coverage.html
 
 Note: The command "gcovr -r .. --html-details -o coverage.html" generates a detailed HTML code coverage report. 
 It uses .. as the root directory to locate source files and coverage data, and produces an output file named coverage.html.
