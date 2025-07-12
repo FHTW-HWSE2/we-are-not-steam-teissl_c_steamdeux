@@ -1,3 +1,4 @@
+#define _XOPEN_SOURCE // Needed for strptime on Linux
 #define USERS_JSON_PATH "test/users_create_duration.json"
 
 #include "unity.h"

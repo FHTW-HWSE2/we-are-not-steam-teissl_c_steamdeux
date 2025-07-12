@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <assert.h>
 #include "../inc/logic/logic.h"
+#include "unity/unity.h"
 
 // Helper to redirect stdin from a string
 static void redirect_stdin(const char *input) {
@@ -20,14 +21,14 @@ void test_read_input_basic() {
     char buffer[100];
     redirect_stdin("Hello, World!\n");
     read_input("Prompt: ", buffer, sizeof(buffer));
-    assert(strcmp(buffer, "Hello, World!") == 0);
+    TEST_ASSERT_EQUAL_STRING("Hello, World!", buffer);
 }
 
 void test_read_input_empty() {
     char buffer[100] = "notempty";
     redirect_stdin("\n");
     read_input("Prompt: ", buffer, sizeof(buffer));
-    assert(strcmp(buffer, "") == 0);
+    TEST_ASSERT_EQUAL_STRING("", buffer);
 }
 
 void test_read_input_truncation() {
@@ -35,7 +36,7 @@ void test_read_input_truncation() {
     redirect_stdin("1234567890\n");
     read_input("Prompt: ", buffer, sizeof(buffer));
     // fgets reads at most size-1 chars, so buffer should be "12345"
-    assert(strcmp(buffer, "12345") == 0);
+    TEST_ASSERT_EQUAL_STRING("12345", buffer);
 }
 
 void test_read_input_fgets_null() {
@@ -44,7 +45,7 @@ void test_read_input_fgets_null() {
     FILE *old_stdin = fdopen(dup(STDIN_FILENO), "r");
     freopen("/dev/null", "r", stdin);
     read_input("Prompt: ", buffer, sizeof(buffer));
-    assert(strcmp(buffer, "") == 0);
+    TEST_ASSERT_EQUAL_STRING("", buffer);
     // Stelle stdin wieder her
     if (old_stdin) {
         dup2(fileno(old_stdin), STDIN_FILENO);
@@ -57,10 +58,10 @@ void setUp(void) {}
 void tearDown(void) {}
 
 int main() {
-    test_read_input_basic();
-    test_read_input_empty();
-    test_read_input_truncation();
-    test_read_input_fgets_null();
-    printf("All read_input tests passed.\n");
-    return 0;
+    UNITY_BEGIN();
+    RUN_TEST(test_read_input_basic);
+    RUN_TEST(test_read_input_empty);
+    RUN_TEST(test_read_input_truncation);
+    RUN_TEST(test_read_input_fgets_null);
+    return UNITY_END();
 }

@@ -241,6 +241,7 @@ add_executable(test_logic_validate_player_profile
     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
     unity/unity.c
+    mocks/mock_time.c
 )
 
 target_include_directories(test_logic_validate_player_profile PRIVATE
@@ -264,6 +265,7 @@ add_executable(test_logic_create_user_with_duration
     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
     unity/unity.c
+    mocks/mock_time.c
 )
 
 target_compile_definitions(test_logic_create_user_with_duration PRIVATE USERS_JSON_PATH=\"test/users_create_duration.json\")
@@ -289,6 +291,7 @@ add_executable(test_logic_remove_user
     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
     unity/unity.c
+    mocks/mock_time.c
 )
 
 target_compile_definitions(test_logic_remove_user PRIVATE USERS_JSON_PATH=\"test/users_remove_test.json\")
@@ -314,6 +317,7 @@ add_executable(test_logic_get_all_users
     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
     unity/unity.c
+    mocks/mock_time.c
 )
 
 target_compile_definitions(test_logic_get_all_users PRIVATE USERS_JSON_PATH=\"test/users_get_all_test.json\")
@@ -339,6 +343,7 @@ add_executable(test_logic_edit_user
     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
     unity/unity.c
+    mocks/mock_time.c
 )
 
 target_compile_definitions(test_logic_edit_user PRIVATE USERS_JSON_PATH=\"test/users_edit_logic.json\")
@@ -364,6 +369,7 @@ add_executable(test_logic_get_top_users
     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
     unity/unity.c
+    mocks/mock_time.c
 )
 
 target_compile_definitions(test_logic_get_top_users PRIVATE USERS_JSON_PATH=\"test/users_top_test.json\")
