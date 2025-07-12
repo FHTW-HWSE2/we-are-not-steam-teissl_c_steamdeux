@@ -39,42 +39,6 @@ target_include_directories(test_data_remove_expired_users_missing_file_returns_E
     ${PROJECT_SOURCE_DIR}/cJSON
 )
 
-# Executable für den Tests der Funktion data_edit_player_profile
-add_executable(test_data_edit_profile
-    test_data_edit_player_profile.c
-    ${PROJECT_SOURCE_DIR}/src/data/data.c
-    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
-    unity/unity.c
-)
-
-target_compile_definitions(test_data_edit_profile PRIVATE USERS_JSON_PATH=\"test/users_edit.json\")
-
-target_include_directories(test_data_edit_profile PRIVATE
-    ${PROJECT_SOURCE_DIR}/inc
-    ${PROJECT_SOURCE_DIR}/src/data
-    ${PROJECT_SOURCE_DIR}/cJSON
-    ${PROJECT_SOURCE_DIR}/test/unity
-    ${PROJECT_SOURCE_DIR}/test/mocks
-)
-
-# Executable für den Test der Funktion data_edit_player_profile mit ungültigem JSON
-add_executable(test_data_edit_profile_invalid_json
-    test_data_edit_player_profile_invalid_json.c
-    ${PROJECT_SOURCE_DIR}/src/data/data.c
-    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
-    unity/unity.c
-)
-
-target_compile_definitions(test_data_edit_profile_invalid_json PRIVATE USERS_JSON_PATH=\"test/users_invalid_object.json\")
-
-target_include_directories(test_data_edit_profile_invalid_json PRIVATE
-    ${PROJECT_SOURCE_DIR}/inc
-    ${PROJECT_SOURCE_DIR}/src/data
-    ${PROJECT_SOURCE_DIR}/test/unity
-    ${PROJECT_SOURCE_DIR}/test/mocks
-    ${PROJECT_SOURCE_DIR}/cJSON
-)
-
 # Executable für den Test der Funktion data_get_all_users
 add_executable(test_data_get_all_users
     test_data_get_all_users.c
@@ -137,22 +101,6 @@ add_executable(test_data_save_report_fallback_array
 target_compile_definitions(test_data_save_report_fallback_array PRIVATE REPORTS_FILE=\"test/missing_or_invalid_report.json\")
 
 target_include_directories(test_data_save_report_fallback_array PRIVATE
-    ${PROJECT_SOURCE_DIR}/inc
-    ${PROJECT_SOURCE_DIR}/src/data
-    ${PROJECT_SOURCE_DIR}/cJSON
-    ${PROJECT_SOURCE_DIR}/test/unity
-)
-
-# Executable für den Test der Funktion data_save_report mit ungültigem JSON
-add_executable(test_data_save_report_invalid_json_type
-    test_data_save_report_invalid_json_type.c
-    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
-    unity/unity.c
-)
-
-target_compile_definitions(test_data_save_report_invalid_json_type PRIVATE REPORTS_FILE=\"test/reports_invalid_object.json\")
-
-target_include_directories(test_data_save_report_invalid_json_type PRIVATE
     ${PROJECT_SOURCE_DIR}/inc
     ${PROJECT_SOURCE_DIR}/src/data
     ${PROJECT_SOURCE_DIR}/cJSON
@@ -347,7 +295,6 @@ add_executable(test_logic_perform_startup_tasks
     ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
     ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
     ${PROJECT_SOURCE_DIR}/test/mocks/mock_cjson.c
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_external.c
     ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
 

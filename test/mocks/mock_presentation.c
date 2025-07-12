@@ -69,3 +69,4 @@ const char* presentation_get_report_date(void) { return "2025-07-12"; }
 void presentation_welcome_add_user(void) {}
 void presentation_error_gamertag_empty_edit(void) {}
 void presentation_display_game_management_menu(void) {}
+void start_simulation(void) {}
