@@ -54,6 +54,52 @@ void test_logic_is_only_spaces(void) {
     TEST_ASSERT_FALSE(logic_is_only_spaces(NULL));
 }
 
+void test_logic_is_valid_date_format(void) {
+    // Real test for wrapper
+    TEST_ASSERT_TRUE(logic_is_valid_date_format("01.01.2020"));
+    TEST_ASSERT_TRUE(logic_is_valid_date_format("31.12.1999"));
+    TEST_ASSERT_FALSE(logic_is_valid_date_format("1.01.2020"));
+    TEST_ASSERT_FALSE(logic_is_valid_date_format("01-01-2020"));
+    TEST_ASSERT_FALSE(logic_is_valid_date_format("01.01.20"));
+    TEST_ASSERT_FALSE(logic_is_valid_date_format("01.01.20200"));
+    TEST_ASSERT_FALSE(logic_is_valid_date_format("xx.xx.xxxx"));
+    TEST_ASSERT_FALSE(logic_is_valid_date_format(NULL));
+    TEST_ASSERT_FALSE(logic_is_valid_date_format(""));
+}
+
+void test_logic_is_valid_alpha(void) {
+    // Real test for wrapper
+    TEST_ASSERT_TRUE(logic_is_valid_alpha("Max Mustermann"));
+    TEST_ASSERT_TRUE(logic_is_valid_alpha("Anna-Lena"));
+    TEST_ASSERT_FALSE(logic_is_valid_alpha("Max123"));
+    TEST_ASSERT_FALSE(logic_is_valid_alpha(""));
+    TEST_ASSERT_FALSE(logic_is_valid_alpha(NULL));
+    TEST_ASSERT_FALSE(logic_is_valid_alpha("Max@Home"));
+}
+
+void test_logic_is_valid_email(void) {
+    // Real test for wrapper
+    TEST_ASSERT_TRUE(logic_is_valid_email("foo@bar.com"));
+    TEST_ASSERT_TRUE(logic_is_valid_email("a@b.de"));
+    TEST_ASSERT_FALSE(logic_is_valid_email("foobar.com"));
+    TEST_ASSERT_FALSE(logic_is_valid_email("foo@barcom"));
+    TEST_ASSERT_FALSE(logic_is_valid_email("foo.bar@com"));
+    TEST_ASSERT_TRUE(logic_is_valid_email("foo@bar.baz.com"));
+    TEST_ASSERT_FALSE(logic_is_valid_email(NULL));
+    TEST_ASSERT_FALSE(logic_is_valid_email(""));
+}
+
+void test_logic_is_valid_ssn(void) {
+    // Real test for wrapper
+    TEST_ASSERT_TRUE(logic_is_valid_ssn("1234-567890"));
+    TEST_ASSERT_FALSE(logic_is_valid_ssn("123-567890"));
+    TEST_ASSERT_FALSE(logic_is_valid_ssn("12345678901"));
+    TEST_ASSERT_FALSE(logic_is_valid_ssn("12345-67890"));
+    TEST_ASSERT_FALSE(logic_is_valid_ssn("12a4-567890"));
+    TEST_ASSERT_FALSE(logic_is_valid_ssn(NULL));
+    TEST_ASSERT_FALSE(logic_is_valid_ssn(""));
+}
+
 // --- Presentation stubs for linker (signatures must match header) ---
 const char* presentation_get_report_title(void) { return ""; }
 const char* presentation_get_report_description(void) { return ""; }
@@ -133,5 +179,9 @@ int main(void) {
     RUN_TEST(test_is_valid_date_format);
     RUN_TEST(test_is_valid_alpha_format);
     RUN_TEST(test_logic_is_only_spaces);
+    RUN_TEST(test_logic_is_valid_date_format);
+    RUN_TEST(test_logic_is_valid_alpha);
+    RUN_TEST(test_logic_is_valid_email);
+    RUN_TEST(test_logic_is_valid_ssn);
     return UNITY_END();
 }

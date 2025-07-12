@@ -4,6 +4,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h> // Für validate_player_profile() Funktion um das Startdatum zu prüfen
+#ifdef UNITTEST_MOCK_TIME
+#include "../test/mocks/mock_time.h"
+#define time mock_time
+#define localtime mock_localtime
+#define mktime mock_mktime
+#define difftime mock_difftime
+#endif
 #include "../inc/logic/logic.h"
 
 #define BUFFER_SIZE 256
@@ -18,7 +25,6 @@
 static void logic_user_menu_workflow(void);
 static void logic_handle_add_user_workflow(void);
 static void logic_handle_edit_user_workflow(void);
-static void read_input(const char *prompt, char *buffer, size_t size);
 
 cJSON *logic_create_report(const char *title, const char *description, const char *date) {
     // Defensive Null-Prüfung
@@ -86,20 +92,17 @@ static int logic_validate_subscription_status(const char* status, int* out) {
     return 0;
 }
 
-static int is_date_in_future(const char* date_str) {
+int is_date_in_future(const char* date_str) {
     if (!date_str) return 0;
     struct tm date_tm = {0};
     if (!strptime(date_str, "%d.%m.%Y", &date_tm)) return 0;
     date_tm.tm_isdst = -1;
-    
     time_t now = time(NULL);
     struct tm now_tm = *localtime(&now);
     now_tm.tm_hour = 0; now_tm.tm_min = 0; now_tm.tm_sec = 0;
     now_tm.tm_isdst = -1;
-    
     time_t today = mktime(&now_tm);
     time_t date_time = mktime(&date_tm);
-    
     return difftime(date_time, today) >= 0;
 }
 
@@ -217,6 +220,7 @@ int logic_add_new_game(Game **games, int *game_count, const char *title, const c
 
 // Refactored 04.07.2025: Hilfsfunktion für Präsentationsschicht
 int logic_is_only_spaces(const char *str) {
+    if (!str || str[0] == '\0') return 0;
     for (size_t i = 0; i < strlen(str); ++i) {
         if (str[i] != ' ') return 0;
     }
@@ -344,7 +348,7 @@ void logic_create_and_save_report(void) {
 }
 
 // Diese Funktion bündelt die Startup-Tasks
-static int logic_perform_startup_tasks(int* removed_count, int* changed_flags) {
+int logic_perform_startup_tasks(int* removed_count, int* changed_flags) {
     *removed_count = 0;
     *changed_flags = 0;
     if (data_remove_expired_users(removed_count) != ERR_SUCCESS) {
@@ -678,7 +682,7 @@ int logic_edit_user(const char* gamertag, const char* new_full_name, const char*
 }
 
 // Funktion zum Einlesen von Benutzereingaben mit Prompt
-static void read_input(const char *prompt, char *buffer, size_t size) {
+void read_input(const char *prompt, char *buffer, size_t size) {
     printf("%s", prompt);
     fflush(stdout);
     if (fgets(buffer, size, stdin) == NULL) {

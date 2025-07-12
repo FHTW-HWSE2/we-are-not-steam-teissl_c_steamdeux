@@ -7,10 +7,9 @@ List users in formated way into the CLI.
 (Noch erweitern)
 
 ### How to compile and run the main program:
-1) -> "cd build"
-2) -> "cmake .."
-3) -> "make"
-5) -> "./game_manager" while you are in the build folder.
+1) -> "cmake -S . -B build"
+2) -> "cmake --build build"
+3) -> "./build/game_manager" 
 
 ### How to compile and run tests
 From Project Root execute these commands:

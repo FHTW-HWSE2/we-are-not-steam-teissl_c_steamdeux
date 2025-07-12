@@ -92,7 +92,6 @@ void start_simulation() {
             if (!user) continue;
             const char *tag = cJSON_GetObjectItem(user, "gamertag")->valuestring;
             const char *end = cJSON_GetObjectItem(user, "subscription_end_date")->valuestring;
-            int is_active = cJSON_GetObjectItem(user, "is_subscribed")->valueint;
 
             struct tm abo_tm = {0};
             strptime(end, "%d.%m.%Y", &abo_tm);

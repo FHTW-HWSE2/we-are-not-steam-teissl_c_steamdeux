@@ -39,42 +39,6 @@ target_include_directories(test_data_remove_expired_users_missing_file_returns_E
     ${PROJECT_SOURCE_DIR}/cJSON
 )
 
-# Executable für den Tests der Funktion data_edit_player_profile
-add_executable(test_data_edit_profile
-    test_data_edit_player_profile.c
-    ${PROJECT_SOURCE_DIR}/src/data/data.c
-    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
-    unity/unity.c
-)
-
-target_compile_definitions(test_data_edit_profile PRIVATE USERS_JSON_PATH=\"test/users_edit.json\")
-
-target_include_directories(test_data_edit_profile PRIVATE
-    ${PROJECT_SOURCE_DIR}/inc
-    ${PROJECT_SOURCE_DIR}/src/data
-    ${PROJECT_SOURCE_DIR}/cJSON
-    ${PROJECT_SOURCE_DIR}/test/unity
-    ${PROJECT_SOURCE_DIR}/test/mocks
-)
-
-# Executable für den Test der Funktion data_edit_player_profile mit ungültigem JSON
-add_executable(test_data_edit_profile_invalid_json
-    test_data_edit_player_profile_invalid_json.c
-    ${PROJECT_SOURCE_DIR}/src/data/data.c
-    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
-    unity/unity.c
-)
-
-target_compile_definitions(test_data_edit_profile_invalid_json PRIVATE USERS_JSON_PATH=\"test/users_invalid_object.json\")
-
-target_include_directories(test_data_edit_profile_invalid_json PRIVATE
-    ${PROJECT_SOURCE_DIR}/inc
-    ${PROJECT_SOURCE_DIR}/src/data
-    ${PROJECT_SOURCE_DIR}/test/unity
-    ${PROJECT_SOURCE_DIR}/test/mocks
-    ${PROJECT_SOURCE_DIR}/cJSON
-)
-
 # Executable für den Test der Funktion data_get_all_users
 add_executable(test_data_get_all_users
     test_data_get_all_users.c
@@ -93,7 +57,7 @@ target_include_directories(test_data_get_all_users PRIVATE
     ${PROJECT_SOURCE_DIR}/test/mocks
 )
 
-# Executable für den Test der Funktion data_save_report
+# Executable für den Test der Funktion data_save_report_missing_file
 add_executable(test_data_save_report_missing_file
     test_data_save_report_missing_file.c
     ${PROJECT_SOURCE_DIR}/src/data/data.c
@@ -137,22 +101,6 @@ add_executable(test_data_save_report_fallback_array
 target_compile_definitions(test_data_save_report_fallback_array PRIVATE REPORTS_FILE=\"test/missing_or_invalid_report.json\")
 
 target_include_directories(test_data_save_report_fallback_array PRIVATE
-    ${PROJECT_SOURCE_DIR}/inc
-    ${PROJECT_SOURCE_DIR}/src/data
-    ${PROJECT_SOURCE_DIR}/cJSON
-    ${PROJECT_SOURCE_DIR}/test/unity
-)
-
-# Executable für den Test der Funktion data_save_report mit ungültigem JSON
-add_executable(test_data_save_report_invalid_json_type
-    test_data_save_report_invalid_json_type.c
-    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
-    unity/unity.c
-)
-
-target_compile_definitions(test_data_save_report_invalid_json_type PRIVATE REPORTS_FILE=\"test/reports_invalid_object.json\")
-
-target_include_directories(test_data_save_report_invalid_json_type PRIVATE
     ${PROJECT_SOURCE_DIR}/inc
     ${PROJECT_SOURCE_DIR}/src/data
     ${PROJECT_SOURCE_DIR}/cJSON
@@ -204,6 +152,7 @@ add_executable(test_logic_validate_required_field
     ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
     ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
     ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
 
 target_include_directories(test_logic_validate_required_field PRIVATE
@@ -429,6 +378,12 @@ target_include_directories(test_logic_get_top_users PRIVATE
     ${PROJECT_SOURCE_DIR}/src/simulation
 )
 
+# In test/CMakeLists.txt sicherstellen, dass das Mocking-Flag gesetzt wird
+set_source_files_properties(
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    PROPERTIES COMPILE_DEFINITIONS UNITTEST_MOCK_TIME
+)
+
 # Executable um alle Tests gebündelt auszuführen
 add_executable(run_all_tests run_all_tests.c)
 
@@ -436,15 +391,130 @@ add_executable(run_all_tests run_all_tests.c)
 add_compile_options(-Wall -Wextra -Wno-unused-parameter)
 
 # Executable für die gemeinsamen Format-Tests
-add_executable(test_is_valid_formats
+set(TEST_IS_VALID_FORMATS_SRCS
     test_is_valid_formats.c
     unity/unity.c
     ${PROJECT_SOURCE_DIR}/src/logic/logic.c
     ${PROJECT_SOURCE_DIR}/src/data/data.c
     ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
+
+add_executable(test_is_valid_formats ${TEST_IS_VALID_FORMATS_SRCS})
 
 target_include_directories(test_is_valid_formats PRIVATE
     ${PROJECT_SOURCE_DIR}/inc
     ${PROJECT_SOURCE_DIR}/test/unity
+)
+
+# Executable für den Test der Funktion is_date_in_future mit Mocking
+add_executable(test_is_date_in_future
+    test_is_date_in_future.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+target_include_directories(test_is_date_in_future PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+)
+
+set_source_files_properties(
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    PROPERTIES COMPILE_DEFINITIONS UNITTEST_MOCK_TIME
+)
+
+# Executable für den Test logic_create_report
+add_executable(test_logic_create_report
+    test_logic_create_report.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+target_include_directories(test_logic_create_report PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+)
+
+# Executable für den Test logic_validate_subscription_status
+add_executable(test_logic_validate_subscription_status
+    test_logic_validate_subscription_status.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+target_include_directories(test_logic_validate_subscription_status PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+)
+
+# Executable für den Test der Funktion read_input
+add_executable(test_read_input
+    test_read_input.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+target_include_directories(test_read_input PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+)
+
+# Executable für den Test logic_perform_startup_tasks
+add_executable(test_logic_perform_startup_tasks
+    test_logic_perform_startup_tasks.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_cjson.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+target_include_directories(test_logic_perform_startup_tasks PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
 )

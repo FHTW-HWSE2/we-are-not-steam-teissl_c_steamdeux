@@ -45,5 +45,12 @@ int is_valid_ssn_format(const char* ssn);
 int is_valid_email_format(const char* email);
 int is_valid_date_format(const char* date);
 int is_valid_alpha_format(const char *str);
+int is_date_in_future(const char* date_str);
+int is_valid_ssn_format(const char* ssn);
+int is_valid_email_format(const char* email);
+int is_valid_date_format(const char* date);
+int is_valid_alpha_format(const char *str);
+void read_input(const char *prompt, char *buffer, size_t size);
+int logic_perform_startup_tasks(int* removed_count, int* changed_flags);
 
 #endif // LOGIC_H
