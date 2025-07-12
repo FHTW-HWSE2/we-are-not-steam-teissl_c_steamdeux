@@ -12,6 +12,29 @@ extern int mock_presentation_display_users_formatted_called;
 extern char** mock_presentation_display_users_formatted_lines;
 extern int mock_presentation_display_users_formatted_count;
 
+// Additional tracking for logic_start_application
+extern int mock_presentation_print_welcome_banner_called;
+extern int mock_presentation_show_startup_info_called;
+extern int mock_presentation_show_startup_info_removed;
+extern int mock_presentation_show_startup_info_changed;
+extern int mock_presentation_error_critical_startup_called;
+extern int mock_presentation_display_main_menu_called;
+extern int mock_presentation_info_exiting_called;
+extern int mock_presentation_error_invalid_option_called;
+extern int mock_presentation_display_user_menu_called;
+extern int mock_presentation_info_returning_to_main_menu_called;
+extern int mock_presentation_start_game_management_menu_called;
+extern int mock_start_simulation_called;
+
+// Choice sequences
+extern int mock_main_menu_choice_count;
+extern int mock_main_menu_choice_index;
+extern int mock_main_menu_choices[100];
+
+extern int mock_user_menu_choice_count;
+extern int mock_user_menu_choice_index;
+extern int mock_user_menu_choices[100];
+
 // Function prototypes (subset matching those used in the test; add more if needed for other tests)
 void presentation_show_error(const char *message);
 void presentation_display_users_formatted(char **lines, int count);

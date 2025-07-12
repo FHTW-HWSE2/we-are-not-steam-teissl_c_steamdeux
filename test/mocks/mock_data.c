@@ -17,6 +17,13 @@ int mock_data_get_all_users_called = 0;
 int mock_data_get_all_users_return = ERR_SUCCESS;
 cJSON* mock_data_get_all_users_users_out = NULL;
 
+int mock_data_remove_expired_users_called = 0;
+int mock_data_remove_expired_users_return = ERR_SUCCESS;
+int mock_data_remove_expired_users_removed_out = 0;
+
+int mock_data_update_all_subscription_flags_called = 0;
+int mock_data_update_all_subscription_flags_return = 0;
+
 // === Setup/Teardown ===
 void mock_data_Init(void) {
     expected_return_value = 0;
@@ -188,11 +195,13 @@ int data_load_games(const char *filename, Game **games_out, int *count_out) {
 
 // ==== Abo-Status aktualisieren ====
 int data_update_all_subscription_flags(void) {
-    return 0; // 0 Nutzer geändert (Standardfall)
+    mock_data_update_all_subscription_flags_called++;
+    return mock_data_update_all_subscription_flags_return;
 }
 
 // ==== Expired Users entfernen ====
 int data_remove_expired_users(int *removed_count_out) {
-    if (removed_count_out) *removed_count_out = 0;
-    return ERR_SUCCESS;
+    mock_data_remove_expired_users_called++;
+    if (removed_count_out) *removed_count_out = mock_data_remove_expired_users_removed_out;
+    return mock_data_remove_expired_users_return;
 }

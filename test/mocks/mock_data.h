@@ -21,6 +21,13 @@ extern int mock_data_load_games_return;
 extern Game* mock_data_load_games_games_out;
 extern int mock_data_load_games_count_out;
 
+extern int mock_data_remove_expired_users_called;
+extern int mock_data_remove_expired_users_return;
+extern int mock_data_remove_expired_users_removed_out;
+
+extern int mock_data_update_all_subscription_flags_called;
+extern int mock_data_update_all_subscription_flags_return;
+
 // ===== save_player_profile =====
 void save_player_profile_ExpectAndReturn(
     const char* full_name,
@@ -86,5 +93,6 @@ void print_user_to_cli(void);
 // ===== weitere gemockte Datenfunktionen =====
 int data_get_all_users(cJSON **users_out);
 int data_remove_expired_users(int *removed_count);
+int data_update_all_subscription_flags(void);
 
 #endif // _MOCK_DATA_H

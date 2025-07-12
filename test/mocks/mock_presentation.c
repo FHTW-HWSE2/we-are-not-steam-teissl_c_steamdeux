@@ -14,6 +14,29 @@ int mock_presentation_display_users_formatted_called = 0;
 char** mock_presentation_display_users_formatted_lines = NULL;
 int mock_presentation_display_users_formatted_count = 0;
 
+// Additional tracking for logic_start_application tests
+int mock_presentation_print_welcome_banner_called = 0;
+int mock_presentation_show_startup_info_called = 0;
+int mock_presentation_show_startup_info_removed = 0;
+int mock_presentation_show_startup_info_changed = 0;
+int mock_presentation_error_critical_startup_called = 0;
+int mock_presentation_display_main_menu_called = 0;
+int mock_presentation_info_exiting_called = 0;
+int mock_presentation_error_invalid_option_called = 0;
+int mock_presentation_display_user_menu_called = 0;
+int mock_presentation_info_returning_to_main_menu_called = 0;
+int mock_presentation_start_game_management_menu_called = 0;
+int mock_start_simulation_called = 0;
+
+// Choice sequences
+int mock_main_menu_choice_count = 0;
+int mock_main_menu_choice_index = 0;
+int mock_main_menu_choices[100] = {0};
+
+int mock_user_menu_choice_count = 0;
+int mock_user_menu_choice_index = 0;
+int mock_user_menu_choices[100] = {0};
+
 // === Mock: Fehleranzeige ===
 void presentation_show_error(const char *message) {
     mock_presentation_show_error_called++;
@@ -43,19 +66,66 @@ void presentation_display_users_formatted(char **lines, int count) {
     }
 }
 
-// === Stub-Funktionen (do nothing oder Rückgabe 0/default) ===
+// Mocked functions with tracking
+void presentation_print_welcome_banner(void) {
+    mock_presentation_print_welcome_banner_called++;
+}
 
-void presentation_print_welcome_banner(void) {}
-void presentation_show_startup_info(int a, int b) {}
-void presentation_error_critical_startup(void) {}
-void presentation_display_main_menu(void) {}
-int presentation_get_main_menu_choice(void) { return 0; }
-void presentation_info_exiting(void) {}
-void presentation_start_game_management_menu(void) {}
-void presentation_error_invalid_option(void) {}
-void presentation_display_user_menu(void) {}
-int presentation_get_user_menu_choice(void) { return 0; }
-void presentation_info_returning_to_main_menu(void) {}
+void presentation_show_startup_info(int removed, int changed) {
+    mock_presentation_show_startup_info_called++;
+    mock_presentation_show_startup_info_removed = removed;
+    mock_presentation_show_startup_info_changed = changed;
+}
+
+void presentation_error_critical_startup(void) {
+    mock_presentation_error_critical_startup_called++;
+}
+
+void presentation_display_main_menu(void) {
+    mock_presentation_display_main_menu_called++;
+}
+
+void presentation_info_exiting(void) {
+    mock_presentation_info_exiting_called++;
+}
+
+void presentation_error_invalid_option(void) {
+    mock_presentation_error_invalid_option_called++;
+}
+
+void presentation_display_user_menu(void) {
+    mock_presentation_display_user_menu_called++;
+}
+
+void presentation_info_returning_to_main_menu(void) {
+    mock_presentation_info_returning_to_main_menu_called++;
+}
+
+void presentation_start_game_management_menu(void) {
+    mock_presentation_start_game_management_menu_called++;
+}
+
+int presentation_get_main_menu_choice(void) {
+    if (mock_main_menu_choice_index < mock_main_menu_choice_count) {
+        return mock_main_menu_choices[mock_main_menu_choice_index++];
+    }
+    return 0;
+}
+
+int presentation_get_user_menu_choice(void) {
+    if (mock_user_menu_choice_index < mock_user_menu_choice_count) {
+        return mock_user_menu_choices[mock_user_menu_choice_index++];
+    }
+    return 0;
+}
+
+void start_simulation(void) {
+    mock_start_simulation_called++;
+}
+
+// === Stub-Funktionen (do nothing oder Rückgabe 0/default) ===
+// (Keep the rest as is, or add tracking if needed for other tests)
+
 void presentation_remove_user(void) {}
 void presentation_info_add_report_selected(void) {}
 void presentation_info_rank_top_users_selected(void) {}
@@ -115,6 +185,3 @@ const char* presentation_get_report_date(void) { return "12.07.2025"; }
 
 void presentation_welcome_add_user(void) {}
 void presentation_error_gamertag_empty_edit(void) {}
-
-// Simulation stub
-void start_simulation(void) {}
