@@ -58,6 +58,10 @@ int main(void) {
     failed |= run("./build/test/test_logic_delete_game");
     failed |= run("./build/test/test_logic_add_new_game");
     failed |= run("./build/test/test_logic_display_games_formatted");
+    failed |= run("./build/test/test_simulation");
+    failed |= run("./build/test/test_run_simulation");
+
+
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
         return 1;

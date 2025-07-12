@@ -680,3 +680,30 @@ target_include_directories(test_logic_add_new_game PRIVATE
     ${PROJECT_SOURCE_DIR}/test/mocks
     ${PROJECT_SOURCE_DIR}/cJSON
 )
+
+# Test für simulation
+add_executable(test_simulation
+    test_simulation.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation_helpers.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+)
+
+target_include_directories(test_simulation PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/simulation
+    ${PROJECT_SOURCE_DIR}/test
+)
+
+# Test für start_simulation mit Umleitung von stdin
+add_executable(test_run_simulation
+    test_run_simulation.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+)
+
+target_include_directories(test_run_simulation PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
