@@ -7,6 +7,17 @@
 static int expected_return_value;
 static int function_called;
 
+int mock_data_load_games_called = 0;
+int mock_data_load_games_return = ERR_SUCCESS;
+Game* mock_data_load_games_games_out = NULL;
+int mock_data_load_games_count_out = 0;
+
+// === Kontrollvariablen für Tests ===
+int mock_data_get_all_users_called = 0;
+int mock_data_get_all_users_return = ERR_SUCCESS;
+cJSON* mock_data_get_all_users_users_out = NULL;
+
+// === Setup/Teardown ===
 void mock_data_Init(void) {
     expected_return_value = 0;
     function_called = 0;
@@ -52,7 +63,6 @@ int save_player_profile(
     return expected_return_value;
 }
 
-// Updated function with data_ prefix
 int data_save_player_profile(
     const char* full_name,
     const char* gamertag,
@@ -145,37 +155,44 @@ void print_user_to_cli(void) {
     function_called = 1;
 }
 
-// Dummy-Implementierung für Test-Builds, damit Linker zufrieden ist
+// ==== data_get_all_users (erweitert für Tests) ====
 int data_get_all_users(cJSON **users_out) {
-    if (users_out) *users_out = cJSON_CreateArray();
-    return 0;
+    mock_data_get_all_users_called++;
+    if (users_out) {
+        *users_out = mock_data_get_all_users_users_out;
+    }
+    return mock_data_get_all_users_return;
 }
 
+// ==== Reports ====
 int data_save_report(cJSON *report) {
     (void)report;
-    return 0;
+    return ERR_SUCCESS;
 }
 
+// ==== Spiele ====
 int data_save_games(const char *filename, Game games[], int game_count) {
-    (void)filename; (void)games; (void)game_count;
-    return 0;
+    (void)filename;
+    (void)games;
+    (void)game_count;
+    return ERR_SUCCESS;
 }
 
-// Missing data_load_games function - updated signature
 int data_load_games(const char *filename, Game **games_out, int *count_out) {
     (void)filename;
-    *games_out = NULL;
-    *count_out = 0;
-    return 0; // Mock returns success
+    mock_data_load_games_called++;
+    if (games_out) *games_out = mock_data_load_games_games_out;
+    if (count_out) *count_out = mock_data_load_games_count_out;
+    return mock_data_load_games_return;
 }
 
-// Missing data_update_all_subscription_flags function - added for test compatibility
+// ==== Abo-Status aktualisieren ====
 int data_update_all_subscription_flags(void) {
-    return 7; // Mock: 7 users changed, wie vom Test erwartet
+    return 0; // 0 Nutzer geändert (Standardfall)
 }
 
-// Mock für data_remove_expired_users, damit der Test die erwarteten Werte bekommt
-int data_remove_expired_users(int *removed_count) {
-    if (removed_count) *removed_count = 42;
-    return 0; // ERR_SUCCESS
+// ==== Expired Users entfernen ====
+int data_remove_expired_users(int *removed_count_out) {
+    if (removed_count_out) *removed_count_out = 0;
+    return ERR_SUCCESS;
 }

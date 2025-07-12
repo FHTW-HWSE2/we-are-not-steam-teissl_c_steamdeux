@@ -3,11 +3,23 @@
 
 #include "unity.h"
 #include "../inc/data/data.h"
+#include "../../inc/error.h"
+#include "../../cJSON/cJSON.h"
 
-// Initialisierung / Verifikation
+// === Initialisierung / Verifikation ===
 void mock_data_Init(void);
 void mock_data_Destroy(void);
 void mock_data_Verify(void);
+
+// === Kontrollvariablen für Mock-Verhalten (Teststeuerung) ===
+extern int mock_data_get_all_users_called;
+extern int mock_data_get_all_users_return;
+extern cJSON* mock_data_get_all_users_users_out;
+
+extern int mock_data_load_games_called;
+extern int mock_data_load_games_return;
+extern Game* mock_data_load_games_games_out;
+extern int mock_data_load_games_count_out;
 
 // ===== save_player_profile =====
 void save_player_profile_ExpectAndReturn(
@@ -71,7 +83,8 @@ int read_player_profiles(char** output);
 void print_user_to_cli_Expect(void);
 void print_user_to_cli(void);
 
-// Mock für data_remove_expired_users
+// ===== weitere gemockte Datenfunktionen =====
+int data_get_all_users(cJSON **users_out);
 int data_remove_expired_users(int *removed_count);
 
-#endif
+#endif // _MOCK_DATA_H

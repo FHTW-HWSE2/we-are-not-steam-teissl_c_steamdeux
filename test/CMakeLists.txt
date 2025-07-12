@@ -524,3 +524,119 @@ target_include_directories(test_logic_perform_startup_tasks PRIVATE
     ${PROJECT_SOURCE_DIR}/test/unity
     ${PROJECT_SOURCE_DIR}/test/mocks
 )
+
+
+# Executable für den Test der Funktion logic_get_user_lines_for_display
+add_executable(test_logic_get_user_lines_for_display
+    ${PROJECT_SOURCE_DIR}/test/test_logic_get_user_lines_for_display.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c  # Reuse from previous
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c  # The source under test
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c 
+    
+)
+
+target_include_directories(test_logic_get_user_lines_for_display PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/src/simulation
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+# Executable für den Test der Funktion logic_display_users_formatted
+add_executable(test_logic_display_users_formatted
+    ${PROJECT_SOURCE_DIR}/test/test_logic_display_users_formatted.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c  # Mock für presentation
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c  # Direkt eingebunden für cJSON
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c  # The source under test
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c 
+)
+
+target_include_directories(test_logic_display_users_formatted PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/presentation  # For presentation.h
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/src/simulation  # For simulation.h
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+# Executable für den Test der Funktion logic_initialize_game_data_loading
+add_executable(test_logic_initialize_game_data_loading
+    test_logic_initialize_game_data_loading.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c  # optional, falls nötig
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c 
+)
+target_include_directories(test_logic_initialize_game_data_loading PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/src/simulation  # For simulation.h if included indirectly
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+# Executable für den Test der Funktion logic_edit_game
+add_executable(test_logic_edit_game
+    ${PROJECT_SOURCE_DIR}/test/test_logic_edit_game.c
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c  # Direkt eingebunden für cJSON
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c  # The source under test
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c 
+)
+
+target_include_directories(test_logic_edit_game PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/src/simulation  # For simulation.h if included indirectly
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
+
+add_executable(test_logic_delete_game
+    ${PROJECT_SOURCE_DIR}/test/test_logic_delete_game.c
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c 
+)
+
+target_include_directories(test_logic_delete_game PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+)
