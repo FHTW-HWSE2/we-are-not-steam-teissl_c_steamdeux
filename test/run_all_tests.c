@@ -50,7 +50,6 @@ int main(void) {
     // failed |= run("./build/test/test_logic_is_only_spaces"); // Deaktiviert, da Binary nicht existiert
     failed |= run("./build/test/test_read_input");
     failed |= run("./build/test/test_logic_perform_startup_tasks");
-    // David
     failed |= run("./build/test/test_logic_get_user_lines_for_display");
     failed |= run("./build/test/test_logic_display_users_formatted");
     failed |= run("./build/test/test_logic_initialize_game_data_loading");
@@ -60,7 +59,7 @@ int main(void) {
     failed |= run("./build/test/test_logic_display_games_formatted");
     failed |= run("./build/test/test_simulation");
     failed |= run("./build/test/test_run_simulation");
-
+    failed |= run("./build/test/test_logic_start_application");
 
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
