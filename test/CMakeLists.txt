@@ -548,7 +548,6 @@ target_include_directories(test_logic_get_user_lines_for_display PRIVATE
     ${PROJECT_SOURCE_DIR}/src/logic
     ${PROJECT_SOURCE_DIR}/src/data
     ${PROJECT_SOURCE_DIR}/src/simulation
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
 
 # Executable für den Test der Funktion logic_display_users_formatted
@@ -572,7 +571,6 @@ target_include_directories(test_logic_display_users_formatted PRIVATE
     ${PROJECT_SOURCE_DIR}/src/logic
     ${PROJECT_SOURCE_DIR}/src/data
     ${PROJECT_SOURCE_DIR}/src/simulation  # For simulation.h
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
 
 # Executable für den Test der Funktion logic_initialize_game_data_loading
@@ -595,7 +593,6 @@ target_include_directories(test_logic_initialize_game_data_loading PRIVATE
     ${PROJECT_SOURCE_DIR}/src/logic
     ${PROJECT_SOURCE_DIR}/src/data
     ${PROJECT_SOURCE_DIR}/src/simulation  # For simulation.h if included indirectly
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
 
 # Executable für den Test der Funktion logic_edit_game
@@ -618,7 +615,6 @@ target_include_directories(test_logic_edit_game PRIVATE
     ${PROJECT_SOURCE_DIR}/src/logic
     ${PROJECT_SOURCE_DIR}/src/data
     ${PROJECT_SOURCE_DIR}/src/simulation  # For simulation.h if included indirectly
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
 
 add_executable(test_logic_delete_game
@@ -638,5 +634,4 @@ target_include_directories(test_logic_delete_game PRIVATE
     ${PROJECT_SOURCE_DIR}/test/unity
     ${PROJECT_SOURCE_DIR}/test/mocks
     ${PROJECT_SOURCE_DIR}/cJSON
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
