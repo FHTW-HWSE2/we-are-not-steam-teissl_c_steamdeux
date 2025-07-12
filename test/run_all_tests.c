@@ -56,6 +56,8 @@ int main(void) {
     failed |= run("./build/test/test_logic_initialize_game_data_loading");
     failed |= run("./build/test/test_logic_edit_game");
     failed |= run("./build/test/test_logic_delete_game");
+    failed |= run("./build/test/test_logic_add_new_game");
+    failed |= run("./build/test/test_logic_display_games_formatted");
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
         return 1;
