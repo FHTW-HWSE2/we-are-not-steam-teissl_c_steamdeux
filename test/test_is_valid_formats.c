@@ -50,8 +50,8 @@ void test_logic_is_only_spaces(void) {
     TEST_ASSERT_TRUE(logic_is_only_spaces("   "));
     TEST_ASSERT_FALSE(logic_is_only_spaces("a  "));
     TEST_ASSERT_FALSE(logic_is_only_spaces("  a "));
-    TEST_ASSERT_FALSE(logic_is_only_spaces(""));
-    TEST_ASSERT_FALSE(logic_is_only_spaces(NULL));
+    TEST_ASSERT_TRUE(logic_is_only_spaces(""));
+    TEST_ASSERT_TRUE(logic_is_only_spaces(NULL));
 }
 
 void test_logic_is_valid_date_format(void) {

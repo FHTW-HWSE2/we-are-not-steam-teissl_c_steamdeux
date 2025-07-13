@@ -52,7 +52,8 @@ Game* create_test_games(int count) {
         games[i].id = i + 1;
         snprintf(games[i].title, sizeof(games[i].title), "Test Game %d", i + 1);
         snprintf(games[i].description, sizeof(games[i].description), "Description for game %d", i + 1);
-        snprintf(games[i].version, sizeof(games[i].version), "1.0.%d", i);
+        // Use a version string that always fits in 10 chars (max 9 + null)
+        snprintf(games[i].version, sizeof(games[i].version), "1.0.%d", i % 1000);
         snprintf(games[i].mode, sizeof(games[i].mode), "Mode %d", i + 1);
         games[i].current_streams = 10 * (i + 1);
     }
@@ -108,7 +109,9 @@ void test_logic_display_games_formatted_multiple_games(void) {
 
     // Spot-check a few lines
     TEST_ASSERT_EQUAL_STRING("Game 1:", mock_presentation_display_users_formatted_lines[0]);
+    TEST_ASSERT_EQUAL_STRING("Version: 1.0.0", mock_presentation_display_users_formatted_lines[3]);
     TEST_ASSERT_EQUAL_STRING("Game 2:", mock_presentation_display_users_formatted_lines[7]);
+    TEST_ASSERT_EQUAL_STRING("Version: 1.0.1", mock_presentation_display_users_formatted_lines[10]);
     TEST_ASSERT_EQUAL_STRING("Current Streams: 20", mock_presentation_display_users_formatted_lines[12]);
 
     free(games);

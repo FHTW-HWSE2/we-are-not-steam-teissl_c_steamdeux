@@ -35,12 +35,11 @@ void setUp(void) {
     mock_localtime_func = fake_localtime;
     mock_mktime_func = fake_mktime;
     mock_difftime_func = fake_difftime;
-    // Set fixed date: 11.07.2025
-    memset(&fixed_tm_value, 0, sizeof(fixed_tm_value));
-    fixed_tm_value.tm_mday = 11;
-    fixed_tm_value.tm_mon = 6; // July (0-based)
-    fixed_tm_value.tm_year = 2025-1900;
-    fixed_time_value = 1752192000;
+    // Set fixed date: today
+    time_t now = time(NULL);
+    struct tm *now_tm = localtime(&now);
+    memcpy(&fixed_tm_value, now_tm, sizeof(struct tm));
+    fixed_time_value = mktime(&fixed_tm_value);
 }
 
 void tearDown(void) {
@@ -48,10 +47,13 @@ void tearDown(void) {
 }
 
 void test_is_date_in_future(void) {
+    // Format today's date as dd.mm.yyyy
+    char today_str[32];
+    snprintf(today_str, sizeof(today_str), "%02d.%02d.%04d", fixed_tm_value.tm_mday, fixed_tm_value.tm_mon + 1, fixed_tm_value.tm_year + 1900);
     // Test: future date
     TEST_ASSERT_TRUE(is_date_in_future("31.12.2099"));
     // Test: today (should be true)
-    TEST_ASSERT_TRUE(is_date_in_future("11.07.2025"));
+    TEST_ASSERT_TRUE(is_date_in_future(today_str));
     // Test: past date
     TEST_ASSERT_FALSE(is_date_in_future("01.01.2000"));
     // Test: invalid date
