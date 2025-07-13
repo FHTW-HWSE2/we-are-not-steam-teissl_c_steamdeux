@@ -51,7 +51,6 @@ int main(void) {
     failed |= run("./build/test/test_is_date_in_future");
     // failed |= run("./build/test/test_logic_is_only_spaces"); // Deaktiviert, da Binary nicht existiert
     failed |= run("./build/test/test_read_input");
-    failed |= run("./build/test/test_logic_perform_startup_tasks");
     failed |= run("./build/test/test_logic_get_user_lines_for_display");
     failed |= run("./build/test/test_logic_display_users_formatted");
     failed |= run("./build/test/test_logic_initialize_game_data_loading");

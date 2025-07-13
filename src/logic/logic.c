@@ -21,10 +21,10 @@
 // Präsentationsschicht: Präsentiert Menüs, liest Benutzereingaben, gibt Ausgaben aus.
 // ===================== SCHICHTEN-KOMMENTARE ENDE =====================
 
-// Forward declarations for static functions
-static void logic_user_menu_workflow(void);
-static void logic_handle_add_user_workflow(void);
-static void logic_handle_edit_user_workflow(void);
+// Forward declarations for  functions
+ void logic_user_menu_workflow(void);
+ void logic_handle_add_user_workflow(void);
+ void logic_handle_edit_user_workflow(void);
 
 cJSON *logic_create_report(const char *title, const char *description, const char *date) {
     // Defensive Null-Prüfung
@@ -86,7 +86,7 @@ int is_valid_alpha_format(const char *str) {
     return 1;
 }
 
-static int logic_validate_subscription_status(const char* status, int* out) {
+ int logic_validate_subscription_status(const char* status, int* out) {
     if (strcmp(status, "true") == 0) { *out = 1; return 1; }
     if (strcmp(status, "false") == 0) { *out = 0; return 1; }
     return 0;
@@ -248,7 +248,7 @@ int logic_is_valid_ssn(const char *str) {
 
 
 // Sortierfunktion für logic_get_top_users
-static int compare_users_by_hours(const void *a, const void *b) {
+ int compare_users_by_hours(const void *a, const void *b) {
     const cJSON *userA = *(const cJSON **)a;
     const cJSON *userB = *(const cJSON **)b;
     int hoursA = cJSON_GetObjectItem(userA, "player_hours")->valueint;
@@ -399,7 +399,7 @@ void logic_start_application(void) {
 }
 
 // Diese Funktion steuert das User Management Menü
-static void logic_user_menu_workflow(void) {
+ void logic_user_menu_workflow(void) {
     while (1) {
         presentation_display_user_menu();
         int choice = presentation_get_user_menu_choice();
@@ -439,7 +439,7 @@ static void logic_user_menu_workflow(void) {
 }
 
 // Diese Funktion steuert das Hinzufügen eines Users im Pull-Modell
-static void logic_handle_add_user_workflow(void) {
+ void logic_handle_add_user_workflow(void) {
     char full_name[BUFFER_SIZE], gamertag[BUFFER_SIZE], ssn[BUFFER_SIZE], email[BUFFER_SIZE], sub_start[BUFFER_SIZE], duration_str[BUFFER_SIZE];
     int use_today = 0, duration = 1;
 
@@ -533,7 +533,7 @@ static void logic_handle_add_user_workflow(void) {
 
 
 // Diese Funktion steuert das Bearbeiten eines Users im Pull-Modell
-static void logic_handle_edit_user_workflow(void) {
+ void logic_handle_edit_user_workflow(void) {
     char gamertag[MAX_USER_INPUT], new_full_name[MAX_USER_INPUT], new_ssn[MAX_USER_INPUT], new_email[MAX_USER_INPUT];
     char sub_start[MAX_USER_INPUT], sub_end[MAX_USER_INPUT], is_subscribed_str[MAX_USER_INPUT];
 

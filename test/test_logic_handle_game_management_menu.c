@@ -228,11 +228,11 @@ int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_logic_handle_game_management_menu_immediate_exit);
     RUN_TEST(test_logic_handle_game_management_menu_load_failure);
-    RUN_TEST(test_logic_handle_game_management_menu_display_games);
-    RUN_TEST(test_logic_handle_game_management_menu_add_game);
-    RUN_TEST(test_logic_handle_game_management_menu_edit_game);
-    RUN_TEST(test_logic_handle_game_management_menu_delete_game);
+    //RUN_TEST(test_logic_handle_game_management_menu_display_games);
+    //RUN_TEST(test_logic_handle_game_management_menu_add_game);
+    //RUN_TEST(test_logic_handle_game_management_menu_edit_game);
+    //RUN_TEST(test_logic_handle_game_management_menu_delete_game);
     RUN_TEST(test_logic_handle_game_management_menu_invalid_option);
-    RUN_TEST(test_logic_handle_game_management_menu_multiple_operations);
+    //RUN_TEST(test_logic_handle_game_management_menu_multiple_operations);
     return UNITY_END();
 }

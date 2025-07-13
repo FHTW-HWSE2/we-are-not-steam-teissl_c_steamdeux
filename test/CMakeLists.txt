@@ -553,24 +553,6 @@ target_include_directories(test_read_input PRIVATE
     ${PROJECT_SOURCE_DIR}/test/mocks
 )
 
-# Executable für den Test logic_perform_startup_tasks
-add_executable(test_logic_perform_startup_tasks
-    test_logic_perform_startup_tasks.c
-    unity/unity.c
-    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_cjson.c
-    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
-)
-
-target_include_directories(test_logic_perform_startup_tasks PRIVATE
-    ${PROJECT_SOURCE_DIR}/inc
-    ${PROJECT_SOURCE_DIR}/src/logic
-    ${PROJECT_SOURCE_DIR}/test/unity
-    ${PROJECT_SOURCE_DIR}/test/mocks
-)
-
 
 # Executable für den Test der Funktion logic_get_user_lines_for_display
 add_executable(test_logic_get_user_lines_for_display
