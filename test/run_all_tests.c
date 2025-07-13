@@ -61,6 +61,7 @@ int main(void) {
     failed |= run("./build/test/test_run_simulation");
     failed |= run("./build/test/test_logic_start_application");
     failed |= run("./build/test/test_logic_user_menu_workflow");
+    failed |= run("./build/test/test_logic_handle_game_workflows");
 
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");

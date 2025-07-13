@@ -24,6 +24,9 @@ int mock_data_remove_expired_users_removed_out = 0;
 int mock_data_update_all_subscription_flags_called = 0;
 int mock_data_update_all_subscription_flags_return = 0;
 
+// Kontrollvariable für das Rückgabeverhalten von data_save_games
+int mock_data_save_games_return = ERR_SUCCESS;
+
 // === Setup/Teardown ===
 void mock_data_Init(void) {
     expected_return_value = 0;
@@ -182,7 +185,7 @@ int data_save_games(const char *filename, Game games[], int game_count) {
     (void)filename;
     (void)games;
     (void)game_count;
-    return ERR_SUCCESS;
+    return mock_data_save_games_return;
 }
 
 int data_load_games(const char *filename, Game **games_out, int *count_out) {
