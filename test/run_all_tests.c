@@ -62,6 +62,8 @@ int main(void) {
     failed |= run("./build/test/test_logic_handle_add_game");
     failed |= run("./build/test/test_logic_handle_game_management_menu");
     failed |= run("./build/test/test_logic_handle_game_workflows");
+    failed |= run("./build/test/test_data_remove_expired_users_invalid_cases");
+    failed |= run("./build/test/test_data_remove_expired_users_save_failure");
 
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");
