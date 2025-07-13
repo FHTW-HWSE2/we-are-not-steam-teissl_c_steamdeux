@@ -909,3 +909,24 @@ target_include_directories(test_data_remove_expired_users_save_failure PRIVATE
     ${PROJECT_SOURCE_DIR}/test/unity
     ${PROJECT_SOURCE_DIR}/cJSON
 )
+
+add_executable(test_logic_handle_game_management_menu_integration
+    test_logic_handle_game_management_menu_integration.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+)
+target_compile_definitions(test_logic_handle_game_management_menu_integration PRIVATE GAMES_JSON_PATH=\"test/test_games_integration.json\")
+target_compile_definitions(test_logic_handle_game_management_menu_integration PRIVATE TEST_INPUT_PATH="test/test_input.txt")
+
+target_include_directories(test_logic_handle_game_management_menu_integration PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+)
