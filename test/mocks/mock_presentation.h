@@ -47,6 +47,11 @@ extern int mock_presentation_show_top_users_terminal_called;
 extern int mock_presentation_info_generate_player_report_selected_called;
 extern int mock_presentation_generate_top_users_file_called;
 
+// --- Tracking-Variablen für Workflows ---
+extern int mock_show_message_called;
+extern int mock_display_error_called;
+extern char last_error_msg[256];
+
 // Function prototypes (subset matching those used in the test; add more if needed for other tests)
 void presentation_show_error(const char *message);
 void presentation_display_users_formatted(char **lines, int count);
@@ -136,5 +141,9 @@ int presentation_get_game_menu_choice(void);
 const char* presentation_get_report_title(void);
 const char* presentation_get_report_description(void);
 const char* presentation_get_report_date(void);
+
+// Global Input Mock Variables
+extern char mock_input_id[16];
+extern char mock_new_title[100];
 
 #endif // MOCK_PRESENTATION_H

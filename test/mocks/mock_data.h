@@ -28,6 +28,8 @@ extern int mock_data_remove_expired_users_removed_out;
 extern int mock_data_update_all_subscription_flags_called;
 extern int mock_data_update_all_subscription_flags_return;
 
+extern int mock_data_save_games_return;
+
 // ===== save_player_profile =====
 void save_player_profile_ExpectAndReturn(
     const char* full_name,

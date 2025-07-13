@@ -830,6 +830,7 @@ target_include_directories(test_logic_handle_add_game PRIVATE
 # Executable für den Test der Funktion logic_handle_game_management_menu
 add_executable(test_logic_handle_game_management_menu
     ${PROJECT_SOURCE_DIR}/test/test_logic_handle_game_management_menu.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
     ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
     ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
     ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
@@ -845,4 +846,26 @@ target_include_directories(test_logic_handle_game_management_menu PRIVATE
     ${PROJECT_SOURCE_DIR}/test/unity
     ${PROJECT_SOURCE_DIR}/test/mocks
     ${PROJECT_SOURCE_DIR}/cJSON
+)
+
+# Executable für die Workflows logic_handle_edit_game und logic_handle_delete_game
+add_executable(test_logic_handle_game_workflows
+    ${PROJECT_SOURCE_DIR}/test/test_logic_handle_game_workflows.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+)
+target_include_directories(test_logic_handle_game_workflows PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
 )
