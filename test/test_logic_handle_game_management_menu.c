@@ -7,6 +7,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Mock-Redirects für die Game-Management-Logikfunktionen
+#define logic_display_games_formatted mock_logic_display_games_formatted
+#define logic_handle_add_game mock_logic_handle_add_game
+#define logic_handle_edit_game mock_logic_handle_edit_game
+#define logic_handle_delete_game mock_logic_handle_delete_game
+
 // We will be testing the actual logic_handle_game_management_menu function,
 // so we include the .c file here. The sub-functions it calls will be mocked.
 // #define TESTING_GAME_MENU

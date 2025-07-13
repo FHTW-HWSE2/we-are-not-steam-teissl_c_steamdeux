@@ -220,7 +220,8 @@ int logic_add_new_game(Game **games, int *game_count, const char *title, const c
 
 // Refactored 04.07.2025: Hilfsfunktion für Präsentationsschicht
 int logic_is_only_spaces(const char *str) {
-    if (!str || str[0] == '\0') return 0;
+    // Treat empty string as only spaces (invalid for required fields)
+    if (!str || str[0] == '\0') return 1;
     for (size_t i = 0; i < strlen(str); ++i) {
         if (str[i] != ' ') return 0;
     }
@@ -818,19 +819,21 @@ void logic_handle_add_game(Game **games, int *game_count) {
     presentation_get_game_version(version, sizeof(version));
     presentation_get_game_mode(mode, sizeof(mode));
 
-    if (!logic_is_only_spaces(title) && !logic_is_only_spaces(mode)) {
-        int result = logic_add_new_game(games, game_count, title, description, version, mode);
-        if (result == ERR_SUCCESS) {
-            if (data_save_games(GAMES_JSON_PATH, *games, *game_count) == ERR_SUCCESS) {
-                presentation_show_message("New game added.");
-            } else {
-                presentation_display_error("Failed to save game.");
-            }
+    // Robust validation: reject empty or spaces-only title/mode
+    if (logic_is_only_spaces(title) || logic_is_only_spaces(mode)) {
+        presentation_display_error("Title and Mode must not be empty.");
+        return;
+    }
+
+    int result = logic_add_new_game(games, game_count, title, description, version, mode);
+    if (result == ERR_SUCCESS) {
+        if (data_save_games(GAMES_JSON_PATH, *games, *game_count) == ERR_SUCCESS) {
+            presentation_show_message("New game added.");
         } else {
-            presentation_display_error("Failed to add game.");
+            presentation_display_error("Failed to save game.");
         }
     } else {
-        presentation_display_error("Title and Mode must not be empty.");
+        presentation_display_error("Failed to add game.");
     }
 }
 

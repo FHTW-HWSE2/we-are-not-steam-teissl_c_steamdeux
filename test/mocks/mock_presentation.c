@@ -1,5 +1,11 @@
 // test/mocks/mock_presentation.c
 
+// === Mock variables for game input (must be before any function uses them) ===
+char mock_game_title[100] = "";
+char mock_game_description[256] = "";
+char mock_game_version[20] = "";
+char mock_game_mode[50] = "";
+
 #include "../../inc/presentation/presentation.h"
 #include <string.h>
 #include <stdlib.h>
@@ -122,6 +128,7 @@ void presentation_display_users_formatted(char **lines, int count) {
             free(mock_presentation_display_users_formatted_lines[i]);
         }
         free(mock_presentation_display_users_formatted_lines);
+        mock_presentation_display_users_formatted_lines = NULL; // Prevent double free
     }
     mock_presentation_display_users_formatted_count = count;
     if (count > 0 && lines) {
@@ -204,10 +211,30 @@ int presentation_get_game_menu_choice(void) {
     return 0; // Default exit
 }
 
-void presentation_get_game_title(char *buffer, size_t size) { if (buffer && size) buffer[0] = '\0'; }
-void presentation_get_game_description(char *buffer, size_t size) { if (buffer && size) buffer[0] = '\0'; }
-void presentation_get_game_version(char *buffer, size_t size) { if (buffer && size) buffer[0] = '\0'; }
-void presentation_get_game_mode(char *buffer, size_t size) { if (buffer && size) buffer[0] = '\0'; }
+void presentation_get_game_title(char *buffer, size_t size) {
+    if (buffer && size) {
+        strncpy(buffer, mock_game_title, size);
+        buffer[size-1] = '\0';
+    }
+}
+void presentation_get_game_description(char *buffer, size_t size) {
+    if (buffer && size) {
+        strncpy(buffer, mock_game_description, size);
+        buffer[size-1] = '\0';
+    }
+}
+void presentation_get_game_version(char *buffer, size_t size) {
+    if (buffer && size) {
+        strncpy(buffer, mock_game_version, size);
+        buffer[size-1] = '\0';
+    }
+}
+void presentation_get_game_mode(char *buffer, size_t size) {
+    if (buffer && size) {
+        strncpy(buffer, mock_game_mode, size);
+        buffer[size-1] = '\0';
+    }
+}
 
 // === Stub-Funktionen (do nothing oder Rückgabe 0/default) ===
 // (Keep the rest as is, or add tracking if needed for other tests)
@@ -263,14 +290,9 @@ void presentation_info_enter_sub_status_edit(void) {}
 void presentation_error_sub_status_edit(void) {}
 void presentation_success_user_edited(void) {}
 void presentation_error_user_not_found(void) {}
-// Mock data for game input functions
-char mock_game_title[100] = "";
-char mock_game_description[256] = "";
-char mock_game_version[20] = "";
-char mock_game_mode[50] = "";
 void presentation_welcome_add_user(void) {}
-void presentation_error_gamertag_empty_edit(void) {}
 
+// Mock data for game input functions
 const char* presentation_get_report_title(void) { return "stub_title"; }
 const char* presentation_get_report_description(void) { return "stub_description"; }
 const char* presentation_get_report_date(void) { return "12.07.2025"; }
@@ -294,3 +316,4 @@ void mock_logic_handle_edit_game(Game *games, int game_count) {
 void mock_logic_handle_delete_game(Game **games, int *game_count) {
     mock_logic_handle_delete_game_called++;
 }
+void presentation_error_gamertag_empty_edit(void) {}
