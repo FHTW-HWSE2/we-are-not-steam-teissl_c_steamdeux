@@ -137,8 +137,17 @@ void test_logic_handle_game_management_menu_add_game(void) {
 
 // Test: Edit game option (choice 3)
 void test_logic_handle_game_management_menu_edit_game(void) {
-    // Set up successful game loading
+    // Set up successful game loading with dummy game
+    Game *test_games = malloc(1 * sizeof(Game));
+    test_games[0].id = 1;
+    strcpy(test_games[0].title, "Test Game");
+    strcpy(test_games[0].description, "Test Desc");
+    strcpy(test_games[0].version, "1.0");
+    strcpy(test_games[0].mode, "Test Mode");
+    test_games[0].current_streams = 0;
+
     mock_data_load_games_return = ERR_SUCCESS;
+    mock_data_load_games_games_out = test_games;
     mock_data_load_games_count_out = 1;
     
     // Set menu choices: edit game, then exit
@@ -158,8 +167,17 @@ void test_logic_handle_game_management_menu_edit_game(void) {
 
 // Test: Delete game option (choice 4)
 void test_logic_handle_game_management_menu_delete_game(void) {
-    // Set up successful game loading
+    // Set up successful game loading with dummy game
+    Game *test_games = malloc(1 * sizeof(Game));
+    test_games[0].id = 1;
+    strcpy(test_games[0].title, "Test Game");
+    strcpy(test_games[0].description, "Test Desc");
+    strcpy(test_games[0].version, "1.0");
+    strcpy(test_games[0].mode, "Test Mode");
+    test_games[0].current_streams = 0;
+
     mock_data_load_games_return = ERR_SUCCESS;
+    mock_data_load_games_games_out = test_games;
     mock_data_load_games_count_out = 1;
     
     // Set menu choices: delete game, then exit
@@ -228,11 +246,11 @@ int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_logic_handle_game_management_menu_immediate_exit);
     RUN_TEST(test_logic_handle_game_management_menu_load_failure);
-    //RUN_TEST(test_logic_handle_game_management_menu_display_games);
-    //RUN_TEST(test_logic_handle_game_management_menu_add_game);
-    //RUN_TEST(test_logic_handle_game_management_menu_edit_game);
-    //RUN_TEST(test_logic_handle_game_management_menu_delete_game);
+    // RUN_TEST(test_logic_handle_game_management_menu_display_games);
+    // RUN_TEST(test_logic_handle_game_management_menu_add_game);
+    // RUN_TEST(test_logic_handle_game_management_menu_edit_game);
+    // RUN_TEST(test_logic_handle_game_management_menu_delete_game);
     RUN_TEST(test_logic_handle_game_management_menu_invalid_option);
-    //RUN_TEST(test_logic_handle_game_management_menu_multiple_operations);
+    // RUN_TEST(test_logic_handle_game_management_menu_multiple_operations);
     return UNITY_END();
 }
