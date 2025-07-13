@@ -185,15 +185,6 @@ GameManager ist eine C-basierte Anwendung zur Verwaltung von Nutzern, Spielen un
 
   
 
-### Voraussetzungen
-
-- C-Compiler (GCC empfohlen)
-
-- CMake ≥ 3.10
-
-- gcovr (optional, für Coverage)
-
-  
 
 ### Kompilieren
 
