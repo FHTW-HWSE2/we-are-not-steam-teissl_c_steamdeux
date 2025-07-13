@@ -4,7 +4,7 @@
 #include "unity.h"
 #include "cJSON.h"
 #include "../../inc/data/data.h"
-#include "mock_data.h"
+#include "mocks/mock_data.h"
 #include "../inc/error.h"
 
 void setUp(void) {
