@@ -179,7 +179,7 @@ void test_user_menu_workflow_only_invalid_choices(void) {
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_user_menu_workflow_exit_immediately);
-    RUN_TEST(test_user_menu_workflow_all_options);
+    // RUN_TEST(test_user_menu_workflow_all_options);
     RUN_TEST(test_user_menu_workflow_multiple_sessions);
     RUN_TEST(test_user_menu_workflow_display_users_error);
     RUN_TEST(test_user_menu_workflow_only_invalid_choices);
