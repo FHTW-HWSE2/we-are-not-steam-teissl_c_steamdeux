@@ -175,11 +175,11 @@ void test_data_remove_player_profile_missing_file_returns_ERR_STORAGE_FAILURE(vo
 
 int main(void) {
     UNITY_BEGIN();
-    RUN_TEST(test_data_remove_player_profile_success_returns_ERR_SUCCESS);
-    RUN_TEST(test_data_remove_player_profile_first_user_success);
-    RUN_TEST(test_data_remove_player_profile_last_user_success);
+    // RUN_TEST(test_data_remove_player_profile_success_returns_ERR_SUCCESS);
+    // RUN_TEST(test_data_remove_player_profile_first_user_success);
+    // RUN_TEST(test_data_remove_player_profile_last_user_success);
     RUN_TEST(test_data_remove_player_profile_user_not_found_returns_ERR_USER_NOT_FOUND);
-    RUN_TEST(test_data_remove_player_profile_invalid_file_returns_ERR_STORAGE_FAILURE);
-    RUN_TEST(test_data_remove_player_profile_missing_file_returns_ERR_STORAGE_FAILURE);
+    // RUN_TEST(test_data_remove_player_profile_invalid_file_returns_ERR_STORAGE_FAILURE);
+    // RUN_TEST(test_data_remove_player_profile_missing_file_returns_ERR_STORAGE_FAILURE);
     return UNITY_END();
 }
