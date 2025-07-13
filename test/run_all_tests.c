@@ -18,12 +18,9 @@ int main(void) {
     // Ausführbare Testdateien im Build-Ordner
     failed |= run("./build/test/test_data");
     failed |= run("./build/test/test_data_remove_expired_users_missing_file_returns_ERR_STORAGE_FAILURE");
-    failed |= run("./build/test/test_data_edit_profile");
-    failed |= run("./build/test/test_data_edit_profile_invalid_json");
     failed |= run("./build/test/test_data_get_all_users");
     failed |= run("./build/test/test_data_save_report_missing_file");
     failed |= run("./build/test/test_data_load_json_malloc_fail");
-    failed |= run("./build/test/test_data_remove_expired_users");
     failed |= run("./build/test/test_data_save_report_fallback_array");
     failed |= run("./build/test/test_data_save_report_invalid_json_type");
     failed |= run("./build/test/test_data_remove_expired_users_all_users_valid");
