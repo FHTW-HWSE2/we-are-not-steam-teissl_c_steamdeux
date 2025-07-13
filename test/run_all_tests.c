@@ -34,6 +34,7 @@ int main(void) {
     failed |= run("./build/test/test_is_valid_formats"); // 🍺 Gemeinsame Format-Tests
     //Sina
     failed |= run("./build/test/test_logic_create_report");
+    failed |= run("./build/test/test_logic_create_and_save_report");
     failed |= run("./build/test/test_data_save_json_to_file");
     failed |= run("./build/test/test_data_update_all_subscription_flags");
     failed |= run("./build/test/test_data_save_player_profile");
@@ -44,6 +45,7 @@ int main(void) {
     failed |= run("./build/test/test_logic_get_all_users");
     failed |= run("./build/test/test_logic_edit_user");
     failed |= run("./build/test/test_logic_get_top_users");
+    failed |= run("./build/test/test_logic_generate_top_users_file");
     // Ergänzte Kern-Validierungsfunktionen
     failed |= run("./build/test/test_logic_validate_subscription_status");
     failed |= run("./build/test/test_is_date_in_future");
@@ -61,6 +63,8 @@ int main(void) {
     failed |= run("./build/test/test_run_simulation");
     failed |= run("./build/test/test_logic_start_application");
     failed |= run("./build/test/test_logic_user_menu_workflow");
+    failed |= run("./build/test/test_logic_handle_add_game");
+    failed |= run("./build/test/test_logic_handle_game_management_menu");
 
     if (failed) {
         printf("\nEinige Tests sind FEHLGESCHLAGEN.\n");

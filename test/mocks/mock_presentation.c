@@ -185,15 +185,71 @@ void presentation_info_enter_sub_status_edit(void) {}
 void presentation_error_sub_status_edit(void) {}
 void presentation_success_user_edited(void) {}
 void presentation_error_user_not_found(void) {}
-void presentation_display_error(const char *msg) {}
+int mock_presentation_show_message_called = 0;
+char* mock_presentation_show_message_arg = NULL;
+int mock_presentation_display_error_called = 0;
+char* mock_presentation_display_error_arg = NULL;
 
-void presentation_get_game_title(char *a, size_t b) { if (a) memset(a, 0, b); }
-void presentation_get_game_description(char *a, size_t b) { if (a) memset(a, 0, b); }
-void presentation_get_game_version(char *a, size_t b) { if (a) memset(a, 0, b); }
-void presentation_get_game_mode(char *a, size_t b) { if (a) memset(a, 0, b); }
-void presentation_show_message(const char *msg) { (void)msg; }
-int presentation_get_game_menu_choice(void) { return 0; }
-void presentation_display_game_management_menu(void) {}
+void presentation_display_error(const char *msg) {
+    mock_presentation_display_error_called++;
+    if (mock_presentation_display_error_arg) {
+        free(mock_presentation_display_error_arg);
+    }
+    mock_presentation_display_error_arg = strdup(msg);
+}
+
+// Mock data for game input functions
+char mock_game_title[100] = "";
+char mock_game_description[256] = "";
+char mock_game_version[20] = "";
+char mock_game_mode[50] = "";
+
+void presentation_get_game_title(char *a, size_t b) { 
+    if (a && b > 0) {
+        strncpy(a, mock_game_title, b - 1);
+        a[b - 1] = '\0';
+    }
+}
+void presentation_get_game_description(char *a, size_t b) { 
+    if (a && b > 0) {
+        strncpy(a, mock_game_description, b - 1);
+        a[b - 1] = '\0';
+    }
+}
+void presentation_get_game_version(char *a, size_t b) { 
+    if (a && b > 0) {
+        strncpy(a, mock_game_version, b - 1);
+        a[b - 1] = '\0';
+    }
+}
+void presentation_get_game_mode(char *a, size_t b) { 
+    if (a && b > 0) {
+        strncpy(a, mock_game_mode, b - 1);
+        a[b - 1] = '\0';
+    }
+}
+void presentation_show_message(const char *msg) { 
+    mock_presentation_show_message_called++;
+    if (mock_presentation_show_message_arg) {
+        free(mock_presentation_show_message_arg);
+    }
+    mock_presentation_show_message_arg = strdup(msg);
+}
+// Game menu choice tracking
+int mock_game_menu_choice_count = 0;
+int mock_game_menu_choice_index = 0;
+int mock_game_menu_choices[100];
+int mock_presentation_display_game_management_menu_called = 0;
+
+int presentation_get_game_menu_choice(void) { 
+    if (mock_game_menu_choice_index < mock_game_menu_choice_count) {
+        return mock_game_menu_choices[mock_game_menu_choice_index++];
+    }
+    return 0;
+}
+void presentation_display_game_management_menu(void) {
+    mock_presentation_display_game_management_menu_called++;
+}
 void presentation_get_game_id_to_edit(char *a, size_t b) { if (a) memset(a, 0, b); }
 void presentation_get_new_game_title(char *a, size_t b) { if (a) memset(a, 0, b); }
 void presentation_get_game_id_to_delete(char *a, size_t b) { if (a) memset(a, 0, b); }

@@ -178,11 +178,15 @@ int data_save_report(cJSON *report) {
 }
 
 // ==== Spiele ====
+int mock_data_save_games_return = ERR_SUCCESS;
+int mock_data_save_games_called = 0;
+
 int data_save_games(const char *filename, Game games[], int game_count) {
     (void)filename;
     (void)games;
     (void)game_count;
-    return ERR_SUCCESS;
+    mock_data_save_games_called++;
+    return mock_data_save_games_return;
 }
 
 int data_load_games(const char *filename, Game **games_out, int *count_out) {

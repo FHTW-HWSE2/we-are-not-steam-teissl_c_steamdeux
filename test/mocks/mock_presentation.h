@@ -7,6 +7,10 @@
 extern int mock_presentation_show_error_called;
 extern char* mock_presentation_show_error_message;
 
+// Mock tracking variables for presentation_display_error
+extern int mock_presentation_display_error_called;
+extern char* mock_presentation_display_error_arg;
+
 // Mock tracking variables for presentation_display_users_formatted
 extern int mock_presentation_display_users_formatted_called;
 extern char** mock_presentation_display_users_formatted_lines;
@@ -111,6 +115,20 @@ void presentation_get_game_mode(char *buffer, size_t size);
 void presentation_get_game_id_to_edit(char *buffer, size_t size);
 void presentation_get_new_game_title(char *buffer, size_t size);
 void presentation_get_game_id_to_delete(char *buffer, size_t size);
+
+// Mock variables for game input
+extern char mock_game_title[100];
+extern char mock_game_description[256];
+extern char mock_game_version[20];
+extern char mock_game_mode[50];
+extern int mock_presentation_show_message_called;
+extern char* mock_presentation_show_message_arg;
+
+// Game menu mock variables
+extern int mock_game_menu_choice_count;
+extern int mock_game_menu_choice_index;
+extern int mock_game_menu_choices[100];
+extern int mock_presentation_display_game_management_menu_called;
 
 int presentation_get_user_menu_choice(void);
 int presentation_get_main_menu_choice(void);

@@ -95,4 +95,8 @@ int data_get_all_users(cJSON **users_out);
 int data_remove_expired_users(int *removed_count);
 int data_update_all_subscription_flags(void);
 
+// Mock variables for data_save_games
+extern int mock_data_save_games_return;
+extern int mock_data_save_games_called;
+
 #endif // _MOCK_DATA_H

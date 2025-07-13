@@ -390,6 +390,32 @@ set_source_files_properties(
     PROPERTIES COMPILE_DEFINITIONS UNITTEST_MOCK_TIME
 )
 
+# Executable für logic_generate_top_users_file Test
+add_executable(test_logic_generate_top_users_file
+    test_logic_generate_top_users_file.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/src/data/data.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/presentation.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/messages.c
+    ${PROJECT_SOURCE_DIR}/src/presentation/menu.c
+    ${PROJECT_SOURCE_DIR}/src/simulation/simulation.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    unity/unity.c
+    mocks/mock_time.c
+)
+
+target_compile_definitions(test_logic_generate_top_users_file PRIVATE USERS_JSON_PATH=\"test/users_generate_top_test.json\")
+
+target_include_directories(test_logic_generate_top_users_file PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
 # Executable um alle Tests gebündelt auszuführen
 add_executable(run_all_tests run_all_tests.c)
 
@@ -453,6 +479,26 @@ add_executable(test_logic_create_report
     ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
 )
 target_include_directories(test_logic_create_report PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/src/logic
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/cJSON
+    ${PROJECT_SOURCE_DIR}/src/presentation
+    ${PROJECT_SOURCE_DIR}/test/unity
+)
+
+# Executable für den Test logic_create_and_save_report
+add_executable(test_logic_create_and_save_report
+    test_logic_create_and_save_report.c
+    unity/unity.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+)
+
+target_include_directories(test_logic_create_and_save_report PRIVATE
     ${PROJECT_SOURCE_DIR}/inc
     ${PROJECT_SOURCE_DIR}/src/logic
     ${PROJECT_SOURCE_DIR}/src/data
@@ -758,4 +804,45 @@ ${PROJECT_SOURCE_DIR}/cJSON
 ${PROJECT_SOURCE_DIR}/src/logic
 ${PROJECT_SOURCE_DIR}/src/data
 ${PROJECT_SOURCE_DIR}/src/simulation
+)
+
+# Executable für den Test der Funktion logic_handle_add_game
+add_executable(test_logic_handle_add_game
+    ${PROJECT_SOURCE_DIR}/test/test_logic_handle_add_game.c
+    ${PROJECT_SOURCE_DIR}/src/logic/logic.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+)
+target_include_directories(test_logic_handle_add_game PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/cJSON
+)
+
+# Executable für den Test der Funktion logic_handle_game_management_menu
+add_executable(test_logic_handle_game_management_menu
+    ${PROJECT_SOURCE_DIR}/test/test_logic_handle_game_management_menu.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_data.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_presentation.c
+    ${PROJECT_SOURCE_DIR}/test/mocks/mock_time.c
+    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
+    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
+)
+target_include_directories(test_logic_handle_game_management_menu PRIVATE
+    ${PROJECT_SOURCE_DIR}/inc
+    ${PROJECT_SOURCE_DIR}/inc/logic
+    ${PROJECT_SOURCE_DIR}/inc/data
+    ${PROJECT_SOURCE_DIR}/inc/presentation
+    ${PROJECT_SOURCE_DIR}/src/data
+    ${PROJECT_SOURCE_DIR}/test/unity
+    ${PROJECT_SOURCE_DIR}/test/mocks
+    ${PROJECT_SOURCE_DIR}/cJSON
 )
