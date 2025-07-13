@@ -17,7 +17,7 @@ You do not need to delete the build/ directory — JSON files or persistent test
 From Project Root execute these commands:
 cmake -S . -B build
 cmake --build build
-./build/run_all_tests
+./build/test/run_all_tests
 
 =========================================
 === How to generate a coverage report ===
