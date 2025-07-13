@@ -3,14 +3,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <time.h> // Für validate_player_profile() Funktion um das Startdatum zu prüfen
-#ifdef UNITTEST_MOCK_TIME
-#include "../test/mocks/mock_time.h"
-#define time mock_time
-#define localtime mock_localtime
-#define mktime mock_mktime
-#define difftime mock_difftime
+#include <time.h> // For time(), localtime(), mktime()
+#include <ctype.h> // For isspace()
+#include "../data/game.h" // Include for Game type definition
+
+#ifndef TESTING_GAME_MENU
+// Remove these stub implementations to avoid redefinition errors
 #endif
+
 #include "../inc/logic/logic.h"
 
 #define BUFFER_SIZE 256

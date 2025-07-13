@@ -9,6 +9,14 @@
 int mock_presentation_show_error_called = 0;
 char* mock_presentation_show_error_message = NULL;
 
+// === Tracking für display_error ===
+int mock_presentation_display_error_called = 0;
+char* mock_presentation_display_error_arg = NULL;
+
+// === Tracking für show_message ===
+int mock_presentation_show_message_called = 0;
+char* mock_presentation_show_message_arg = NULL;
+
 // === Tracking für display_users_formatted ===
 int mock_presentation_display_users_formatted_called = 0;
 char** mock_presentation_display_users_formatted_lines = NULL;
@@ -45,6 +53,12 @@ int mock_presentation_show_top_users_terminal_called = 0;
 int mock_presentation_info_generate_player_report_selected_called = 0;
 int mock_presentation_generate_top_users_file_called = 0;
 
+// === Game Menu Mocks ===
+int mock_presentation_display_game_management_menu_called = 0;
+int mock_game_menu_choice_count = 0;
+int mock_game_menu_choice_index = 0;
+int mock_game_menu_choices[100] = {0};
+
 // --- Tracking-Variablen für Workflows ---
 int mock_show_message_called = 0;
 int mock_display_error_called = 0;
@@ -52,14 +66,23 @@ char last_error_msg[256] = "";
 
 // --- Präsentationsfunktionen für Game-Workflows (mit Zähler) ---
 void presentation_show_message(const char *msg) {
+    mock_presentation_show_message_called++;
     mock_show_message_called++;
-    (void)msg;
+    if (mock_presentation_show_message_arg) {
+        free(mock_presentation_show_message_arg);
+    }
+    mock_presentation_show_message_arg = msg ? strdup(msg) : NULL;
 }
 
 void presentation_display_error(const char *msg) {
+    mock_presentation_display_error_called++;
     mock_display_error_called++;
+    if (mock_presentation_display_error_arg) {
+        free(mock_presentation_display_error_arg);
+    }
+    mock_presentation_display_error_arg = msg ? strdup(msg) : NULL;
     if (msg) {
-        strncpy(last_error_msg, msg, sizeof(last_error_msg));
+        strncpy(last_error_msg, msg, sizeof(last_error_msg)-1);
         last_error_msg[sizeof(last_error_msg)-1] = '\0';
     } else {
         last_error_msg[0] = '\0';
@@ -170,8 +193,17 @@ void start_simulation(void) {
 
 // --- Dummy-Implementierungen für fehlende Präsentationsfunktionen (für Linker) ---
 void presentation_success_report_saved(void) {}
-void presentation_display_game_management_menu(void) {}
-int presentation_get_game_menu_choice(void) { return 0; }
+void presentation_display_game_management_menu(void) {
+    mock_presentation_display_game_management_menu_called++;
+}
+
+int presentation_get_game_menu_choice(void) {
+    if (mock_game_menu_choice_index < mock_game_menu_choice_count) {
+        return mock_game_menu_choices[mock_game_menu_choice_index++];
+    }
+    return 0; // Default exit
+}
+
 void presentation_get_game_title(char *buffer, size_t size) { if (buffer && size) buffer[0] = '\0'; }
 void presentation_get_game_description(char *buffer, size_t size) { if (buffer && size) buffer[0] = '\0'; }
 void presentation_get_game_version(char *buffer, size_t size) { if (buffer && size) buffer[0] = '\0'; }
@@ -242,3 +274,23 @@ void presentation_error_gamertag_empty_edit(void) {}
 const char* presentation_get_report_title(void) { return "stub_title"; }
 const char* presentation_get_report_description(void) { return "stub_description"; }
 const char* presentation_get_report_date(void) { return "12.07.2025"; }
+
+// === Logic Game Management Menu Mock Tracking ===
+int mock_logic_display_games_formatted_called = 0;
+int mock_logic_handle_add_game_called = 0;
+int mock_logic_handle_edit_game_called = 0;
+int mock_logic_handle_delete_game_called = 0;
+
+// Mock functions for logic_handle_game_management_menu (if needed by test)
+void mock_logic_display_games_formatted(const Game *games, int game_count) {
+    mock_logic_display_games_formatted_called++;
+}
+void mock_logic_handle_add_game(Game **games, int *game_count) {
+    mock_logic_handle_add_game_called++;
+}
+void mock_logic_handle_edit_game(Game *games, int game_count) {
+    mock_logic_handle_edit_game_called++;
+}
+void mock_logic_handle_delete_game(Game **games, int *game_count) {
+    mock_logic_handle_delete_game_called++;
+}

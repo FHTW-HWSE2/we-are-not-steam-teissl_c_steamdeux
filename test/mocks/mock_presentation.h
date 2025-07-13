@@ -11,6 +11,10 @@ extern char* mock_presentation_show_error_message;
 extern int mock_presentation_display_error_called;
 extern char* mock_presentation_display_error_arg;
 
+// Mock tracking variables for presentation_show_message
+extern int mock_presentation_show_message_called;
+extern char* mock_presentation_show_message_arg;
+
 // Mock tracking variables for presentation_display_users_formatted
 extern int mock_presentation_display_users_formatted_called;
 extern char** mock_presentation_display_users_formatted_lines;
@@ -47,10 +51,17 @@ extern int mock_presentation_show_top_users_terminal_called;
 extern int mock_presentation_info_generate_player_report_selected_called;
 extern int mock_presentation_generate_top_users_file_called;
 
+// === Logic Game Management Menu Mock Tracking ===
+extern int mock_logic_display_games_formatted_called;
+extern int mock_logic_handle_add_game_called;
+extern int mock_logic_handle_edit_game_called;
+extern int mock_logic_handle_delete_game_called;
+
 // --- Tracking-Variablen für Workflows ---
-extern int mock_show_message_called;
-extern int mock_display_error_called;
-extern char last_error_msg[256];
+// extern int mock_show_message_called; // Veraltet, wird durch mock_presentation_show_message_called ersetzt
+// extern int mock_display_error_called; // Veraltet, wird durch mock_presentation_display_error_called ersetzt
+// extern char last_error_msg[256]; // Veraltet, wird durch mock_presentation_display_error_arg ersetzt
+
 
 // Function prototypes (subset matching those used in the test; add more if needed for other tests)
 void presentation_show_error(const char *message);
@@ -134,6 +145,11 @@ extern int mock_game_menu_choice_count;
 extern int mock_game_menu_choice_index;
 extern int mock_game_menu_choices[100];
 extern int mock_presentation_display_game_management_menu_called;
+
+// Legacy/compatibility mocks for older tests
+extern int mock_show_message_called;
+extern int mock_display_error_called;
+extern char last_error_msg[256];
 
 int presentation_get_user_menu_choice(void);
 int presentation_get_main_menu_choice(void);

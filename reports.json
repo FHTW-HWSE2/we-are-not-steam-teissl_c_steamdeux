@@ -21891,4 +21891,3166 @@
 		"kills":	11,
 		"deaths":	9,
 		"assists":	2
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	137,
+		"timestamp":	"2025-07-12T15:15:35",
+		"score":	620,
+		"progress":	20
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	86,
+		"timestamp":	"2025-07-12T17:46:36",
+		"kills":	13,
+		"deaths":	11,
+		"assists":	5
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Frostbound",
+		"duration_minutes":	58,
+		"timestamp":	"2025-07-11T17:04:54",
+		"score":	689,
+		"progress":	50
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	121,
+		"timestamp":	"2025-07-12T12:58:50",
+		"kills":	16,
+		"deaths":	3,
+		"assists":	6
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Dreamwalker",
+		"duration_minutes":	110,
+		"timestamp":	"2025-07-12T00:12:05",
+		"score":	298,
+		"progress":	71
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Solar Rift",
+		"duration_minutes":	98,
+		"timestamp":	"2025-07-12T11:15:47",
+		"kills":	4,
+		"deaths":	12,
+		"assists":	9
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Phantom Heist",
+		"duration_minutes":	87,
+		"timestamp":	"2025-07-12T00:11:40",
+		"score":	850,
+		"progress":	26
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Arcane Arena",
+		"duration_minutes":	55,
+		"timestamp":	"2025-07-11T21:44:45",
+		"kills":	5,
+		"deaths":	6,
+		"assists":	8
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	52,
+		"timestamp":	"2025-07-12T01:03:15",
+		"score":	441,
+		"progress":	72
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Steel Tempest",
+		"duration_minutes":	77,
+		"timestamp":	"2025-07-12T12:34:13",
+		"kills":	7,
+		"deaths":	5,
+		"assists":	9
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	150,
+		"timestamp":	"2025-07-12T17:37:02",
+		"score":	529,
+		"progress":	37
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	128,
+		"timestamp":	"2025-07-13T10:53:16",
+		"kills":	2,
+		"deaths":	5,
+		"assists":	9
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Chrono Shard",
+		"duration_minutes":	80,
+		"timestamp":	"2025-07-13T09:47:42",
+		"score":	856,
+		"progress":	35
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	104,
+		"timestamp":	"2025-07-11T16:50:43",
+		"score":	976,
+		"progress":	82
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	145,
+		"timestamp":	"2025-07-11T21:22:37",
+		"kills":	2,
+		"deaths":	0,
+		"assists":	0
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Glitchstorm",
+		"duration_minutes":	126,
+		"timestamp":	"2025-07-13T15:07:45",
+		"score":	53,
+		"progress":	47
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	82,
+		"timestamp":	"2025-07-12T11:03:19",
+		"kills":	0,
+		"deaths":	1,
+		"assists":	1
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Nova Stryke",
+		"duration_minutes":	58,
+		"timestamp":	"2025-07-13T07:33:09",
+		"score":	990,
+		"progress":	21
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Echo Circuit",
+		"duration_minutes":	48,
+		"timestamp":	"2025-07-13T00:23:25",
+		"score":	213,
+		"progress":	92
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	34,
+		"timestamp":	"2025-07-12T14:21:39",
+		"kills":	9,
+		"deaths":	11,
+		"assists":	6
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Hollowbyte",
+		"duration_minutes":	75,
+		"timestamp":	"2025-07-12T18:58:10",
+		"score":	864,
+		"progress":	18
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Titan Siege",
+		"duration_minutes":	79,
+		"timestamp":	"2025-07-12T09:04:53",
+		"kills":	0,
+		"deaths":	11,
+		"assists":	7
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Binary Fate",
+		"duration_minutes":	49,
+		"timestamp":	"2025-07-12T14:28:41",
+		"score":	282,
+		"progress":	56
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Dustrealm",
+		"duration_minutes":	121,
+		"timestamp":	"2025-07-12T05:25:17",
+		"score":	318,
+		"progress":	79
+	}, {
+		"gamertag":	"PixelKing",
+		"game":	"Ashen Pact",
+		"duration_minutes":	106,
+		"timestamp":	"2025-07-12T12:54:53",
+		"kills":	13,
+		"deaths":	1,
+		"assists":	9
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	52,
+		"timestamp":	"2025-07-13T12:24:17",
+		"score":	513,
+		"progress":	99
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	65,
+		"timestamp":	"2025-07-12T07:10:34",
+		"kills":	15,
+		"deaths":	5,
+		"assists":	1
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Frostbound",
+		"duration_minutes":	53,
+		"timestamp":	"2025-07-13T02:46:27",
+		"score":	675,
+		"progress":	68
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	133,
+		"timestamp":	"2025-07-11T23:50:18",
+		"kills":	14,
+		"deaths":	6,
+		"assists":	0
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Dreamwalker",
+		"duration_minutes":	117,
+		"timestamp":	"2025-07-12T09:40:43",
+		"score":	803,
+		"progress":	0
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Solar Rift",
+		"duration_minutes":	55,
+		"timestamp":	"2025-07-13T06:32:42",
+		"kills":	6,
+		"deaths":	0,
+		"assists":	3
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Phantom Heist",
+		"duration_minutes":	94,
+		"timestamp":	"2025-07-13T09:00:34",
+		"score":	101,
+		"progress":	88
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Arcane Arena",
+		"duration_minutes":	75,
+		"timestamp":	"2025-07-13T10:02:36",
+		"kills":	7,
+		"deaths":	3,
+		"assists":	2
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	148,
+		"timestamp":	"2025-07-13T03:41:16",
+		"score":	252,
+		"progress":	36
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Steel Tempest",
+		"duration_minutes":	54,
+		"timestamp":	"2025-07-12T10:06:23",
+		"kills":	12,
+		"deaths":	6,
+		"assists":	1
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	30,
+		"timestamp":	"2025-07-12T03:23:18",
+		"score":	588,
+		"progress":	52
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	144,
+		"timestamp":	"2025-07-11T18:38:23",
+		"kills":	3,
+		"deaths":	2,
+		"assists":	4
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Chrono Shard",
+		"duration_minutes":	145,
+		"timestamp":	"2025-07-13T03:23:54",
+		"score":	946,
+		"progress":	45
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	92,
+		"timestamp":	"2025-07-11T22:55:36",
+		"score":	836,
+		"progress":	16
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	133,
+		"timestamp":	"2025-07-13T10:52:48",
+		"kills":	11,
+		"deaths":	4,
+		"assists":	3
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Glitchstorm",
+		"duration_minutes":	142,
+		"timestamp":	"2025-07-12T11:13:41",
+		"score":	48,
+		"progress":	18
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	90,
+		"timestamp":	"2025-07-12T11:38:55",
+		"kills":	6,
+		"deaths":	3,
+		"assists":	6
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Nova Stryke",
+		"duration_minutes":	79,
+		"timestamp":	"2025-07-12T16:09:08",
+		"score":	176,
+		"progress":	45
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Echo Circuit",
+		"duration_minutes":	38,
+		"timestamp":	"2025-07-13T12:48:47",
+		"score":	884,
+		"progress":	73
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	95,
+		"timestamp":	"2025-07-12T11:37:22",
+		"kills":	8,
+		"deaths":	6,
+		"assists":	4
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Hollowbyte",
+		"duration_minutes":	121,
+		"timestamp":	"2025-07-12T19:04:00",
+		"score":	943,
+		"progress":	87
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Titan Siege",
+		"duration_minutes":	112,
+		"timestamp":	"2025-07-12T10:20:25",
+		"kills":	5,
+		"deaths":	10,
+		"assists":	8
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Binary Fate",
+		"duration_minutes":	75,
+		"timestamp":	"2025-07-11T21:59:09",
+		"score":	976,
+		"progress":	44
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Dustrealm",
+		"duration_minutes":	122,
+		"timestamp":	"2025-07-13T04:46:47",
+		"score":	42,
+		"progress":	86
+	}, {
+		"gamertag":	"LunaGamerX",
+		"game":	"Ashen Pact",
+		"duration_minutes":	42,
+		"timestamp":	"2025-07-11T16:19:06",
+		"kills":	14,
+		"deaths":	8,
+		"assists":	7
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	42,
+		"timestamp":	"2025-07-12T14:29:16",
+		"score":	1,
+		"progress":	30
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	95,
+		"timestamp":	"2025-07-12T07:38:09",
+		"kills":	10,
+		"deaths":	3,
+		"assists":	5
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Frostbound",
+		"duration_minutes":	45,
+		"timestamp":	"2025-07-11T22:57:20",
+		"score":	718,
+		"progress":	27
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	45,
+		"timestamp":	"2025-07-12T03:05:55",
+		"kills":	19,
+		"deaths":	8,
+		"assists":	2
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Dreamwalker",
+		"duration_minutes":	52,
+		"timestamp":	"2025-07-12T15:29:01",
+		"score":	810,
+		"progress":	40
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Solar Rift",
+		"duration_minutes":	108,
+		"timestamp":	"2025-07-13T00:24:04",
+		"kills":	11,
+		"deaths":	6,
+		"assists":	5
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Phantom Heist",
+		"duration_minutes":	95,
+		"timestamp":	"2025-07-12T20:10:07",
+		"score":	526,
+		"progress":	68
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Arcane Arena",
+		"duration_minutes":	146,
+		"timestamp":	"2025-07-12T01:23:50",
+		"kills":	17,
+		"deaths":	7,
+		"assists":	2
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	95,
+		"timestamp":	"2025-07-12T20:15:57",
+		"score":	30,
+		"progress":	35
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Steel Tempest",
+		"duration_minutes":	39,
+		"timestamp":	"2025-07-11T19:47:37",
+		"kills":	2,
+		"deaths":	11,
+		"assists":	9
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	92,
+		"timestamp":	"2025-07-13T13:08:32",
+		"score":	947,
+		"progress":	15
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	82,
+		"timestamp":	"2025-07-13T01:47:21",
+		"kills":	14,
+		"deaths":	4,
+		"assists":	1
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Chrono Shard",
+		"duration_minutes":	38,
+		"timestamp":	"2025-07-13T14:49:39",
+		"score":	679,
+		"progress":	66
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	136,
+		"timestamp":	"2025-07-11T23:32:08",
+		"score":	584,
+		"progress":	77
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	71,
+		"timestamp":	"2025-07-13T14:54:06",
+		"kills":	9,
+		"deaths":	10,
+		"assists":	6
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Glitchstorm",
+		"duration_minutes":	35,
+		"timestamp":	"2025-07-12T02:51:02",
+		"score":	428,
+		"progress":	49
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	116,
+		"timestamp":	"2025-07-13T11:31:17",
+		"kills":	5,
+		"deaths":	4,
+		"assists":	2
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Nova Stryke",
+		"duration_minutes":	88,
+		"timestamp":	"2025-07-12T18:59:43",
+		"score":	319,
+		"progress":	18
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Echo Circuit",
+		"duration_minutes":	40,
+		"timestamp":	"2025-07-11T20:59:30",
+		"score":	492,
+		"progress":	88
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	94,
+		"timestamp":	"2025-07-11T23:24:26",
+		"kills":	17,
+		"deaths":	4,
+		"assists":	1
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Hollowbyte",
+		"duration_minutes":	96,
+		"timestamp":	"2025-07-13T10:43:18",
+		"score":	886,
+		"progress":	84
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Titan Siege",
+		"duration_minutes":	35,
+		"timestamp":	"2025-07-13T14:12:40",
+		"kills":	11,
+		"deaths":	0,
+		"assists":	7
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Binary Fate",
+		"duration_minutes":	114,
+		"timestamp":	"2025-07-12T17:05:10",
+		"score":	376,
+		"progress":	98
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Dustrealm",
+		"duration_minutes":	41,
+		"timestamp":	"2025-07-11T16:55:01",
+		"score":	610,
+		"progress":	76
+	}, {
+		"gamertag":	"BlazeStorm",
+		"game":	"Ashen Pact",
+		"duration_minutes":	46,
+		"timestamp":	"2025-07-13T05:51:05",
+		"kills":	19,
+		"deaths":	14,
+		"assists":	2
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	90,
+		"timestamp":	"2025-07-12T05:02:46",
+		"score":	494,
+		"progress":	25
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	60,
+		"timestamp":	"2025-07-12T20:32:52",
+		"kills":	12,
+		"deaths":	5,
+		"assists":	9
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Frostbound",
+		"duration_minutes":	65,
+		"timestamp":	"2025-07-12T01:02:51",
+		"score":	925,
+		"progress":	13
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	68,
+		"timestamp":	"2025-07-12T06:54:43",
+		"kills":	11,
+		"deaths":	10,
+		"assists":	4
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Dreamwalker",
+		"duration_minutes":	67,
+		"timestamp":	"2025-07-12T23:49:23",
+		"score":	502,
+		"progress":	28
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Solar Rift",
+		"duration_minutes":	123,
+		"timestamp":	"2025-07-12T12:24:07",
+		"kills":	15,
+		"deaths":	6,
+		"assists":	7
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Phantom Heist",
+		"duration_minutes":	87,
+		"timestamp":	"2025-07-12T02:41:44",
+		"score":	351,
+		"progress":	90
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Arcane Arena",
+		"duration_minutes":	83,
+		"timestamp":	"2025-07-12T01:23:35",
+		"kills":	1,
+		"deaths":	2,
+		"assists":	0
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	144,
+		"timestamp":	"2025-07-12T22:55:57",
+		"score":	668,
+		"progress":	90
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Steel Tempest",
+		"duration_minutes":	129,
+		"timestamp":	"2025-07-13T00:28:23",
+		"kills":	6,
+		"deaths":	13,
+		"assists":	1
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	94,
+		"timestamp":	"2025-07-12T23:39:23",
+		"score":	748,
+		"progress":	58
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	82,
+		"timestamp":	"2025-07-12T07:20:14",
+		"kills":	5,
+		"deaths":	12,
+		"assists":	8
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Chrono Shard",
+		"duration_minutes":	136,
+		"timestamp":	"2025-07-12T05:03:57",
+		"score":	894,
+		"progress":	12
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	57,
+		"timestamp":	"2025-07-13T13:00:58",
+		"score":	757,
+		"progress":	87
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	84,
+		"timestamp":	"2025-07-12T03:11:45",
+		"kills":	12,
+		"deaths":	5,
+		"assists":	4
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Glitchstorm",
+		"duration_minutes":	37,
+		"timestamp":	"2025-07-12T07:48:22",
+		"score":	312,
+		"progress":	97
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	38,
+		"timestamp":	"2025-07-11T23:13:58",
+		"kills":	2,
+		"deaths":	13,
+		"assists":	2
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Nova Stryke",
+		"duration_minutes":	87,
+		"timestamp":	"2025-07-12T23:13:18",
+		"score":	21,
+		"progress":	62
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Echo Circuit",
+		"duration_minutes":	79,
+		"timestamp":	"2025-07-12T01:54:01",
+		"score":	43,
+		"progress":	18
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	126,
+		"timestamp":	"2025-07-12T11:50:06",
+		"kills":	12,
+		"deaths":	8,
+		"assists":	9
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Hollowbyte",
+		"duration_minutes":	37,
+		"timestamp":	"2025-07-12T00:14:35",
+		"score":	19,
+		"progress":	97
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Titan Siege",
+		"duration_minutes":	67,
+		"timestamp":	"2025-07-12T02:51:26",
+		"kills":	4,
+		"deaths":	8,
+		"assists":	9
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Binary Fate",
+		"duration_minutes":	146,
+		"timestamp":	"2025-07-13T11:44:44",
+		"score":	284,
+		"progress":	22
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Dustrealm",
+		"duration_minutes":	42,
+		"timestamp":	"2025-07-13T07:59:14",
+		"score":	245,
+		"progress":	74
+	}, {
+		"gamertag":	"SinaIstChef187",
+		"game":	"Ashen Pact",
+		"duration_minutes":	115,
+		"timestamp":	"2025-07-12T04:10:57",
+		"kills":	4,
+		"deaths":	7,
+		"assists":	3
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	69,
+		"timestamp":	"2025-07-11T23:18:09",
+		"score":	846,
+		"progress":	92
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	32,
+		"timestamp":	"2025-07-12T03:13:28",
+		"kills":	7,
+		"deaths":	9,
+		"assists":	1
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Frostbound",
+		"duration_minutes":	123,
+		"timestamp":	"2025-07-12T01:57:11",
+		"score":	982,
+		"progress":	77
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	98,
+		"timestamp":	"2025-07-13T14:38:24",
+		"kills":	12,
+		"deaths":	4,
+		"assists":	6
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Dreamwalker",
+		"duration_minutes":	143,
+		"timestamp":	"2025-07-11T23:44:33",
+		"score":	860,
+		"progress":	45
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Solar Rift",
+		"duration_minutes":	59,
+		"timestamp":	"2025-07-13T07:39:02",
+		"kills":	18,
+		"deaths":	1,
+		"assists":	7
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Phantom Heist",
+		"duration_minutes":	139,
+		"timestamp":	"2025-07-11T18:27:37",
+		"score":	299,
+		"progress":	14
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Arcane Arena",
+		"duration_minutes":	112,
+		"timestamp":	"2025-07-12T18:13:57",
+		"kills":	12,
+		"deaths":	4,
+		"assists":	3
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	149,
+		"timestamp":	"2025-07-12T19:57:15",
+		"score":	977,
+		"progress":	97
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Steel Tempest",
+		"duration_minutes":	39,
+		"timestamp":	"2025-07-11T23:25:02",
+		"kills":	11,
+		"deaths":	1,
+		"assists":	8
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	98,
+		"timestamp":	"2025-07-13T08:45:54",
+		"score":	659,
+		"progress":	82
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	36,
+		"timestamp":	"2025-07-12T03:01:01",
+		"kills":	5,
+		"deaths":	2,
+		"assists":	4
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Chrono Shard",
+		"duration_minutes":	53,
+		"timestamp":	"2025-07-13T01:04:47",
+		"score":	412,
+		"progress":	87
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	74,
+		"timestamp":	"2025-07-12T11:44:04",
+		"score":	683,
+		"progress":	93
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	145,
+		"timestamp":	"2025-07-12T22:10:02",
+		"kills":	16,
+		"deaths":	14,
+		"assists":	0
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Glitchstorm",
+		"duration_minutes":	137,
+		"timestamp":	"2025-07-13T10:37:16",
+		"score":	17,
+		"progress":	58
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	49,
+		"timestamp":	"2025-07-11T19:22:13",
+		"kills":	2,
+		"deaths":	13,
+		"assists":	5
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Nova Stryke",
+		"duration_minutes":	64,
+		"timestamp":	"2025-07-13T13:28:55",
+		"score":	436,
+		"progress":	84
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Echo Circuit",
+		"duration_minutes":	57,
+		"timestamp":	"2025-07-12T00:44:33",
+		"score":	531,
+		"progress":	48
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	77,
+		"timestamp":	"2025-07-12T21:58:13",
+		"kills":	19,
+		"deaths":	13,
+		"assists":	9
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Hollowbyte",
+		"duration_minutes":	71,
+		"timestamp":	"2025-07-13T01:29:59",
+		"score":	834,
+		"progress":	5
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Titan Siege",
+		"duration_minutes":	63,
+		"timestamp":	"2025-07-11T16:52:48",
+		"kills":	16,
+		"deaths":	13,
+		"assists":	1
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Binary Fate",
+		"duration_minutes":	129,
+		"timestamp":	"2025-07-12T05:54:11",
+		"score":	150,
+		"progress":	84
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Dustrealm",
+		"duration_minutes":	128,
+		"timestamp":	"2025-07-13T14:29:42",
+		"score":	463,
+		"progress":	17
+	}, {
+		"gamertag":	"MysticEcho",
+		"game":	"Ashen Pact",
+		"duration_minutes":	33,
+		"timestamp":	"2025-07-11T19:43:04",
+		"kills":	18,
+		"deaths":	2,
+		"assists":	1
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	34,
+		"timestamp":	"2025-07-13T15:13:00",
+		"score":	423,
+		"progress":	14
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	67,
+		"timestamp":	"2025-07-12T00:31:58",
+		"kills":	2,
+		"deaths":	11,
+		"assists":	2
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Frostbound",
+		"duration_minutes":	134,
+		"timestamp":	"2025-07-13T10:46:33",
+		"score":	177,
+		"progress":	32
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	56,
+		"timestamp":	"2025-07-12T13:56:31",
+		"kills":	15,
+		"deaths":	14,
+		"assists":	2
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Dreamwalker",
+		"duration_minutes":	108,
+		"timestamp":	"2025-07-12T17:54:26",
+		"score":	202,
+		"progress":	72
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Solar Rift",
+		"duration_minutes":	59,
+		"timestamp":	"2025-07-12T13:00:28",
+		"kills":	9,
+		"deaths":	3,
+		"assists":	5
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Phantom Heist",
+		"duration_minutes":	62,
+		"timestamp":	"2025-07-12T02:39:25",
+		"score":	78,
+		"progress":	44
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Arcane Arena",
+		"duration_minutes":	85,
+		"timestamp":	"2025-07-12T22:29:10",
+		"kills":	0,
+		"deaths":	13,
+		"assists":	2
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	105,
+		"timestamp":	"2025-07-12T00:28:56",
+		"score":	679,
+		"progress":	0
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Steel Tempest",
+		"duration_minutes":	106,
+		"timestamp":	"2025-07-12T01:05:14",
+		"kills":	15,
+		"deaths":	6,
+		"assists":	8
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	116,
+		"timestamp":	"2025-07-12T09:39:23",
+		"score":	435,
+		"progress":	56
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	60,
+		"timestamp":	"2025-07-11T20:27:59",
+		"kills":	12,
+		"deaths":	12,
+		"assists":	9
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Chrono Shard",
+		"duration_minutes":	30,
+		"timestamp":	"2025-07-13T06:27:43",
+		"score":	272,
+		"progress":	33
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	112,
+		"timestamp":	"2025-07-11T17:05:41",
+		"score":	149,
+		"progress":	79
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	150,
+		"timestamp":	"2025-07-13T11:54:09",
+		"kills":	18,
+		"deaths":	6,
+		"assists":	2
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Glitchstorm",
+		"duration_minutes":	60,
+		"timestamp":	"2025-07-12T15:44:50",
+		"score":	763,
+		"progress":	54
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	139,
+		"timestamp":	"2025-07-12T22:36:38",
+		"kills":	6,
+		"deaths":	14,
+		"assists":	9
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Nova Stryke",
+		"duration_minutes":	59,
+		"timestamp":	"2025-07-11T23:55:17",
+		"score":	444,
+		"progress":	28
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Echo Circuit",
+		"duration_minutes":	94,
+		"timestamp":	"2025-07-13T10:17:15",
+		"score":	213,
+		"progress":	25
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	84,
+		"timestamp":	"2025-07-13T10:49:22",
+		"kills":	18,
+		"deaths":	8,
+		"assists":	8
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Hollowbyte",
+		"duration_minutes":	119,
+		"timestamp":	"2025-07-13T15:12:03",
+		"score":	719,
+		"progress":	54
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Titan Siege",
+		"duration_minutes":	74,
+		"timestamp":	"2025-07-12T05:19:38",
+		"kills":	17,
+		"deaths":	7,
+		"assists":	3
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Binary Fate",
+		"duration_minutes":	70,
+		"timestamp":	"2025-07-11T17:19:58",
+		"score":	779,
+		"progress":	84
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Dustrealm",
+		"duration_minutes":	125,
+		"timestamp":	"2025-07-12T10:00:19",
+		"score":	1,
+		"progress":	46
+	}, {
+		"gamertag":	"IronFury1",
+		"game":	"Ashen Pact",
+		"duration_minutes":	100,
+		"timestamp":	"2025-07-11T23:23:16",
+		"kills":	4,
+		"deaths":	9,
+		"assists":	4
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	63,
+		"timestamp":	"2025-07-13T08:24:51",
+		"score":	240,
+		"progress":	43
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	113,
+		"timestamp":	"2025-07-12T15:15:22",
+		"kills":	9,
+		"deaths":	14,
+		"assists":	7
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Frostbound",
+		"duration_minutes":	147,
+		"timestamp":	"2025-07-12T22:53:57",
+		"score":	676,
+		"progress":	12
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	59,
+		"timestamp":	"2025-07-12T22:35:02",
+		"kills":	16,
+		"deaths":	8,
+		"assists":	2
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Dreamwalker",
+		"duration_minutes":	40,
+		"timestamp":	"2025-07-12T11:56:28",
+		"score":	401,
+		"progress":	0
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Solar Rift",
+		"duration_minutes":	65,
+		"timestamp":	"2025-07-12T00:07:46",
+		"kills":	2,
+		"deaths":	2,
+		"assists":	3
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Phantom Heist",
+		"duration_minutes":	110,
+		"timestamp":	"2025-07-11T18:09:18",
+		"score":	839,
+		"progress":	11
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Arcane Arena",
+		"duration_minutes":	33,
+		"timestamp":	"2025-07-12T05:15:00",
+		"kills":	2,
+		"deaths":	3,
+		"assists":	5
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	146,
+		"timestamp":	"2025-07-12T04:57:55",
+		"score":	659,
+		"progress":	60
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Steel Tempest",
+		"duration_minutes":	78,
+		"timestamp":	"2025-07-11T22:46:17",
+		"kills":	6,
+		"deaths":	4,
+		"assists":	0
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	110,
+		"timestamp":	"2025-07-11T17:52:49",
+		"score":	261,
+		"progress":	97
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	140,
+		"timestamp":	"2025-07-12T09:22:55",
+		"kills":	1,
+		"deaths":	13,
+		"assists":	2
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Chrono Shard",
+		"duration_minutes":	89,
+		"timestamp":	"2025-07-12T05:59:26",
+		"score":	321,
+		"progress":	100
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	97,
+		"timestamp":	"2025-07-11T17:31:24",
+		"score":	30,
+		"progress":	65
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	75,
+		"timestamp":	"2025-07-12T20:51:09",
+		"kills":	18,
+		"deaths":	8,
+		"assists":	5
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Glitchstorm",
+		"duration_minutes":	92,
+		"timestamp":	"2025-07-13T03:39:02",
+		"score":	377,
+		"progress":	16
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	80,
+		"timestamp":	"2025-07-12T01:56:40",
+		"kills":	15,
+		"deaths":	4,
+		"assists":	1
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Nova Stryke",
+		"duration_minutes":	119,
+		"timestamp":	"2025-07-12T18:12:08",
+		"score":	924,
+		"progress":	77
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Echo Circuit",
+		"duration_minutes":	119,
+		"timestamp":	"2025-07-11T19:24:10",
+		"score":	533,
+		"progress":	43
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	121,
+		"timestamp":	"2025-07-13T13:21:20",
+		"kills":	3,
+		"deaths":	9,
+		"assists":	1
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Hollowbyte",
+		"duration_minutes":	84,
+		"timestamp":	"2025-07-12T03:19:38",
+		"score":	651,
+		"progress":	41
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Titan Siege",
+		"duration_minutes":	69,
+		"timestamp":	"2025-07-12T07:36:58",
+		"kills":	17,
+		"deaths":	2,
+		"assists":	9
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Binary Fate",
+		"duration_minutes":	44,
+		"timestamp":	"2025-07-12T04:44:38",
+		"score":	186,
+		"progress":	6
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Dustrealm",
+		"duration_minutes":	69,
+		"timestamp":	"2025-07-13T03:04:22",
+		"score":	185,
+		"progress":	48
+	}, {
+		"gamertag":	"StarViper",
+		"game":	"Ashen Pact",
+		"duration_minutes":	123,
+		"timestamp":	"2025-07-12T03:13:11",
+		"kills":	18,
+		"deaths":	0,
+		"assists":	8
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	75,
+		"timestamp":	"2025-07-12T11:21:03",
+		"score":	83,
+		"progress":	13
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	101,
+		"timestamp":	"2025-07-11T22:16:37",
+		"kills":	14,
+		"deaths":	10,
+		"assists":	3
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Frostbound",
+		"duration_minutes":	56,
+		"timestamp":	"2025-07-11T18:43:12",
+		"score":	785,
+		"progress":	86
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	85,
+		"timestamp":	"2025-07-11T22:51:21",
+		"kills":	8,
+		"deaths":	10,
+		"assists":	7
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Dreamwalker",
+		"duration_minutes":	118,
+		"timestamp":	"2025-07-12T07:31:58",
+		"score":	223,
+		"progress":	46
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Solar Rift",
+		"duration_minutes":	43,
+		"timestamp":	"2025-07-13T02:20:39",
+		"kills":	12,
+		"deaths":	2,
+		"assists":	1
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Phantom Heist",
+		"duration_minutes":	103,
+		"timestamp":	"2025-07-12T11:34:13",
+		"score":	216,
+		"progress":	1
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Arcane Arena",
+		"duration_minutes":	84,
+		"timestamp":	"2025-07-13T12:54:07",
+		"kills":	15,
+		"deaths":	2,
+		"assists":	3
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	142,
+		"timestamp":	"2025-07-12T05:42:25",
+		"score":	630,
+		"progress":	31
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Steel Tempest",
+		"duration_minutes":	38,
+		"timestamp":	"2025-07-12T18:52:42",
+		"kills":	18,
+		"deaths":	3,
+		"assists":	5
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	70,
+		"timestamp":	"2025-07-13T15:44:06",
+		"score":	507,
+		"progress":	88
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	112,
+		"timestamp":	"2025-07-12T21:10:10",
+		"kills":	19,
+		"deaths":	8,
+		"assists":	9
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Chrono Shard",
+		"duration_minutes":	81,
+		"timestamp":	"2025-07-11T16:53:07",
+		"score":	228,
+		"progress":	35
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	126,
+		"timestamp":	"2025-07-12T10:37:53",
+		"score":	899,
+		"progress":	29
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	141,
+		"timestamp":	"2025-07-13T14:59:56",
+		"kills":	11,
+		"deaths":	2,
+		"assists":	8
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Glitchstorm",
+		"duration_minutes":	115,
+		"timestamp":	"2025-07-12T21:29:53",
+		"score":	788,
+		"progress":	65
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	51,
+		"timestamp":	"2025-07-12T05:50:21",
+		"kills":	14,
+		"deaths":	6,
+		"assists":	5
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Nova Stryke",
+		"duration_minutes":	102,
+		"timestamp":	"2025-07-13T02:18:29",
+		"score":	343,
+		"progress":	15
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Echo Circuit",
+		"duration_minutes":	77,
+		"timestamp":	"2025-07-13T14:31:55",
+		"score":	240,
+		"progress":	48
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	31,
+		"timestamp":	"2025-07-12T15:22:47",
+		"kills":	5,
+		"deaths":	3,
+		"assists":	5
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Hollowbyte",
+		"duration_minutes":	125,
+		"timestamp":	"2025-07-11T22:57:19",
+		"score":	124,
+		"progress":	17
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Titan Siege",
+		"duration_minutes":	35,
+		"timestamp":	"2025-07-12T13:35:20",
+		"kills":	9,
+		"deaths":	2,
+		"assists":	7
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Binary Fate",
+		"duration_minutes":	120,
+		"timestamp":	"2025-07-12T13:49:43",
+		"score":	287,
+		"progress":	63
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Dustrealm",
+		"duration_minutes":	130,
+		"timestamp":	"2025-07-11T21:45:34",
+		"score":	2,
+		"progress":	97
+	}, {
+		"gamertag":	"ShadowWisp",
+		"game":	"Ashen Pact",
+		"duration_minutes":	82,
+		"timestamp":	"2025-07-12T18:06:42",
+		"kills":	7,
+		"deaths":	6,
+		"assists":	7
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	113,
+		"timestamp":	"2025-07-13T13:56:49",
+		"score":	507,
+		"progress":	9
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	51,
+		"timestamp":	"2025-07-12T06:51:48",
+		"kills":	19,
+		"deaths":	0,
+		"assists":	6
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Frostbound",
+		"duration_minutes":	93,
+		"timestamp":	"2025-07-13T04:45:49",
+		"score":	102,
+		"progress":	6
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	119,
+		"timestamp":	"2025-07-12T23:20:18",
+		"kills":	8,
+		"deaths":	10,
+		"assists":	0
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Dreamwalker",
+		"duration_minutes":	132,
+		"timestamp":	"2025-07-13T16:01:48",
+		"score":	878,
+		"progress":	67
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Solar Rift",
+		"duration_minutes":	33,
+		"timestamp":	"2025-07-13T08:15:04",
+		"kills":	15,
+		"deaths":	2,
+		"assists":	6
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Phantom Heist",
+		"duration_minutes":	73,
+		"timestamp":	"2025-07-12T18:40:34",
+		"score":	674,
+		"progress":	44
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Arcane Arena",
+		"duration_minutes":	134,
+		"timestamp":	"2025-07-13T14:42:15",
+		"kills":	9,
+		"deaths":	8,
+		"assists":	1
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	110,
+		"timestamp":	"2025-07-12T19:37:02",
+		"score":	722,
+		"progress":	15
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Steel Tempest",
+		"duration_minutes":	45,
+		"timestamp":	"2025-07-13T05:47:55",
+		"kills":	12,
+		"deaths":	1,
+		"assists":	2
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	115,
+		"timestamp":	"2025-07-12T03:13:43",
+		"score":	127,
+		"progress":	2
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	45,
+		"timestamp":	"2025-07-12T00:10:29",
+		"kills":	16,
+		"deaths":	5,
+		"assists":	0
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Chrono Shard",
+		"duration_minutes":	144,
+		"timestamp":	"2025-07-12T23:21:34",
+		"score":	819,
+		"progress":	52
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	130,
+		"timestamp":	"2025-07-13T08:16:55",
+		"score":	464,
+		"progress":	5
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	46,
+		"timestamp":	"2025-07-13T00:18:38",
+		"kills":	13,
+		"deaths":	4,
+		"assists":	2
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Glitchstorm",
+		"duration_minutes":	82,
+		"timestamp":	"2025-07-13T06:16:20",
+		"score":	96,
+		"progress":	85
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	117,
+		"timestamp":	"2025-07-12T06:56:18",
+		"kills":	10,
+		"deaths":	8,
+		"assists":	3
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Nova Stryke",
+		"duration_minutes":	72,
+		"timestamp":	"2025-07-13T08:19:19",
+		"score":	662,
+		"progress":	98
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Echo Circuit",
+		"duration_minutes":	66,
+		"timestamp":	"2025-07-13T01:46:07",
+		"score":	819,
+		"progress":	36
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	120,
+		"timestamp":	"2025-07-13T15:51:56",
+		"kills":	8,
+		"deaths":	13,
+		"assists":	5
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Hollowbyte",
+		"duration_minutes":	114,
+		"timestamp":	"2025-07-12T06:48:41",
+		"score":	999,
+		"progress":	87
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Titan Siege",
+		"duration_minutes":	90,
+		"timestamp":	"2025-07-11T18:26:07",
+		"kills":	16,
+		"deaths":	0,
+		"assists":	5
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Binary Fate",
+		"duration_minutes":	142,
+		"timestamp":	"2025-07-12T20:19:50",
+		"score":	213,
+		"progress":	87
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Dustrealm",
+		"duration_minutes":	37,
+		"timestamp":	"2025-07-13T13:39:25",
+		"score":	480,
+		"progress":	6
+	}, {
+		"gamertag":	"CosmoBlaze",
+		"game":	"Ashen Pact",
+		"duration_minutes":	105,
+		"timestamp":	"2025-07-12T14:36:51",
+		"kills":	2,
+		"deaths":	11,
+		"assists":	1
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	144,
+		"timestamp":	"2025-07-13T00:44:34",
+		"score":	273,
+		"progress":	96
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	148,
+		"timestamp":	"2025-07-11T16:51:31",
+		"kills":	4,
+		"deaths":	10,
+		"assists":	3
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Frostbound",
+		"duration_minutes":	110,
+		"timestamp":	"2025-07-13T05:16:54",
+		"score":	904,
+		"progress":	84
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	143,
+		"timestamp":	"2025-07-11T21:44:22",
+		"kills":	17,
+		"deaths":	6,
+		"assists":	4
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Dreamwalker",
+		"duration_minutes":	38,
+		"timestamp":	"2025-07-12T06:06:43",
+		"score":	977,
+		"progress":	73
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Solar Rift",
+		"duration_minutes":	71,
+		"timestamp":	"2025-07-12T10:43:55",
+		"kills":	17,
+		"deaths":	11,
+		"assists":	3
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Phantom Heist",
+		"duration_minutes":	94,
+		"timestamp":	"2025-07-13T11:35:09",
+		"score":	647,
+		"progress":	17
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Arcane Arena",
+		"duration_minutes":	78,
+		"timestamp":	"2025-07-12T15:37:55",
+		"kills":	13,
+		"deaths":	1,
+		"assists":	6
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	41,
+		"timestamp":	"2025-07-12T13:11:21",
+		"score":	3,
+		"progress":	80
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Steel Tempest",
+		"duration_minutes":	137,
+		"timestamp":	"2025-07-11T23:53:31",
+		"kills":	9,
+		"deaths":	14,
+		"assists":	4
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	32,
+		"timestamp":	"2025-07-12T06:26:35",
+		"score":	232,
+		"progress":	14
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	59,
+		"timestamp":	"2025-07-12T01:46:59",
+		"kills":	9,
+		"deaths":	7,
+		"assists":	5
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Chrono Shard",
+		"duration_minutes":	71,
+		"timestamp":	"2025-07-13T05:58:00",
+		"score":	783,
+		"progress":	6
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	105,
+		"timestamp":	"2025-07-13T09:15:25",
+		"score":	368,
+		"progress":	53
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	49,
+		"timestamp":	"2025-07-13T10:51:47",
+		"kills":	18,
+		"deaths":	13,
+		"assists":	8
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Glitchstorm",
+		"duration_minutes":	45,
+		"timestamp":	"2025-07-11T19:46:38",
+		"score":	101,
+		"progress":	39
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	63,
+		"timestamp":	"2025-07-13T12:32:38",
+		"kills":	7,
+		"deaths":	4,
+		"assists":	5
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Nova Stryke",
+		"duration_minutes":	37,
+		"timestamp":	"2025-07-12T13:20:01",
+		"score":	830,
+		"progress":	15
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Echo Circuit",
+		"duration_minutes":	55,
+		"timestamp":	"2025-07-11T21:13:09",
+		"score":	289,
+		"progress":	8
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	57,
+		"timestamp":	"2025-07-13T03:33:25",
+		"kills":	10,
+		"deaths":	4,
+		"assists":	5
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Hollowbyte",
+		"duration_minutes":	132,
+		"timestamp":	"2025-07-12T22:39:44",
+		"score":	393,
+		"progress":	81
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Titan Siege",
+		"duration_minutes":	146,
+		"timestamp":	"2025-07-12T01:01:53",
+		"kills":	2,
+		"deaths":	14,
+		"assists":	6
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Binary Fate",
+		"duration_minutes":	101,
+		"timestamp":	"2025-07-12T04:16:39",
+		"score":	500,
+		"progress":	61
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Dustrealm",
+		"duration_minutes":	125,
+		"timestamp":	"2025-07-12T04:04:18",
+		"score":	462,
+		"progress":	75
+	}, {
+		"gamertag":	"FrostByte",
+		"game":	"Ashen Pact",
+		"duration_minutes":	75,
+		"timestamp":	"2025-07-12T03:12:39",
+		"kills":	3,
+		"deaths":	4,
+		"assists":	9
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	95,
+		"timestamp":	"2025-07-13T07:31:50",
+		"score":	890,
+		"progress":	22
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	81,
+		"timestamp":	"2025-07-12T18:32:42",
+		"kills":	3,
+		"deaths":	8,
+		"assists":	2
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Frostbound",
+		"duration_minutes":	58,
+		"timestamp":	"2025-07-11T19:08:06",
+		"score":	318,
+		"progress":	22
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	88,
+		"timestamp":	"2025-07-12T15:43:15",
+		"kills":	1,
+		"deaths":	14,
+		"assists":	2
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Dreamwalker",
+		"duration_minutes":	90,
+		"timestamp":	"2025-07-12T20:51:48",
+		"score":	812,
+		"progress":	32
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Solar Rift",
+		"duration_minutes":	113,
+		"timestamp":	"2025-07-12T01:14:05",
+		"kills":	15,
+		"deaths":	7,
+		"assists":	5
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Phantom Heist",
+		"duration_minutes":	148,
+		"timestamp":	"2025-07-13T15:15:57",
+		"score":	744,
+		"progress":	33
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Arcane Arena",
+		"duration_minutes":	108,
+		"timestamp":	"2025-07-13T00:13:34",
+		"kills":	1,
+		"deaths":	12,
+		"assists":	2
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	67,
+		"timestamp":	"2025-07-12T18:07:28",
+		"score":	502,
+		"progress":	24
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Steel Tempest",
+		"duration_minutes":	143,
+		"timestamp":	"2025-07-12T09:56:24",
+		"kills":	10,
+		"deaths":	12,
+		"assists":	7
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	146,
+		"timestamp":	"2025-07-12T02:25:06",
+		"score":	556,
+		"progress":	55
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	63,
+		"timestamp":	"2025-07-12T15:16:40",
+		"kills":	13,
+		"deaths":	10,
+		"assists":	1
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Chrono Shard",
+		"duration_minutes":	135,
+		"timestamp":	"2025-07-12T19:01:49",
+		"score":	560,
+		"progress":	35
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	46,
+		"timestamp":	"2025-07-12T14:03:16",
+		"score":	370,
+		"progress":	48
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	115,
+		"timestamp":	"2025-07-11T18:30:43",
+		"kills":	0,
+		"deaths":	0,
+		"assists":	0
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Glitchstorm",
+		"duration_minutes":	145,
+		"timestamp":	"2025-07-13T08:31:13",
+		"score":	373,
+		"progress":	30
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	50,
+		"timestamp":	"2025-07-12T00:37:39",
+		"kills":	15,
+		"deaths":	3,
+		"assists":	7
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Nova Stryke",
+		"duration_minutes":	104,
+		"timestamp":	"2025-07-12T13:15:41",
+		"score":	775,
+		"progress":	48
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Echo Circuit",
+		"duration_minutes":	134,
+		"timestamp":	"2025-07-11T19:57:04",
+		"score":	90,
+		"progress":	35
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	34,
+		"timestamp":	"2025-07-13T15:50:09",
+		"kills":	18,
+		"deaths":	14,
+		"assists":	6
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Hollowbyte",
+		"duration_minutes":	35,
+		"timestamp":	"2025-07-12T08:59:47",
+		"score":	897,
+		"progress":	79
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Titan Siege",
+		"duration_minutes":	120,
+		"timestamp":	"2025-07-12T17:15:46",
+		"kills":	7,
+		"deaths":	11,
+		"assists":	5
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Binary Fate",
+		"duration_minutes":	124,
+		"timestamp":	"2025-07-12T22:53:47",
+		"score":	558,
+		"progress":	65
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Dustrealm",
+		"duration_minutes":	112,
+		"timestamp":	"2025-07-11T16:15:48",
+		"score":	800,
+		"progress":	4
+	}, {
+		"gamertag":	"CrystalFox",
+		"game":	"Ashen Pact",
+		"duration_minutes":	61,
+		"timestamp":	"2025-07-12T06:45:45",
+		"kills":	0,
+		"deaths":	11,
+		"assists":	1
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	80,
+		"timestamp":	"2025-07-13T14:11:08",
+		"score":	151,
+		"progress":	8
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	71,
+		"timestamp":	"2025-07-13T01:51:46",
+		"kills":	5,
+		"deaths":	5,
+		"assists":	2
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Frostbound",
+		"duration_minutes":	44,
+		"timestamp":	"2025-07-13T04:33:05",
+		"score":	179,
+		"progress":	67
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	75,
+		"timestamp":	"2025-07-13T12:36:55",
+		"kills":	17,
+		"deaths":	7,
+		"assists":	9
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Dreamwalker",
+		"duration_minutes":	111,
+		"timestamp":	"2025-07-13T01:36:24",
+		"score":	590,
+		"progress":	30
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Solar Rift",
+		"duration_minutes":	41,
+		"timestamp":	"2025-07-12T08:30:06",
+		"kills":	1,
+		"deaths":	14,
+		"assists":	1
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Phantom Heist",
+		"duration_minutes":	134,
+		"timestamp":	"2025-07-12T19:36:15",
+		"score":	839,
+		"progress":	43
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Arcane Arena",
+		"duration_minutes":	64,
+		"timestamp":	"2025-07-11T17:31:17",
+		"kills":	2,
+		"deaths":	12,
+		"assists":	4
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	32,
+		"timestamp":	"2025-07-13T02:14:10",
+		"score":	924,
+		"progress":	71
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Steel Tempest",
+		"duration_minutes":	138,
+		"timestamp":	"2025-07-11T22:48:28",
+		"kills":	18,
+		"deaths":	12,
+		"assists":	7
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	34,
+		"timestamp":	"2025-07-11T20:09:58",
+		"score":	239,
+		"progress":	73
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	61,
+		"timestamp":	"2025-07-11T23:15:45",
+		"kills":	18,
+		"deaths":	5,
+		"assists":	9
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Chrono Shard",
+		"duration_minutes":	81,
+		"timestamp":	"2025-07-12T23:41:58",
+		"score":	194,
+		"progress":	13
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	140,
+		"timestamp":	"2025-07-12T14:03:01",
+		"score":	804,
+		"progress":	23
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	130,
+		"timestamp":	"2025-07-11T19:54:33",
+		"kills":	1,
+		"deaths":	8,
+		"assists":	0
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Glitchstorm",
+		"duration_minutes":	76,
+		"timestamp":	"2025-07-11T22:37:31",
+		"score":	187,
+		"progress":	65
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	86,
+		"timestamp":	"2025-07-12T19:28:41",
+		"kills":	17,
+		"deaths":	5,
+		"assists":	5
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Nova Stryke",
+		"duration_minutes":	98,
+		"timestamp":	"2025-07-12T13:24:22",
+		"score":	624,
+		"progress":	35
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Echo Circuit",
+		"duration_minutes":	94,
+		"timestamp":	"2025-07-11T22:22:48",
+		"score":	907,
+		"progress":	11
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	83,
+		"timestamp":	"2025-07-13T05:12:01",
+		"kills":	1,
+		"deaths":	6,
+		"assists":	5
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Hollowbyte",
+		"duration_minutes":	63,
+		"timestamp":	"2025-07-13T07:31:54",
+		"score":	709,
+		"progress":	18
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Titan Siege",
+		"duration_minutes":	150,
+		"timestamp":	"2025-07-12T20:03:32",
+		"kills":	3,
+		"deaths":	14,
+		"assists":	8
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Binary Fate",
+		"duration_minutes":	149,
+		"timestamp":	"2025-07-12T04:46:10",
+		"score":	947,
+		"progress":	36
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Dustrealm",
+		"duration_minutes":	98,
+		"timestamp":	"2025-07-12T01:39:34",
+		"score":	989,
+		"progress":	22
+	}, {
+		"gamertag":	"EmberQueen",
+		"game":	"Ashen Pact",
+		"duration_minutes":	69,
+		"timestamp":	"2025-07-13T10:43:46",
+		"kills":	15,
+		"deaths":	13,
+		"assists":	2
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	126,
+		"timestamp":	"2025-07-12T11:39:28",
+		"score":	472,
+		"progress":	44
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	54,
+		"timestamp":	"2025-07-13T11:14:57",
+		"kills":	17,
+		"deaths":	13,
+		"assists":	7
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Frostbound",
+		"duration_minutes":	30,
+		"timestamp":	"2025-07-11T19:30:34",
+		"score":	26,
+		"progress":	6
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	117,
+		"timestamp":	"2025-07-12T06:33:05",
+		"kills":	16,
+		"deaths":	13,
+		"assists":	4
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Dreamwalker",
+		"duration_minutes":	131,
+		"timestamp":	"2025-07-12T20:44:42",
+		"score":	231,
+		"progress":	58
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Solar Rift",
+		"duration_minutes":	80,
+		"timestamp":	"2025-07-13T10:56:31",
+		"kills":	0,
+		"deaths":	4,
+		"assists":	2
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Phantom Heist",
+		"duration_minutes":	92,
+		"timestamp":	"2025-07-11T23:45:25",
+		"score":	390,
+		"progress":	51
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Arcane Arena",
+		"duration_minutes":	147,
+		"timestamp":	"2025-07-12T06:36:17",
+		"kills":	11,
+		"deaths":	9,
+		"assists":	6
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	126,
+		"timestamp":	"2025-07-12T08:11:28",
+		"score":	426,
+		"progress":	0
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Steel Tempest",
+		"duration_minutes":	70,
+		"timestamp":	"2025-07-11T19:37:35",
+		"kills":	0,
+		"deaths":	6,
+		"assists":	0
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	90,
+		"timestamp":	"2025-07-13T04:49:15",
+		"score":	500,
+		"progress":	23
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	62,
+		"timestamp":	"2025-07-12T08:27:09",
+		"kills":	15,
+		"deaths":	11,
+		"assists":	0
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Chrono Shard",
+		"duration_minutes":	83,
+		"timestamp":	"2025-07-11T21:06:31",
+		"score":	861,
+		"progress":	46
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	64,
+		"timestamp":	"2025-07-11T16:54:23",
+		"score":	609,
+		"progress":	49
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	136,
+		"timestamp":	"2025-07-12T14:50:16",
+		"kills":	4,
+		"deaths":	8,
+		"assists":	9
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Glitchstorm",
+		"duration_minutes":	46,
+		"timestamp":	"2025-07-13T06:09:34",
+		"score":	18,
+		"progress":	85
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	46,
+		"timestamp":	"2025-07-13T03:17:17",
+		"kills":	2,
+		"deaths":	6,
+		"assists":	4
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Nova Stryke",
+		"duration_minutes":	69,
+		"timestamp":	"2025-07-12T17:43:09",
+		"score":	585,
+		"progress":	3
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Echo Circuit",
+		"duration_minutes":	110,
+		"timestamp":	"2025-07-11T20:30:44",
+		"score":	437,
+		"progress":	0
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	71,
+		"timestamp":	"2025-07-12T11:22:27",
+		"kills":	1,
+		"deaths":	4,
+		"assists":	9
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Hollowbyte",
+		"duration_minutes":	111,
+		"timestamp":	"2025-07-12T00:05:12",
+		"score":	790,
+		"progress":	46
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Titan Siege",
+		"duration_minutes":	44,
+		"timestamp":	"2025-07-12T01:03:45",
+		"kills":	12,
+		"deaths":	0,
+		"assists":	5
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Binary Fate",
+		"duration_minutes":	125,
+		"timestamp":	"2025-07-12T22:12:42",
+		"score":	693,
+		"progress":	18
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Dustrealm",
+		"duration_minutes":	94,
+		"timestamp":	"2025-07-12T09:49:52",
+		"score":	296,
+		"progress":	54
+	}, {
+		"gamertag":	"StormChaser",
+		"game":	"Ashen Pact",
+		"duration_minutes":	149,
+		"timestamp":	"2025-07-11T23:25:03",
+		"kills":	17,
+		"deaths":	14,
+		"assists":	0
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	97,
+		"timestamp":	"2025-07-13T12:15:53",
+		"score":	777,
+		"progress":	85
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	59,
+		"timestamp":	"2025-07-12T16:26:10",
+		"kills":	8,
+		"deaths":	1,
+		"assists":	0
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Frostbound",
+		"duration_minutes":	120,
+		"timestamp":	"2025-07-12T17:21:56",
+		"score":	711,
+		"progress":	28
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	143,
+		"timestamp":	"2025-07-11T19:59:22",
+		"kills":	6,
+		"deaths":	7,
+		"assists":	2
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Dreamwalker",
+		"duration_minutes":	90,
+		"timestamp":	"2025-07-12T09:30:58",
+		"score":	868,
+		"progress":	98
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Solar Rift",
+		"duration_minutes":	147,
+		"timestamp":	"2025-07-12T15:48:44",
+		"kills":	14,
+		"deaths":	10,
+		"assists":	9
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Phantom Heist",
+		"duration_minutes":	107,
+		"timestamp":	"2025-07-13T11:54:25",
+		"score":	430,
+		"progress":	95
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Arcane Arena",
+		"duration_minutes":	50,
+		"timestamp":	"2025-07-13T04:05:23",
+		"kills":	10,
+		"deaths":	6,
+		"assists":	2
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	72,
+		"timestamp":	"2025-07-12T00:14:44",
+		"score":	628,
+		"progress":	16
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Steel Tempest",
+		"duration_minutes":	110,
+		"timestamp":	"2025-07-12T11:52:15",
+		"kills":	5,
+		"deaths":	11,
+		"assists":	6
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	124,
+		"timestamp":	"2025-07-12T04:07:44",
+		"score":	570,
+		"progress":	80
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	141,
+		"timestamp":	"2025-07-13T14:58:56",
+		"kills":	3,
+		"deaths":	11,
+		"assists":	3
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Chrono Shard",
+		"duration_minutes":	34,
+		"timestamp":	"2025-07-12T22:26:14",
+		"score":	878,
+		"progress":	35
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	37,
+		"timestamp":	"2025-07-12T06:03:55",
+		"score":	502,
+		"progress":	41
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	37,
+		"timestamp":	"2025-07-12T13:11:08",
+		"kills":	11,
+		"deaths":	2,
+		"assists":	3
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Glitchstorm",
+		"duration_minutes":	82,
+		"timestamp":	"2025-07-12T20:01:05",
+		"score":	853,
+		"progress":	41
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	88,
+		"timestamp":	"2025-07-12T04:35:30",
+		"kills":	13,
+		"deaths":	13,
+		"assists":	7
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Nova Stryke",
+		"duration_minutes":	107,
+		"timestamp":	"2025-07-12T17:54:09",
+		"score":	567,
+		"progress":	12
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Echo Circuit",
+		"duration_minutes":	126,
+		"timestamp":	"2025-07-13T03:00:17",
+		"score":	76,
+		"progress":	33
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	45,
+		"timestamp":	"2025-07-11T22:15:01",
+		"kills":	13,
+		"deaths":	0,
+		"assists":	0
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Hollowbyte",
+		"duration_minutes":	139,
+		"timestamp":	"2025-07-12T16:40:10",
+		"score":	935,
+		"progress":	57
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Titan Siege",
+		"duration_minutes":	104,
+		"timestamp":	"2025-07-12T18:22:13",
+		"kills":	5,
+		"deaths":	0,
+		"assists":	1
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Binary Fate",
+		"duration_minutes":	30,
+		"timestamp":	"2025-07-12T15:50:43",
+		"score":	654,
+		"progress":	41
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Dustrealm",
+		"duration_minutes":	71,
+		"timestamp":	"2025-07-12T21:42:03",
+		"score":	892,
+		"progress":	64
+	}, {
+		"gamertag":	"NightShade",
+		"game":	"Ashen Pact",
+		"duration_minutes":	57,
+		"timestamp":	"2025-07-12T23:51:51",
+		"kills":	10,
+		"deaths":	3,
+		"assists":	1
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	86,
+		"timestamp":	"2025-07-12T03:05:14",
+		"score":	659,
+		"progress":	44
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	48,
+		"timestamp":	"2025-07-12T09:27:21",
+		"kills":	8,
+		"deaths":	13,
+		"assists":	0
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Frostbound",
+		"duration_minutes":	78,
+		"timestamp":	"2025-07-12T09:50:41",
+		"score":	387,
+		"progress":	52
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	87,
+		"timestamp":	"2025-07-12T19:22:26",
+		"kills":	13,
+		"deaths":	12,
+		"assists":	4
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Dreamwalker",
+		"duration_minutes":	115,
+		"timestamp":	"2025-07-13T08:36:38",
+		"score":	771,
+		"progress":	69
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Solar Rift",
+		"duration_minutes":	84,
+		"timestamp":	"2025-07-11T18:22:32",
+		"kills":	3,
+		"deaths":	1,
+		"assists":	2
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Phantom Heist",
+		"duration_minutes":	76,
+		"timestamp":	"2025-07-13T10:53:11",
+		"score":	147,
+		"progress":	74
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Arcane Arena",
+		"duration_minutes":	106,
+		"timestamp":	"2025-07-12T23:52:46",
+		"kills":	17,
+		"deaths":	14,
+		"assists":	6
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	64,
+		"timestamp":	"2025-07-13T07:45:49",
+		"score":	406,
+		"progress":	43
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Steel Tempest",
+		"duration_minutes":	142,
+		"timestamp":	"2025-07-11T20:30:35",
+		"kills":	5,
+		"deaths":	4,
+		"assists":	7
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	54,
+		"timestamp":	"2025-07-12T07:27:07",
+		"score":	789,
+		"progress":	29
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	118,
+		"timestamp":	"2025-07-11T23:23:29",
+		"kills":	8,
+		"deaths":	14,
+		"assists":	8
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Chrono Shard",
+		"duration_minutes":	46,
+		"timestamp":	"2025-07-12T19:31:25",
+		"score":	6,
+		"progress":	93
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	145,
+		"timestamp":	"2025-07-12T16:56:25",
+		"score":	809,
+		"progress":	60
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	123,
+		"timestamp":	"2025-07-13T05:09:17",
+		"kills":	13,
+		"deaths":	0,
+		"assists":	0
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Glitchstorm",
+		"duration_minutes":	83,
+		"timestamp":	"2025-07-12T18:17:49",
+		"score":	748,
+		"progress":	37
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	123,
+		"timestamp":	"2025-07-11T16:51:26",
+		"kills":	16,
+		"deaths":	12,
+		"assists":	0
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Nova Stryke",
+		"duration_minutes":	49,
+		"timestamp":	"2025-07-13T05:31:25",
+		"score":	861,
+		"progress":	25
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Echo Circuit",
+		"duration_minutes":	101,
+		"timestamp":	"2025-07-11T22:33:15",
+		"score":	722,
+		"progress":	94
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	142,
+		"timestamp":	"2025-07-13T05:09:30",
+		"kills":	16,
+		"deaths":	14,
+		"assists":	0
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Hollowbyte",
+		"duration_minutes":	130,
+		"timestamp":	"2025-07-13T09:21:34",
+		"score":	209,
+		"progress":	94
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Titan Siege",
+		"duration_minutes":	71,
+		"timestamp":	"2025-07-13T11:06:36",
+		"kills":	15,
+		"deaths":	1,
+		"assists":	5
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Binary Fate",
+		"duration_minutes":	62,
+		"timestamp":	"2025-07-13T10:02:41",
+		"score":	204,
+		"progress":	80
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Dustrealm",
+		"duration_minutes":	31,
+		"timestamp":	"2025-07-12T21:02:10",
+		"score":	973,
+		"progress":	97
+	}, {
+		"gamertag":	"MoonStrider",
+		"game":	"Ashen Pact",
+		"duration_minutes":	104,
+		"timestamp":	"2025-07-11T17:20:59",
+		"kills":	0,
+		"deaths":	12,
+		"assists":	4
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	67,
+		"timestamp":	"2025-07-13T07:42:11",
+		"score":	986,
+		"progress":	46
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	109,
+		"timestamp":	"2025-07-12T05:33:52",
+		"kills":	2,
+		"deaths":	12,
+		"assists":	8
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Frostbound",
+		"duration_minutes":	130,
+		"timestamp":	"2025-07-12T00:24:52",
+		"score":	39,
+		"progress":	22
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	86,
+		"timestamp":	"2025-07-13T03:52:36",
+		"kills":	7,
+		"deaths":	6,
+		"assists":	8
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Dreamwalker",
+		"duration_minutes":	40,
+		"timestamp":	"2025-07-12T11:59:20",
+		"score":	164,
+		"progress":	58
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Solar Rift",
+		"duration_minutes":	106,
+		"timestamp":	"2025-07-11T17:29:26",
+		"kills":	7,
+		"deaths":	14,
+		"assists":	4
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Phantom Heist",
+		"duration_minutes":	60,
+		"timestamp":	"2025-07-12T05:56:58",
+		"score":	459,
+		"progress":	73
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Arcane Arena",
+		"duration_minutes":	62,
+		"timestamp":	"2025-07-12T04:07:52",
+		"kills":	12,
+		"deaths":	13,
+		"assists":	0
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	83,
+		"timestamp":	"2025-07-12T17:14:14",
+		"score":	502,
+		"progress":	90
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Steel Tempest",
+		"duration_minutes":	114,
+		"timestamp":	"2025-07-13T08:30:37",
+		"kills":	11,
+		"deaths":	3,
+		"assists":	5
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	42,
+		"timestamp":	"2025-07-13T02:13:54",
+		"score":	919,
+		"progress":	86
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	73,
+		"timestamp":	"2025-07-12T19:40:41",
+		"kills":	1,
+		"deaths":	2,
+		"assists":	1
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Chrono Shard",
+		"duration_minutes":	40,
+		"timestamp":	"2025-07-11T16:34:13",
+		"score":	342,
+		"progress":	98
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	72,
+		"timestamp":	"2025-07-12T07:34:35",
+		"score":	730,
+		"progress":	54
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	94,
+		"timestamp":	"2025-07-12T03:13:09",
+		"kills":	16,
+		"deaths":	0,
+		"assists":	0
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Glitchstorm",
+		"duration_minutes":	52,
+		"timestamp":	"2025-07-11T21:21:36",
+		"score":	323,
+		"progress":	94
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	120,
+		"timestamp":	"2025-07-13T14:11:54",
+		"kills":	1,
+		"deaths":	7,
+		"assists":	2
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Nova Stryke",
+		"duration_minutes":	34,
+		"timestamp":	"2025-07-12T18:28:17",
+		"score":	631,
+		"progress":	62
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Echo Circuit",
+		"duration_minutes":	131,
+		"timestamp":	"2025-07-13T10:20:57",
+		"score":	576,
+		"progress":	81
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	80,
+		"timestamp":	"2025-07-13T04:10:08",
+		"kills":	1,
+		"deaths":	8,
+		"assists":	5
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Hollowbyte",
+		"duration_minutes":	33,
+		"timestamp":	"2025-07-12T18:51:05",
+		"score":	7,
+		"progress":	35
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Titan Siege",
+		"duration_minutes":	64,
+		"timestamp":	"2025-07-12T16:56:22",
+		"kills":	14,
+		"deaths":	2,
+		"assists":	8
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Binary Fate",
+		"duration_minutes":	40,
+		"timestamp":	"2025-07-13T01:19:34",
+		"score":	871,
+		"progress":	46
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Dustrealm",
+		"duration_minutes":	61,
+		"timestamp":	"2025-07-12T00:41:31",
+		"score":	215,
+		"progress":	61
+	}, {
+		"gamertag":	"GhostPulse",
+		"game":	"Ashen Pact",
+		"duration_minutes":	127,
+		"timestamp":	"2025-07-13T15:28:36",
+		"kills":	6,
+		"deaths":	14,
+		"assists":	8
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Echoes of Eternity",
+		"duration_minutes":	33,
+		"timestamp":	"2025-07-12T16:29:51",
+		"score":	365,
+		"progress":	41
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Neon Overdrive",
+		"duration_minutes":	118,
+		"timestamp":	"2025-07-13T05:11:31",
+		"kills":	12,
+		"deaths":	5,
+		"assists":	3
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Frostbound",
+		"duration_minutes":	99,
+		"timestamp":	"2025-07-12T16:04:30",
+		"score":	951,
+		"progress":	55
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Warborn Protocol",
+		"duration_minutes":	30,
+		"timestamp":	"2025-07-13T10:17:11",
+		"kills":	15,
+		"deaths":	0,
+		"assists":	6
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Dreamwalker",
+		"duration_minutes":	116,
+		"timestamp":	"2025-07-12T14:43:12",
+		"score":	449,
+		"progress":	68
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Solar Rift",
+		"duration_minutes":	58,
+		"timestamp":	"2025-07-13T06:50:42",
+		"kills":	0,
+		"deaths":	0,
+		"assists":	0
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Phantom Heist",
+		"duration_minutes":	143,
+		"timestamp":	"2025-07-13T10:16:35",
+		"score":	216,
+		"progress":	26
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Arcane Arena",
+		"duration_minutes":	141,
+		"timestamp":	"2025-07-13T08:00:23",
+		"kills":	11,
+		"deaths":	0,
+		"assists":	1
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Rogue Horizon",
+		"duration_minutes":	150,
+		"timestamp":	"2025-07-12T08:40:17",
+		"score":	867,
+		"progress":	86
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Steel Tempest",
+		"duration_minutes":	48,
+		"timestamp":	"2025-07-12T18:17:31",
+		"kills":	8,
+		"deaths":	2,
+		"assists":	6
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Warden’s Legacy",
+		"duration_minutes":	58,
+		"timestamp":	"2025-07-12T15:08:30",
+		"score":	148,
+		"progress":	3
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Starforge Syndicate",
+		"duration_minutes":	118,
+		"timestamp":	"2025-07-12T12:24:04",
+		"kills":	7,
+		"deaths":	0,
+		"assists":	9
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Chrono Shard",
+		"duration_minutes":	57,
+		"timestamp":	"2025-07-12T13:34:13",
+		"score":	346,
+		"progress":	26
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Veil of Shadows",
+		"duration_minutes":	103,
+		"timestamp":	"2025-07-12T04:34:09",
+		"score":	724,
+		"progress":	6
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Crimson Protocol",
+		"duration_minutes":	135,
+		"timestamp":	"2025-07-13T01:31:39",
+		"kills":	12,
+		"deaths":	3,
+		"assists":	4
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Glitchstorm",
+		"duration_minutes":	105,
+		"timestamp":	"2025-07-12T09:21:52",
+		"score":	253,
+		"progress":	16
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Monarchs of Myth",
+		"duration_minutes":	108,
+		"timestamp":	"2025-07-12T10:49:58",
+		"kills":	8,
+		"deaths":	0,
+		"assists":	0
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Nova Stryke",
+		"duration_minutes":	52,
+		"timestamp":	"2025-07-12T23:07:52",
+		"score":	978,
+		"progress":	81
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Echo Circuit",
+		"duration_minutes":	94,
+		"timestamp":	"2025-07-12T16:14:25",
+		"score":	991,
+		"progress":	67
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Golem’s Wrath",
+		"duration_minutes":	75,
+		"timestamp":	"2025-07-12T13:38:31",
+		"kills":	11,
+		"deaths":	8,
+		"assists":	6
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Hollowbyte",
+		"duration_minutes":	126,
+		"timestamp":	"2025-07-13T11:02:15",
+		"score":	431,
+		"progress":	26
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Titan Siege",
+		"duration_minutes":	59,
+		"timestamp":	"2025-07-13T00:58:36",
+		"kills":	5,
+		"deaths":	2,
+		"assists":	7
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Binary Fate",
+		"duration_minutes":	95,
+		"timestamp":	"2025-07-11T16:50:20",
+		"score":	280,
+		"progress":	71
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Dustrealm",
+		"duration_minutes":	126,
+		"timestamp":	"2025-07-12T05:42:45",
+		"score":	79,
+		"progress":	29
+	}, {
+		"gamertag":	"StarFlare",
+		"game":	"Ashen Pact",
+		"duration_minutes":	110,
+		"timestamp":	"2025-07-12T21:43:31",
+		"kills":	5,
+		"deaths":	12,
+		"assists":	2
 	}]

@@ -7,75 +7,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Additional mock variables for this test
-int mock_logic_display_games_formatted_called = 0;
-int mock_logic_handle_add_game_called = 0;
-int mock_logic_handle_edit_game_called = 0;
-int mock_logic_handle_delete_game_called = 0;
+// We will be testing the actual logic_handle_game_management_menu function,
+// so we include the .c file here. The sub-functions it calls will be mocked.
+// #define TESTING_GAME_MENU
+// #include "../../src/logic/logic.c"
 
-// Mock the sub-functions to track calls
-void logic_display_games_formatted(const Game *games, int game_count) {
-    (void)games;
-    (void)game_count;
-    mock_logic_display_games_formatted_called++;
-}
-
-void logic_handle_add_game(Game **games, int *game_count) {
-    (void)games;
-    (void)game_count;
-    mock_logic_handle_add_game_called++;
-}
-
-void logic_handle_edit_game(Game *games, int game_count) {
-    (void)games;
-    (void)game_count;
-    mock_logic_handle_edit_game_called++;
-}
-
-void logic_handle_delete_game(Game **games, int *game_count) {
-    (void)games;
-    (void)game_count;
-    mock_logic_handle_delete_game_called++;
-}
-
-// Include the actual implementation we're testing
-int logic_initialize_game_data_loading(const char *filename, Game **games, int *game_count) {
-    (void)filename;
-    return data_load_games(filename, games, game_count);
-}
-
-void logic_handle_game_management_menu(void) {
-    Game *games = NULL;
-    int game_count = 0;
-    if (logic_initialize_game_data_loading(GAMES_JSON_PATH, &games, &game_count) != ERR_SUCCESS) {
-        presentation_display_error("Failed to load games.");
-        return;
-    }
-    int choice;
-    do {
-        presentation_display_game_management_menu();
-        choice = presentation_get_game_menu_choice();
-        switch (choice) {
-            case 1:
-                logic_display_games_formatted(games, game_count);
-                break;
-            case 2:
-                logic_handle_add_game(&games, &game_count);
-                break;
-            case 3:
-                logic_handle_edit_game(games, game_count);
-                break;
-            case 4:
-                logic_handle_delete_game(&games, &game_count);
-                break;
-            case 0:
-                break;
-            default:
-                presentation_display_error("Invalid option.");
-        }
-    } while (choice != 0);
-    free(games);
-}
 
 void setUp(void) {
     // Reset mock variables
