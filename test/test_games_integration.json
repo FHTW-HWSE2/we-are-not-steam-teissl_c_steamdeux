@@ -1,0 +1,9 @@
+{
+	"games":	[{
+			"title":	"T2",
+			"description":	"Desc 2",
+			"version":	"2.0",
+			"mode":	"Multiplayer",
+			"current_streams":	0
+		}]
+}
