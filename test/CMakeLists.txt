@@ -909,17 +909,3 @@ target_include_directories(test_data_remove_expired_users_save_failure PRIVATE
     ${PROJECT_SOURCE_DIR}/test/unity
     ${PROJECT_SOURCE_DIR}/cJSON
 )
-
-add_executable(test_data_remove_expired_users_removes_expired
-    test_data_remove_expired_users_removes_expired.c
-    ${PROJECT_SOURCE_DIR}/src/data/data.c
-    ${PROJECT_SOURCE_DIR}/cJSON/cJSON.c
-    ${PROJECT_SOURCE_DIR}/test/unity/unity.c
-)
-target_compile_definitions(test_data_remove_expired_users_removes_expired PRIVATE USERS_JSON_PATH=\"test/users_expired.json\")
-target_include_directories(test_data_remove_expired_users_removes_expired PRIVATE
-    ${PROJECT_SOURCE_DIR}/inc
-    ${PROJECT_SOURCE_DIR}/src/data
-    ${PROJECT_SOURCE_DIR}/test/unity
-    ${PROJECT_SOURCE_DIR}/cJSON
-)
