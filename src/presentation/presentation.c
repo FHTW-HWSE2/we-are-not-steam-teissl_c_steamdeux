@@ -122,7 +122,7 @@ void presentation_get_gamertag(char *buffer, size_t size) {
     buffer[strcspn(buffer, "\n")] = 0;
 }
 void presentation_get_ssn(char *buffer, size_t size) {
-    printf("Enter SSN (format XXXX-XXXXXX or XXXX XXXXXX): ");
+    printf("Enter SSN (format XXXX-XXXXXX): ");
     fgets(buffer, size, stdin);
     buffer[strcspn(buffer, "\n")] = 0;
 }
