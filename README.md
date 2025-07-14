@@ -306,21 +306,7 @@ Um auch Präsentationscode einzubeziehen:
 
 ```sh
 
-gcovr -r .. \
-
---filter '../src/logic'  \
-
---filter '../src/data'  \
-
---filter '../src/simulation'  \
-
---filter '../src/presentation'  \
-
---exclude '../test'  \
-
---exclude '../cJSON'  \
-
---html --html-details -o coverage.html
+gcovr -r ..   --filter '../src/logic'   --filter '../src/data'   --filter '../src/simulation'   --filter '../src/presentation' --exclude '../test'   --exclude '../cJSON'   --html --html-details -o coverage.html
 
 ```
 
